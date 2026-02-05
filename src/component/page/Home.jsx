@@ -129,7 +129,7 @@ function BubblesBackground() {
           0% { transform: translateY(0) scale(1); opacity: 0; }
           15% { opacity: 0.7; }
           85% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
+          100% { transform: translateY(-450vh) scale(1.3); opacity: 0; }
         }
       `}</style>
     </Box>
