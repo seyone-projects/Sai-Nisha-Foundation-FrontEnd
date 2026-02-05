@@ -14,7 +14,6 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./Footer";
 
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -23,7 +22,7 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-import serviceImg1 from "./image/kids education - 1.jpg";
+import serviceImg1 from "./image/pre emergency.png";
 import serviceImg2 from "./image/pets - 1.jpg";
 import serviceImg3 from "./image/mentally challenged elders.webp";
 import serviceImg4 from "./image/newborn-baby.jpg";
@@ -32,13 +31,11 @@ import serviceImg6 from "./image/kids_education_part2.jpg";
 
 const serviceImages = [serviceImg1, serviceImg2, serviceImg3, serviceImg4, serviceImg5, serviceImg6];
 
-
 const creamBg = "#F7F4EC";
 const navyText = "#1F2F3F";
 const olive = "#7C8F29";
 const gold = "#D68910";
 const mutedText = "#5F6F7E";
-
 
 const services = [
   {
@@ -67,7 +64,6 @@ const services = [
   },
 ];
 
-
 const theme = createTheme({
   typography: {
     fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
@@ -80,7 +76,6 @@ const theme = createTheme({
   },
 });
 
-
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -91,6 +86,13 @@ const slideUp = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
+// Video Spotlight Effect Animation
+const spotlightMove = keyframes`
+  0% { transform: translate(-20%, -20%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(120%, 120%); opacity: 0; }
+`;
 
 function BubblesBackground() {
   return (
@@ -140,7 +142,7 @@ function BubblesBackground() {
           0% { transform: translateY(0) scale(1); opacity: 0; }
           10% { opacity: 0.7; }
           90% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+          100% { transform: translateY(-400vh) scale(1.4); opacity: 0; }
         }
       `}</style>
     </Box>
@@ -165,20 +167,71 @@ export default function Services() {
 
         <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
           <Container maxWidth="lg">
-            <Typography
-              variant={isMobile ? "h4" : "h2"}
-              align="center"
+            
+            {/* Spotlight Header Wrapper - Enhanced height and animation */}
+            <Box
               sx={{
-                fontWeight: 900,
+                position: "relative",
+                backgroundColor: "#111827", // Dark theme for effect visibility
+                borderRadius: 4,
+                overflow: "hidden",
+                bottom: 30,
+                py: { xs: 10, md: 15 }, 
                 mb: { xs: 6, md: 8 },
-                color: navyText,
-                textTransform: "uppercase",
-                animation: `${fadeIn} 1s ease-out`,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Our <span style={{ color: gold }}>Services</span>
-            </Typography>
+              {/* Spotlight Moving Light Sweep */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: `radial-gradient(circle at center, rgba(214, 137, 16, 0.25) 0%, transparent 70%)`,
+                  filter: "blur(60px)",
+                  zIndex: 0,
+                  animation: `${spotlightMove} 6s infinite ease-in-out`,
+                }}
+              />
 
+              <Typography
+                variant={isMobile ? "h4" : "h2"}
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  fontWeight: 900,
+                  color: "#FFFFFF",
+                  textTransform: "uppercase",
+                  animation: `${fadeIn} 1s ease-out`,
+                  letterSpacing: { xs: 2, md: 5 },
+                }}
+              >
+                Our <span style={{ color: gold }}>Services</span>
+              </Typography>
+              
+              <Typography
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  color: "rgba(255,255,255,0.7)",
+                  letterSpacing: { xs: 3, md: 8 },
+                  fontSize: { xs: 12, md: 16 },
+                  mt: 3,
+                  fontWeight: 600,
+                  textTransform: "uppercase"
+                }}
+              >
+                Explore • Participate • Grow
+              </Typography>
+            </Box>
 
             <Box
               sx={{
@@ -212,7 +265,6 @@ export default function Services() {
                 always centred on dignity and need.
               </Typography>
             </Box>
-
 
             <Box sx={{ maxWidth: 1000, mx: "auto", mb: 10, textAlign: "center" }}>
               <Typography
@@ -259,12 +311,13 @@ export default function Services() {
               </Typography>
             </Box>
 
-
             <Grid container spacing={4} justifyContent="center">
               {services.map((service, index) => (
                 <Grid
                   item
-                  size={{ xs: 12, md: 6, lg: 4 }}
+                  xs={12}
+                  md={6}
+                  lg={4}
                   key={index}
                   sx={{
                     display: "flex",

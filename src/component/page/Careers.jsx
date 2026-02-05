@@ -43,6 +43,14 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
+// Video Spotlight Effect Animation
+const spotlightMove = keyframes`
+  0% { transform: translate(-20%, -20%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(120%, 120%); opacity: 0; }
+`;
+
 function BubblesBackground() {
   return (
     <Box
@@ -96,7 +104,7 @@ function BubblesBackground() {
           0% { transform: translateY(0) scale(1); opacity: 0; }
           10% { opacity: 0.7; }
           90% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+          100% { transform: translateY(-450vh) scale(1.4); opacity: 0; }
         }
       `}</style>
     </Box>
@@ -121,22 +129,75 @@ export default function Careers() {
 
         <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
           <Container maxWidth="lg">
-            <Typography
-              variant={isMobile ? "h4" : "h2"}
-              align="center"
+            {/* Spotlight Header Wrapper - HEIGHT INCREASED HERE */}
+            <Box
               sx={{
-                fontWeight: 900,
+                position: "relative",
+                backgroundColor: "#111827",
+                borderRadius: 4,
+                overflow: "hidden",
+                bottom: 30,
+                // Increased padding for more height
+                py: { xs: 10, md: 15 }, 
                 mb: { xs: 6, md: 8 },
-                color: navyText,
-                textTransform: "uppercase",
-                animation: `${fadeIn} 1s ease-out`,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Our <span style={{ color: gold }}>Careers</span>
-            </Typography>
+              {/* Spotlight Moving Light */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: `radial-gradient(circle at center, rgba(214, 137, 16, 0.2) 0%, transparent 70%)`,
+                  filter: "blur(60px)", // Slightly higher blur for larger box
+                  zIndex: 0,
+                  animation: `${spotlightMove} 6s infinite ease-in-out`,
+                }}
+              />
+
+              <Typography
+                variant={isMobile ? "h4" : "h2"}
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  fontWeight: 900,
+                  color: "#FFFFFF",
+                  textTransform: "uppercase",
+                  animation: `${fadeIn} 1s ease-out`,
+                  // Extra spacing to fill the box
+                  letterSpacing: { xs: 2, md: 5 },
+                }}
+              >
+                Our <span style={{ color: gold }}>Careers</span>
+              </Typography>
+              
+              <Typography
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  color: "rgba(255,255,255,0.7)",
+                  letterSpacing: { xs: 3, md: 8 }, // Wider spacing like the video
+                  fontSize: { xs: 12, md: 16 },
+                  mt: 3,
+                  fontWeight: 600,
+                  textTransform: "uppercase"
+                }}
+              >
+                Explore • Participate • Grow
+              </Typography>
+            </Box>
 
             <Grid container spacing={4}>
-              <Grid item size={{ xs: 12, md: 12 }}>
+              <Grid item xs={12}>
                 <Box sx={{ mb: 4, textAlign: { xs: "center", md: "left" } }}>
                   <Typography variant="h5" fontWeight={800} sx={{ color: navyText, mb: 1 }}>
                     Join us to make an impact across India
@@ -200,7 +261,7 @@ function JobCard({ title, location, desc, type, date }) {
       }}
     >
       <Grid container spacing={2}>
-        <Grid item size={{ xs: 12, md: 9 }}>
+        <Grid item xs={12} md={9}>
           <Typography variant="h6" fontWeight={800} sx={{ color: olive, mb: 0.5 }}>
             {title}
           </Typography>
@@ -216,7 +277,8 @@ function JobCard({ title, location, desc, type, date }) {
 
         <Grid
           item
-          size={{ xs: 12, md: 3 }}
+          xs={12}
+          md={3}
           sx={{
             textAlign: { xs: "left", md: "right" },
             display: "flex",

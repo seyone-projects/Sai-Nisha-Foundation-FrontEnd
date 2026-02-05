@@ -143,7 +143,7 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <Box sx={{ position: "relative", backgroundColor: creamBg }}>
+      <Box sx={{ position: "relative", backgroundColor: creamBg, overflowX: "hidden" }}>
         
         <BubblesBackground />
 
@@ -418,7 +418,7 @@ export default function Home() {
           }}
         >
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-  <Typography fontWeight={800} color="#1a1a1a">
+  <Typography fontWeight={600} color="#1a1a1a">
     <span style={{ color: "#2E7D32" }}>
       From a child’s first breath…
     </span>{" "}

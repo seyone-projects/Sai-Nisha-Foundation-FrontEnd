@@ -6,10 +6,12 @@ import {
   Container,
   Divider,
   CssBaseline,
+  keyframes,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import Footer from "../page/Footer";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
@@ -19,12 +21,10 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-
 import aboutImg1 from "../page/image/ladies.png";
 import aboutImg2 from "../page/image/newborn-baby.jpg";
 import aboutImg3 from "../page/image/kids education - 2.jpg";
 import aboutImg4 from "../page/image/mentally challenged elders.webp";
-
 
 const navyText = "#1F2F3F";
 const olive = "#7C8F29";
@@ -32,15 +32,13 @@ const gold = "#D68910";
 const mutedText = "#5F6F7E";
 const creamBg = "#F7F4EC";
 
-
 const theme = createTheme({
   typography: {
     fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
-    h2: { fontWeight: 900 },
-    h4: { fontWeight: 800 },
-    h5: { fontWeight: 700 },
-    body1: { fontWeight: 400 },
-    body2: { fontWeight: 400 },
+    h2: { fontWeight: 900, lineHeight: 1.1 },
+    h4: { fontWeight: 800, lineHeight: 1.2 },
+    h5: { fontWeight: 700, lineHeight: 1.2 },
+    body1: { fontWeight: 400, lineHeight: 1.3 },
   },
 });
 
@@ -58,6 +56,12 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.3 } },
 };
 
+const spotlightMove = keyframes`
+  0% { transform: translate(-20%, -20%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(120%, 120%); opacity: 0; }
+`;
 
 function BubblesBackground() {
   return (
@@ -107,7 +111,7 @@ function BubblesBackground() {
           0% { transform: translateY(0) scale(1); opacity: 0; }
           10% { opacity: 0.7; }
           90% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+          100% { transform: translateY(-450vh) scale(1.4); opacity: 0; }
         }
       `}</style>
     </Box>
@@ -115,6 +119,8 @@ function BubblesBackground() {
 }
 
 export default function About() {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -130,36 +136,73 @@ export default function About() {
         <BubblesBackground />
 
         <Container sx={{ position: "relative", zIndex: 2 }}>
+          
           <motion.div variants={fadeDown} initial="hidden" animate="visible">
-            <Typography
-              align="center"
-              variant="h2"
+            <Box
               sx={{
-                fontWeight: 900,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                background: `linear-gradient(90deg, ${navyText}, ${olive})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                position: "relative",
+                backgroundColor: "#111827", 
+                borderRadius: 4,
+                overflow: "hidden",
+                bottom: 30,
+                py: { xs: 10, md: 15 }, 
+                mb: { xs: 6, md: 8 },
+                boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              About Us
-            </Typography>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: `radial-gradient(circle at center, rgba(214, 137, 16, 0.25) 0%, transparent 70%)`,
+                  filter: "blur(60px)",
+                  zIndex: 0,
+                  animation: `${spotlightMove} 6s infinite ease-in-out`,
+                }}
+              />
 
-            <Divider
-              sx={{
-                width: 140,
-                height: 5,
-                background: `linear-gradient(90deg, ${gold}, ${olive})`,
-                mx: "auto",
-                mt: 3,
-                mb: 9,
-                borderRadius: 2,
-              }}
-            />
+              <Typography
+                variant={isMobile ? "h4" : "h2"}
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  fontWeight: 900,
+                  letterSpacing: { xs: "0.1em", md: "0.18em" },
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  lineHeight: 1,
+                }}
+              >
+                About <span style={{ color: gold }}>Us</span>
+              </Typography>
+
+              <Typography
+                align="center"
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  color: "rgba(255,255,255,0.7)",
+                  letterSpacing: { xs: 3, md: 8 },
+                  fontSize: { xs: 12, md: 14 },
+                  mt: 3,
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  lineHeight: 1,
+                }}
+              >
+                Compassion • Purpose • Impact
+              </Typography>
+            </Box>
           </motion.div>
 
-          {/* ================= STORY ================= */}
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
             <Box
               sx={{
@@ -173,150 +216,81 @@ export default function About() {
                 boxShadow: "0 50px 140px rgba(0,0,0,0.28)",
               }}
             >
-              <Typography lineHeight={2} color={mutedText}>
-                <strong>Sai Nisha Foundation</strong> was born from a place of
-                love, loss, and an unshakable resolve to protect life when it
-                is most fragile.
-                <br />
-                <br />
-                For many families, pregnancy and childbirth are moments of joy.
-                For countless others, they are moments filled with fear,
-                uncertainty, and helpless waiting.
-                <br />
-                <br />
-                The final weeks of pregnancy.
-                <br />
-                The first hours after birth.
-                <br />
-                These moments decide everything — yet they are often the moments
-                when support is least accessible.
-                <br />
-                <br />
-                Sai Nisha Foundation exists to stand in that space.
+              <Typography lineHeight={1.3} color={mutedText}>
+                &bull; <strong>Sai Nisha Foundation</strong> was born from love, loss, and a resolve to protect fragile life.<br />
+                &bull; We stand in the gap for families facing fear and uncertainty during childbirth.<br />
+                &bull; We prioritize support during the final weeks of pregnancy and first hours of birth.<br />
+                &bull; Our mission is to ensure that critical care is accessible when it is most needed.
               </Typography>
 
-              {/* ================= ROOTS ================= */}
-              <Typography mt={6} variant="h4" fontWeight={800} color={olive}>
+              <Typography mt={4} variant="h4" fontWeight={800} color={olive} sx={{ lineHeight: 1.2 }}>
                 Our Roots
               </Typography>
-
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                Established in 2023, Sai Nisha Foundation was founded by Ganesh
-                and his spouse, born from a deeply personal promise — that no
-                mother should ever feel abandoned, and no newborn should ever
-                be denied care because help did not arrive in time.
-                <br />
-                <br />
-                The Foundation is named in loving memory of:
-                <br />
-                • Sai — our daughter
-                <br />
-                • Nisha (Nithya & Shanmugam) — Ganesh’s parents
-                <br />
-                <br />
-                What began as remembrance soon became responsibility.
-                <br />
-                <br />
-                Sai Nisha Foundation was born out of pain — the pain of losing
-                our child within a week of birth.
-                <br />
-                <br />
-                During the final trimester, at the peak of the COVID crisis,
-                hospitals were overwhelmed. Doors remained closed. Admissions
-                were denied. When we needed care the most, timely support did
-                not reach us — and that absence changed our lives forever.
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; Established in 2023 by Ganesh and his spouse to honor a deeply personal promise.<br />
+                &bull; Named in loving memory of <strong>Sai</strong> (daughter) and <strong>Nisha</strong> (parents Nithya & Shanmugam).<br />
+                &bull; Born from the pain of losing a child within a week of birth due to delayed hospital care.<br />
+                &bull; Transformed a personal COVID-era crisis into a public responsibility for others.
               </Typography>
 
-              {/* ================= PURPOSE & BELIEFS ================= */}
-              <Typography mt={6} color={mutedText} lineHeight={2}>
-                Out of that loss came a resolve. Out of that silence came a voice.
-                <br />
-                <br />
-                Sai Nisha Foundation exists today to ensure that no family faces
-                the same helplessness we once did.
-              </Typography>
-
-              <Typography mt={4} variant="h4" fontWeight={800} color={navyText}>
+              <Typography mt={4} variant="h4" fontWeight={800} color={navyText} sx={{ lineHeight: 1.2 }}>
                 A Purpose Forged Through Loss
               </Typography>
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                In June 2024, the untimely loss of Ganesh profoundly altered the
-                course of this journey.
-                <br />
-                <br />
-                Yet grief did not silence the mission. It strengthened it.
-                <br />
-                <br />
-                The Foundation chose not to retreat from pain, but to transform
-                loss into presence — ensuring that even in moments of personal
-                darkness, light could still reach others.
-                <br />
-                <br />
-                Sai Nisha Foundation continues today not as an institution
-                driven by numbers, but as a commitment driven by conscience —
-                rooted in compassion, shaped by experience, and guided by the
-                belief that care delayed should never become care denied.
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; The mission was strengthened following the untimely loss of our founder, Ganesh, in 2024.<br />
+                &bull; We choose to transform personal grief into an active, compassionate presence.<br />
+                &bull; Driven by conscience and experience rather than just numbers.<br />
+                &bull; Guided by the core belief that care delayed should never become care denied.
               </Typography>
 
-              <Typography mt={6} variant="h4" fontWeight={800} color="#2f4dd3">
+              <Typography mt={4} variant="h4" fontWeight={800} color="#2f4dd3" sx={{ lineHeight: 1.2 }}>
                 What We Believe
               </Typography>
-
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                • A mother deserves care, dignity, and reassurance
-                <br />
-                • A newborn’s survival should never depend on financial readiness
-                <br />
-                • Timely support can save lives and families
-                <br />
-                <br />
-                We do not work for recognition. We work for impact — quiet,
-                immediate, and meaningful.
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; Every mother deserves dignity, care, and absolute reassurance.<br />
+                &bull; A newborn's survival should never be a matter of financial capability.<br />
+                &bull; Timely intervention has the power to save entire families.<br />
+                &bull; Our focus remains on quiet, immediate, and meaningful impact.
               </Typography>
 
-              <Typography mt={6} variant="h4" fontWeight={800} color={navyText}>
+              <Typography mt={4} variant="h4" fontWeight={800} color={navyText} sx={{ lineHeight: 1.2 }}>
                 Our Core Focus
               </Typography>
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                🤰 Supporting Mothers in the Third Trimester
-                <br />
-                👶 Emergency Support for Newborns & NICU Care
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; 🤰 Comprehensive support for mothers in their third trimester.<br />
+                &bull; 👶 Emergency medical assistance for newborns and specialized NICU care.
               </Typography>
 
-              <Typography mt={6} variant="h4" fontWeight={800} color={gold}>
+              <Typography mt={4} variant="h4" fontWeight={800} color={gold} sx={{ lineHeight: 1.2 }}>
                 Compassion Beyond Boundaries
               </Typography>
-
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                • Children striving for education and sports excellence
-                <br />
-                • Injured and elderly animals
-                <br />
-                • Mentally challenged elders facing neglect
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; Empowering children striving for excellence in education and sports.<br />
+                &bull; Providing refuge and care for injured and elderly animals.<br />
+                &bull; Supporting mentally challenged elders facing neglect or abandonment.
               </Typography>
 
-              <Typography mt={6} variant="h4" fontWeight={800} color="#d32f4a">
+              <Typography mt={4} variant="h4" fontWeight={800} color="#d32f4a" sx={{ lineHeight: 1.2 }}>
                 Our Promise
               </Typography>
               <Divider sx={{ my: 2 }} />
-              <Typography mt={2} color={mutedText} lineHeight={2}>
-                We may not be able to help everyone. But for those we reach, we
-                promise presence, honesty, and compassion.
+              <Typography color={mutedText} lineHeight={1.3}>
+                &bull; We promise presence, honesty, and compassion to every life we reach.<br />
+                &bull; We remain dedicated to the belief that every life is worth fighting for.
               </Typography>
             </Box>
           </motion.div>
 
-          {/* ================= GALLERY ================= */}
           <Box sx={{ mt: { xs: 8, md: 16 } }}>
             <motion.div variants={stagger} initial="hidden" whileInView="visible">
               <Grid container spacing={{ xs: 3, md: 6 }} justifyContent="center">
                 {[aboutImg1, aboutImg2, aboutImg3, aboutImg4].map((img, i) => (
-                  <Grid item size={{ xs: 12, sm: 6, md: 6 }} key={i}>
+                  <Grid item xs={12} sm={6} md={6} key={i}>
                     <motion.img
                       src={img}
                       variants={fadeUp}
