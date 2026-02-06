@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Button,
   Typography,
   Grid,
   Card,
@@ -28,6 +29,7 @@ import serviceImg3 from "./image/mentally challenged elders.webp";
 import serviceImg4 from "./image/newborn-baby.jpg";
 import serviceImg5 from "./image/education.jpg";
 import serviceImg6 from "./image/kids_education_part2.jpg";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const serviceImages = [serviceImg1, serviceImg2, serviceImg3, serviceImg4, serviceImg5, serviceImg6];
 
@@ -155,6 +157,37 @@ export default function Services() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+         <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          zIndex: 9999,
+        }}
+      >
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+            "&:hover": {
+              backgroundColor: "#1EBE5D",
+              transform: "scale(1.1)",
+            },
+          }}
+        >
+          <WhatsAppIcon sx={{ fontSize: 30 }} />
+        </Button>
+      </Box>
       <Box
         sx={{
           background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,

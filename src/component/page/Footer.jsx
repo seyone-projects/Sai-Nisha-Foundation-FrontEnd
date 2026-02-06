@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
 /* 👉 IMPORT BACKGROUND IMAGE */
-import footerBg from "../page/image/kids_education_part1.jpg";
+import footerBg from "../page/image/education.jpg";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -29,6 +29,7 @@ export default function Footer() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         position: "relative",
+        mt: 2,
       }}
     >
       {/* OVERLAY */}
@@ -42,7 +43,7 @@ export default function Footer() {
         {/* TOP SECTION */}
         <Box sx={{ maxWidth: 1100, mx: "auto", mb: 8 }}>
           <Grid container spacing={4}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6}><br /><br />
               <Typography sx={{ fontSize: 14, mb: 0.5 }}>
                 📧 Email:{" "}
                 <Link href="mailto:hello@sainisha.in">
@@ -77,7 +78,7 @@ export default function Footer() {
               <Stack
                 spacing={1}
                 alignItems={{ xs: "center", md: "flex-end" }}
-              >
+              ><br /><br />
                 <Link component={RouterLink} to="/about">About Us</Link>
                 <Link component={RouterLink} to="/contactus">Contact Us</Link>
                 <Link component={RouterLink} to="/volunteer">Volunteer</Link>

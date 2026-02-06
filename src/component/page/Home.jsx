@@ -31,6 +31,7 @@ import ngoImage1 from "../page/image/ladies.png";
 import ngoImage2 from "../page/image/newborn.png";
 import ngoImage3 from "../page/image/baby.png";
 import ngoImage4 from "../page/image/kids education - 2.jpg";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 
 const creamBg = "#F7F4EC";
@@ -142,6 +143,38 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+       <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          zIndex: 9999,
+        }}
+      >
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+            "&:hover": {
+              backgroundColor: "#1EBE5D",
+              transform: "scale(1.1)",
+            },
+          }}
+        >
+          <WhatsAppIcon sx={{ fontSize: 30 }} />
+        </Button>
+      </Box>
+
 
       <Box sx={{ position: "relative", backgroundColor: creamBg, overflowX: "hidden" }}>
         
@@ -419,8 +452,8 @@ export default function Home() {
           }}
         >
       <motion.div  initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-  <Typography fontWeight={600} color="#1a1a1a">
-    <span style={{ color: "#2E7D32" }}>
+  <Typography fontWeight={600} color="#1a1a1a" >
+    <span style={{ color: "#2E7D32" }} >
       From a child’s first breath…
     </span>{" "}
     <span style={{ color: "#efcb00" }}>
