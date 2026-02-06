@@ -27,6 +27,8 @@ import Careers from "./component/page/Careers";
 import ContactUs from "./component/page/ContactUs";
 import Payment from "./component/page/payment";
 import VolunteerForm from "./component/page/VolunteerForm";
+import Campaigns from "./component/page/Campaigns";
+import Media from "./component/page/Media";
 
 
 const creamBg = "#F3EEDC";
@@ -69,6 +71,8 @@ export default function App() {
     { label: "Events", path: "/events" },
     { label: "Services", path: "/services" },
     { label: "Careers", path: "/careers" },
+    { label: "Campaigns", path: "/campaigns" },
+    { label: "Media", path: "/media" },
   ];
 
   return (
@@ -112,7 +116,7 @@ export default function App() {
                 </Button>
               ))}
 
-           <Button
+           {/* <Button
   component={Link}
   to="/volunteer"
   variant="contained"
@@ -120,7 +124,7 @@ export default function App() {
   sx={{ fontWeight: 700, px: 3 }}
 >
   Volunteer
-</Button>
+</Button> */}
               <Button
                 component={Link}
                 to="/payment"
@@ -155,7 +159,7 @@ export default function App() {
 
           <Divider />
 
-          <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
+          {/* <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
             <Button
               variant="contained"
               sx={{ bgcolor: greenBtn }}
@@ -173,7 +177,7 @@ export default function App() {
             >
               Donate
             </Button>
-          </Box>
+          </Box> */}
         </Box>
       </Drawer>
 
@@ -188,6 +192,8 @@ export default function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/volunteer" element={<VolunteerForm/>} />
+           <Route path="/campaigns" element={<Campaigns/>} />
+           <Route path="/media" element={<Media/>} />
         </Routes>
       </Container>
     </Router>

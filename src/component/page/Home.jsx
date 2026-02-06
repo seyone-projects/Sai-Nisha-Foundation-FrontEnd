@@ -150,7 +150,7 @@ export default function Home() {
         {/* ================= HERO ================= */}
         <Box
           sx={{
-            height: isMobile ? "65vh" : "85vh",
+            height: isMobile ? "65vh" : "100vh",
             backgroundImage: `url(${heroImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -161,7 +161,7 @@ export default function Home() {
             overflow: "hidden",
           }}
         >
-          <Box
+          {/* <Box
             sx={{
               position: "absolute",
               inset: 0,
@@ -169,7 +169,7 @@ export default function Home() {
                 "linear-gradient(180deg, rgba(247,244,236,0.88), rgba(31,47,63,0.95))",
               zIndex: 1,
             }}
-          />
+          /> */}
 
           <Container sx={{ position: "relative", zIndex: 2 }}>
             <motion.div
@@ -179,12 +179,12 @@ export default function Home() {
             >
               <Box
                 sx={{
-                  background: "rgba(255,255,255,0.94)",
-                  backdropFilter: "blur(14px)",
+                  // background: "rgba(255,255,255,0.94)",
+                  // backdropFilter: "blur(14px)",
                   borderRadius: 6,
                   p: isMobile ? 3 : 6,
                   textAlign: "center",
-                  boxShadow: "0 45px 120px rgba(0,0,0,0.35)",
+                  // boxShadow: "0 45px 120px rgba(0,0,0,0.35)",
                 }}
               >
                 <Typography
@@ -249,6 +249,7 @@ export default function Home() {
             </motion.div>
           </Container>
         </Box>
+
 
         {/* ================= STORY ================= */}
         <Container sx={{ py: { xs: 6, md: 12 }, position: "relative", zIndex: 2 }}>
@@ -354,7 +355,7 @@ export default function Home() {
         </Container>
 
         {/* ================= CORE WORK ================= */}
-        <Container sx={{ py: { xs: 6, md: 12 }, position: "relative", zIndex: 2 }}>
+        <Container sx={{ py: { xs: 6, md: 10 }, position: "relative", zIndex: 2 }}>
           <Grid container spacing={{ xs: 4, md: 7 }} alignItems="center">
             <Grid item size={{ xs: 12, md: 7 }}>
               <motion.div
@@ -408,7 +409,7 @@ export default function Home() {
 
         <Box
           sx={{
-            py: 10,
+            py: 1,
             p: 1,
             borderRadius: 15,
             background: `linear-gradient(90deg, ${olive}, ${gold})`,
@@ -417,7 +418,7 @@ export default function Home() {
             zIndex: 2,
           }}
         >
-      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+      <motion.div  initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
   <Typography fontWeight={600} color="#1a1a1a">
     <span style={{ color: "#2E7D32" }}>
       From a child’s first breath…
