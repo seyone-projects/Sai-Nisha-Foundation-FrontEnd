@@ -233,40 +233,41 @@ export default function Services() {
               </Typography>
             </Box>
 
-            <Box
-              sx={{
-                maxWidth: 950,
-                mx: "auto",
-                mb: 10,
-                textAlign: "center",
-                animation: `${fadeIn} 1.2s ease-out`,
-                p: 4,
-                borderRadius: 8,
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
-                backdropFilter: "blur(5px)",
-              }}
-            >
-              <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
-                Sai Nisha Foundation
-              </Typography>
+         <Box
+  sx={{
+    maxWidth: 900,
+    mx: "auto",
+    mb: 10,
+    textAlign: "left",
+    animation: `${fadeIn} 1.2s ease-out`,
+    p: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    backdropFilter: "blur(5px)",
+  }}
+>
+  <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
+    Sai Nisha Foundation
+  </Typography>
 
-              <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
-                Serving Life at Its Most Vulnerable Moments
-              </Typography>
+  <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
+    Serving Life at Its Most Vulnerable Moments
+  </Typography>
 
-              <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
-                At Sai Nisha Foundation, our work begins where uncertainty is highest
-                and support is often absent. We focus on moments when time, care,
-                and reassurance matter more than anything else.
-              </Typography>
+  <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
+    At Sai Nisha Foundation, our work begins where uncertainty is highest
+    and support is often absent. We focus on moments when time, care,
+    and reassurance matter more than anything else.
+  </Typography>
 
-              <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
-                Our services are guided by urgency, compassion, and responsibility — 
-                always centred on dignity and need.
-              </Typography>
-            </Box>
+  <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
+    Our services are guided by urgency, compassion, and responsibility —
+    always centred on dignity and need.
+  </Typography>
+</Box>
 
-            <Box sx={{ maxWidth: 1000, mx: "auto", mb: 10, textAlign: "center" }}>
+
+            <Box sx={{ maxWidth: 830, mx: "auto", mb: 10, textAlign: "left" }}>
               <Typography
                 variant="h5"
                 sx={{ fontWeight: 800, color: gold, mb: 3 }}
@@ -287,7 +288,7 @@ export default function Services() {
               </Typography>
             </Box>
 
-            <Box sx={{ maxWidth: 1000, mx: "auto", mb: 12, textAlign: "center" }}>
+            <Box sx={{ maxWidth: 850, mx: "auto", mb: 12, textAlign: "left" }}>
               <Typography
                 variant="h5"
                 sx={{ fontWeight: 800, color: "#00BFFF", mb: 3 }}
