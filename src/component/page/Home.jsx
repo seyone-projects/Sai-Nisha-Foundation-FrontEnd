@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -11,9 +11,10 @@ import {
   useMediaQuery,
   Divider,
   CssBaseline,
+   IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { motion } from "framer-motion";
+import { motion ,AnimatePresence } from "framer-motion";
 import Footer from "./Footer";
 
 
@@ -26,11 +27,20 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 
-import heroImage from "../page/image/volunteers.png";
+/* IMAGES */
+import heroImage from "../page/image/volunteers 2.png";
+import ngoImage5 from "../page/image/volunteer-work-with-food.jpg";
+import ngoImage6 from "../page/image/education photo 2.jpg";
+import ngoImage7 from "../page/image/education photo 1.jpg";
+import ngoImage8 from "../page/image/kids education - 2.jpg";
+
 import ngoImage1 from "../page/image/ladies.png";
 import ngoImage2 from "../page/image/newborn.png";
 import ngoImage3 from "../page/image/baby.png";
 import ngoImage4 from "../page/image/kids education - 2.jpg";
+
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 
@@ -79,6 +89,15 @@ const fadeRight = {
     transition: { duration: 0.9, ease: "easeOut" },
   },
 };
+
+/* HERO IMAGES ARRAY (ONLY ADDITION) */
+const heroImages = [
+  heroImage,
+  ngoImage5,
+  ngoImage6,
+  ngoImage7,
+  ngoImage8,
+];
 
 function BubblesBackground() {
   return (
@@ -140,6 +159,46 @@ function BubblesBackground() {
 export default function Home() {
   const isMobile = useMediaQuery("(max-width:600px)");
 
+   /* HERO AUTO SCROLL LOGIC */
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
+   /* ================= TESTIMONIAL LOGIC (ADDED) ================= */
+const testimonials = [
+  {
+    text:
+      "Our goal is to ensure that every mother and newborn receives timely, compassionate, and reliable medical support during the most critical moments of life. By stepping in when families feel most vulnerable, we aim to reduce preventable risks and offer reassurance, care, and dignity at every stage of childbirth.",
+  },
+  {
+    text:
+      "We strive to expand our reach by building strong and lasting partnerships with hospitals, doctors, and healthcare providers across underserved and rural regions. Through collaboration and trust, we aim to bridge gaps in access to care and bring life-saving support closer to those who need it the most.",
+  },
+  {
+    text:
+      "Our long-term vision is to create a sustainable and responsive support system where no family has to face pregnancy-related or newborn emergencies alone. By fostering community involvement, awareness, and continuous support, we work towards a future where every life is protected and valued.",
+  },
+];
+
+
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const prevTestimonial = () => {
+    setActiveTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
+  const nextTestimonial = () => {
+    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+  /* ============================================================= */
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -181,48 +240,44 @@ export default function Home() {
         <BubblesBackground />
 
         {/* ================= HERO ================= */}
-        <Box
+          <Box
           sx={{
             height: isMobile ? "65vh" : "100vh",
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             overflow: "hidden",
           }}
         >
-          {/* <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(180deg, rgba(247,244,236,0.88), rgba(31,47,63,0.95))",
-              zIndex: 1,
-            }}
-          /> */}
-
-          <Container sx={{ position: "relative", zIndex: 2 }}>
+          {/* AUTO SLIDING BACKGROUND */}
+          <AnimatePresence>
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
+              key={heroIndex}
+              initial={{ opacity: 0, scale: 1.08 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, ease: "easeOut" }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.4 }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage: `url(${heroImages[heroIndex]})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+          </AnimatePresence>
+
+          <Container sx={{ position: "relative", zIndex: 2, height: "100%" }}>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
             >
-              <Box
-                sx={{
-                  // background: "rgba(255,255,255,0.94)",
-                  // backdropFilter: "blur(14px)",
-                  borderRadius: 6,
-                  p: isMobile ? 3 : 6,
-                  textAlign: "center",
-                  // boxShadow: "0 45px 120px rgba(0,0,0,0.35)",
-                }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <Typography
                   variant={isMobile ? "h4" : "h2"}
-                  letterSpacing={2}
                   sx={{
                     background: `linear-gradient(90deg, ${navyText}, ${olive})`,
                     WebkitBackgroundClip: "text",
@@ -232,12 +287,7 @@ export default function Home() {
                   SAI NISHA FOUNDATION
                 </Typography>
 
-                <Typography
-                  mt={2}
-                  fontSize={18}
-                  color={mutedText}
-                  fontStyle="italic"
-                >
+                <Typography mt={2} fontStyle="italic" color={mutedText}>
                   Standing beside life,{" "}
                   <span style={{ color: gold, fontWeight: 700 }}>
                     when it needs support the most
@@ -246,42 +296,167 @@ export default function Home() {
                 </Typography>
 
                 <Box mt={5}>
-                  <motion.div
-                    animate={{
-                      y: [0, -8, 0],
-                      boxShadow: [
-                        "0 0 0 rgba(0,0,0,0)",
-                        `0 0 40px rgba(214,137,16,0.6)`,
-                        "0 0 0 rgba(0,0,0,0)",
-                      ],
+                  <Button
+                    size="large"
+                    sx={{
+                      px: 6,
+                      py: 1.6,
+                      borderRadius: 50,
+                      background: `linear-gradient(90deg, ${olive}, ${gold})`,
+                      fontWeight: 800,
                     }}
-                    transition={{ repeat: Infinity, duration: 2.5 }}
                   >
-                    <Button
-                      size="large"
-                      sx={{
-                        px: 6,
-                        py: 1.6,
-                        fontSize: 16,
-                        borderRadius: 50,
-                        background: `linear-gradient(90deg, ${olive}, ${gold})`,
-                        color: "#1a1a1a",
-                        fontWeight: 800,
-                        letterSpacing: 1,
-                        "&:hover": {
-                          transform: "scale(1.1)",
-                          background: `linear-gradient(90deg, ${gold}, ${olive})`,
-                        },
-                      }}
-                    >
-                      Join as Volunteer
-                    </Button>
-                  </motion.div>
+                    Join as Volunteer
+                  </Button>
                 </Box>
-              </Box>
-            </motion.div>
+              </motion.div>
+            </Box>
           </Container>
         </Box>
+
+        {/* ================= TESTIMONIALS  ================= */}
+   <Box
+  sx={{
+    py: 12,
+    background:
+      "linear-gradient(135deg, #e6ece3 0%, #f4f8f2 100%)",
+  }}
+>
+  <Container maxWidth="md">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <Typography
+        variant="h5"
+        textAlign="center"
+        fontWeight={800}
+        mb={6}
+        sx={{
+          letterSpacing: 1,
+          color: "#406e2e",
+        }}
+      >
+        Our Goals
+      </Typography>
+    </motion.div>
+
+    <Box sx={{ position: "relative" }}>
+      <motion.div
+        key={activeTestimonial}
+        initial={{ opacity: 0, x: 60, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        exit={{ opacity: 0, x: -60 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <Card
+  sx={{
+    px: { xs: 3, md: 5 },
+    py: { xs: 4, md: 5 },
+    borderRadius: 6,
+    backdropFilter: "blur(12px)",
+    background:
+      "linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(238, 250, 243, 0.9))",
+    boxShadow:
+      "0 25px 70px rgba(75, 110, 46, 0.25)",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+
+          {/* Decorative gradient glow */}
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(circle at top left, rgba(90,70,200,0.15), transparent 60%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <CardContent>
+  <motion.div
+    animate={{ scale: [1, 1.05, 1] }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <Typography
+      textAlign="center"
+      lineHeight={1.9}
+      sx={{
+        fontSize: { xs: "1rem", md: "1.05rem" },
+        color: "#4A4A4A",
+        fontStyle: "italic",
+      }}
+    >
+      <Box
+        component="span"
+        sx={{
+          color: "#2e6e3c",
+          fontWeight: 700,
+          background:
+            "linear-gradient(120deg, #acc84666 0%, transparent 100%)",
+          px: 0.5,
+          borderRadius: 1,
+        }}
+      >
+        {testimonials[activeTestimonial].text}
+      </Box>
+    </Typography>
+  </motion.div>
+</CardContent>
+
+        </Card>
+      </motion.div>
+
+      {/* LEFT BUTTON */}
+      <IconButton
+        onClick={prevTestimonial}
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: { xs: -10, md: -30 },
+          transform: "translateY(-50%)",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+          "&:hover": {
+            backgroundColor: "#acc846",
+            color: "#fff",
+            transform: "translateY(-50%) scale(1.1)",
+          },
+        }}
+      >
+        <ArrowBackIosNewIcon />
+      </IconButton>
+
+      {/* RIGHT BUTTON */}
+      <IconButton
+        onClick={nextTestimonial}
+        sx={{
+          position: "absolute",
+          top: "50%",
+          right: { xs: -10, md: -30 },
+          transform: "translateY(-50%)",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+          "&:hover": {
+            backgroundColor: "#c8bb46",
+            color: "#fff",
+            transform: "translateY(-50%) scale(1.1)",
+          },
+        }}
+      >
+        <ArrowForwardIosIcon />
+      </IconButton>
+    </Box>
+  </Container>
+</Box>
 
 
         {/* ================= STORY ================= */}

@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
 /* 👉 IMPORT BACKGROUND IMAGE */
-import footerBg from "../page/image/education.jpg";
+import footerBg from "../page/image/footer.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -78,7 +78,7 @@ export default function Footer() {
               <Stack
                 spacing={1}
                 alignItems={{ xs: "center", md: "flex-end" }}
-              ><br /><br />
+              ><br />
                 <Link component={RouterLink} to="/about">About Us</Link>
                 <Link component={RouterLink} to="/contactus">Contact Us</Link>
                 <Link component={RouterLink} to="/volunteer">Volunteer</Link>
