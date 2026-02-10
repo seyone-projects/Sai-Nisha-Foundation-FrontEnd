@@ -15,22 +15,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
 /* 👉 IMPORT BACKGROUND IMAGE */
-import footerBg from "../page/image/footer.png";
+// import footerBg from "../page/image/footer.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        backgroundImage: `url(${footerBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        position: "relative",
-        mt: 2,
-      }}
+      // sx={{
+      //   width: "100%",
+      //   backgroundImage: `url(${footerBg})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      //   position: "relative",
+      //   mt: 2,
+      // }}
     >
       {/* OVERLAY */}
       <Box

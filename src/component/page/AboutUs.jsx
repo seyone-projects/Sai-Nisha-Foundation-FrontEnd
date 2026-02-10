@@ -265,7 +265,7 @@ export default function About() {
               }}
             >
               {/* VISION */}
-            <Typography variant="h4" fontWeight={900} color={gold}>
+            <Typography variant="h4" fontWeight={900} color={gold} textAlign={"center"}>
   Our Vision
 </Typography>
 
@@ -400,7 +400,7 @@ export default function About() {
               <Divider sx={{ my: 4 }} />
 
               {/* MISSION */}
-          <Typography variant="h4" fontWeight={900} color={olive}>
+          <Typography variant="h4" fontWeight={900} color={olive} textAlign={"center"}>
   Our Mission
 </Typography>
 
@@ -548,11 +548,11 @@ export default function About() {
   .
 </Typography>
 
-              <Divider sx={{ my: 4 }} />
+              <Divider sx={{ my: 2 }} />
 
               {/* BAR CHART */}
 
-            <Typography variant="h4" fontWeight={900} color={navyText}>
+            <Typography variant="h4" fontWeight={900} color={navyText} textAlign={"center"}>
   Our Impact Focus
 </Typography>
 
@@ -613,7 +613,7 @@ export default function About() {
   ))}
 </Box>
 
-              <Divider sx={{ my: 4 }} />
+              <Divider sx={{ my: 2 }} />
 
               {/* QUOTE */}
              <Box
@@ -653,181 +653,52 @@ export default function About() {
     </motion.div>
   </Box>
 
-  <Divider sx={{ my: 6 }} />
+  <Divider sx={{ my: 4 }} />
 
-{/* GET INVOLVED */}
-<Typography
-  variant="h4"
-  fontWeight={900}
-  textAlign="center"
-  color={navyText}
-  mb={4}
->
-  Get Involved
+  {/* GET INVOLVED SECTION */}
+         <Typography variant="h4" align="center" mb={6} fontWeight={900}>
+  Get <span style={{ color: olive }}>Involved</span>
 </Typography>
 
-<Grid container spacing={4} justifyContent="center">
-  {/* SHOW YOUR SUPPORT */}
-  <Grid item xs={12} md={4}>
-    <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3 }}>
-      <Box
-        sx={{
-          textAlign: "center",
-          p: 4,
-          height: "100%",
-          borderRadius: 5,
-          background: "rgba(255,255,255,0.9)",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-        }}
+<Grid container spacing={4} sx={{ mb: -5 }} justifyContent="center">
+  {[
+    { title: "Support", icon: <VolunteerActivismIcon />, color: gold, text: "Stand with us by supporting life-saving care for mothers and newborns during their most critical hours." },
+    { title: "Partner", icon: <HandshakeIcon />, color: olive, text: "Collaborate with us to expand reach, strengthen healthcare access, and create sustainable community impact." },
+    { title: "Join", icon: <GroupAddIcon />, color: navyText, text: "Become part of a compassionate movement dedicated to protecting life, dignity, and hope for the future." }
+  ].map((card, idx) => (
+    <Grid item xs={12} sm={6} md={4} key={idx} sx={{ display: "flex", justifyContent: "center" }}>
+      <motion.div 
+        whileHover={{ y: -15 }} 
+        transition={{ duration: 0.3 }}
+        style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
-        <VolunteerActivismIcon sx={{ fontSize: 50, color: gold, mb: 2 }} />
-
-        <Typography variant="h6" fontWeight={800} color={gold}>
-          Show Your Support
-        </Typography>
-
-        <Typography color={mutedText} mt={1}>
-          Stand with us by supporting{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            life-saving care
-          </Box>{" "}
-          for{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 600 }}>
-            mothers, newborns, and families
-          </Box>{" "}
-          during their{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>
-            most critical moments
-          </Box>
-          . In times when{" "}
-          <Box component="span" sx={{ color: "#d32f2f", fontWeight: 600 }}>
-            hope feels fragile
-          </Box>{" "}
-          and choices are limited, your support becomes a{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 800 }}>
-            lifeline
-          </Box>{" "}
-          — delivering{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 600 }}>
-            timely care
-          </Box>
-          , comfort, and the assurance that{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>
-            no family faces crisis alone
-          </Box>
-          .
-        </Typography>
-      </Box>
-    </motion.div>
-  </Grid>
-
-  {/* PARTNER WITH US */}
-  <Grid item xs={12} md={4}>
-    <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3 }}>
-      <Box
-        sx={{
-          textAlign: "center",
-          p: 4,
+        <Box sx={{ 
+          width: "100%",
+          maxWidth: { xs: "100%", md: 320 }, 
+          p: 4, 
+          textAlign: "center", 
+          bgcolor: "#fff", 
+          borderRadius: 6, 
           height: "100%",
-          borderRadius: 5,
-          background: "rgba(255,255,255,0.9)",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-        }}
-      >
-        <HandshakeIcon sx={{ fontSize: 50, color: olive, mb: 2 }} />
-
-        <Typography variant="h6" fontWeight={800} color={olive}>
-          Partner With Us
-        </Typography>
-
-        <Typography color={mutedText} mt={1}>
-          Collaborate with us to{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            expand reach
+          boxShadow: "0 20px 40px rgba(0,0,0,0.08)", 
+          borderBottom: `5px solid ${card.color}`,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}>
+          <Box sx={{ color: card.color, mb: 2, transform: "scale(1.4)" }}>
+            {card.icon}
           </Box>
-          ,{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 700 }}>
-            strengthen healthcare access
-          </Box>
-          , and create{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>
-            sustainable community impact
-          </Box>
-          . By partnering with{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            Sai Nisha Foundation
-          </Box>
-          , organizations and individuals help build{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 600 }}>
-            reliable healthcare pathways
-          </Box>
-          , support{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 600 }}>
-            maternal and neonatal care
-          </Box>
-          , and drive{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 600 }}>
-            long-term social change
-          </Box>
-          .
-        </Typography>
-      </Box>
-    </motion.div>
-  </Grid>
-
-  {/* JOIN WITH US */}
-  <Grid item xs={12} md={4}>
-    <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3 }}>
-      <Box
-        sx={{
-          textAlign: "center",
-          p: 4,
-          height: "100%",
-          borderRadius: 5,
-          background: "rgba(255,255,255,0.9)",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-        }}
-      >
-        <GroupAddIcon sx={{ fontSize: 50, color: navyText, mb: 2 }} />
-
-        <Typography variant="h6" fontWeight={800} color={navyText}>
-          Join With Us
-        </Typography>
-
-        <Typography color={mutedText} mt={1}>
-          Become part of a{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            compassionate movement
-          </Box>{" "}
-          dedicated to{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 700 }}>
-            protecting life, dignity, and hope
-          </Box>{" "}
-          for the future. Your{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 600 }}>
-            time, skills, and voice
-          </Box>{" "}
-          help{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            bridge gaps in care
-          </Box>
-          , raise awareness, and extend a{" "}
-          <Box component="span" sx={{ color: olive, fontWeight: 700 }}>
-            helping hand
-          </Box>{" "}
-          to families in crisis. Together, we{" "}
-          <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>
-            transform empathy into action
-          </Box>{" "}
-          and build a{" "}
-          <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
-            safer, more caring world
-          </Box>
-          .
-        </Typography>
-      </Box>
-    </motion.div>
-  </Grid>
+          <Typography variant="h6" fontWeight={800} gutterBottom color={card.color}>
+            {card.title}
+          </Typography>
+          <Typography color={mutedText} fontSize="0.95rem">
+            {card.text}
+          </Typography>
+        </Box>
+      </motion.div>
+    </Grid>
+  ))}
 </Grid>
 
 
@@ -893,7 +764,7 @@ export default function About() {
       .
     </Typography>
 
-    <Typography mt={4} variant="h4" fontWeight={800} color={olive}>
+    <Typography mt={4} variant="h4" fontWeight={800} color={olive} textAlign={"center"}>
       Our Roots
     </Typography>
     <Divider sx={{ my: 2 }} />
@@ -940,7 +811,7 @@ export default function About() {
       .
     </Typography>
 
-    <Typography mt={4} variant="h4" fontWeight={800} color={navyText}>
+    <Typography mt={4} variant="h4" fontWeight={800} color={navyText} textAlign={"center"}>
       A Purpose Forged Through Loss
     </Typography>
     <Divider sx={{ my: 2 }} />
@@ -966,7 +837,7 @@ export default function About() {
       .
     </Typography>
 
-    <Typography mt={4} variant="h4" fontWeight={800} color="#2f4dd3">
+    <Typography mt={4} variant="h4" fontWeight={800} color="#2f4dd3" textAlign={"center"}>
       What We Believe
     </Typography>
     <Divider sx={{ my: 2 }} />
@@ -991,7 +862,7 @@ export default function About() {
       .
     </Typography>
 
-    <Typography mt={4} variant="h4" fontWeight={800} color={gold}>
+    <Typography mt={4} variant="h4" fontWeight={800} color={gold} textAlign={"center"} marginBottom={5}>
       Our Promise
     </Typography>
     <Divider sx={{ my: 2 }} />

@@ -284,7 +284,7 @@ export default function Careers() {
   sx={{
     mt: 14,
     py: { xs: 8, md: 12 },
-    background: "linear-gradient(135deg, #bae90e, #4deb25)",
+    background: "linear-gradient(135deg, #bae90e, #e8eb25)",
     borderRadius: 6,
     color: "#fff",
   }}
@@ -320,10 +320,10 @@ export default function Careers() {
               Reach out to us
             </Typography>
             <Typography fontSize={14} color="text.secondary">
-              info@sainishafoundation.org
+              hello@sainisha.in
             </Typography>
             <Typography fontSize={14} color="text.secondary">
-              Call us: +91 98765 43210
+              Call us: +91 9962290875
             </Typography>
           </Box>
         </Paper>

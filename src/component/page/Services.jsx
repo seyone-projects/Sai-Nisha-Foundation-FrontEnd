@@ -88,7 +88,6 @@ const slideUp = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-// Video Spotlight Effect Animation
 const spotlightMove = keyframes`
   0% { transform: translate(-20%, -20%); opacity: 0; }
   20% { opacity: 1; }
@@ -158,7 +157,7 @@ export default function Services() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-         <Box
+      <Box
         sx={{
           position: "fixed",
           bottom: 20,
@@ -188,6 +187,7 @@ export default function Services() {
           <WhatsAppIcon sx={{ fontSize: 30 }} />
         </Button>
       </Box>
+
       <Box
         sx={{
           background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
@@ -201,11 +201,10 @@ export default function Services() {
         <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
           <Container maxWidth="lg">
             
-            {/* Spotlight Header Wrapper - Enhanced height and animation */}
             <Box
               sx={{
                 position: "relative",
-                backgroundColor: "#111827", // Dark theme for effect visibility
+                backgroundColor: "#111827",
                 borderRadius: 4,
                 overflow: "hidden",
                 bottom: 30,
@@ -218,7 +217,6 @@ export default function Services() {
                 justifyContent: "center",
               }}
             >
-              {/* Spotlight Moving Light Sweep */}
               <Box
                 sx={{
                   position: "absolute",
@@ -266,39 +264,38 @@ export default function Services() {
               </Typography>
             </Box>
 
-         <Box
-  sx={{
-    maxWidth: 900,
-    mx: "auto",
-    mb: 10,
-    textAlign: "left",
-    animation: `${fadeIn} 1.2s ease-out`,
-    p: 4,
-    borderRadius: 8,
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
-    backdropFilter: "blur(5px)",
-  }}
->
-  <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
-    Sai Nisha Foundation
-  </Typography>
+            <Box
+              sx={{
+                maxWidth: 900,
+                mx: "auto",
+                mb: 10,
+                textAlign: "left",
+                animation: `${fadeIn} 1.2s ease-out`,
+                p: 4,
+                borderRadius: 8,
+                backgroundColor: "rgba(255, 255, 255, 0.4)",
+                backdropFilter: "blur(5px)",
+              }}
+            >
+              <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
+                Sai Nisha Foundation
+              </Typography>
 
-  <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
-    Serving Life at Its Most Vulnerable Moments
-  </Typography>
+              <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
+                Serving Life at Its Most Vulnerable Moments
+              </Typography>
 
-  <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
-    At Sai Nisha Foundation, our work begins where uncertainty is highest
-    and support is often absent. We focus on moments when time, care,
-    and reassurance matter more than anything else.
-  </Typography>
+              <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
+                At Sai Nisha Foundation, our work begins where uncertainty is highest
+                and support is often absent. We focus on moments when time, care,
+                and reassurance matter more than anything else.
+              </Typography>
 
-  <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
-    Our services are guided by urgency, compassion, and responsibility —
-    always centred on dignity and need.
-  </Typography>
-</Box>
-
+              <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
+                Our services are guided by urgency, compassion, and responsibility —
+                always centred on dignity and need.
+              </Typography>
+            </Box>
 
             <Box sx={{ maxWidth: 830, mx: "auto", mb: 10, textAlign: "left" }}>
               <Typography
@@ -348,11 +345,9 @@ export default function Services() {
             <Grid container spacing={4} justifyContent="center">
               {services.map((service, index) => (
                 <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  lg={4}
                   key={index}
+                  // Replaced xs, md, and sx props with size and sx
+                  size={{ xs: 12, md: 6, lg: 4 }}
                   sx={{
                     display: "flex",
                     justifyContent: "center",

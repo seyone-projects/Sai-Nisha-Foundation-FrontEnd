@@ -11,7 +11,6 @@ import { motion } from "framer-motion";
 import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -20,12 +19,10 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-
 const creamBg = "#F7F4EC";
 const navyText = "#1F2F3F";
 const olive = "#7C8F29";
 const gold = "#D68910";
-
 
 const fadeDown = {
   hidden: { opacity: 0, y: -50 },
@@ -44,6 +41,7 @@ const fadeUp = {
     transition: { duration: 0.9, ease: "easeOut" },
   },
 };
+
 function BubblesBackground() {
   return (
     <Box
@@ -53,7 +51,7 @@ function BubblesBackground() {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 1, 
+        zIndex: 1,
         overflow: "hidden",
         pointerEvents: "none",
       }}
@@ -106,7 +104,7 @@ export default function Events() {
     <>
       <CssBaseline />
 
-        <Box
+      <Box
         sx={{
           position: "fixed",
           bottom: 20,
@@ -136,6 +134,7 @@ export default function Events() {
           <WhatsAppIcon sx={{ fontSize: 30 }} />
         </Button>
       </Box>
+
       <Box
         sx={{
           minHeight: "100vh",
@@ -162,11 +161,12 @@ export default function Events() {
           }}
         />
         <BubblesBackground />
+        
         <Box
           sx={{
             background: `linear-gradient(135deg, ${navyText}, #0E1624)`,
             color: "#fff",
-            py: isMobile ? 7 : 10,
+            py: { xs: 7, md: 10 },
             textAlign: "center",
             px: 2,
             boxShadow: "0 25px 80px rgba(0,0,0,0.5)",
@@ -203,35 +203,38 @@ export default function Events() {
             </Typography>
 
             <Typography
-              mt={2}
-              fontSize={{ xs: 14, md: 17 }}
-              opacity={0.9}
-              color="#F7F4EC"
+              sx={{
+                mt: 2,
+                fontSize: { xs: 14, md: 17 },
+                opacity: 0.9,
+                color: "#F7F4EC"
+              }}
             >
               Curated volunteering opportunities to create meaningful impact
             </Typography>
 
             <Typography
-              mt={1}
-              fontSize={13}
-              opacity={0.85}
-              letterSpacing="0.2em"
-              textTransform="uppercase"
-              color={olive}
+              sx={{
+                mt: 1,
+                fontSize: 13,
+                opacity: 0.85,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: olive
+              }}
             >
               Explore • Participate • Grow
             </Typography>
           </motion.div>
         </Box>
 
-        {/* ================= COMING SOON CARD ================= */}
         <Container
           sx={{
             flex: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            py: isMobile ? 6 : 10,
+            py: { xs: 6, md: 10 },
             position: "relative",
             zIndex: 2,
           }}
@@ -281,10 +284,12 @@ export default function Events() {
               </Typography>
 
               <Typography
-                mt={2}
-                fontSize={{ xs: 14, md: 16 }}
-                color={olive}
-                lineHeight={1.9}
+                sx={{
+                  mt: 2,
+                  fontSize: { xs: 14, md: 16 },
+                  color: olive,
+                  lineHeight: 1.9
+                }}
               >
                 We’re preparing impactful volunteering events for you. Stay
                 tuned — exciting opportunities are on the way!
@@ -295,12 +300,14 @@ export default function Events() {
                 transition={{ duration: 2.2, repeat: Infinity }}
               >
                 <Typography
-                  mt={4}
-                  fontWeight={900}
-                  fontSize={13}
-                  letterSpacing="0.25em"
-                  color={gold}
-                  textTransform="uppercase"
+                  sx={{
+                    mt: 4,
+                    fontWeight: 900,
+                    fontSize: 13,
+                    letterSpacing: "0.25em",
+                    color: gold,
+                    textTransform: "uppercase"
+                  }}
                 >
                   Thank you for your patience
                 </Typography>
