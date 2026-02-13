@@ -14,7 +14,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
-/* 👉 IMPORT BACKGROUND IMAGE */
+/* IMPORT BACKGROUND IMAGE */
 // import footerBg from "../page/image/footer.png";
 
 export default function Footer() {

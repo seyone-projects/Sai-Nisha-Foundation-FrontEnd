@@ -29,6 +29,7 @@ import Payment from "./component/page/payment";
 import VolunteerForm from "./component/page/VolunteerForm";
 import Campaigns from "./component/page/Campaigns";
 import Media from "./component/page/Media";
+import Manage from "./component/page/Manage";
 
 
 const creamBg = "#F3EEDC";
@@ -194,6 +195,7 @@ export default function App() {
           <Route path="/volunteer" element={<VolunteerForm/>} />
            <Route path="/campaigns" element={<Campaigns/>} />
            <Route path="/media" element={<Media/>} />
+           <Route path="/manage" element={<Manage/>} />
         </Routes>
       </Container>
     </Router>
