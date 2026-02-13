@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Box,
-  Button,
   Typography,
   Container,
   CssBaseline,
@@ -19,17 +18,17 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 // --- IMAGE IMPORTS ---
 import eventImg1 from "../page/image/DSC05916.jpg"; 
-import eventImg2 from '../page/image/DSC06299.jpg'
-import eventImg3 from '../page/image/DSC06390.jpg'
+import eventImg2 from '../page/image/DSC06299.jpg';
+import eventImg3 from '../page/image/DSC06390.jpg';
 import eventImg4 from "../page/image/DSC06321.jpg"; 
-import eventImg5 from '../page/image/DSC05759.jpg'
-import eventImg6 from '../page/image/DSC05749.jpg'
-import eventImg7 from '../page/image/DSC05657.jpg'
-import eventImg8 from '../page/image/DSC06093.jpg'
-import eventImg9 from '../page/image/DSC05856.jpg'
-import eventImg10 from '../page/image/DSC05875.jpg'
-import eventImg11 from '../page/image/DSC06227.jpg'
-import eventImg12 from '../page/image/DSC06023.jpg'
+import eventImg5 from '../page/image/DSC05759.jpg';
+import eventImg6 from '../page/image/DSC05749.jpg';
+import eventImg7 from '../page/image/DSC05657.jpg';
+import eventImg8 from '../page/image/DSC06093.jpg';
+import eventImg9 from '../page/image/DSC05856.jpg';
+import eventImg10 from '../page/image/DSC05875.jpg';
+import eventImg11 from '../page/image/DSC06227.jpg';
+import eventImg12 from '../page/image/DSC06023.jpg';
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
@@ -39,7 +38,6 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-const creamBg = "#F7F4EC";
 const navyText = "#1F2F3F";
 const eventMagenta = "#b7e900";
 const cinematicNavy = "#0B121E"; 
@@ -50,52 +48,145 @@ const ALL_EVENTS = [
   { title: "Chief Guest 2", date: "Sun, 01 Feb 2026", image: eventImg2 },
   { title: "Chief Guest 3", date: "Sun, 01 Feb 2026", image: eventImg3 },
   { title: "Chief Guest 4", date: "Sun, 01 Feb 2026", image: eventImg4 },
-  { title: "Audience", date: "Sun, 01 Feb 2026", image: eventImg5 },
+  { title: "Singing", date: "Sun, 01 Feb 2026", image: eventImg5 },
   { title: "Group Singing", date: "Sun, 01 Feb 2026", image: eventImg6 },
   { title: "Hosts", date: "Sun, 01 Feb 2026", image: eventImg7 },
   { title: "Bharatanatyam", date: "Sun, 01 Feb 2026", image: eventImg8 },
   { title: "Group Singing 2", date: "Sun, 01 Feb 2026", image: eventImg9 },
   { title: "Group Dance", date: "Sun, 01 Feb 2026", image: eventImg10 },
   { title: "Memory Recreation", date: "Sun, 01 Feb 2026", image: eventImg11 },
-  { title: "Cloud Computing Summit", date: "Sun, 01 Feb 2026", image: eventImg12 },
+  { title: "Lighting Candles", date: "Sun, 01 Feb 2026", image: eventImg12 },
 ];
+
+const BG_IMAGES = [eventImg1, eventImg4, eventImg8, eventImg12, eventImg3];
 
 const fadeDown = {
   hidden: { opacity: 0, y: -30 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const setTransition = {
-  initial: { opacity: 0, x: 50 },
-  animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -50 },
-  transition: { duration: 0.6, ease: "easeInOut" }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
-function CinematicBackground() {
+const cardItemVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0, 
+    transition: { duration: 0.5, ease: "easeOut" } 
+  },
+};
+
+// --- NEW SHADER BACKGROUND WITH LIGHT WAVES ---
+function GlobalShaderBackground() {
   return (
-    <Box sx={{ position: "absolute", inset: 0, zIndex: 1, overflow: "hidden", backgroundColor: cinematicNavy }}>
-      {[...Array(6)].map((_, i) => (
+    <Box
+      sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: -1,
+        overflow: "hidden",
+        background: cinematicNavy,
+      }}
+    >
+      {/* Animated Gradient Mesh (Wave Effect) */}
+      <Box
+        sx={{
+          position: "absolute",
+          width: "200%",
+          height: "200%",
+          top: "-50%",
+          left: "-50%",
+          background: `radial-gradient(circle at 50% 50%, ${cinematicNavy} 0%, #162435 50%, ${cinematicNavy} 100%)`,
+          animation: "meshRotate 20s linear infinite",
+          opacity: 0.8,
+        }}
+      />
+
+      {/* Slow Drifting Light Waves */}
+      {[...Array(3)].map((_, i) => (
         <Box
           key={i}
           sx={{
             position: "absolute",
-            width: { xs: 150, md: 300 },
-            height: { xs: 150, md: 300 },
-            borderRadius: "50%",
-            background: i % 2 === 0 
-                ? `radial-gradient(circle, rgba(242, 169, 0, 0.12) 0%, transparent 70%)` 
-                : `radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%)`,
-            filter: "blur(40px)",
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animation: `floatOrbs ${15 + i * 2}s linear infinite alternate`,
+            width: "100%",
+            height: "100%",
+            background: `linear-gradient(${45 + i * 30}deg, transparent 0%, rgba(242,169,0,0.05) 50%, transparent 100%)`,
+            animation: `waveMove ${10 + i * 5}s infinite alternate ease-in-out`,
+            mixBlendMode: "screen",
           }}
         />
       ))}
+
+      {/* Soft Cinematic Lens Flares */}
+      <Box sx={{
+        position: "absolute",
+        width: "600px",
+        height: "600px",
+        background: `radial-gradient(circle, rgba(242,169,0,0.15) 0%, transparent 70%)`,
+        top: "10%",
+        right: "-10%",
+        filter: "blur(60px)",
+        animation: "floatFlare 15s infinite alternate",
+      }} />
+      
       <style>{`
-        @keyframes floatOrbs { 0% { transform: translate(0, 0); opacity: 0.3; } 100% { transform: translate(50px, -50px); opacity: 0.6; } }
+        @keyframes meshRotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes waveMove {
+          0% { transform: translateY(-10%) translateX(-5%); }
+          100% { transform: translateY(10%) translateX(5%); }
+        }
+        @keyframes floatFlare {
+          0% { transform: translate(0,0); opacity: 0.5; }
+          100% { transform: translate(-100px, 50px); opacity: 0.8; }
+        }
       `}</style>
+    </Box>
+  );
+}
+
+function CinematicHeroBackground() {
+  const [bgIndex, setBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % BG_IMAGES.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Box sx={{ position: "absolute", inset: 0, zIndex: 1, overflow: "hidden" }}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={bgIndex}
+          initial={{ opacity: 0, scale: 1.2 }}
+          animate={{ opacity: 0.4, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${BG_IMAGES[bgIndex]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "absolute",
+          }}
+        />
+      </AnimatePresence>
+      <Box sx={{ position: "absolute", inset: 0, background: `linear-gradient(to bottom, transparent, ${cinematicNavy})`, zIndex: 2 }} />
     </Box>
   );
 }
@@ -116,7 +207,7 @@ export default function Events() {
 
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(() => handleNext(), 3000);
+    const timer = setInterval(() => handleNext(), 5000);
     return () => clearInterval(timer);
   }, [handleNext, isPaused]);
 
@@ -128,133 +219,122 @@ export default function Events() {
   return (
     <>
       <CssBaseline />
+      <GlobalShaderBackground />
       
-      {/* WhatsApp Button */}
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
-        <IconButton
-          component="a" href="https://wa.me/919962290875" target="_blank" rel="noopener noreferrer"
-          sx={{
-            width: 56, height: 56, backgroundColor: "#25D366", color: "#fff",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" },
-          }}
-        >
+        <IconButton component="a" href="https://wa.me/919962290875" target="_blank" sx={{ width: 56, height: 56, backgroundColor: "#25D366", color: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}>
           <WhatsAppIcon sx={{ fontSize: 30 }} />
         </IconButton>
       </Box>
 
-      <Box sx={{ minHeight: "100vh", background: creamBg, display: "flex", flexDirection: "column", fontFamily: "Poppins, sans-serif", position: "relative" }}>
+      <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "Poppins, sans-serif", position: "relative" }}>
         
-        {/* HERO SECTION */}
-        <Box sx={{ minHeight: { xs: "50vh", md: "70vh" }, display: "flex", alignItems: "center", color: "#fff", position: "relative", zIndex: 2, py: { xs: 8, md: 10 } }}>
-          <CinematicBackground />
-          <Container maxWidth="lg" sx={{ position: "relative", zIndex: 3, textAlign: "center" }}>
+        <Box sx={{ minHeight: { xs: "60vh", md: "85vh" }, display: "flex", alignItems: "center", color: "#fff", position: "relative", zIndex: 2, overflow: "hidden" }}>
+          <CinematicHeroBackground />
+          <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10, textAlign: "center" }}>
             <motion.div variants={fadeDown} initial="hidden" animate="visible">
-              <Typography variant="h1" sx={{ fontWeight: 900, color: cinematicGold, fontSize: { xs: "2.8rem", sm: "4rem", md: "6.5rem" }, letterSpacing: { xs: "2px", md: "8px" }, textTransform: "uppercase", mb: 2 }}>
+              <Typography variant="h1" sx={{ fontWeight: 900, color: cinematicGold, fontSize: { xs: "2.8rem", sm: "4.5rem", md: "6.5rem" }, letterSpacing: { xs: "2px", md: "8px" }, textTransform: "uppercase", mb: 2, textShadow: '0 10px 30px rgba(0,0,0,0.8)' }}>
                 Our EVENTS
               </Typography>
-              <Typography sx={{ fontSize: { xs: 16, md: 22 }, fontWeight: 400, maxWidth: "800px", mx: "auto", px: 2, lineHeight: 1.6, color: "rgba(255, 255, 255, 0.9)", mb: 4 }}>
-                Curated volunteering opportunities to create <br /> meaningful impact
+              <Typography sx={{ fontSize: { xs: 16, md: 22 }, fontWeight: 400, maxWidth: "800px", mx: "auto", px: 2, lineHeight: 1.6, color: "rgba(255, 255, 255, 0.8)", mb: 4, fontStyle: 'italic' }}>
+                "Reliving the moments of joy, talent, and meaningful connections"
               </Typography>
+              <Box sx={{ width: '80px', height: '2px', bgcolor: cinematicGold, mx: 'auto', mt: 2 }} />
             </motion.div>
           </Container>
         </Box>
 
-        {/* EVENTS GRID SECTION */}
         <Container 
             maxWidth="lg" 
-            sx={{ position: "relative", zIndex: 3, mt: { xs: -4, md: -8 }, pb: 10 }}
+            sx={{ position: "relative", zIndex: 3, mt: { xs: -10, md: -15 }, pb: 10 }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
         >
-          
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-             {/* Left Arrow Desktop */}
-             <IconButton 
-                onClick={handlePrev}
-                sx={{ 
-                    bgcolor: 'white', color: cinematicNavy, boxShadow: 3,
-                    display: { xs: 'none', md: 'flex' },
-                    '&:hover': { bgcolor: cinematicGold, color: 'white' }
-                }}
-             >
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 8 }}>
+             <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', display: { xs: 'none', md: 'flex' }, '&:hover': { bgcolor: cinematicGold, color: 'white' } }}>
                 <ArrowBackIosNewIcon />
              </IconButton>
 
              <Box textAlign="center" sx={{ width: "100%" }}>
-                <Typography sx={{ color: eventMagenta, fontWeight: 700, fontSize: { xs: '1.5rem', md: '2.5rem' }, mb: 0.5 }}>
-                  Our Events
+                <Typography sx={{ color: eventMagenta, fontWeight: 700, fontSize: { xs: '1rem', md: '1.4rem' }, textTransform: 'uppercase', letterSpacing: 4, mb: 1 }}>
+                  Event Highlights
                 </Typography>
-                <Typography variant="h3" sx={{ fontWeight: 800, color: navyText, fontSize: { xs: '1.2rem', md: '2rem' }, mb: 2 }}>
-                  Featured Sets
+                <Typography variant="h3" sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: '2rem', md: '3.5rem' }, mb: 3 }}>
+                  Captured Memories
                 </Typography>
-                {/* Pagination Dots */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
                     {[...Array(totalPages)].map((_, i) => (
-                        <Box 
-                            key={i} 
-                            sx={{ 
-                                width: currentPage === i ? 24 : 8, 
-                                height: 8, 
-                                borderRadius: 4, 
-                                bgcolor: currentPage === i ? cinematicGold : '#ccc',
-                                transition: 'all 0.3s ease'
-                            }} 
-                        />
+                        <Box key={i} sx={{ width: currentPage === i ? 40 : 8, height: 8, borderRadius: 5, bgcolor: currentPage === i ? cinematicGold : 'rgba(255,255,255,0.2)', transition: '0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                     ))}
                 </Box>
              </Box>
 
-             {/* Right Arrow Desktop */}
-             <IconButton 
-                onClick={handleNext}
-                sx={{ 
-                    bgcolor: 'white', color: cinematicNavy, boxShadow: 3,
-                    display: { xs: 'none', md: 'flex' },
-                    '&:hover': { bgcolor: cinematicGold, color: 'white' }
-                }}
-             >
+             <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', display: { xs: 'none', md: 'flex' }, '&:hover': { bgcolor: cinematicGold, color: 'white' } }}>
                 <ArrowForwardIosIcon />
              </IconButton>
           </Box>
 
-          {/* Cards Grid */}
-          <Box sx={{ minHeight: { xs: 'auto', md: '600px' } }}>
+          <Box sx={{ minHeight: { xs: 'auto', md: '650px' } }}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPage}
-                variants={setTransition}
-                initial="initial"
-                animate="animate"
-                exit="exit"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
               >
-                <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="center">
+                <Grid container spacing={4} justifyContent="center">
                   {currentCards.map((event, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                      <motion.div whileHover={{ y: -8 }} style={{ height: '100%' }}>
+                    <Grid item xs={12} sm={6} md={4} key={`${currentPage}-${index}`}>
+                      <motion.div 
+                        variants={cardItemVariants}
+                        whileHover={{ y: -15, transition: { duration: 0.3 } }}
+                        style={{ height: '100%' }}
+                      >
                         <Card sx={{ 
                           borderRadius: 4, 
-                          border: '1px solid #f0f0f0', 
-                          boxShadow: '0 10px 30px rgba(0,0,0,0.05)', 
+                          overflow: 'hidden',
+                          background: 'rgba(255, 255, 255, 0.03)',
+                          backdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)', 
                           height: '100%', 
                           display: 'flex', 
                           flexDirection: 'column',
-                          mx: { xs: 'auto', sm: 0 },
-                          maxWidth: { xs: '340px', sm: '100%' }
+                          transition: 'all 0.4s ease',
+                          '&:hover': {
+                            background: 'rgba(255, 255, 255, 0.07)',
+                            borderColor: cinematicGold,
+                            boxShadow: `0 20px 50px rgba(0,0,0,0.5)`,
+                          }
                         }}>
-                          <CardMedia component="img" height="200" image={event.image} alt={event.title} />
-                          <CardContent sx={{ p: { xs: 2, md: 3 }, flexGrow: 1 }}>
-                            <Typography sx={{ fontWeight: 700, fontSize: '1.05rem', height: 50, overflow: 'hidden', mb: 1.5, color: '#2D3954' }}>
+                          <Box sx={{ position: 'relative', overflow: 'hidden', height: '240px' }}>
+                            <CardMedia 
+                              component="img" 
+                              height="100%" 
+                              image={event.image} 
+                              alt={event.title}
+                              sx={{ 
+                                transition: 'transform 1.2s ease',
+                                '&:hover': { transform: 'scale(1.15)' } 
+                              }}
+                            />
+                            <Box sx={{ 
+                                position: 'absolute', inset: 0, 
+                                background: 'linear-gradient(to top, rgba(11,18,30,0.8), transparent)',
+                            }} />
+                          </Box>
+                          
+                          <CardContent sx={{ p: 3, flexGrow: 1, textAlign: 'center' }}>
+                            <Typography sx={{ fontWeight: 700, fontSize: '1.4rem', mb: 1, color: '#fff', letterSpacing: 0.5 }}>
                               {event.title}
                             </Typography>
-                            <Typography variant="body2" sx={{ color: "#777", mb: 2 }}>
-                              📅 {event.date}
+                            <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.6)", mb: 2, display: 'inline-flex', alignItems: 'center', bgcolor: 'rgba(255,255,255,0.05)', px: 2, py: 0.5, borderRadius: 1 }}>
+                              {event.date}
                             </Typography>
-                            <Box sx={{ pt: 2, borderTop: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                              <Box>
-                                <Typography variant="caption" sx={{ color: '#999', display: 'block' }}>Organized By</Typography>
-                                <Typography variant="caption" sx={{ color: eventMagenta, fontWeight: 700 }}>Sai Nisha</Typography>
-                              </Box>
+                            <Box sx={{ mt: 2, pt: 2, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                                <Typography variant="caption" sx={{ color: cinematicGold, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 2 }}>
+                                    Partner: Sai Nisha
+                                </Typography>
                             </Box>
                           </CardContent>
                         </Card>
@@ -266,12 +346,10 @@ export default function Events() {
             </AnimatePresence>
           </Box>
 
-          {/* Mobile Arrows - Visible only on mobile/tablet */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 5 }}>
-             <IconButton onClick={handlePrev} sx={{ bgcolor: 'white', boxShadow: 2, color: cinematicNavy }}><ArrowBackIosNewIcon /></IconButton>
-             <IconButton onClick={handleNext} sx={{ bgcolor: 'white', boxShadow: 2, color: cinematicNavy }}><ArrowForwardIosIcon /></IconButton>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 6 }}>
+             <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowBackIosNewIcon /></IconButton>
+             <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowForwardIosIcon /></IconButton>
           </Box>
-
         </Container>
       </Box>
       <Footer />

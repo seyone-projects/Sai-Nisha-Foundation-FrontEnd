@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./Footer";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
@@ -29,9 +30,15 @@ import serviceImg3 from "./image/mentally challenged elders.webp";
 import serviceImg4 from "./image/newborn-baby.jpg";
 import serviceImg5 from "./image/education.jpg";
 import serviceImg6 from "./image/kids_education_part2.jpg";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-const serviceImages = [serviceImg1, serviceImg2, serviceImg3, serviceImg4, serviceImg5, serviceImg6];
+const serviceImages = [
+  serviceImg1,
+  serviceImg2,
+  serviceImg3,
+  serviceImg4,
+  serviceImg5,
+  serviceImg6,
+];
 
 const creamBg = "#F7F4EC";
 const navyText = "#1F2F3F";
@@ -40,44 +47,25 @@ const gold = "#D68910";
 const mutedText = "#5F6F7E";
 
 const services = [
-  {
-    title: "Pregnancy Emergency",
-    desc: "We provide urgent support for expecting mothers during high-risk pregnancies, ensuring timely medical care, transportation, and emotional assistance when every moment matters.",
-  },
-  {
-    title: "Pets",
-    desc: "We promote compassion toward animals through rescue support, medical aid, rehabilitation, and adoption awareness for abandoned and injured pets.",
-  },
-  {
-    title: "Mentally Challenged Elders",
-    desc: "We ensure dignity, care, and emotional well-being for mentally challenged elderly individuals by offering medical support, daily care, and compassionate companionship.",
-  },
-  {
-    title: "Newborn Emergency Care",
-    desc: "We support critically ill newborns by facilitating immediate medical attention, NICU access, and essential life-saving care during the most fragile first hours of life.",
-  },
-  {
-    title: "Education",
-    desc: "We empower children through access to education, learning resources, and skill development, helping them build a brighter and more secure future.",
-  },
-  {
-    title: "Sports",
-    desc: "We encourage physical fitness and confidence in young individuals by supporting sports training, team activities, and opportunities for healthy development.",
-  },
+  { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies." },
+  { title: "Pets", desc: "Rescue, medical care, and adoption support." },
+  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-being." },
+  { title: "Newborn Emergency Care", desc: "NICU access and life-saving care." },
+  { title: "Education", desc: "Empowering children through learning." },
+  { title: "Sports", desc: "Encouraging fitness and confidence." },
 ];
 
 const theme = createTheme({
   typography: {
-    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Poppins", sans-serif`,
     h2: { fontWeight: 900 },
     h4: { fontWeight: 800 },
     h5: { fontWeight: 700 },
     h6: { fontWeight: 600 },
-    body1: { fontWeight: 400 },
-    body2: { fontWeight: 400 },
   },
 });
 
+/* ---------------- ANIMATIONS ---------------- */
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -90,60 +78,73 @@ const slideUp = keyframes`
 
 const spotlightMove = keyframes`
   0% { transform: translate(-20%, -20%); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
+  50% { opacity: 1; }
   100% { transform: translate(120%, 120%); opacity: 0; }
 `;
 
-function BubblesBackground() {
+/* ---------------- FULL PAGE VIDEO ---------------- */
+function FullPageVideoBackground() {
   return (
     <Box
       sx={{
         position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
+        inset: 0,
+        zIndex: -2,
         overflow: "hidden",
-        pointerEvents: "none",
       }}
     >
-      {[...Array(40)].map((_, i) => {
-        const size = Math.random() * 20 + 8;
-        const randomLeft = Math.random() * 100;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 20;
-        const isGold = i % 2 === 0;
-        const color = isGold ? "rgba(214, 137, 16, 0.45)" : "rgba(255, 230, 0, 0.35)";
-        const glow = isGold ? "rgba(214, 137, 16, 0.3)" : "rgba(255, 230, 0, 0.2)";
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          filter: "brightness(0.35) contrast(1.15)",
+        }}
+      >
+        <source src="/animation eeee.mp4" type="video/mp4" />
+      </video>
 
-        return (
-          <Box
-            key={i}
-            sx={{
-              position: "absolute",
-              bottom: "-30px",
-              left: `${randomLeft}%`,
-              width: `${size}px`,
-              height: `${size}px`,
-              backgroundColor: color,
-              borderRadius: "50%",
-              boxShadow: `0 0 15px 4px ${glow}`,
-              opacity: 0,
-              animation: `floatUp ${duration}s linear infinite`,
-              animationDelay: `${delay}s`,
-            }}
-          />
-        );
-      })}
+      {/* Dark cinematic overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to bottom, rgba(17,24,39,0.85), rgba(17,24,39,0.95))",
+        }}
+      />
+    </Box>
+  );
+}
 
+/* ---------------- FLOATING BUBBLES ---------------- */
+function BubblesBackground() {
+  return (
+    <Box sx={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
+      {[...Array(35)].map((_, i) => (
+        <Box
+          key={i}
+          sx={{
+            position: "absolute",
+            bottom: "-50px",
+            left: `${Math.random() * 100}%`,
+            width: 10 + Math.random() * 20,
+            height: 10 + Math.random() * 20,
+            borderRadius: "50%",
+            background: "rgba(214,137,16,0.45)",
+            animation: `floatUp ${12 + Math.random() * 10}s linear infinite`,
+          }}
+        />
+      ))}
       <style>{`
         @keyframes floatUp {
-          0% { transform: translateY(0) scale(1); opacity: 0; }
-          10% { opacity: 0.7; }
-          90% { opacity: 0.6; }
-          100% { transform: translateY(-450vh) scale(1.4); opacity: 0; }
+          from { transform: translateY(0); opacity: 0; }
+          20% { opacity: .8; }
+          to { transform: translateY(-450vh); opacity: 0; }
         }
       `}</style>
     </Box>
@@ -157,244 +158,116 @@ export default function Services() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <Box
+      {/* VIDEO & EFFECTS */}
+      <FullPageVideoBackground />
+      <BubblesBackground />
+
+      {/* WHATSAPP */}
+      <Button
+        component="a"
+        href="https://wa.me/919962290875"
         sx={{
           position: "fixed",
           bottom: 20,
           right: 20,
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          bgcolor: "#25D366",
+          color: "#fff",
           zIndex: 9999,
         }}
       >
-        <Button
-          component="a"
-          href="https://wa.me/919962290875"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            minWidth: 0,
-            width: 56,
-            height: 56,
-            borderRadius: "50%",
-            backgroundColor: "#25D366",
-            color: "#fff",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-            "&:hover": {
-              backgroundColor: "#1EBE5D",
-              transform: "scale(1.1)",
-            },
-          }}
-        >
-          <WhatsAppIcon sx={{ fontSize: 30 }} />
-        </Button>
-      </Box>
+        <WhatsAppIcon />
+      </Button>
 
-      <Box
-        sx={{
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <BubblesBackground />
+      {/* CONTENT */}
+      <Box sx={{ position: "relative", zIndex: 2, minHeight: "100vh" }}>
+        <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
 
-        <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
-          <Container maxWidth="lg">
-            
+          {/* HERO */}
+          <Box
+            sx={{
+              position: "relative",
+              backgroundColor: "rgba(17,24,39,0.85)",
+              borderRadius: 4,
+              py: { xs: 8, md: 12 },
+              mb: 10,
+              textAlign: "center",
+              overflow: "hidden",
+            }}
+          >
             <Box
               sx={{
-                position: "relative",
-                backgroundColor: "#111827",
-                borderRadius: 4,
-                overflow: "hidden",
-                bottom: 30,
-                py: { xs: 10, md: 15 }, 
-                mb: { xs: 6, md: 8 },
-                boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+                position: "absolute",
+                inset: 0,
+                background:
+                  "radial-gradient(circle, rgba(214,137,16,0.25), transparent)",
+                animation: `${spotlightMove} 6s infinite`,
               }}
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: `radial-gradient(circle at center, rgba(214, 137, 16, 0.25) 0%, transparent 70%)`,
-                  filter: "blur(60px)",
-                  zIndex: 0,
-                  animation: `${spotlightMove} 6s infinite ease-in-out`,
-                }}
-              />
+            />
 
-              <Typography
-                variant={isMobile ? "h4" : "h2"}
-                align="center"
-                sx={{
-                  position: "relative",
-                  zIndex: 2,
-                  fontWeight: 900,
-                  color: "#FFFFFF",
-                  textTransform: "uppercase",
-                  animation: `${fadeIn} 1s ease-out`,
-                  letterSpacing: { xs: 2, md: 5 },
-                }}
-              >
-                Our <span style={{ color: gold }}>Services</span>
-              </Typography>
-              
-              <Typography
-                align="center"
-                sx={{
-                  position: "relative",
-                  zIndex: 2,
-                  color: "rgba(255,255,255,0.7)",
-                  letterSpacing: { xs: 3, md: 8 },
-                  fontSize: { xs: 12, md: 16 },
-                  mt: 3,
-                  fontWeight: 600,
-                  textTransform: "uppercase"
-                }}
-              >
-                Explore • Participate • Grow
-              </Typography>
-            </Box>
-
-            <Box
+            <Typography
+              variant={isMobile ? "h4" : "h2"}
               sx={{
-                maxWidth: 900,
-                mx: "auto",
-                mb: 10,
-                textAlign: "left",
-                animation: `${fadeIn} 1.2s ease-out`,
-                p: 4,
-                borderRadius: 8,
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
-                backdropFilter: "blur(5px)",
+                color: "#fff",
+                textTransform: "uppercase",
+                animation: `${fadeIn} 1s ease-out`,
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
-                Sai Nisha Foundation
-              </Typography>
+              Our <span style={{ color: gold }}>Services</span>
+            </Typography>
 
-              <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
-                Serving Life at Its Most Vulnerable Moments
-              </Typography>
+            <Typography sx={{ color: "rgba(255,255,255,0.7)", mt: 2 }}>
+              Explore • Participate • Grow
+            </Typography>
+          </Box>
 
-              <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
-                At Sai Nisha Foundation, our work begins where uncertainty is highest
-                and support is often absent. We focus on moments when time, care,
-                and reassurance matter more than anything else.
-              </Typography>
-
-              <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
-                Our services are guided by urgency, compassion, and responsibility —
-                always centred on dignity and need.
-              </Typography>
-            </Box>
-
-            <Box sx={{ maxWidth: 830, mx: "auto", mb: 10, textAlign: "left" }}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: 800, color: gold, mb: 3 }}
+          {/* SERVICES GRID */}
+          <Grid container spacing={4} justifyContent="center">
+            {services.map((service, index) => (
+              <Grid
+                key={index}
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  opacity: 0,
+                  animation: `${slideUp} .8s ease-out ${index * 0.1}s forwards`,
+                }}
               >
-                Primary Services (Our Core Commitment)
-              </Typography>
-
-              <Typography sx={{ mb: 3, color: mutedText }}>
-                <b>Third Trimester Pregnancy Support:</b> Emergency medical
-                assistance, hospitalisation support, nutrition, guidance, and
-                emotional reassurance.
-              </Typography>
-
-              <Typography sx={{ color: mutedText }}>
-                <b>NICU & Newborn Emergency Care:</b> Partial or full financial
-                support, neonatal emergency treatment, and post-NICU recovery
-                support.
-              </Typography>
-            </Box>
-
-            <Box sx={{ maxWidth: 850, mx: "auto", mb: 12, textAlign: "left" }}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: 800, color: "#00BFFF", mb: 3 }}
-              >
-                Secondary Services
-              </Typography>
-
-              <Typography sx={{ mb: 2, color: mutedText }}>
-                <b>Children – Education & Sports:</b> Supporting education, coaching,
-                equipment, and opportunities.
-              </Typography>
-
-              <Typography sx={{ mb: 2, color: mutedText }}>
-                <b>Injured & Elderly Pet Care:</b> Emergency medical care and support
-                for abandoned animals.
-              </Typography>
-
-              <Typography sx={{ color: mutedText }}>
-                <b>Mentally Challenged Elders:</b> Medical care, safety, dignity, and
-                caregiver support.
-              </Typography>
-            </Box>
-
-            <Grid container spacing={4} justifyContent="center">
-              {services.map((service, index) => (
-                <Grid
-                  key={index}
-                  // Replaced xs, md, and sx props with size and sx
-                  size={{ xs: 12, md: 6, lg: 4 }}
+                <Card
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    opacity: 0,
-                    animation: `${slideUp} 0.8s ease-out ${index * 0.1}s forwards`,
+                    width: 320,
+                    background: "rgba(255,255,255,0.15)",
+                    backdropFilter: "blur(12px)",
+                    borderRadius: 6,
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    color: "#fff",
                   }}
                 >
-                  <Card
-                    sx={{
-                      width: 320,
-                      borderRadius: 6,
-                      overflow: "hidden",
-                      backgroundColor: "rgba(255, 255, 255, 0.7)", 
-                      backdropFilter: "blur(10px)",
-                      boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-                      border: "1px solid rgba(255, 255, 255, 0.3)",
-                      transition: "0.4s",
-                      "&:hover": {
-                        transform: "translateY(-10px)",
-                        boxShadow: "0 25px 50px rgba(0,0,0,0.2)",
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="240"
-                      image={serviceImages[index]}
-                      alt={service.title}
-                    />
-                    <CardContent sx={{ textAlign: "center" }}>
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 800, color: olive, mb: 1 }}
-                      >
-                        {service.title}
-                      </Typography>
-                      <Typography sx={{ opacity: 0.85, color: mutedText }}>
-                        {service.desc}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </Box>
+                  <CardMedia
+                    component="img"
+                    height="240"
+                    image={serviceImages[index]}
+                  />
+                  <CardContent sx={{ textAlign: "center" }}>
+                    <Typography variant="h6" sx={{ color: olive }}>
+                      {service.title}
+                    </Typography>
+                    <Typography sx={{ color: mutedText }}>
+                      {service.desc}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+
         <Footer />
       </Box>
     </ThemeProvider>
