@@ -845,6 +845,54 @@ export default function About() {
                 .
               </Typography>
 
+              <Typography mt={4} variant="h4" fontWeight={800} color="#2fd3d3" textAlign={"center"}>
+                Our Core Focus
+              </Typography>
+              <Divider sx={{ my: 2 }} />
+              <Typography color={mutedText} lineHeight={1.5}>
+                &bull;{" "}
+                <Box component="span" sx={{ fontWeight: 700, color: gold }}>
+                  Supporting Mothers
+                </Box>{" "}
+                in the {" "}
+                <Box component="span" sx={{ fontWeight: 600, color: olive }}>
+                  Third Trimester
+                </Box>
+                .<br />
+                &bull;{" "}
+                <Box component="span" sx={{ fontWeight: 700, color: navyText }}>
+                  Emergency 
+                </Box>{" "}
+                Support for {" "}
+                <Box component="span" sx={{ fontWeight: 700, color: gold }}>
+                  New Borns & NICU care
+                </Box>
+                .
+              </Typography>
+
+                <Typography mt={4} variant="h4" fontWeight={800} color={gold} textAlign={"center"} marginBottom={5}>
+                Compassion Beyond Boundaries
+              </Typography>
+              <Divider sx={{ my: 2 }} />
+              <Typography color={mutedText} lineHeight={1.5}>
+                &bull; Children Striving{" "}
+                <Box component="span" sx={{ color: gold, fontWeight: 700 }}>
+                  for education and 
+                </Box>
+                ,{" "}
+                <Box component="span" sx={{ color: olive, fontWeight: 700 }}>
+                  sports excellence
+                </Box>
+                , and{" "}
+                <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>
+                  Injured elderly animals ,
+                </Box>
+                <Box component="span" sx={{ color: gold, fontWeight: 800 }}>
+                  Mentally challenged elders facing neglect
+                </Box>
+                .
+              </Typography>
+
               <Typography mt={4} variant="h4" fontWeight={800} color={gold} textAlign={"center"} marginBottom={5}>
                 Our Promise
               </Typography>
