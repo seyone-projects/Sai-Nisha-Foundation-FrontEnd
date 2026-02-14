@@ -38,16 +38,15 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-const navyText = "#1F2F3F";
 const eventMagenta = "#b7e900";
 const cinematicNavy = "#0B121E"; 
 const cinematicGold = "#F2A900"; 
 
 const ALL_EVENTS = [
-  { title: "Chief Guest 1", date: "Sun, 01 Feb 2026", image: eventImg1 },
-  { title: "Chief Guest 2", date: "Sun, 01 Feb 2026", image: eventImg2 },
-  { title: "Chief Guest 3", date: "Sun, 01 Feb 2026", image: eventImg3 },
-  { title: "Chief Guest 4", date: "Sun, 01 Feb 2026", image: eventImg4 },
+  { title: "Guru Roopa Yogi", date: "Sun, 01 Feb 2026", image: eventImg1 },
+  { title: "Thiru Dhina", date: "Sun, 01 Feb 2026", image: eventImg2 },
+  { title: "R. kannan", date: "Sun, 01 Feb 2026", image: eventImg3 },
+  { title: "Jagan purushottam", date: "Sun, 01 Feb 2026", image: eventImg4 },
   { title: "Singing", date: "Sun, 01 Feb 2026", image: eventImg5 },
   { title: "Group Singing", date: "Sun, 01 Feb 2026", image: eventImg6 },
   { title: "Hosts", date: "Sun, 01 Feb 2026", image: eventImg7 },
@@ -98,7 +97,6 @@ function GlobalShaderBackground() {
         background: cinematicNavy,
       }}
     >
-      {/* Animated Gradient Mesh (Wave Effect) */}
       <Box
         sx={{
           position: "absolute",
@@ -111,8 +109,6 @@ function GlobalShaderBackground() {
           opacity: 0.8,
         }}
       />
-
-      {/* Slow Drifting Light Waves */}
       {[...Array(3)].map((_, i) => (
         <Box
           key={i}
@@ -126,32 +122,9 @@ function GlobalShaderBackground() {
           }}
         />
       ))}
-
-      {/* Soft Cinematic Lens Flares */}
-      <Box sx={{
-        position: "absolute",
-        width: "600px",
-        height: "600px",
-        background: `radial-gradient(circle, rgba(242,169,0,0.15) 0%, transparent 70%)`,
-        top: "10%",
-        right: "-10%",
-        filter: "blur(60px)",
-        animation: "floatFlare 15s infinite alternate",
-      }} />
-      
       <style>{`
-        @keyframes meshRotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes waveMove {
-          0% { transform: translateY(-10%) translateX(-5%); }
-          100% { transform: translateY(10%) translateX(5%); }
-        }
-        @keyframes floatFlare {
-          0% { transform: translate(0,0); opacity: 0.5; }
-          100% { transform: translate(-100px, 50px); opacity: 0.8; }
-        }
+        @keyframes meshRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes waveMove { 0% { transform: translateY(-10%) translateX(-5%); } 100% { transform: translateY(10%) translateX(5%); } }
       `}</style>
     </Box>
   );
@@ -351,8 +324,15 @@ export default function Events() {
              <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowForwardIosIcon /></IconButton>
           </Box>
         </Container>
+
+        {/* --- FOOTER OVERRIDE BOX --- */}
+        <Box sx={{ 
+          width: "100%", 
+          "& *": { color: "#ffffff !important" } 
+        }}>
+          <Footer />
+        </Box>
       </Box>
-      <Footer />
     </>
   );
 }

@@ -44,21 +44,21 @@ export default function Footer() {
         <Box sx={{ maxWidth: 1100, mx: "auto", mb: 8 }}>
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}><br /><br />
-              <Typography sx={{ fontSize: 14, mb: 0.5 }}>
+              <Typography sx={{ fontSize: 16, mb: 0.5 }}>
                 📧 Email:{" "}
                 <Link href="mailto:hello@sainisha.in">
                   hello@sainisha.in
                 </Link>
               </Typography>
 
-              <Typography sx={{ fontSize: 14, mb: 0.5 }}>
+              <Typography sx={{ fontSize: 16, mb: 0.5 }}>
                 📞 Phone:{" "}
                 <Link href="tel:+919876543210">
                   +91 9962290875
                 </Link>
               </Typography>
 
-              <Typography sx={{ fontSize: 14 }}>
+              <Typography sx={{ fontSize: 16 }}>
                 Sai Nisha Foundation, <br />
                 No. 10, Thiruvallur Street <br />
                 Shanthi Nagar Irumbuliyur, <br />
@@ -76,15 +76,17 @@ export default function Footer() {
               }}
             >
               <Stack
-                spacing={1}
-                alignItems={{ xs: "center", md: "flex-end" }}
-              ><br />
-                <Link component={RouterLink} to="/about">About Us</Link>
-                <Link component={RouterLink} to="/contactus">Contact Us</Link>
-                <Link component={RouterLink} to="/volunteer">Volunteer</Link>
-                <Link component={RouterLink} to="/payment">Donate</Link>
-                <Link component={RouterLink} to="/careers">Careers</Link>
-              </Stack>
+  spacing={1}
+  alignItems={{ xs: "center", md: "flex-end" }}
+  sx={{ fontSize: "16px" }}
+  mt={5}
+>
+  <Link component={RouterLink} to="/about">About Us</Link>
+  <Link component={RouterLink} to="/contactus">Contact Us</Link>
+  <Link component={RouterLink} to="/volunteer">Volunteer</Link>
+  <Link component={RouterLink} to="/payment">Donate</Link>
+  <Link component={RouterLink} to="/careers">Careers</Link>
+</Stack>
             </Grid>
           </Grid>
         </Box>
@@ -105,7 +107,7 @@ export default function Footer() {
             <Link href="#"><CloseIcon fontSize="small" /></Link>
           </Stack>
 
-          <Typography sx={{ fontSize: 12, color: "text.primary" }}>
+          <Typography sx={{ fontSize: 16, color: "text.primary" }}>
             © {currentYear} Sai Nisha Foundation. All Rights Reserved.
           </Typography>
         </Box>

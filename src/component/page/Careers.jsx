@@ -220,7 +220,7 @@ export default function Careers() {
             Join us get Involved view openings
           </Typography>
 
-          {/* JOB CARDS - CENTERED GRID */}
+          {/* JOB CARDS */}
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Grid container spacing={4} justifyContent="center" alignItems="stretch">
               <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
@@ -241,7 +241,6 @@ export default function Careers() {
                   date="12/08/2025"
                 />
               </Grid>
-              {/* This is the Business Development Card centered on screen */}
               <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
                 <JobCard
                   title="Business Development"
@@ -262,18 +261,9 @@ export default function Careers() {
 
             <Grid container spacing={4} justifyContent="center">
               {[
-                {
-                  title: "Purpose-Driven Work",
-                  text: "Work on projects that address real challenges in education and healthcare.",
-                },
-                {
-                  title: "Learn & Grow",
-                  text: "Build leadership and workplace skills through hands-on mentorship.",
-                },
-                {
-                  title: "Nationwide Impact",
-                  text: "Collaborate with a diverse team from across India to touch lives.",
-                },
+                { title: "Purpose-Driven Work", text: "Work on projects that address real challenges in education and healthcare." },
+                { title: "Learn & Grow", text: "Build leadership and workplace skills through hands-on mentorship." },
+                { title: "Nationwide Impact", text: "Collaborate with a diverse team from across India to touch lives." },
               ].map((item, idx) => (
                 <Grid item xs={12} md={4} key={idx} display="flex" justifyContent="center">
                   <motion.div
@@ -367,7 +357,14 @@ export default function Careers() {
             </Container>
           </Box>
         </Container>
-        <Footer />
+
+        {/* --- MODIFIED FOOTER SECTION --- */}
+        <Box sx={{ 
+          width: "100%", 
+          "& *": { color: "#ffffff !important" } 
+        }}>
+          <Footer />
+        </Box>
       </Box>
     </ThemeProvider>
   );

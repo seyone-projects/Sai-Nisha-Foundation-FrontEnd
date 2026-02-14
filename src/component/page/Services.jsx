@@ -40,16 +40,15 @@ const serviceImages = [
   serviceImg6,
 ];
 
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
+// Colors
 const gold = "#D68910";
-const mutedText = "#5F6F7E";
+const lightOlive = "#A4B454"; // Brightened for dark background
+const lightMuted = "#CBD5E1"; // Light grey for readability
 
 const services = [
   { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies." },
   { title: "Pets", desc: "Rescue, medical care, and adoption support." },
-  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-being." },
+  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-developed." },
   { title: "Newborn Emergency Care", desc: "NICU access and life-saving care." },
   { title: "Education", desc: "Empowering children through learning." },
   { title: "Sports", desc: "Encouraging fitness and confidence." },
@@ -107,8 +106,6 @@ function FullPageVideoBackground() {
       >
         <source src="/animation eeee.mp4" type="video/mp4" />
       </video>
-
-      {/* Dark cinematic overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -158,7 +155,6 @@ export default function Services() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      {/* VIDEO & EFFECTS */}
       <FullPageVideoBackground />
       <BubblesBackground />
 
@@ -176,12 +172,12 @@ export default function Services() {
           bgcolor: "#25D366",
           color: "#fff",
           zIndex: 9999,
+          '&:hover': { bgcolor: "#128C7E" }
         }}
       >
         <WhatsAppIcon />
       </Button>
 
-      {/* CONTENT */}
       <Box sx={{ position: "relative", zIndex: 2, minHeight: "100vh" }}>
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
 
@@ -242,23 +238,26 @@ export default function Services() {
                 <Card
                   sx={{
                     width: 320,
-                    background: "rgba(255,255,255,0.15)",
+                    background: "rgba(255,255,255,0.1)",
                     backdropFilter: "blur(12px)",
                     borderRadius: 6,
-                    border: "1px solid rgba(255,255,255,0.25)",
+                    border: "1px solid rgba(255,255,255,0.2)",
                     color: "#fff",
+                    transition: "transform 0.3s ease",
+                    '&:hover': { transform: 'translateY(-10px)' }
                   }}
                 >
                   <CardMedia
                     component="img"
                     height="240"
                     image={serviceImages[index]}
+                    alt={service.title}
                   />
                   <CardContent sx={{ textAlign: "center" }}>
-                    <Typography variant="h6" sx={{ color: olive }}>
+                    <Typography variant="h6" sx={{ color: gold, mb: 1 }}>
                       {service.title}
                     </Typography>
-                    <Typography sx={{ color: mutedText }}>
+                    <Typography sx={{ color: lightMuted, fontSize: '0.9rem' }}>
                       {service.desc}
                     </Typography>
                   </CardContent>
@@ -268,7 +267,15 @@ export default function Services() {
           </Grid>
         </Container>
 
-        <Footer />
+        {/* FOOTER SECTION 
+            We wrap the footer in a Box that overrides all child text colors to white
+        */}
+        <Box sx={{ 
+          width: "100%", 
+          "& *": { color: "#ffffff !important" } 
+        }}>
+          <Footer />
+        </Box>
       </Box>
     </ThemeProvider>
   );
