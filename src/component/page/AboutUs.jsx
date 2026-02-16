@@ -22,13 +22,13 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import aboutImg1 from "../page/image/ladies.png";
 import aboutImg2 from "../page/image/newborn-baby.jpg";
 
-// UPDATED COLOR COMBINATION: Light Black & Premium Neon Accents
-const navyText = "#F1F5F9"; // Lightened for contrast against dark bg
-const olive = "#84CC16";    // Slightly brightened olive
-const gold = "#FACC15";     // Electric Yellow/Gold
-const mutedText = "#94A3B8"; // Muted slate for dark mode
-const creamBg = "#0F172A";  // Deep Charcoal/Light Black Background
-const cardBg = "#1E293B";   // Slightly lighter black for cards
+
+const navyText = "#F1F5F9"; 
+const olive = "#84CC16"; 
+const gold = "#FACC15";
+const mutedText = "#94A3B8";
+const creamBg = "#0F172A";
+const cardBg = "#1E293B";
 
 const theme = createTheme({
   typography: {
@@ -39,11 +39,11 @@ const theme = createTheme({
     body1: { fontWeight: 400, lineHeight: 1.3 },
   },
   palette: {
-    mode: 'dark', // Ensures MUI components adapt to dark theme
+    mode: 'dark',
   }
 });
 
-// THUNDER & CIRCLE ANIMATIONS
+
 const thunderEffect = {
   animate: {
     opacity: [1, 0.8, 1, 0.9, 1, 0.4, 1],

@@ -16,20 +16,10 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-// --- IMAGE IMPORTS ---
-import eventImg1 from "../page/image/DSC05916.jpg"; 
-import eventImg2 from '../page/image/DSC06299.jpg';
-import eventImg3 from '../page/image/DSC06390.jpg';
-import eventImg4 from "../page/image/DSC06321.jpg"; 
-import eventImg5 from '../page/image/DSC05759.jpg';
-import eventImg6 from '../page/image/DSC05749.jpg';
-import eventImg7 from '../page/image/DSC05657.jpg';
-import eventImg8 from '../page/image/DSC06093.jpg';
-import eventImg9 from '../page/image/DSC05856.jpg';
-import eventImg10 from '../page/image/DSC05875.jpg';
-import eventImg11 from '../page/image/DSC06227.jpg';
-import eventImg12 from '../page/image/DSC06023.jpg';
+// This connects your separate data file to this UI
+import { ALL_EVENTS, HERO_SLIDES } from "../page/data/EventRegistry";
 
+// Google Fonts
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -39,26 +29,10 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const eventMagenta = "#b7e900";
-const cinematicNavy = "#0B121E"; 
-const cinematicGold = "#F2A900"; 
+const cinematicNavy = "#0B121E";
+const cinematicGold = "#F2A900";
 
-const ALL_EVENTS = [
-  { title: "Guru Roopa Yogi", date: "Sun, 01 Feb 2026", image: eventImg1 },
-  { title: "Thiru Dhina", date: "Sun, 01 Feb 2026", image: eventImg2 },
-  { title: "R. kannan", date: "Sun, 01 Feb 2026", image: eventImg3 },
-  { title: "Jagan purushottam", date: "Sun, 01 Feb 2026", image: eventImg4 },
-  { title: "Singing", date: "Sun, 01 Feb 2026", image: eventImg5 },
-  { title: "Group Singing", date: "Sun, 01 Feb 2026", image: eventImg6 },
-  { title: "Hosts", date: "Sun, 01 Feb 2026", image: eventImg7 },
-  { title: "Bharatanatyam", date: "Sun, 01 Feb 2026", image: eventImg8 },
-  { title: "Group Singing 2", date: "Sun, 01 Feb 2026", image: eventImg9 },
-  { title: "Group Dance", date: "Sun, 01 Feb 2026", image: eventImg10 },
-  { title: "Memory Recreation", date: "Sun, 01 Feb 2026", image: eventImg11 },
-  { title: "Lighting Candles", date: "Sun, 01 Feb 2026", image: eventImg12 },
-];
-
-const BG_IMAGES = [eventImg1, eventImg4, eventImg8, eventImg12, eventImg3];
-
+// --- ANIMATION CONFIGURATION ---
 const fadeDown = {
   hidden: { opacity: 0, y: -30 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
@@ -66,10 +40,7 @@ const fadeDown = {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
 const cardItemVariants = {
@@ -82,45 +53,13 @@ const cardItemVariants = {
   },
 };
 
-// --- NEW SHADER BACKGROUND WITH LIGHT WAVES ---
+// --- BACKGROUND COMPONENTS ---
 function GlobalShaderBackground() {
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: -1,
-        overflow: "hidden",
-        background: cinematicNavy,
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          width: "200%",
-          height: "200%",
-          top: "-50%",
-          left: "-50%",
-          background: `radial-gradient(circle at 50% 50%, ${cinematicNavy} 0%, #162435 50%, ${cinematicNavy} 100%)`,
-          animation: "meshRotate 20s linear infinite",
-          opacity: 0.8,
-        }}
-      />
+    <Box sx={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -1, overflow: "hidden", background: cinematicNavy }}>
+      <Box sx={{ position: "absolute", width: "200%", height: "200%", top: "-50%", left: "-50%", background: `radial-gradient(circle at 50% 50%, ${cinematicNavy} 0%, #162435 50%, ${cinematicNavy} 100%)`, animation: "meshRotate 20s linear infinite", opacity: 0.8 }} />
       {[...Array(3)].map((_, i) => (
-        <Box
-          key={i}
-          sx={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            background: `linear-gradient(${45 + i * 30}deg, transparent 0%, rgba(242,169,0,0.05) 50%, transparent 100%)`,
-            animation: `waveMove ${10 + i * 5}s infinite alternate ease-in-out`,
-            mixBlendMode: "screen",
-          }}
-        />
+        <Box key={i} sx={{ position: "absolute", width: "100%", height: "100%", background: `linear-gradient(${45 + i * 30}deg, transparent 0%, rgba(242,169,0,0.05) 50%, transparent 100%)`, animation: `waveMove ${10 + i * 5}s infinite alternate ease-in-out`, mixBlendMode: "screen" }} />
       ))}
       <style>{`
         @keyframes meshRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -134,8 +73,9 @@ function CinematicHeroBackground() {
   const [bgIndex, setBgIndex] = useState(0);
 
   useEffect(() => {
+    if (HERO_SLIDES.length === 0) return;
     const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % BG_IMAGES.length);
+      setBgIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 6000);
     return () => clearInterval(interval);
   }, []);
@@ -149,13 +89,13 @@ function CinematicHeroBackground() {
           animate={{ opacity: 0.4, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 3, ease: "easeInOut" }}
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundImage: `url(${BG_IMAGES[bgIndex]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            position: "absolute",
+          style={{ 
+            width: "100%", 
+            height: "100%", 
+            backgroundImage: `url(${HERO_SLIDES[bgIndex]})`, 
+            backgroundSize: "cover", 
+            backgroundPosition: "center", 
+            position: "absolute" 
           }}
         />
       </AnimatePresence>
@@ -164,10 +104,13 @@ function CinematicHeroBackground() {
   );
 }
 
+// --- MAIN COMPONENT ---
 export default function Events() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const cardsPerPage = 6;
+  
+  // Calculate total pages based on registry length
   const totalPages = Math.ceil(ALL_EVENTS.length / cardsPerPage);
 
   const handleNext = useCallback(() => {
@@ -178,12 +121,14 @@ export default function Events() {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
+  // Auto-slide effect
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || totalPages <= 1) return;
     const timer = setInterval(() => handleNext(), 5000);
     return () => clearInterval(timer);
-  }, [handleNext, isPaused]);
+  }, [handleNext, isPaused, totalPages]);
 
+  // Slice data for the current page
   const currentCards = ALL_EVENTS.slice(
     currentPage * cardsPerPage,
     (currentPage + 1) * cardsPerPage
@@ -194,14 +139,28 @@ export default function Events() {
       <CssBaseline />
       <GlobalShaderBackground />
       
+      {/* WhatsApp Sticky Contact */}
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
-        <IconButton component="a" href="https://wa.me/919962290875" target="_blank" sx={{ width: 56, height: 56, backgroundColor: "#25D366", color: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}>
+        <IconButton 
+          component="a" 
+          href="https://wa.me/919962290875" 
+          target="_blank" 
+          sx={{ 
+            width: 56, 
+            height: 56, 
+            backgroundColor: "#25D366", 
+            color: "#fff", 
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)", 
+            "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } 
+          }}
+        >
           <WhatsAppIcon sx={{ fontSize: 30 }} />
         </IconButton>
       </Box>
 
       <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "Poppins, sans-serif", position: "relative" }}>
         
+        {/* --- HERO SECTION --- */}
         <Box sx={{ minHeight: { xs: "60vh", md: "85vh" }, display: "flex", alignItems: "center", color: "#fff", position: "relative", zIndex: 2, overflow: "hidden" }}>
           <CinematicHeroBackground />
           <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10, textAlign: "center" }}>
@@ -217,12 +176,14 @@ export default function Events() {
           </Container>
         </Box>
 
+        {/* --- EVENTS GRID SECTION --- */}
         <Container 
-            maxWidth="lg" 
-            sx={{ position: "relative", zIndex: 3, mt: { xs: -10, md: -15 }, pb: 10 }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+          maxWidth="lg" 
+          sx={{ position: "relative", zIndex: 3, mt: { xs: -10, md: -15 }, pb: 10 }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
+          {/* Navigation Controls */}
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 8 }}>
              <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', display: { xs: 'none', md: 'flex' }, '&:hover': { bgcolor: cinematicGold, color: 'white' } }}>
                 <ArrowBackIosNewIcon />
@@ -235,6 +196,7 @@ export default function Events() {
                 <Typography variant="h3" sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: '2rem', md: '3.5rem' }, mb: 3 }}>
                   Captured Memories
                 </Typography>
+                {/* Pagination Dots */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
                     {[...Array(totalPages)].map((_, i) => (
                         <Box key={i} sx={{ width: currentPage === i ? 40 : 8, height: 8, borderRadius: 5, bgcolor: currentPage === i ? cinematicGold : 'rgba(255,255,255,0.2)', transition: '0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
@@ -247,6 +209,7 @@ export default function Events() {
              </IconButton>
           </Box>
 
+          {/* Grid Display */}
           <Box sx={{ minHeight: { xs: 'auto', md: '650px' } }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -306,7 +269,7 @@ export default function Events() {
                             </Typography>
                             <Box sx={{ mt: 2, pt: 2, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
                                 <Typography variant="caption" sx={{ color: cinematicGold, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 2 }}>
-                                    Partner: Sai Nisha
+                                    Partner: {event.partner || "General"}
                                 </Typography>
                             </Box>
                           </CardContent>
@@ -319,17 +282,15 @@ export default function Events() {
             </AnimatePresence>
           </Box>
 
+          {/* Mobile Only Navigation */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 6 }}>
              <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowBackIosNewIcon /></IconButton>
              <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowForwardIosIcon /></IconButton>
           </Box>
         </Container>
 
-        {/* --- FOOTER OVERRIDE BOX --- */}
-        <Box sx={{ 
-          width: "100%", 
-          "& *": { color: "#ffffff !important" } 
-        }}>
+        {/* --- FOOTER --- */}
+        <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
           <Footer />
         </Box>
       </Box>

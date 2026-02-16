@@ -8,11 +8,8 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
-
-
-/* BACKGROUND IMAGE */
 import campaignBg from "../page/image/sai-nisha-logo.png";
-
+import Footer from "../page/Footer"; 
 
 const theme = createTheme({
   typography: {
@@ -21,15 +18,17 @@ const theme = createTheme({
 });
 
 export default function Campaign() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
+    <>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      
 
       {/* MAIN CONTAINER */}
       <Box
         sx={{
+          display: "flex", // Ensures footer can push down
+          flexDirection: "column",
           minHeight: "100vh",
           width: "100%",
           backgroundImage: `url(${campaignBg})`,
@@ -74,66 +73,76 @@ export default function Campaign() {
               color="#fff"
               letterSpacing={1}
             >
-               Campaigns for ngo
+              Campaigns for ngo
             </Typography>
           </Box>
         </Box>
 
         {/* LEFT ACTION MENU */}
-       <Box
-  sx={{
-    position: "relative",
-    zIndex: 2,
-    display: "flex",
-    flexDirection: "column",
-    gap: 2.2,
-    width: 260,
-    mt: 12,
-    ml: 4,
-  }}
->
-  {[
-    {
-      label: "How we Manage Campaigns",
-      onClick: () => navigate("/manage"),
-    },
-    {
-      label: "History",
-      onClick: () => navigate("/manage")
-    },
-    {
-      label: "Notes",
-      onClick: () => navigate("/manage")
-    },
-  ].map((item, index) => (
-    <Button
-      key={index}
-      fullWidth
-      endIcon={<ArrowForwardIosIcon />}
-      onClick={item.onClick}
-      sx={{
-        justifyContent: "space-between",
-        textTransform: "none",
-        fontWeight: 600,
-        fontSize: "0.95rem",
-        px: 2.5,
-        py: 1.4,
-        color: "#ffffff",
-        backgroundColor: "#0b3d3b",
-        borderRadius: 1,
-        boxShadow: "0 6px 18px rgba(0,0,0,0.35)",
-        "&:hover": {
-          backgroundColor: "#145c59",
-          transform: "translateX(6px)",
-        },
-        transition: "all 0.25s ease",
-      }}
-    >
-      {item.label}
-    </Button>
-  ))}
-</Box>
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2.2,
+            width: 260,
+            mt: 12,
+            ml: 4,
+            flex: 1, // This pushes the footer to the bottom
+          }}
+        >
+          {[
+            {
+              label: "How we Manage Campaigns",
+              onClick: () => navigate("/manage"),
+            },
+            {
+              label: "History",
+              onClick: () => navigate("/manage"),
+            },
+            {
+              label: "Notes",
+              onClick: () => navigate("/manage"),
+            },
+          ].map((item, index) => (
+            <Button
+              key={index}
+              fullWidth
+              endIcon={<ArrowForwardIosIcon />}
+              onClick={item.onClick}
+              sx={{
+                justifyContent: "space-between",
+                textTransform: "none",
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                px: 2.5,
+                py: 1.4,
+                color: "#ffffff",
+                backgroundColor: "#0b3d3b",
+                borderRadius: 1,
+                boxShadow: "0 6px 18px rgba(0,0,0,0.35)",
+                "&:hover": {
+                  backgroundColor: "#145c59",
+                  transform: "translateX(6px)",
+                },
+                transition: "all 0.25s ease",
+              }}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Box>
+
+
       </Box>
     </ThemeProvider>
+      <Box sx={{ 
+           "& *": { color: "#FFFFFF !important" }, // Force all nested text/icons to white
+           bgcolor: "#020617" // Matching the dark aesthetic
+         }}>
+           <Footer />
+         </Box>
+    </>
   );
 }
