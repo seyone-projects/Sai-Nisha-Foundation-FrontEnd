@@ -30,6 +30,7 @@ import VolunteerForm from "./component/page/VolunteerForm";
 import Campaigns from "./component/page/Campaigns";
 import Media from "./component/page/Media";
 import Manage from "./component/page/Manage";
+import Awareness from "./component/page/Awareness";
 
 
 const creamBg = "#F3EEDC";
@@ -196,6 +197,7 @@ export default function App() {
            <Route path="/campaigns" element={<Campaigns/>} />
            <Route path="/media" element={<Media/>} />
            <Route path="/manage" element={<Manage/>} />
+           <Route path="/awareness" element={<Awareness/>} />
         </Routes>
       </Container>
     </Router>

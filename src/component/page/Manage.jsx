@@ -9,11 +9,6 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-/* IMAGES 
-  Note: I have reused img1 and img2 to fill 9 slots. 
-  Replace these with your actual imports (img3, img4, etc.) 
-*/
 import img1 from "../page/image/home1.jpg";
 import img2 from "../page/image/home.jpg";
 import img3 from "../page/image/images_1.jpg";
@@ -33,7 +28,7 @@ const theme = createTheme({
   },
 });
 
-// Array containing 9 items
+
 const mediaList = [
   { type: "image", src: img1, title: "Healthcare Outreach" },
   { type: "image", src: img2, title: "Education for All" },
@@ -66,7 +61,7 @@ export default function Manage() {
           sx={{
             py: 6,
             px: { xs: 2, md: 6 },
-            flex: 1, // Pushes anything below (like a footer) to the bottom
+            flex: 1, 
           }}
         >
           {/* TITLE */}
@@ -85,9 +80,9 @@ export default function Manage() {
             {mediaList.map((item, index) => (
               <Grid 
                 item 
-                xs={12}    // 1 card per row on mobile
-                sm={6}     // 2 cards per row on tablets
-                md={4}     // 3 cards per row on desktop
+                xs={12}  
+                sm={6}  
+                md={4}  
                 key={index}
               >
                 <Card
@@ -110,7 +105,7 @@ export default function Manage() {
                     image={item.src}
                     alt={item.title}
                     sx={{
-                      height: 240, // Increased height slightly for better visual balance
+                      height: 240, 
                       width: "100%",
                       objectFit: "cover",
                     }}
@@ -139,8 +134,6 @@ export default function Manage() {
             ))}
           </Grid>
         </Box>
-        
-        {/* If you want to add your Footer here later, just import and place it below this comment */}
       </Box>
     </ThemeProvider>
   );

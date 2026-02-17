@@ -4,145 +4,279 @@ import {
   Typography,
   Button,
   CssBaseline,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  useMediaQuery,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
-import campaignBg from "../page/image/sai-nisha-logo.png";
-import Footer from "../page/Footer"; 
+import { motion } from "framer-motion";
+
+import campaignBg from "../page/image/ngo 2.jpg";
+import campaignImg2 from "../page/image/ngo 1.jpg";
+import campaignImg3 from "../page/image/ngo 3.avif";
+
+import Footer from "../page/Footer";
 
 const theme = createTheme({
+  palette: {
+    primary: { main: "#0B3D3B" },
+    secondary: { main: "#FFD700" },
+    background: { default: "#0f172a" },
+  },
   typography: {
     fontFamily: `"Poppins","Roboto","Helvetica","Arial",sans-serif`,
   },
 });
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
+const cardAnimation = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+};
+
 export default function Campaign() {
   const navigate = useNavigate();
+  const isDesktop = useMediaQuery("(min-width:900px)");
+
+  const campaigns = [
+    { title: "SAI NISHA FOUNDATION", image: campaignBg },
+    { title: "CHILD EDUCATION DRIVE", image: campaignImg2 },
+    { title: "HEALTH & AWARENESS CAMP", image: campaignImg3 },
+  ];
+
   return (
-    <>
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      {/* MAIN CONTAINER */}
+      {/* ================= HERO SECTION ================= */}
       <Box
         sx={{
-          display: "flex", // Ensures footer can push down
-          flexDirection: "column",
-          minHeight: "100vh",
           width: "100%",
+          minHeight: { xs: "70vh", md: "90vh" },
           backgroundImage: `url(${campaignBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 8000,
+          textAlign: "center",
           position: "relative",
+          px: 2,
         }}
       >
-        {/* DARK OVERLAY */}
         <Box
           sx={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.4))",
+              "linear-gradient(rgba(0,0,0,0.7), rgba(11,61,59,0.8))",
           }}
         />
 
-        {/* HEADER */}
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 2,
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            mt: 2,
-          }}
-        >
-          <Box
-            sx={{
-              px: 6,
-              py: 1.6,
-              backgroundColor: "#0b3d3b",
-              borderRadius: "0 0 60px 60px",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.35)",
-            }}
-          >
+        <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
+          <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Typography
-              variant="h5"
-              fontWeight={700}
-              color="#fff"
-              letterSpacing={1}
-            >
-              Campaigns for ngo
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* LEFT ACTION MENU */}
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 2,
-            display: "flex",
-            flexDirection: "column",
-            gap: 2.2,
-            width: 260,
-            mt: 12,
-            ml: 4,
-            flex: 1, // This pushes the footer to the bottom
-          }}
-        >
-          {[
-            {
-              label: "How we Manage Campaigns",
-              onClick: () => navigate("/manage"),
-            },
-            {
-              label: "History",
-              onClick: () => navigate("/manage"),
-            },
-            {
-              label: "Notes",
-              onClick: () => navigate("/manage"),
-            },
-          ].map((item, index) => (
-            <Button
-              key={index}
-              fullWidth
-              endIcon={<ArrowForwardIosIcon />}
-              onClick={item.onClick}
+              variant="h2"
               sx={{
-                justifyContent: "space-between",
-                textTransform: "none",
-                fontWeight: 600,
-                fontSize: "0.95rem",
-                px: 2.5,
-                py: 1.4,
-                color: "#ffffff",
-                backgroundColor: "#0b3d3b",
-                borderRadius: 1,
-                boxShadow: "0 6px 18px rgba(0,0,0,0.35)",
-                "&:hover": {
-                  backgroundColor: "#145c59",
-                  transform: "translateX(6px)",
-                },
-                transition: "all 0.25s ease",
+                fontWeight: 800,
+                color: "#FFD700",
+                mb: 2,
+                fontSize: { xs: "2rem", md: "3.5rem" },
               }}
             >
-              {item.label}
-            </Button>
-          ))}
-        </Box>
+              OUR CAMPAIGNS
+            </Typography>
 
+            <Box
+              sx={{
+                width: 80,
+                height: 4,
+                bgcolor: "#FFD700",
+                mx: "auto",
+                mb: 3,
+              }}
+            />
 
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: "1rem", md: "1.2rem" },
+                lineHeight: 1.8,
+                color: "#f1f5f9",
+              }}
+            >
+              We design and execute impactful campaigns focused on education,
+              healthcare, and community development.
+            </Typography>
+          </motion.div>
+        </Container>
+      </Box>
+
+      {/* ================= CONTENT SECTION ================= */}
+      <Box sx={{ bgcolor: "#0f172a", py: { xs: 6, md: 10 } }}>
+        <Container maxWidth="lg">
+
+          {/* Animated Heading */}
+          {isDesktop ? (
+            <motion.div
+              animate={{ x: ["-10%", "30%", "-30%"] }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <Typography
+                variant="h3"
+                sx={{
+                  color: "#ffffff",
+                  fontWeight: 700,
+                  mt: 1,
+                  mb: 6,
+                  fontSize: "2.5rem",
+                  textAlign: "center",
+                }}
+              >
+                CAMPAIGNS FOR NGO
+              </Typography>
+            </motion.div>
+          ) : (
+            <Typography
+              variant="h3"
+              sx={{
+                color: "#ffffff",
+                fontWeight: 700,
+                mt: 1,
+                mb: 6,
+                fontSize: "1.8rem",
+                textAlign: "center",
+              }}
+            >
+              CAMPAIGNS FOR NGO
+            </Typography>
+          )}
+
+          <Grid container spacing={5} justifyContent="center">
+            {/* LEFT SIDE BUTTONS */}
+            <Grid item xs={12} md={4}>
+              <Box display="flex" flexDirection="column" gap={3}>
+                {[
+                  { label: "How we Manage Campaigns", path: "/manage" },
+                  { label: "Awareness", path: "/awareness" },
+                  { label: "Peer to Peer", path: "/manage" },
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={fadeLeft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 }}
+                  >
+                    <Button
+                      fullWidth
+                      endIcon={<ArrowForwardIosIcon />}
+                      onClick={() => navigate(item.path)}
+                      sx={{
+                        justifyContent: "space-between",
+                        textTransform: "none",
+                        fontWeight: 600,
+                        px: 3,
+                        py: 2,
+                        color: "#fff",
+                        background:
+                          "linear-gradient(90deg, #0B3D3B, #145c59)",
+                        borderRadius: 3,
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  </motion.div>
+                ))}
+              </Box>
+            </Grid>
+
+            {/* RIGHT SIDE CARDS (CENTERED) */}
+            <Grid item xs={12} md={8}>
+              <Grid
+                container
+                spacing={4}
+                justifyContent="center"
+                alignItems="center"
+              >
+                {campaigns.map((item, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    key={index}
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    <motion.div
+                      variants={cardAnimation}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.2 }}
+                      style={{ width: "100%", maxWidth: 280 }}
+                    >
+                      <Card
+                        sx={{
+                          bgcolor: "#1e293b",
+                          color: "#fff",
+                          borderRadius: 4,
+                          height: "100%",
+                          textAlign: "center",
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          image={item.image}
+                          alt={item.title}
+                          sx={{ height: 180, objectFit: "cover" }}
+                        />
+                        <CardContent>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: "#FFD700",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {item.title}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* ================= FOOTER ================= */}
+      <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}>
+        <Footer />
       </Box>
     </ThemeProvider>
-      <Box sx={{ 
-           "& *": { color: "#FFFFFF !important" }, // Force all nested text/icons to white
-           bgcolor: "#020617" // Matching the dark aesthetic
-         }}>
-           <Footer />
-         </Box>
-    </>
   );
 }
