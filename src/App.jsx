@@ -31,6 +31,7 @@ import Campaigns from "./component/page/Campaigns";
 import Media from "./component/page/Media";
 import Manage from "./component/page/Manage";
 import Awareness from "./component/page/Awareness";
+import PeerToPeer from "./component/page/PeertoPeer";
 
 
 const creamBg = "#F3EEDC";
@@ -198,6 +199,7 @@ export default function App() {
            <Route path="/media" element={<Media/>} />
            <Route path="/manage" element={<Manage/>} />
            <Route path="/awareness" element={<Awareness/>} />
+           <Route path="/peertopeer" element={<PeerToPeer/>} />
         </Routes>
       </Container>
     </Router>

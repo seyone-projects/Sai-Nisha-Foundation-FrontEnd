@@ -9,6 +9,9 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { motion } from "framer-motion";
+import Footer from "../page/Footer";
+
 import img1 from "../page/image/home1.jpg";
 import img2 from "../page/image/home.jpg";
 import img3 from "../page/image/images_1.jpg";
@@ -21,13 +24,17 @@ import img9 from "../page/image/images_7.jpg";
 import img10 from "../page/image/images_8.jpg";
 import img11 from "../page/image/images_9.jpg";
 
+import bgImage from "../page/image/home1.jpg";
 
 const theme = createTheme({
+  palette: {
+    primary: { main: "#f5b400" }, // Yellow Accent
+    background: { default: "#0b1d3a" }, // Deep Navy
+  },
   typography: {
     fontFamily: `"Poppins","Roboto","Helvetica","Arial",sans-serif`,
   },
 });
-
 
 const mediaList = [
   { type: "image", src: img1, title: "Healthcare Outreach" },
@@ -39,8 +46,8 @@ const mediaList = [
   { type: "image", src: img7, title: "Environmental Care" },
   { type: "image", src: img8, title: "Youth Mentorship" },
   { type: "image", src: img9, title: "Elderly Support" },
-  { type: "image", src: img10, title: "Elderly Support" },
-  { type: "image", src: img11, title: "Elderly Support" },
+  { type: "image", src: img10, title: "Community Welfare" },
+  { type: "image", src: img11, title: "Child Protection" },
 ];
 
 export default function Manage() {
@@ -48,93 +55,127 @@ export default function Manage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      {/* PAGE CONTAINER */}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-          background: "linear-gradient(135deg,#f4f6f8,#eef2f3)",
-        }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <Box
           sx={{
-            py: 6,
-            px: { xs: 2, md: 6 },
-            flex: 1, 
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+
+            /* 🎯 CAREER STYLE DARK OVERLAY */
+            backgroundImage: `
+              linear-gradient(
+                rgba(5, 15, 35, 0.92),
+                rgba(8, 22, 45, 0.95)
+              ),
+              url(${bgImage})
+            `,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
           }}
         >
-          {/* TITLE */}
-          <Typography
-            variant="h4"
-            fontWeight={800}
-            textAlign="center"
-            mb={5}
-            color="#0b3d3b"
-          >
-            Manage Campaigns
-          </Typography>
+          {/* HERO TITLE SECTION */}
+          <Box sx={{ textAlign: "center", pt: 10, pb: 6 }}>
+            <Typography
+              variant="h2"
+              fontWeight={900}
+              sx={{
+                color: "#ffffff",
+                letterSpacing: 3,
+              }}
+            >
+              MANAGE{" "}
+              <Box component="span" sx={{ color: "#f5b400" }}>
+                CAMPAIGNS
+              </Box>
+            </Typography>
 
-          {/* MEDIA GRID */}
-          <Grid container spacing={4} justifyContent="center">
-            {mediaList.map((item, index) => (
-              <Grid 
-                item 
-                xs={12}  
-                sm={6}  
-                md={4}  
-                key={index}
-              >
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    boxShadow: "0 18px 45px rgba(0,0,0,0.1)",
-                    transition: "all 0.3s ease",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: "0 30px 70px rgba(0,0,0,0.2)",
-                    },
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    image={item.src}
-                    alt={item.title}
-                    sx={{
-                      height: 240, 
-                      width: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
+            <Typography
+              sx={{
+                mt: 2,
+                color: "#cbd5e1",
+                letterSpacing: 2,
+              }}
+            >
+              ORGANIZE • TRACK • GROW
+            </Typography>
+          </Box>
 
-                  <CardContent
-                    sx={{
-                      flexGrow: 1,
-                      textAlign: "center",
-                      background: "linear-gradient(180deg,#ffffff,#f7f7f7)",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      py: 3,
-                    }}
+          {/* GRID SECTION */}
+          <Box sx={{ px: { xs: 2, md: 6 }, pb: 8, flex: 1 }}>
+            <Grid container spacing={4} justifyContent="center">
+              {mediaList.map((item, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.08 }}
+                    viewport={{ once: true }}
                   >
-                    <Typography fontWeight={700} variant="subtitle1" color="#0b3d3b">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                      Campaign #{index + 1}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+                    <Card
+                      sx={{
+                        borderRadius: 4,
+                        overflow: "hidden",
+                        background: "rgba(255,255,255,0.95)",
+                        backdropFilter: "blur(6px)",
+                        boxShadow: "0 20px 50px rgba(0,0,0,0.6)",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          transform: "translateY(-8px)",
+                          boxShadow: "0 25px 70px rgba(245,180,0,0.4)",
+                        },
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        image={item.src}
+                        alt={item.title}
+                        sx={{
+                          height: 240,
+                          objectFit: "cover",
+                        }}
+                      />
+
+                      <CardContent sx={{ textAlign: "center", py: 3 }}>
+                        <Typography
+                          fontWeight={800}
+                          variant="subtitle1"
+                          sx={{ color: "#0b1d3a" }}
+                        >
+                          {item.title}
+                        </Typography>
+
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            mt: 1,
+                            color: "#f5b400",
+                            fontWeight: 600,
+                          }}
+                        >
+                          Campaign #{index + 1}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+
+          {/* FOOTER */}
+          <Box
+            sx={{
+              bgcolor: "#050f23",
+              "& *": { color: "#fff !important" },
+            }}
+          >
+            <Footer />
+          </Box>
         </Box>
-      </Box>
+      </motion.div>
     </ThemeProvider>
   );
 }

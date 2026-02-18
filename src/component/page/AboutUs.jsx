@@ -441,7 +441,7 @@ export default function About() {
                         <motion.div
                           whileHover={{ y: -15, scale: 1.02 }}
                           transition={{ duration: 0.3 }}
-                          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+                          style={{ width: "270px", display: "flex", justifyContent: "center" }}
                         >
                           <Box sx={{
                             width: "100%",

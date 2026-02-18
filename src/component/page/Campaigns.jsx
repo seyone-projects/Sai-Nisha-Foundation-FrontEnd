@@ -53,7 +53,7 @@ export default function Campaign() {
   const isDesktop = useMediaQuery("(min-width:900px)");
 
   const campaigns = [
-    { title: "SAI NISHA FOUNDATION", image: campaignBg },
+    { title: "HELPING CHILDREN", image: campaignBg },
     { title: "CHILD EDUCATION DRIVE", image: campaignImg2 },
     { title: "HEALTH & AWARENESS CAMP", image: campaignImg3 },
   ];
@@ -121,11 +121,11 @@ export default function Campaign() {
               }}
             >
               We design and execute impactful campaigns focused on education,
-              healthcare, and community development.
+              healthcare, and community development.We collaborate with local leaders, volunteers, and partner organizations to create sustainable solutions that uplift underserved communities. Through awareness drives, skill-building programs, and grassroots initiatives, we empower individuals with the knowledge, resources, and support they need to build healthier families, access quality education, and achieve long-term social and economic stability.
             </Typography>
           </motion.div>
         </Container>
-      </Box>
+              </Box>
 
       {/* ================= CONTENT SECTION ================= */}
       <Box sx={{ bgcolor: "#0f172a", py: { xs: 6, md: 10 } }}>
@@ -134,7 +134,7 @@ export default function Campaign() {
           {/* Animated Heading */}
           {isDesktop ? (
             <motion.div
-              animate={{ x: ["-10%", "30%", "-30%"] }}
+              animate={{ x: ["-5%", "30%", "-30%"] }}
               transition={{
                 duration: 6,
                 repeat: Infinity,
@@ -178,7 +178,7 @@ export default function Campaign() {
                 {[
                   { label: "How we Manage Campaigns", path: "/manage" },
                   { label: "Awareness", path: "/awareness" },
-                  { label: "Peer to Peer", path: "/manage" },
+                  { label: "Peer to Peer", path: "/peertopeer" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}

@@ -250,6 +250,15 @@ export default function Careers() {
                   date="15/08/2025"
                 />
               </Grid>
+                      <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
+                <JobCard
+                  title="video creator"
+                  location="Tambaram, Chennai"
+                  desc="Create compelling visual stories that inspire action and strengthen audience engagement."
+                  type="Full time"
+                  date="25/08/2025"
+                />
+              </Grid>
             </Grid>
           </motion.div>
 
