@@ -21,6 +21,7 @@ import campaignImg2 from "../page/image/ngo 1.jpg";
 import campaignImg3 from "../page/image/ngo 3.avif";
 
 import Footer from "../page/Footer";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const theme = createTheme({
   palette: {
@@ -61,6 +62,26 @@ export default function Campaign() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+            {/* WHATSAPP */}
+      <Button
+        component="a"
+        href="https://wa.me/919962290875"
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          bgcolor: "#25D366",
+          color: "#fff",
+          zIndex: 9999,
+          '&:hover': { bgcolor: "#128C7E" }
+        }}
+      >
+        <WhatsAppIcon />
+      </Button>
 
       {/* ================= HERO SECTION ================= */}
       <Box

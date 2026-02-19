@@ -24,12 +24,12 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-import serviceImg1 from "./image/pre emergency.png";
-import serviceImg2 from "./image/pets - 1.jpg";
-import serviceImg3 from "./image/mentally challenged elders.webp";
-import serviceImg4 from "./image/newborn-baby.jpg";
-import serviceImg5 from "./image/education.jpg";
-import serviceImg6 from "./image/kids_education_part2.jpg";
+import serviceImg1 from "./image/pre.jpg";
+import serviceImg2 from "./image/gettyimages-1637251600-612x612.jpg";
+import serviceImg3 from "./image/mental 2.avif";
+import serviceImg4 from "./image/baby.png";
+import serviceImg5 from "./image/edu 1.avif";
+import serviceImg6 from "./image/sports 1.avif";
 
 const serviceImages = [
   serviceImg1,
@@ -40,10 +40,10 @@ const serviceImages = [
   serviceImg6,
 ];
 
-// Colors
+
 const gold = "#D68910";
-const lightOlive = "#A4B454"; // Brightened for dark background
-const lightMuted = "#CBD5E1"; // Light grey for readability
+const lightOlive = "#A4B454";
+const lightMuted = "#CBD5E1"; 
 
 const services = [
   { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies." },
@@ -64,7 +64,7 @@ const theme = createTheme({
   },
 });
 
-/* ---------------- ANIMATIONS ---------------- */
+
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -81,7 +81,7 @@ const spotlightMove = keyframes`
   100% { transform: translate(120%, 120%); opacity: 0; }
 `;
 
-/* ---------------- FULL PAGE VIDEO ---------------- */
+
 function FullPageVideoBackground() {
   return (
     <Box
@@ -118,7 +118,6 @@ function FullPageVideoBackground() {
   );
 }
 
-/* ---------------- FLOATING BUBBLES ---------------- */
 function BubblesBackground() {
   return (
     <Box sx={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
@@ -267,9 +266,7 @@ export default function Services() {
           </Grid>
         </Container>
 
-        {/* FOOTER SECTION 
-            We wrap the footer in a Box that overrides all child text colors to white
-        */}
+       
         <Box sx={{ 
           width: "100%", 
           "& *": { color: "#ffffff !important" } 

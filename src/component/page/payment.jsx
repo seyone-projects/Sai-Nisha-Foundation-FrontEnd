@@ -319,7 +319,9 @@ export default function Payment() {
           </Container>
         </Box>
 
-        <Footer />
+     <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}>
+            <Footer />
+          </Box>
       </Box>
     </ThemeProvider>
   );

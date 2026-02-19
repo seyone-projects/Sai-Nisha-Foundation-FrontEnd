@@ -12,12 +12,13 @@ import {
   ListItemButton,
   ListItemText,
   Divider,
+  Menu,
+  MenuItem,
   useMediaQuery,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./component/page/image/ngo.jpeg";
-
 
 import Home from "./component/page/Home";
 import AboutUs from "./component/page/AboutUs";
@@ -32,41 +33,28 @@ import Media from "./component/page/Media";
 import Manage from "./component/page/Manage";
 import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
-
+import PhotoGallery from "./component/page/PhotoGallery";
+import News from "./component/page/Newsandpublication";
+import Newsandpublication from "./component/page/Newsandpublication";
 
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
-const greenBtn = "#7c8f29ff";
 const goldBtn = "#D68910";
 
 export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isMobile = useMediaQuery("(max-width:900px)");
 
+  // 🔥 Submenu State
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const [pointer, setPointer] = useState({ x: -100, y: -100 });
+  const handleMediaHover = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  useEffect(() => {
-    const handleMouseMove = (e) =>
-      setPointer({ x: e.clientX, y: e.clientY });
-
-    const handleTouchMove = (e) => {
-      if (e.touches[0]) {
-        setPointer({
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, []);
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
   const menuItems = [
     { label: "Home", path: "/" },
@@ -75,28 +63,10 @@ export default function App() {
     { label: "Services", path: "/services" },
     { label: "Careers", path: "/careers" },
     { label: "Campaigns", path: "/campaigns" },
-    { label: "Media", path: "/media" },
   ];
 
   return (
     <Router>
-      <Box
-        sx={{
-          position: "fixed",
-          top: pointer.y,
-          left: pointer.x,
-          width: 40,
-          height: 40,
-          borderRadius: "50%",
-          pointerEvents: "none",
-          transform: "translate(-50%, -50%)",
-          background: `radial-gradient(circle, ${goldBtn} 0%, transparent 70%)`,
-          filter: "blur(10px)",
-          opacity: 0.6,
-          zIndex: 9999,
-        }}
-      />
-
       {/* NAVBAR */}
       <AppBar position="sticky" sx={{ bgcolor: creamBg, color: navyText }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -107,7 +77,7 @@ export default function App() {
               <MenuIcon sx={{ fontSize: 32, color: navyText }} />
             </IconButton>
           ) : (
-            <Box sx={{ display: "flex", gap: 3 }}>
+            <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
@@ -119,15 +89,38 @@ export default function App() {
                 </Button>
               ))}
 
-           {/* <Button
-  component={Link}
-  to="/volunteer"
-  variant="contained"
-  color="success"
-  sx={{ fontWeight: 700, px: 3 }}
->
-  Volunteer
-</Button> */}
+              <Box
+                onMouseEnter={handleMediaHover}
+                onMouseLeave={handleCloseMenu}
+              >
+                <Button
+                  sx={{ color: navyText, fontWeight: 600 }}
+                >
+                  Media
+                </Button>
+
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleCloseMenu}
+                >
+                  <MenuItem
+                    component={Link}
+                    to="/photo-gallery"
+                    onClick={handleCloseMenu}
+                  >
+                    Photo Gallery
+                  </MenuItem>
+                  <MenuItem
+                    component={Link}
+                    to="/news"
+                    onClick={handleCloseMenu}
+                  >
+                    News
+                  </MenuItem>
+                </Menu>
+              </Box>
+
               <Button
                 component={Link}
                 to="/payment"
@@ -141,6 +134,7 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
+      {/* MOBILE DRAWER */}
       <Drawer
         anchor="right"
         open={openDrawer}
@@ -158,29 +152,25 @@ export default function App() {
                 <ListItemText primary={item.label} />
               </ListItemButton>
             ))}
-          </List>
 
-          <Divider />
-
-          {/* <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
-            <Button
-              variant="contained"
-              sx={{ bgcolor: greenBtn }}
-              onClick={() => setOpenDrawer(false)}
-            >
-              Volunteer
-            </Button>
-
-            <Button
-              variant="contained"
+            {/* MEDIA SUBMENU IN MOBILE */}
+            <Divider />
+            <ListItemButton
               component={Link}
-              to="/payment"
-              sx={{ bgcolor: goldBtn, color: "#000" }}
+              to="/photo-gallery"
               onClick={() => setOpenDrawer(false)}
             >
-              Donate
-            </Button>
-          </Box> */}
+              <ListItemText primary="Photo Gallery" />
+            </ListItemButton>
+
+            <ListItemButton
+              component={Link}
+              to="/news"
+              onClick={() => setOpenDrawer(false)}
+            >
+              <ListItemText primary="News" />
+            </ListItemButton>
+          </List>
         </Box>
       </Drawer>
 
@@ -194,12 +184,13 @@ export default function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/payment" element={<Payment />} />
-          <Route path="/volunteer" element={<VolunteerForm/>} />
-           <Route path="/campaigns" element={<Campaigns/>} />
-           <Route path="/media" element={<Media/>} />
-           <Route path="/manage" element={<Manage/>} />
-           <Route path="/awareness" element={<Awareness/>} />
-           <Route path="/peertopeer" element={<PeerToPeer/>} />
+          <Route path="/volunteer" element={<VolunteerForm />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/manage" element={<Manage />} />
+          <Route path="/awareness" element={<Awareness />} />
+          <Route path="/peertopeer" element={<PeerToPeer />} />
+          <Route path="/photo-gallery" element={<PhotoGallery />} />
+          <Route path="/news" element={<Newsandpublication />} />
         </Routes>
       </Container>
     </Router>

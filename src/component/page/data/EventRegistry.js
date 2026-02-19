@@ -19,19 +19,19 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
   { 
-    title: "Thiru Dhina", 
+    title: "Music director Thiru  Dhina", 
     date: "Sun, 01 Feb 2026", 
     image: img2, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Director Kannan", 
+    title: "Director Thiru  Kannan", 
     date: "Sun, 01 Feb 2026", 
     image: img3, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Zee tamil Singer", 
+    title: "Actor Thiru  Jagan purushottam", 
     date: "Sun, 01 Feb 2026", 
     image: img4, 
     partner: "Sai Nisha" 

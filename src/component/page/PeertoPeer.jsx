@@ -5,26 +5,28 @@ import {
   Button,
   Container,
   Grid,
-  Card,
-  CardContent,
-  CardMedia,
   CssBaseline,
+  Avatar,
+  Divider,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
-import Footer from "../page/Footer"; 
-
-// Images
-import heroBg from "../page/image/volunteers 2.png";
-import idea1 from "../page/image/pets.jpg";
-import idea2 from "../page/image/gettyimages-1637251600-612x612.jpg";
-import idea3 from "../page/image/gettyimages-964352016-612x612.jpg";
-import idea4 from "../page/image/prt images.jpg";
+import Footer from "../page/Footer";
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import heroBg from "../page/image/mental care.avif";
+import idea1 from "../page/image/mental care 2.webp";
+import idea2 from "../page/image/mental care 3.webp";
+import idea3 from "../page/image/mental images.webp";
+import idea4 from "../page/image/mental care.avif";
 
 const theme = createTheme({
   palette: {
-    primary: { main: "#6C63FF" },
-    secondary: { main: "#FF6F91" },
+    primary: { main: "#0B1F3A" },      
+    secondary: { main: "#FFC107" }, 
+    background: { default: "#0A192F" },
   },
   typography: {
     fontFamily: "Poppins, sans-serif",
@@ -32,15 +34,63 @@ const theme = createTheme({
 });
 
 const PeerToPeer = () => {
+ 
+const fundraisingIdeas = [
+  {
+    title: "Elderly Home Nursing Care",
+    img: idea1, 
+    desc: "We provide compassionate home nursing services for senior citizens, ensuring they receive personalized medical attention, regular health monitoring, and emotional support in the comfort of their homes. Our trained caregivers focus on dignity, safety, and quality of life for every elder we serve."
+  },
+  {
+    title: "Post-Hospitalization & Rehabilitation Support",
+    img: idea2,
+    desc: "Our rehabilitation programs assist seniors recovering from surgery, illness, or mobility challenges. From physiotherapy support to mobility assistance, we help individuals regain strength, independence, and confidence through guided care and professional supervision."
+  },
+  {
+    title: "Daily Living & Personal Care Assistance",
+    img: idea3,
+    desc: "We support elderly individuals with daily activities such as bathing, grooming, medication reminders, and meal assistance. Our caregivers ensure comfort, hygiene, and companionship while promoting independence in everyday life."
+  },
+  {
+    title: "Emotional Support & Companionship",
+    img: idea4,
+    desc: "Loneliness can impact mental health. Our caregivers provide meaningful companionship, conversation, and emotional reassurance to seniors, fostering a sense of belonging and happiness while supporting their overall well-being."
+  }
+];
+
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+          {/* WHATSAPP */}
+      <Button
+        component="a"
+        href="https://wa.me/919962290875"
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          bgcolor: "#25D366",
+          color: "#fff",
+          zIndex: 9999,
+          '&:hover': { bgcolor: "#128C7E" }
+        }}
+      >
+        <WhatsAppIcon />
+      </Button>
 
       {/* HERO SECTION */}
       <Box
         sx={{
           height: { xs: "90vh", md: "100vh" },
-          backgroundImage: `linear-gradient(rgba(53, 52, 130, 0.75), rgba(63, 52, 130, 0.75)), url(${heroBg})`,
+          backgroundImage: `
+            linear-gradient(rgba(5,15,35,0.85), rgba(5,15,35,0.9)),
+            url(${heroBg})
+          `,
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "#fff",
@@ -58,165 +108,165 @@ const PeerToPeer = () => {
             <Typography
               variant="h2"
               fontWeight="bold"
-              sx={{ mb: 3, fontSize: { xs: "32px", md: "56px" } }}
+              sx={{
+                mb: 3,
+                fontSize: { xs: "32px", md: "56px" },
+                color: "#FFC107",
+                letterSpacing: 2,
+              }}
             >
-              Emergency <br /> Medical Care
+              Empowering Every Mind & Ability
             </Typography>
 
-            <Typography sx={{ mb: 4, maxWidth: 600, mx: "auto" }}>
-              Together let’s get fitter with our furry friends and turn those
-              walkies into fundraising dollars for new Born emergency
-              across the country.
+            <Typography sx={{ mb: 4, maxWidth: 600, mx: "auto", color: "#E0E0E0" }}>
+              Join us in providing specialized care, vocational training, and
+              inclusive opportunities for individuals with intellectual and
+              developmental disabilities.
             </Typography>
 
-            <Box sx={{ mb: 4 }}>
-              <Typography>$11,791 raised</Typography>
-              <Box
-                sx={{
-                  height: 8,
-                  bgcolor: "#fff",
-                  borderRadius: 10,
-                  mt: 1,
-                  overflow: "hidden",
-                }}
-              >
-                <Box
-                  sx={{
-                    width: "60%",
-                    height: "100%",
-                    bgcolor: "secondary.main",
-                  }}
-                />
-              </Box>
-              <Typography sx={{ mt: 1 }}>$25,000 goal</Typography>
-            </Box>
-
-            <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                sx={{ px: 4, borderRadius: "30px" }}
-              >
-                Donate
-              </Button>
-            </Box>
+            <Button
+              variant="contained"
+              sx={{
+                px: 6,
+                py: 1.5,
+                borderRadius: "30px",
+                fontWeight: "bold",
+                backgroundColor: "#FFC107",
+                color: "#000",
+                "&:hover": { backgroundColor: "#e6ac00" },
+              }}
+            >
+              Support Our Mission
+            </Button>
           </motion.div>
         </Container>
       </Box>
 
-      {/* HOW IT WORKS */}
-      <Box sx={{ py: 10, bgcolor: "#F8F9FF" }}>
+      {/* HOW YOU CAN HELP */}
+      <Box sx={{ py: 10, bgcolor: "#0A192F", color: "#fff" }}>
         <Container>
           <Typography
-            variant="h5"
+            variant="h4"
             textAlign="center"
             fontWeight="bold"
-            sx={{ mb: 6 }}
+            sx={{ mb: 8, color: "#FFC107", letterSpacing: 2 }}
           >
-            HOW IT WORKS
+            HOW YOU CAN HELP
           </Typography>
 
           <Grid container spacing={4} justifyContent="center">
             {[
               {
-                title: "Sign up",
-                desc: "Register you and your dog and start fundraising.",
+                title: "Become a Mentor",
+                desc: "Spend time and share your skills.",
+                icon: <Diversity3Icon sx={{ fontSize: 40 }} />,
               },
               {
-                title: "Take the lead",
-                desc: "Pledge a distance and start walking together.",
+                title: "Advocate",
+                desc: "Promote inclusive policies.",
+                icon: <PsychologyIcon sx={{ fontSize: 40 }} />,
               },
               {
-                title: "Get Fundraising",
-                desc: "Share your page and raise funds for rescue shelters.",
+                title: "Donate",
+                desc: "Help build sensory rooms.",
+                icon: <HandshakeIcon sx={{ fontSize: 40 }} />,
               },
             ].map((item, index) => (
-              <Grid
-                item
-                xs={12}
-                md={4}
-                key={index}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <motion.div whileHover={{ y: -10 }}>
-                  <Card
-                    sx={{
-                      p: 3,
-                      textAlign: "center",
-                      borderRadius: 4,
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-                      maxWidth: 320,
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        variant="h6"
-                        fontWeight="bold"
-                        color="primary"
-                        sx={{ mb: 2 }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Typography color="text.secondary">
-                        {item.desc}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+              <Grid item xs={12} md={4} key={index} textAlign="center">
+                <Avatar
+                  sx={{
+                    bgcolor: "#FFC107",
+                    color: "#000",
+                    width: 80,
+                    height: 80,
+                    mx: "auto",
+                    mb: 2,
+                  }}
+                >
+                  {item.icon}
+                </Avatar>
+
+                <Typography variant="h6" fontWeight="bold">
+                  {item.title}
+                </Typography>
+
+                <Typography sx={{ color: "#ccc", px: 2 }}>
+                  {item.desc}
+                </Typography>
               </Grid>
             ))}
           </Grid>
         </Container>
       </Box>
 
-      {/* EXPLORE FUNDRAISING IDEAS */}
-      <Box sx={{ py: 10 }}>
-        <Container>
+      {/* KEY FOCUS AREAS */}
+      <Box sx={{ py: 10, bgcolor: "#081426", color: "#fff" }}>
+        <Container maxWidth="md">
           <Typography
-            variant="h5"
+            variant="h4"
             textAlign="center"
             fontWeight="bold"
-            sx={{ mb: 6 }}
+            sx={{ mb: 8, color: "#FFC107" }}
           >
-            EXPLORE FUNDRAISING IDEAS
+            OUR KEY FOCUS AREAS
           </Typography>
 
-          <Grid container spacing={4}>
-            {[idea1, idea2, idea3, idea4].map((img, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <motion.div whileHover={{ scale: 1.05 }}>
-                  <Card
+          {fundraisingIdeas.map((item, index) => (
+            <Box key={index} sx={{ mb: 10 }}>
+              <Grid
+                container
+                spacing={6}
+                alignItems="center"
+                direction={index % 2 === 0 ? "row" : "row-reverse"}
+              >
+                <Grid item xs={12} md={5}>
+                  <Box
+                    component="img"
+                    src={item.img}
+                    alt={item.title}
                     sx={{
-                      borderRadius: 4,
-                      overflow: "hidden",
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                      width: "100%",
+                      height: 320,
+                      objectFit: "cover",
+                      borderRadius: "20px",
+                      boxShadow: "0 15px 40px rgba(0,0,0,0.5)",
                     }}
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={7}>
+                  <Typography
+                    variant="h5"
+                    fontWeight="bold"
+                    sx={{ color: "#FFC107" }}
+                    gutterBottom
                   >
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image={img}
-                      alt="idea"
-                    />
-                    <CardContent>
-                      <Typography fontWeight="bold" sx={{ mb: 1 }}>
-                        Fundraising Idea
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Start your own creative fundraising journey.
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                    {item.title}
+                  </Typography>
+
+                  <Typography sx={{ color: "#ccc", lineHeight: 1.8 }}>
+                    {item.desc}
+                  </Typography>
+
+                  <Divider
+                    sx={{
+                      mt: 3,
+                      width: "80px",
+                      borderBottomWidth: 4,
+                      borderColor: "#FFC107",
+                    }}
+                  />
+                </Grid>
               </Grid>
-            ))}
-          </Grid>
+            </Box>
+          ))}
         </Container>
       </Box>
 
-       <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}>
-              <Footer />
-            </Box>
+      {/* FOOTER */}
+      <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}>
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 };

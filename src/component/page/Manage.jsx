@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Button,
   Typography,
   Grid,
   Card,
@@ -11,6 +12,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import Footer from "../page/Footer";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import img1 from "../page/image/home1.jpg";
 import img2 from "../page/image/home.jpg";
@@ -54,6 +56,27 @@ export default function Manage() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+      
+      {/* WhatsApp FAB */}
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" },
+          }}
+        >
+          <WhatsAppIcon />
+        </Button>
+      </Box>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <Box

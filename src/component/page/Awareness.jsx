@@ -1,25 +1,21 @@
 import React from "react";
 import {
   Box,
+  Button,
   Typography,
   Container,
   Grid,
-  Card,
-  CardContent,
-  CardMedia,
   CssBaseline,
   Divider,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import Footer from "./Footer";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
+// Using your imported images
 import pregnancyImg from "../page/image/pre.jpg";
-import petcareImg from "../page/image/gettyimages-1637251600-612x612.jpg";
-import eldersImg from "../page/image/mental images.webp";
 import newbornImg from "../page/image/newborn 11.jpg";
-import educationImg from "../page/image/edu 1.avif";
-import sportsImg from "../page/image/sports 1.avif";
 
 const theme = createTheme({
   palette: {
@@ -34,40 +30,16 @@ const theme = createTheme({
 
 const programs = [
   {
-    title: "Emergency Care",
+    title: "Pregnancy Emergency",
     description:
-      "Providing urgent medical support,and maternal health care during critical pregnancy situations.",
+     "Every pregnancy deserves a safe beginning and a healthy future, and your support ensures that even in the most unexpected moments, expert emergency care is always within reach. By leveraging your workplace’s gift matching program, you are doing more than just donating—you are doubling the hope and the resources available to mothers and newborns when they need it most. It is an effortless yet incredibly powerful way to turn your professional network into a lifeline of support, ensuring that every family has the specialized care, advanced technology, and medical expertise required to navigate an emergency and come home stronger together.",
     image: pregnancyImg,
   },
   {
-    title: "Pet Care & Rescue",
+    title: "Newborn Emergency Care",
     description:
-      "Rescuing injured and abandoned animals while ensuring food, shelter, medical treatment, and adoption support.",
-    image: petcareImg,
-  },
-  {
-    title: "Mentally Challenged Elders",
-    description:
-      "Offering specialized care, therapy programs, and emotional support for elderly",
-    image: eldersImg,
-  },
-  {
-    title: "Newborn Care",
-    description:
-      "Ensuring immediate neonatal medical attention, ICU support, and life-saving treatment for newborn babies.",
+      "Every newborn deserves the brightest start possible, and your support ensures that even the tiniest fighters have access to the world-class emergency care they need to thrive. By utilizing your workplace’s gift matching program, you are doubling the strength of our medical response—turning a single contribution into twice the life-saving equipment, specialized nursing, and advanced technology for infants in critical care.",
     image: newbornImg,
-  },
-  {
-    title: "Education",
-    description:
-      "Providing scholarships, learning materials, and awareness programs to empower underprivileged children.",
-    image: educationImg,
-  },
-  {
-    title: "Sports",
-    description:
-      "Encouraging youth participation in sports by providing training, equipment, and mentorship opportunities.",
-    image: sportsImg,
   },
 ];
 
@@ -76,15 +48,35 @@ export default function Awareness() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
+            {/* WhatsApp FAB */}
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" },
+          }}
+        >
+          <WhatsAppIcon />
+        </Button>
+      </Box>
+
       {/* MAIN FULL PAGE DARK BACKGROUND */}
       <Box sx={{ bgcolor: "#0f172a", color: "#ffffff" }}>
-
+        
         {/* HERO SECTION */}
         <Box
           sx={{
-            background:
-              "linear-gradient(rgba(0,0,0,0.7), rgba(11,61,59,0.8))",
+            background: "linear-gradient(rgba(0,0,0,0.7), rgba(11,61,59,0.8))",
             py: { xs: 8, md: 12 },
+            textAlign: "center"
           }}
         >
           <Container maxWidth="md">
@@ -119,51 +111,83 @@ export default function Awareness() {
           </Container>
         </Box>
 
-        {/* PROGRAM CARDS SECTION */}
+        {/* ALTERNATING PARAGRAPH SECTION (IMAGE DESIGN) */}
         <Box sx={{ py: { xs: 6, md: 10 } }}>
           <Container maxWidth="lg">
-            <Grid container spacing={4} justifyContent="center">
-              {programs.map((item, index) => (
-                <Grid item xs={12} sm={6} md={4} key={index}>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <Card
-                      sx={{
-                        bgcolor: "#1e293b",
-                        color: "#fff",
-                        borderRadius: 4,
-                        height: "200",
-                        width: 280,
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                      }}
+            {programs.map((item, index) => (
+              <Box key={index} sx={{ mb: { xs: 8, md: 12 } }}>
+                <Grid
+                  container
+                  spacing={6}
+                  alignItems="center"
+                  // Alternates direction based on even/odd index
+                  flexDirection={index % 2 === 0 ? "row" : "row-reverse"}
+                >
+                  {/* IMAGE SIDE */}
+                  <Grid item xs={12} md={6}>
+                    <motion.div
+                      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6 }}
                     >
-                      <CardMedia
+                      <Box
                         component="img"
-                        height="220"
-                        image={item.image}
+                        src={item.image}
                         alt={item.title}
-                        sx={{ objectFit: "cover" }}
+                        sx={{
+                          width: "100%",
+                          maxHeight: 400,
+                          objectFit: "cover",
+                          borderRadius: "24px",
+                          boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                        }}
                       />
-                      <CardContent>
-                        <Typography
-                          variant="h6"
-                          fontWeight={700}
-                          gutterBottom
-                          sx={{ color: "#FFD700" }}
-                        >
-                          {item.title}
-                        </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                          {item.description}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                    </motion.div>
+                  </Grid>
+
+                  {/* TEXT SIDE */}
+                  <Grid item xs={12} md={6}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <Typography
+                        variant="h5"
+                        fontWeight={700}
+                        sx={{ color: "#6C63FF", mb: 2 }} // Purple color from your image
+                      >
+                        {item.title}
+                      </Typography>
+                      
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          opacity: 0.8,
+                          lineHeight: 1.8,
+                          fontSize: "1rem",
+                          mb: 2,
+                        }}
+                      >
+                        {item.description}
+                      </Typography>
+
+                      {/* Decorative colored bar from your image */}
+                      <Box
+                        sx={{
+                          width: 40,
+                          height: 3,
+                          bgcolor: "#FF6F91", // Pinkish bar from your image
+                          borderRadius: 2,
+                        }}
+                      />
+                    </motion.div>
+                  </Grid>
                 </Grid>
-              ))}
-            </Grid>
+              </Box>
+            ))}
           </Container>
         </Box>
 
@@ -181,9 +205,9 @@ export default function Awareness() {
               Our Aim
             </Typography>
 
-            <Grid container spacing={4} mt={2} justifyContent="center" marginTop={5}>
+            <Grid container spacing={4} mt={2} justifyContent="center">
               {[
-                { number: "1200+", label: "Medical Emergencies Handled" },
+                { number: "1200+", label: "Medical Emergencies" },
                 { number: "500+", label: "Pets Rescued" },
                 { number: "900+", label: "Elders Supported" },
                 { number: "2000+", label: "Children Empowered" },
@@ -196,9 +220,7 @@ export default function Awareness() {
                   >
                     {item.number}
                   </Typography>
-                  <Typography sx={{ opacity: 0.8 }}>
-                    {item.label}
-                  </Typography>
+                  <Typography sx={{ opacity: 0.8 }}>{item.label}</Typography>
                 </Grid>
               ))}
             </Grid>
@@ -208,33 +230,29 @@ export default function Awareness() {
         {/* CALL TO ACTION */}
         <Box
           sx={{
-            background:
-              "linear-gradient(90deg, #0B3D3B, #145c59)",
-            py: { xs: 6, md: 8 },
+            background: "linear-gradient(90deg, #0B3D3B, #145c59)",
+            py: { xs: 5, md: 6 },
             textAlign: "center",
-            borderRadius: 30,
           }}
         >
           <Container maxWidth="sm">
-           <Typography
-                variant="h3"
-                fontWeight={800}
-                gutterBottom
-                sx={{ color: "#FFD700" }}
-              >
-              Join Our Mission
-              </Typography>
-            <Typography sx={{ opacity: 0.9 }} >
+            <Typography
+              variant="h3"
+              fontWeight={800}
+              sx={{ color: "#FFD700", mb: 1 }}
+            >
+              Join in Our Awareness
+            </Typography>
+            <Typography sx={{ opacity: 0.9 }}>
               Together, we can provide immediate emergency care to those in crisis, protect vulnerable lives from harm, and create opportunities that empower families to build a better future. Every act of support brings food to the hungry, shelter to the homeless, education to children, and hope to communities facing hardship. United by compassion, we can turn challenges into new beginnings.
             </Typography>
           </Container>
         </Box>
 
         {/* FOOTER */}
-        <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important"} }}>
+        <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}>
           <Footer />
         </Box>
-
       </Box>
     </ThemeProvider>
   );
