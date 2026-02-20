@@ -37,13 +37,13 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
    { 
-    title: "Zee tamil Singer 2", 
+    title: "sujesh  (Zee tamil) ", 
     date: "Sun, 01 Feb 2026", 
     image: img5, 
     partner: "Sai Nisha" 
   },
    { 
-    title: "Hosts", 
+    title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img6, 
     partner: "Sai Nisha" 
@@ -55,35 +55,35 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singer", 
+    title: "Bharathanatiyam", 
     date: "Sun, 01 Feb 2026", 
     image: img8, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singer", 
+    title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img9, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singer", 
+    title: "Dancers", 
     date: "Sun, 01 Feb 2026", 
     image: img10, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singer", 
+    title: "Memory Recreations", 
     date: "Sun, 01 Feb 2026", 
     image: img11, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singer", 
+    title: "Lighting Candles", 
     date: "Sun, 01 Feb 2026", 
     image: img12, 
     partner: "Sai Nisha" 
   },
 ];
 
-export const HERO_SLIDES = [img1, img3];
+export const HERO_SLIDES = [img1, img3, img12];

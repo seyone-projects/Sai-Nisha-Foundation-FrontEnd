@@ -22,15 +22,34 @@ import EmailIcon from "@mui/icons-material/Email";
 import emailjs from "@emailjs/browser";
 import Footer from "./Footer";
 
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const gold = "#D68910";
-const olive = "#7C8F29";
+
+const darkNavy = "#0B1120"; 
+const tealGreen = "#0E4D44"; 
+const emeraldGreen = "#157A6E"; 
+const textWhite = "#FFFFFF";
+const lightGrey = "#B0BCC2";
 
 const theme = createTheme({
+  palette: {
+    mode: 'dark', 
+    primary: {
+      main: emeraldGreen,
+    },
+  },
   typography: {
     fontFamily: `"Poppins", sans-serif`,
     h3: { fontWeight: 900 },
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' },
+          },
+        },
+      },
+    },
   },
 });
 
@@ -97,79 +116,59 @@ export default function ContactUs() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+<ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <Box sx={{ py: 10, background: creamBg }}>
+      <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh" }}>
         <Card
           sx={{
-            width: isMobile ? "95%" : "70%",
+            width: isMobile ? "95%" : "90%", 
+            maxWidth: "800px",
             mx: "auto",
             borderRadius: 6,
-            border: `2px solid ${gold}`,
+            border: `1px solid ${emeraldGreen}`,
+            background: "#111827", 
+            boxShadow: "0px 10px 30px rgba(0,0,0,0.5)",
           }}
         >
           {/* HEADER */}
-          <Box
-            sx={{
-              background: `linear-gradient(90deg, ${navyText}, ${olive})`,
-              py: 4,
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h3" sx={{ color: "#fff" }}>
-              Contact Us
-            </Typography>
-            <Typography sx={{ color: "#eee" }}>
-              Carrying His Light Forward
-            </Typography>
+          <Box sx={{ background: `linear-gradient(135deg, ${tealGreen}, ${emeraldGreen})`, py: 4, textAlign: "center" }}>
+            <Typography variant="h3" sx={{ color: textWhite }}>Contact Us</Typography>
+            <Typography sx={{ color: lightGrey }}>Carrying His Light Forward</Typography>
           </Box>
 
-          <Divider
-            sx={{
-              height: 4,
-              background: `linear-gradient(90deg, ${gold}, ${olive})`,
-            }}
-          />
+          <Divider sx={{ height: 4, background: `linear-gradient(90deg, ${emeraldGreen}, #2DD4BF)`, border: "none" }} />
 
-          {/* FORM */}
-          <Box sx={{ px: 6, py: 5 }}>
-            <Grid container spacing={3}>
-              <Grid item size={{ xs: 12, md: 4 }}>
+          {/* FORM AREA */}
+          <Box sx={{ px: isMobile ? 3 : 10, py: 6 }}>
+            <Grid container spacing={4} direction="column" alignItems="center">
+              
+              {/* All Grid items now have xs={12} and a set width to ensure they are wide but centered */}
+              <Grid item xs={12} sx={{ width: "100%" }}>
                 <FormControl fullWidth>
-                  <InputLabel>Type *</InputLabel>
+                  <InputLabel sx={{ color: lightGrey }}>Type *</InputLabel>
                   <Select
                     value={type}
                     label="Type *"
                     onChange={(e) => setType(e.target.value)}
+                    sx={{ color: textWhite }}
                   >
                     <MenuItem value="Volunteering">Volunteering</MenuItem>
                     <MenuItem value="Donation">Donation</MenuItem>
-                    <MenuItem value="CSR">CSR</MenuItem>
                     <MenuItem value="Others">Others</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
 
-              <Grid item size={{ xs: 12, md: 4 }}>
-                <TextField
-                  label="Name *"
-                  fullWidth
-                  value={formData.name}
-                  onChange={handleChange("name")}
-                />
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <TextField label="Name *" fullWidth value={formData.name} onChange={handleChange("name")} />
               </Grid>
 
-              <Grid item size={{ xs: 12, md: 4 }}>
-                <TextField
-                  label="Initial"
-                  fullWidth
-                  value={formData.initial}
-                  onChange={handleChange("initial")}
-                />
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <TextField label="Initial" fullWidth value={formData.initial} onChange={handleChange("initial")} />
               </Grid>
 
-              <Grid item size={{ xs: 12, md: 6 }}>
+              <Grid item xs={12} sx={{ width: "100%" }}>
                 <TextField
                   label="Email *"
                   fullWidth
@@ -178,58 +177,60 @@ export default function ContactUs() {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <EmailIcon />
+                        <EmailIcon sx={{ color: emeraldGreen }} />
                       </InputAdornment>
                     ),
                   }}
                 />
               </Grid>
 
-              <Grid item size={{ xs: 12, md: 6 }}>
-                <TextField
-                  label="Mobile *"
-                  fullWidth
-                  value={formData.mobile}
-                  onChange={handleChange("mobile")}
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <TextField label="Mobile *" fullWidth value={formData.mobile} onChange={handleChange("mobile")} />
+              </Grid>
+
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <TextField 
+                  label="Message *" 
+                  multiline 
+                  rows={5} 
+                  fullWidth 
+                  value={formData.message} 
+                  onChange={handleChange("message")} 
                 />
               </Grid>
 
-              <Grid item size={{ xs: 12 }}>
-                <TextField
-                  label="Message *"
-                  multiline
-                  rows={isMobile ? 3 : 4}
-                  fullWidth
-                  value={formData.message}
-                  onChange={handleChange("message")}
-                />
+              <Grid item xs={12} sx={{ width: "100%", textAlign: "center", mt: 4 }}>
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{
+                    background: `linear-gradient(90deg, ${tealGreen}, ${emeraldGreen})`,
+                    width: isMobile ? "100%" : "40%", 
+                    py: 2,
+                    borderRadius: 2, 
+                    fontWeight: 700,
+                    color: textWhite,
+                    textTransform: "none",
+                    fontSize: "1.2rem",
+                    transition: "all 0.3s ease",
+                    "&:hover": { 
+                        background: emeraldGreen,
+                        boxShadow: `0px 0px 20px ${emeraldGreen}`
+                    }
+                  }}
+                >
+                  Submit Message
+                </Button>
               </Grid>
+
             </Grid>
-
-            <Box sx={{ mt: 5, textAlign: "center" }}>
-              <Button
-                variant="contained"
-                onClick={handleSubmit}
-                sx={{
-                  background: `linear-gradient(90deg, ${olive}, ${gold})`,
-                  px: 6,
-                  borderRadius: 50,
-                  fontWeight: 700,
-                  color: "#000",
-                }}
-              >
-                Submit
-              </Button>
-            </Box>
           </Box>
         </Card>
       </Box>
 
-      <Snackbar open={success} autoHideDuration={4000}>
-        <Alert severity="success">Message sent successfully!</Alert>
-      </Snackbar>
-
-      <Footer />
+        <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}>
+                <Footer />
+              </Box>
     </ThemeProvider>
   );
 }

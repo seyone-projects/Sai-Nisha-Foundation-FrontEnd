@@ -16,7 +16,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"; // Added for the arrow icon in buttons
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
@@ -26,12 +26,12 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
-const gold = "#D68910";
-const mutedText = "#5F6F7E";
+// Updated Color Palette from the Image
+const deepNavy = "#050B18";
+const forestGreen = "#064439";
+const lightGreen = "#0A5D4D"; 
+const pureWhite = "#FFFFFF";
+const mutedGrey = "rgba(255, 255, 255, 0.7)";
 
 const theme = createTheme({
   typography: {
@@ -41,6 +41,11 @@ const theme = createTheme({
     body1: { fontWeight: 400 },
     body2: { fontWeight: 400 },
   },
+  // Added palette to fix TextField label colors on dark background
+  palette: {
+    mode: 'dark',
+    primary: { main: forestGreen },
+  }
 });
 
 const fadeIn = keyframes`
@@ -68,9 +73,10 @@ function BubblesBackground() {
         const duration = Math.random() * 10 + 10;
         const delay = Math.random() * 20;
 
-        const isGold = i % 2 === 0;
-        const color = isGold ? "rgba(214, 137, 16, 0.45)" : "rgba(255, 230, 0, 0.35)";
-        const glow = isGold ? "rgba(214, 137, 16, 0.3)" : "rgba(255, 230, 0, 0.2)";
+        // Updated bubble colors to match the theme
+        const isGreen = i % 2 === 0;
+        const color = isGreen ? "rgba(6, 68, 57, 0.45)" : "rgba(255, 255, 255, 0.1)";
+        const glow = isGreen ? "rgba(6, 68, 57, 0.3)" : "rgba(255, 255, 255, 0.05)";
 
         return (
           <Box
@@ -120,39 +126,41 @@ export default function Payment() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-          <Box
-              sx={{
-                position: "fixed",
-                bottom: 20,
-                right: 20,
-                zIndex: 9999,
-              }}
-            >
-              <Button
-                component="a"
-                href="https://wa.me/919962290875"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  minWidth: 0,
-                  width: 56,
-                  height: 56,
-                  borderRadius: "50%",
-                  backgroundColor: "#25D366",
-                  color: "#fff",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-                  "&:hover": {
-                    backgroundColor: "#1EBE5D",
-                    transform: "scale(1.1)",
-                  },
-                }}
-              >
-                <WhatsAppIcon sx={{ fontSize: 30 }} />
-              </Button>
-            </Box>
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          zIndex: 9999,
+        }}
+      >
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+            "&:hover": {
+              backgroundColor: "#1EBE5D",
+              transform: "scale(1.1)",
+            },
+          }}
+        >
+          <WhatsAppIcon sx={{ fontSize: 30 }} />
+        </Button>
+      </Box>
+
+      {/* Background Changed to Deep Navy from Image */}
       <Box 
         sx={{ 
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
+          backgroundColor: deepNavy,
           minHeight: "100vh",
           position: "relative",
           zIndex: 1,
@@ -168,33 +176,34 @@ export default function Payment() {
               sx={{
                 fontWeight: 900,
                 mb: 4,
-                color: navyText,
+                color: pureWhite, // Changed to White
                 textTransform: "uppercase",
                 animation: `${fadeIn} 1s ease-out`,
+                letterSpacing: 1
               }}
             >
-              Support <span style={{ color: gold }}>Our Cause</span>
+              Support <span style={{ color: "#fff" }}>Our Cause</span>
             </Typography>
 
             <Card
               sx={{
                 p: { xs: 3, md: 5 },
                 borderRadius: 6, 
-                border: "1px solid rgba(255, 255, 255, 0.3)",
-                backgroundColor: "rgba(255, 255, 255, 0.7)", 
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 15px 35px rgba(0,0,0,0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)", // Glassmorphism style for Dark UI
+                backdropFilter: "blur(20px)",
+                boxShadow: "0 15px 35px rgba(0,0,0,0.5)",
                 transition: "0.4s",
                 "&:hover": {
-                  boxShadow: "0 25px 50px rgba(0,0,0,0.12)",
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.7)",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
                 }
               }}
             >
-
               <Typography
                 variant="h5"
                 fontWeight={800}
-                color={navyText}
+                color={pureWhite}
                 textAlign="center"
                 gutterBottom
               >
@@ -203,15 +212,14 @@ export default function Payment() {
 
               <Typography
                 textAlign="center"
-                color={mutedText}
+                color={mutedGrey}
                 mb={4}
                 fontWeight={500}
               >
                 Your contribution helps us create real impact
               </Typography>
 
-
-              <Typography fontWeight={700} fontSize={14} mb={1.5} color={olive} sx={{ textTransform: 'uppercase' }}>
+              <Typography fontWeight={700} fontSize={14} mb={1.5} color={mutedGrey} sx={{ textTransform: 'uppercase', letterSpacing: 1.5 }}>
                 Select Amount (₹)
               </Typography>
 
@@ -225,7 +233,8 @@ export default function Payment() {
                     "& .MuiToggleButton-root": {
                         borderRadius: "12px",
                         mx: 0.5,
-                        border: "1px solid rgba(124, 143, 41, 0.2) !important",
+                        border: "1px solid rgba(255, 255, 255, 0.1) !important",
+                        color: pureWhite,
                     }
                 }}
               >
@@ -235,11 +244,10 @@ export default function Payment() {
                     value={val}
                     sx={{
                       fontWeight: 700,
-                      color: navyText,
                       "&.Mui-selected": {
-                        backgroundColor: `${gold} !important`,
+                        backgroundColor: `${forestGreen} !important`, // Changed to Image Green
                         color: "#fff",
-                        boxShadow: `0 4px 12px ${gold}44`,
+                        boxShadow: `0 4px 12px ${forestGreen}66`,
                       },
                     }}
                   >
@@ -260,44 +268,45 @@ export default function Payment() {
                 }}
                 sx={{ 
                     mb: 3,
-                    "& .MuiOutlinedInput-root": { borderRadius: "12px" }
+                    "& .MuiOutlinedInput-root": { 
+                        borderRadius: "12px",
+                        backgroundColor: "rgba(255,255,255,0.05)"
+                    }
                 }}
               />
 
-
-              <Typography fontWeight={700} fontSize={14} mb={1.5} color={olive} sx={{ textTransform: 'uppercase' }}>
+              <Typography fontWeight={700} fontSize={14} mb={1.5} color={mutedGrey} sx={{ textTransform: 'uppercase', letterSpacing: 1.5 }}>
                 Donor Details
               </Typography>
 
               <Grid container spacing={2}>
-                <Grid item size={{ xs: 12 }}>
-                  <TextField fullWidth label="Full Name" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }} />
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Full Name" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px", backgroundColor: "rgba(255,255,255,0.05)" } }} />
                 </Grid>
-                <Grid item size={{ xs: 12 }}>
-                  <TextField fullWidth label="Email Address" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }} />
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Email Address" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px", backgroundColor: "rgba(255,255,255,0.05)" } }} />
                 </Grid>
-                <Grid item size={{ xs: 12 }}>
-                  <TextField fullWidth label="Phone Number" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }} />
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Phone Number" variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px", backgroundColor: "rgba(255,255,255,0.05)" } }} />
                 </Grid>
               </Grid>
-
 
               <Button
                 fullWidth
                 size="large"
+                endIcon={<ChevronRightIcon />}
                 sx={{
                   mt: 4,
                   py: 1.8,
                   fontSize: 16,
                   fontWeight: 800,
-                  borderRadius: 4,
-                  backgroundColor: olive,
+                  borderRadius: 3,
+                  backgroundColor: forestGreen, // Match Button in Image
                   color: "#fff",
-                  boxShadow: `0 10px 20px ${olive}44`,
+                  boxShadow: `0 10px 20px rgba(0,0,0,0.3)`,
                   "&:hover": {
-                    backgroundColor: gold,
+                    backgroundColor: lightGreen,
                     transform: "translateY(-3px)",
-                    boxShadow: `0 15px 30px ${gold}66`,
                   },
                   transition: "all 0.4s ease",
                 }}
@@ -309,9 +318,10 @@ export default function Payment() {
               <Typography
                 mt={2.5}
                 textAlign="center"
-                fontSize={12}
+                fontSize={11}
                 fontWeight={600}
-                color={mutedText}
+                color={mutedGrey}
+                sx={{ letterSpacing: 2 }}
               >
                 SECURE PAYMENT • 100% TRANSPARENT USAGE
               </Typography>
@@ -319,9 +329,10 @@ export default function Payment() {
           </Container>
         </Box>
 
-     <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}>
-            <Footer />
-          </Box>
+      
+              <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}>
+                     <Footer />
+                   </Box>
       </Box>
     </ThemeProvider>
   );

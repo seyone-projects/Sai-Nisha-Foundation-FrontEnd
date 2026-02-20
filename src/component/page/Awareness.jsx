@@ -7,13 +7,14 @@ import {
   Grid,
   CssBaseline,
   Divider,
+  IconButton, 
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Footer from "./Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-
-// Using your imported images
 import pregnancyImg from "../page/image/pre.jpg";
 import newbornImg from "../page/image/newborn 11.jpg";
 
@@ -32,7 +33,7 @@ const programs = [
   {
     title: "Pregnancy Emergency",
     description:
-     "Every pregnancy deserves a safe beginning and a healthy future, and your support ensures that even in the most unexpected moments, expert emergency care is always within reach. By leveraging your workplace’s gift matching program, you are doing more than just donating—you are doubling the hope and the resources available to mothers and newborns when they need it most. It is an effortless yet incredibly powerful way to turn your professional network into a lifeline of support, ensuring that every family has the specialized care, advanced technology, and medical expertise required to navigate an emergency and come home stronger together.",
+      "Every pregnancy deserves a safe beginning and a healthy future, and your support ensures that even in the most unexpected moments, expert emergency care is always within reach. By leveraging your workplace’s gift matching program, you are doing more than just donating—you are doubling the hope and the resources available to mothers and newborns when they need it most. It is an effortless yet incredibly powerful way to turn your professional network into a lifeline of support, ensuring that every family has the specialized care, advanced technology, and medical expertise required to navigate an emergency and come home stronger together.",
     image: pregnancyImg,
   },
   {
@@ -44,11 +45,13 @@ const programs = [
 ];
 
 export default function Awareness() {
+  const navigate = useNavigate();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-            {/* WhatsApp FAB */}
+      {/* WhatsApp FAB */}
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
         <Button
           component="a"
@@ -66,6 +69,24 @@ export default function Awareness() {
         >
           <WhatsAppIcon />
         </Button>
+      </Box>
+
+      {/* BACK BUTTON - TOP RIGHT */}
+      <Box sx={{ position: "fixed", top: 80, right: 20, zIndex: 9999 }}>
+        <IconButton
+          onClick={() => navigate(-1)}
+          sx={{
+            bgcolor: "rgba(255, 255, 255, 0.1)",
+            color: "#FFD700",
+            backdropFilter: "blur(5px)",
+            "&:hover": { 
+              bgcolor: "rgba(255, 255, 255, 0.2)",
+              transform: "scale(1.1)" 
+            },
+          }}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
       </Box>
 
       {/* MAIN FULL PAGE DARK BACKGROUND */}

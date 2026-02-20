@@ -13,8 +13,8 @@ import {
   keyframes,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "../page/Footer";
-
+// Ensure Footer path is correct for your project
+import Footer from "../page/Footer"; 
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
@@ -24,16 +24,24 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
-const gold = "#D68910";
-
+// Colors extracted from the provided image
+const darkNavy = "#0A121E"; // Deep dark background
+const emeraldGreen = "#0D4D3E"; // Button/Action color
+const lightTeal = "#166352"; // Hover/Accent color
+const whiteText = "#FFFFFF";
+const mutedText = "#B0BEC5";
 
 const theme = createTheme({
+  palette: {
+    mode: 'dark', // Switches default MUI behavior to dark mode
+    primary: {
+      main: emeraldGreen,
+    },
+  },
   typography: {
     fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
     h2: { fontWeight: 900 },
+    h3: { fontWeight: 800 },
     h4: { fontWeight: 800 },
     h5: { fontWeight: 700 },
     body1: { fontWeight: 400 },
@@ -41,11 +49,10 @@ const theme = createTheme({
   },
 });
 
-
 const floatUp = keyframes`
   0% { transform: translateY(0) scale(1); opacity: 0; }
-  20% { opacity: 0.5; }
-  80% { opacity: 0.5; }
+  20% { opacity: 0.3; }
+  80% { opacity: 0.3; }
   100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
 `;
 
@@ -80,8 +87,8 @@ const BubblesBackground = () => {
               width: size,
               height: size,
               borderRadius: "50%",
-              background: `radial-gradient(circle at 30% 30%, rgba(214, 137, 16, 0.4), rgba(255, 255, 255, 0.1))`,
-              boxShadow: `0 0 10px rgba(214, 137, 16, 0.2)`,
+              background: `radial-gradient(circle at 30% 30%, rgba(22, 99, 82, 0.4), rgba(255, 255, 255, 0.05))`,
+              boxShadow: `0 0 10px rgba(13, 77, 62, 0.2)`,
               animation: `${floatUp} ${duration}s linear infinite`,
               animationDelay: `${delay}s`,
             }}
@@ -122,7 +129,7 @@ export default function VolunteerForm() {
       <Box
         sx={{
           py: { xs: 6, md: 10 },
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
+          background: darkNavy, // Matches the image background
           minHeight: "100vh",
           position: "relative",
           overflow: "hidden",
@@ -132,33 +139,33 @@ export default function VolunteerForm() {
 
         <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
           <Paper
-            elevation={8}
+            elevation={0}
             sx={{
               p: { xs: 3, md: 5 },
               borderRadius: 6,
-              boxShadow: "0 20px 45px rgba(0,0,0,0.12)",
-              bgcolor: "rgba(255, 255, 255, 0.85)",
-              backdropFilter: "blur(4px)", 
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              bgcolor: "rgba(15, 28, 46, 0.8)", // Semi-transparent dark blue
+              backdropFilter: "blur(10px)",
             }}
           >
             <Typography
               variant={isMobile ? "h4" : "h3"}
               textAlign="center"
-              sx={{ fontWeight: 900, color: navyText, mb: 1 }}
+              sx={{ fontWeight: 900, color: whiteText, mb: 1, textTransform: 'uppercase' }}
             >
-              Volunteer <span style={{ color: gold }}>With Us</span>
+              Volunteer <span style={{ color: lightTeal }}>With Us</span>
             </Typography>
 
             <Typography
               textAlign="center"
-              sx={{ color: olive, fontWeight: 600, mb: 4 }}
+              sx={{ color: mutedText, fontWeight: 500, mb: 4, letterSpacing: 1 }}
             >
-              Be the reason someone smiles today
+              BE THE REASON SOMEONE SMILES TODAY
             </Typography>
 
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     label="Full Name"
@@ -166,11 +173,11 @@ export default function VolunteerForm() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     label="Email Address"
@@ -179,11 +186,11 @@ export default function VolunteerForm() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     label="Phone Number"
@@ -191,11 +198,11 @@ export default function VolunteerForm() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     label="Age"
@@ -203,11 +210,11 @@ export default function VolunteerForm() {
                     type="number"
                     value={formData.age}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     select
                     fullWidth
@@ -215,7 +222,7 @@ export default function VolunteerForm() {
                     name="role"
                     value={formData.role}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   >
                     <MenuItem value="Medical Support">Medical Support</MenuItem>
                     <MenuItem value="Education">Education</MenuItem>
@@ -224,58 +231,54 @@ export default function VolunteerForm() {
                   </TextField>
                 </Grid>
 
-                <Grid item size={{ xs: 12, md: 6 }}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     label="Availability (Days / Time)"
                     name="availability"
                     value={formData.availability}
                     onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3, bgcolor: "rgba(255,255,255,0.05)" } }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12 }}>
+                <Grid item xs={12}>
                   <TextField
                     label="Message"
                     name="message"
                     multiline
-                    rows={isMobile ? 4 : 6}
+                    fullWidth
+                    rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    sx={{
-                      width: "calc(500px)",
-                      maxWidth: "100%", 
-                    }}
-                    InputProps={{
-                      sx: {
-                        borderRadius: 3,
-                        bgcolor: "#FFFDF7",
-                      },
+                    sx={{ 
+                        "& .MuiOutlinedInput-root": { 
+                            borderRadius: 3, 
+                            bgcolor: "rgba(255,255,255,0.05)" 
+                        } 
                     }}
                   />
                 </Grid>
 
-                <Grid item size={{ xs: 12 }}>
-                  <Box mt={4}>
+                <Grid item xs={12}>
+                  <Box mt={2}>
                     <Button
                       type="submit"
                       fullWidth
                       size="large"
                       sx={{
-                        mt: -5,
-                        ml: { xs: 0, md: 0 },
-                        px: 0,
-                        py: 1.8,
-                        fontWeight: 800,
-                        borderRadius: 4,
+                        py: 2,
+                        fontWeight: 700,
+                        borderRadius: 3,
                         fontSize: "1rem",
-                        background: `linear-gradient(135deg, ${olive}, ${gold})`,
+                        background: `linear-gradient(90deg, ${emeraldGreen}, ${lightTeal})`,
                         color: "#fff",
+                        textTransform: 'uppercase',
                         transition: "0.3s",
                         "&:hover": {
+                          background: lightTeal,
                           transform: "translateY(-2px)",
-                          boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+                          boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
                         },
                       }}
                     >
@@ -289,7 +292,9 @@ export default function VolunteerForm() {
         </Container>
       </Box>
 
-      <Footer />
+    <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}>
+                <Footer />
+              </Box>
     </ThemeProvider>
   );
 }

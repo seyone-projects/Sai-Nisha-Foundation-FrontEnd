@@ -8,9 +8,12 @@ import {
   CssBaseline,
   Avatar,
   Divider,
+  IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Navigation hook
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Back icon
 import Footer from "../page/Footer";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import HandshakeIcon from "@mui/icons-material/Handshake";
@@ -34,36 +37,36 @@ const theme = createTheme({
 });
 
 const PeerToPeer = () => {
- 
-const fundraisingIdeas = [
-  {
-    title: "Elderly Home Nursing Care",
-    img: idea1, 
-    desc: "We provide compassionate home nursing services for senior citizens, ensuring they receive personalized medical attention, regular health monitoring, and emotional support in the comfort of their homes. Our trained caregivers focus on dignity, safety, and quality of life for every elder we serve."
-  },
-  {
-    title: "Post-Hospitalization & Rehabilitation Support",
-    img: idea2,
-    desc: "Our rehabilitation programs assist seniors recovering from surgery, illness, or mobility challenges. From physiotherapy support to mobility assistance, we help individuals regain strength, independence, and confidence through guided care and professional supervision."
-  },
-  {
-    title: "Daily Living & Personal Care Assistance",
-    img: idea3,
-    desc: "We support elderly individuals with daily activities such as bathing, grooming, medication reminders, and meal assistance. Our caregivers ensure comfort, hygiene, and companionship while promoting independence in everyday life."
-  },
-  {
-    title: "Emotional Support & Companionship",
-    img: idea4,
-    desc: "Loneliness can impact mental health. Our caregivers provide meaningful companionship, conversation, and emotional reassurance to seniors, fostering a sense of belonging and happiness while supporting their overall well-being."
-  }
-];
+  const navigate = useNavigate(); // Initialize navigation
 
+  const fundraisingIdeas = [
+    {
+      title: "Elderly Home Nursing Care",
+      img: idea1, 
+      desc: "We provide compassionate home nursing services for senior citizens, ensuring they receive personalized medical attention, regular health monitoring, and emotional support in the comfort of their homes. Our trained caregivers focus on dignity, safety, and quality of life for every elder we serve."
+    },
+    {
+      title: "Post-Hospitalization & Rehabilitation Support",
+      img: idea2,
+      desc: "Our rehabilitation programs assist seniors recovering from surgery, illness, or mobility challenges. From physiotherapy support to mobility assistance, we help individuals regain strength, independence, and confidence through guided care and professional supervision."
+    },
+    {
+      title: "Daily Living & Personal Care Assistance",
+      img: idea3,
+      desc: "We support elderly individuals with daily activities such as bathing, grooming, medication reminders, and meal assistance. Our caregivers ensure comfort, hygiene, and companionship while promoting independence in everyday life."
+    },
+    {
+      title: "Emotional Support & Companionship",
+      img: idea4,
+      desc: "Loneliness can impact mental health. Our caregivers provide meaningful companionship, conversation, and emotional reassurance to seniors, fostering a sense of belonging and happiness while supporting their overall well-being."
+    }
+  ];
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-          {/* WHATSAPP */}
+      {/* WHATSAPP */}
       <Button
         component="a"
         href="https://wa.me/919962290875"
@@ -87,6 +90,7 @@ const fundraisingIdeas = [
       <Box
         sx={{
           height: { xs: "90vh", md: "100vh" },
+          position: "relative", // Required for absolute positioning of the back button
           backgroundImage: `
             linear-gradient(rgba(5,15,35,0.85), rgba(5,15,35,0.9)),
             url(${heroBg})
@@ -99,6 +103,26 @@ const fundraisingIdeas = [
           textAlign: "center",
         }}
       >
+        {/* BACK BUTTON - TOP RIGHT */}
+        <IconButton
+          onClick={() => navigate(-1)}
+          sx={{
+            position: "absolute",
+            top: { xs: 20, md: 40 },
+            right: { xs: 20, md: 40 },
+            bgcolor: "rgba(255, 255, 255, 0.1)", // Slight background for visibility
+            color: "#FFC107",
+            zIndex: 10,
+            transition: "all 0.3s ease",
+            "&:hover": { 
+              bgcolor: "rgba(255, 255, 255, 0.2)",
+              transform: "scale(1.1)"
+            },
+          }}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
+
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 40 }}

@@ -8,9 +8,12 @@ import {
   CardMedia,
   CardContent,
   CssBaseline,
+  IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"; // Import Back Icon
 import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
@@ -53,11 +56,12 @@ const mediaList = [
 ];
 
 export default function Manage() {
+  const navigate = useNavigate(); // Initialize navigation
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      
       {/* WhatsApp FAB */}
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
         <Button
@@ -99,14 +103,47 @@ export default function Manage() {
             backgroundAttachment: "fixed",
           }}
         >
+        <Box 
+  sx={{ 
+    position: "absolute", 
+    top: 80, 
+    right: { xs: 20, md: 40 },
+    zIndex: 10 
+  }}
+>
+  <Button
+    onClick={() => navigate(-1)}
+    startIcon={<ArrowBackIosNewIcon />}
+    sx={{
+      color: "#fff",
+      textTransform: "none",
+      fontWeight: 600,
+      fontSize: "1.1rem",
+      bgcolor: "rgba(255, 255, 255, 0.1)",
+      px: 3,
+      py: 1,
+      borderRadius: "30px",
+      backdropFilter: "blur(10px)",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      "&:hover": {
+        bgcolor: "#f5b400",
+        color: "#0b1d3a",
+        borderColor: "#f5b400",
+      },
+    }}
+  >
+    Back
+  </Button>
+</Box>
           {/* HERO TITLE SECTION */}
-          <Box sx={{ textAlign: "center", pt: 10, pb: 6 }}>
+          <Box sx={{ textAlign: "center", pt: 12, pb: 6 }}>
             <Typography
               variant="h2"
               fontWeight={900}
               sx={{
                 color: "#ffffff",
                 letterSpacing: 3,
+                fontSize: { xs: "2.5rem", md: "3.75rem" },
               }}
             >
               MANAGE{" "}
