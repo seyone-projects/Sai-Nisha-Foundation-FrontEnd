@@ -13,7 +13,6 @@ import {
   keyframes,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// Ensure Footer path is correct for your project
 import Footer from "../page/Footer"; 
 
 import "@fontsource/poppins/300.css";
@@ -24,16 +23,16 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-// Colors extracted from the provided image
-const darkNavy = "#0A121E"; // Deep dark background
-const emeraldGreen = "#0D4D3E"; // Button/Action color
-const lightTeal = "#166352"; // Hover/Accent color
+
+const darkNavy = "#0A121E";
+const emeraldGreen = "#0D4D3E"; 
+const lightTeal = "#166352";
 const whiteText = "#FFFFFF";
 const mutedText = "#B0BEC5";
 
 const theme = createTheme({
   palette: {
-    mode: 'dark', // Switches default MUI behavior to dark mode
+    mode: 'dark',
     primary: {
       main: emeraldGreen,
     },
@@ -129,7 +128,7 @@ export default function VolunteerForm() {
       <Box
         sx={{
           py: { xs: 6, md: 10 },
-          background: darkNavy, // Matches the image background
+          background: darkNavy, 
           minHeight: "100vh",
           position: "relative",
           overflow: "hidden",
@@ -144,7 +143,7 @@ export default function VolunteerForm() {
               p: { xs: 3, md: 5 },
               borderRadius: 6,
               border: "1px solid rgba(255, 255, 255, 0.1)",
-              bgcolor: "rgba(15, 28, 46, 0.8)", // Semi-transparent dark blue
+              bgcolor: "rgba(15, 28, 46, 0.8)", 
               backdropFilter: "blur(10px)",
             }}
           >
