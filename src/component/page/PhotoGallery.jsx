@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "./Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -21,20 +20,22 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
-
-/* IMAGES */
 import heroImage from "../page/image/volunteers 2.png";
-import ngoImage2 from "../page/image/DSC05759.jpg";
-import ngoImage3 from "../page/image/DSC05657.jpg";
-import ngoImage5 from "../page/image/DSC05856.jpg";
-import ngoImage6 from "../page/image/DSC06023.jpg";
-import ngoImage7 from "../page/image/DSC06227.jpg";
-import ngoImage8 from "../page/image/DSC06390.jpg";
-import ngoImage9 from "../page/image/DSC06321.jpg";
-import ngoImage10 from "../page/image/DSC05766.jpg";
-import ngoImage11 from "../page/image/DSC05797.jpg";
+import ngoImage1 from "../page/image/award 2.jpg";
+import ngoImage2 from "../page/image/award 1.jpg";
+import ngoImage3 from "../page/image/award 3.jpg";
+import ngoImage4 from "../page/image/DSC05916.jpg";
+import ngoImage5 from "../page/image/DSC06299.jpg";
+import ngoImage6 from "../page/image/DSC06390.jpg";
+import ngoImage7 from "../page/image/DSC06321.jpg";
+import ngoImage8 from "../page/image/DSC06093.jpg";
+import ngoImage9 from "../page/image/DSC05856.jpg";
+import ngoImage10 from "../page/image/DSC05886.jpg";
+import ngoImage11 from "../page/image/DSC06458.jpg";
+import ngoImage12 from "../page/image/DSC06154.jpg";
+import ngoImage13 from "../page/image/DSC06329.jpg";
+import ngoImage14 from "../page/image/DSC06118.jpg";
 
-/* CONSTANTS */
 const darkBg = "#121212";
 const gold = "#FFC107";
 const whiteText = "#FFFFFF";
@@ -54,115 +55,112 @@ const theme = createTheme({
     h2: { fontWeight: 800 },
   },
 });
-
-/* ANIMATIONS */
-const letterAnim = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const imageReveal = {
-  hidden: { clipPath: "inset(100% 0 0 0)", opacity: 0 },
+const containerVariants = {
+  hidden: { opacity: 0 },
   visible: {
-    clipPath: "inset(0% 0 0 0)",
     opacity: 1,
-    transition: { duration: 1.2, ease: "circOut" },
+    transition: {
+      staggerChildren: 0.2,
+    },
   },
 };
+const OppositeSection = ({ title, img1, img2, isMobile, index }) => {
+  const isFromRight = Math.floor(index / 2) % 2 === 0;
+  const startX = isFromRight ? 120 : -120;
 
-/* HERO IMAGES */
-const heroImages = [heroImage, ngoImage5, ngoImage6, ngoImage7, ngoImage8];
+  const itemVariants = {
+    hidden: { opacity: 0, x: startX, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    },
+  };
 
-/* REUSABLE SECTION COMPONENT */
-const OppositeSection = ({ title, img1, img2, isMobile }) => (
-  <Box sx={{ bgcolor: "#000", py: isMobile ? 8 : 12 }}>
-    <Container>
-      <Grid container spacing={6} alignItems="center">
-        
-        {/* LEFT CONTENT */}
-        <Grid item xs={12} md={6}>
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography
-              variant={isMobile ? "h5" : "h4"}
-              sx={{ color: gold, mb: 2, fontWeight: 800 }}
-            >
-              {title}
-            </Typography>
-            <Divider
-              sx={{ borderColor: gold, width: "80px", borderWidth: 2 }}
-            />
-          </motion.div>
-        </Grid>
-
-        {/* RIGHT IMAGES */}
-        <Grid item xs={12} md={6}>
-          <Grid container spacing={3}>
-            {[img1, img2].map((img, index) => (
-              <Grid item xs={12} sm={6} key={index}>
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  variants={imageReveal}
+  return (
+    <Box sx={{ bgcolor: "#000", py: isMobile ? 8 : 12, overflow: "hidden" }}>
+      <Container>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          <Grid container spacing={6} alignItems="center">
+            
+            {/* TEXT CONTENT */}
+            <Grid item xs={12} md={6}>
+              <motion.div variants={itemVariants}>
+                <Typography
+                  variant={isMobile ? "h5" : "h4"}
+                  sx={{ color: gold, mb: 2, fontWeight: 800 }}
                 >
-                  <Box
-                    component="img"
-                    src={img}
-                    sx={{
-                      width: "100%",
-                      height: isMobile ? 250 : 320,
-                      objectFit: "cover",
-                      borderRadius: 2,
-                      filter: "brightness(0.8) contrast(1.2)",
-                    }}
-                  />
-                </motion.div>
+                  {title}
+                </Typography>
+                <Divider
+                  sx={{ borderColor: gold, width: "80px", borderWidth: 2 }}
+                />
+              </motion.div>
+            </Grid>
+
+            {/* IMAGES GRID */}
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={3}>
+                {[img1, img2].map((img, imgIdx) => (
+                  <Grid item xs={12} sm={6} key={imgIdx}>
+                    <motion.div 
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.03 }} 
+                        style={{ willChange: "transform" }}
+                    >
+                      <Box
+                        component="img"
+                        src={img}
+                        alt={title}
+                        sx={{
+                          width: "100%",
+                          height: isMobile ? 250 : 320,
+                          objectFit: "cover",
+                          borderRadius: 3, 
+                          filter: "brightness(0.9)",
+                          boxShadow: "0px 15px 40px rgba(0,0,0,0.6)",
+                          display: "block"
+                        }}
+                      />
+                    </motion.div>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </Container>
-  </Box>
-);
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
 
 export default function PhotoGallery() {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [heroIndex, setHeroIndex] = useState(0);
+
+  const heroImages = [heroImage, ngoImage5, ngoImage6, ngoImage7, ngoImage8];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroImages.length]);
 
   const sections = [
-    { title: "Events listed", img1: ngoImage3, img2: ngoImage2 },
-    { title: "Moments That Matter Most", img1: ngoImage5, img2: ngoImage6 },
-    { title: "Standing Strong Together", img1: ngoImage7, img2: ngoImage8 },
-    { title: "Hope in Difficult Times", img1: ngoImage9, img2: ngoImage10 },
-    { title: "Hope in Difficult Times", img1: ngoImage11, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Moments That Matter Most", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Standing Strong Together", img1: ngoImage3, img2: ngoImage2 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Moments That Matter Most", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Standing Strong Together", img1: ngoImage3, img2: ngoImage2 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
-    { title: "Hope in Difficult Times", img1: ngoImage2, img2: ngoImage3 },
+    { title: "Events listed", img1: ngoImage1, img2: ngoImage2 },
+    { title: "Moments That Matter Most", img1: ngoImage3, img2: ngoImage4 },
+    { title: "Standing Strong Together", img1: ngoImage5, img2: ngoImage6 },
+    { title: "Hope in Difficult Times", img1: ngoImage7, img2: ngoImage8 },
+    { title: "Empowering Communities", img1: ngoImage9, img2: ngoImage10 },
+    { title: "A Brighter Future", img1: ngoImage11, img2: ngoImage12 },
+    { title: "Helping Hands", img1: ngoImage13, img2: ngoImage14 },
   ];
 
   return (
@@ -182,6 +180,7 @@ export default function PhotoGallery() {
             borderRadius: "50%",
             backgroundColor: "#25D366",
             color: "#fff",
+            boxShadow: "0px 4px 15px rgba(37, 211, 102, 0.4)",
             "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" },
           }}
         >
@@ -189,7 +188,7 @@ export default function PhotoGallery() {
         </Button>
       </Box>
 
-      <Box sx={{ backgroundColor: darkBg, color: whiteText }}>
+      <Box sx={{ backgroundColor: darkBg, color: whiteText, overflowX: "hidden" }}>
         
         {/* HERO SECTION */}
         <Box
@@ -198,35 +197,57 @@ export default function PhotoGallery() {
             position: "relative",
             overflow: "hidden",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            textAlign: "center"
           }}
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={heroIndex}
-              initial={{ scale: 1.2, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.35 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 2.5 }}
+              transition={{ duration: 1.5 }}
               style={{
                 position: "absolute",
                 inset: 0,
                 backgroundImage: `url(${heroImages[heroIndex]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                zIndex: 0
               }}
             />
           </AnimatePresence>
-    <Typography variant="h2" sx={{ fontWeight: 900, mb: 4 }}>
-             SAI NISHA FOUNDATION
-    </Typography>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.5 }}
+            style={{ zIndex: 1, padding: "0 20px" }}
+          >
+            <Typography 
+              variant={isMobile ? "h3" : "h2"} 
+              sx={{ 
+                fontWeight: 900, 
+                letterSpacing: "4px",
+                textShadow: "0px 4px 20px rgba(0,0,0,0.9)" 
+              }}
+            >
+              SAI NISHA FOUNDATION
+            </Typography>
+            <Typography variant="h6" sx={{ color: gold, mt: 2, fontWeight: 300, letterSpacing: 2 }}>
+                BUILDING HOPE, CHANGING LIVES
+            </Typography>
+          </motion.div>
         </Box>
 
         {/* DYNAMIC SECTIONS */}
         {sections.map((section, index) => (
           <OppositeSection
             key={index}
+            index={index}
             title={section.title}
             img1={section.img1}
             img2={section.img2}
@@ -234,9 +255,10 @@ export default function PhotoGallery() {
           />
         ))}
 
-        <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}>
-               <Footer />
-             </Box>
+        {/* FOOTER WRAPPER */}
+        <Box sx={{ bgcolor: "#050B18", borderTop: `1px solid ${gold}33` }}>
+          <Footer />
+        </Box>
       </Box>
     </ThemeProvider>
   );
