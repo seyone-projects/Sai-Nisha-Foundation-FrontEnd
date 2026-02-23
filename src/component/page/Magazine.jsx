@@ -146,7 +146,7 @@ function BubblesBackground() {
   );
 }
 
-export default function Services() {
+export default function Magazine() {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   return (

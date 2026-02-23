@@ -15,11 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-
 import campaignBg from "../page/image/ngo 2.jpg";
 import campaignImg2 from "../page/image/ngo 1.jpg";
 import campaignImg3 from "../page/image/ngo 3.avif";
-
 import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
@@ -34,7 +32,6 @@ const theme = createTheme({
   },
 });
 
-// Animation Variants matching the video style
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -52,7 +49,6 @@ export default function Campaign() {
   const navigate = useNavigate();
   const isDesktop = useMediaQuery("(min-width:900px)");
   
-  // Scroll hooks for Parallax Effect seen in the video header
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
@@ -88,7 +84,7 @@ export default function Campaign() {
         <WhatsAppIcon />
       </Button>
 
-      {/* ================= HERO SECTION (With Parallax & Fade) ================= */}
+
       <Box
         sx={{
           width: "100%",
@@ -307,8 +303,6 @@ export default function Campaign() {
           </Grid>
         </Container>
       </Box>
-
-      {/* ================= FOOTER ================= */}
       <Box sx={{ bgcolor: "#020617", borderTop: '1px solid rgba(255,255,255,0.05)', "& *": { color: "#fff !important" } }}>
         <Footer />
       </Box>

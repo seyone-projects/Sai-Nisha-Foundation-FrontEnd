@@ -19,7 +19,6 @@ import {
 
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./component/page/image/ngo.jpeg";
-
 import Home from "./component/page/Home";
 import AboutUs from "./component/page/AboutUs";
 import Events from "./component/page/Events";
@@ -34,8 +33,8 @@ import Manage from "./component/page/Manage";
 import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
 import PhotoGallery from "./component/page/PhotoGallery";
-import News from "./component/page/Newsandpublication";
 import Newsandpublication from "./component/page/Newsandpublication";
+import Magazine from "./component/page/magazine";
 
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
@@ -191,6 +190,7 @@ export default function App() {
           <Route path="/peertopeer" element={<PeerToPeer />} />
           <Route path="/photo-gallery" element={<PhotoGallery />} />
           <Route path="/news" element={<Newsandpublication />} />
+          <Route path="/magazine" element={<Magazine />} />
         </Routes>
       </Container>
     </Router>

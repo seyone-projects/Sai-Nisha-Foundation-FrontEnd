@@ -323,7 +323,7 @@ export default function Home() {
           </Container>
         </Box>
 
-        {/* FOOTER WRAPPER TO ENSURE WHITE COLOR */}
+
         <Box sx={{ color: "#FFFFFF" }}>
           <Footer />
         </Box>

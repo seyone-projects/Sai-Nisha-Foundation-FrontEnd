@@ -16,8 +16,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight"; // Added for the arrow icon in buttons
-
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -176,7 +175,7 @@ export default function Payment() {
               sx={{
                 fontWeight: 900,
                 mb: 4,
-                color: pureWhite, // Changed to White
+                color: pureWhite,
                 textTransform: "uppercase",
                 animation: `${fadeIn} 1s ease-out`,
                 letterSpacing: 1
@@ -190,7 +189,7 @@ export default function Payment() {
                 p: { xs: 3, md: 5 },
                 borderRadius: 6, 
                 border: "1px solid rgba(255, 255, 255, 0.1)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)", // Glassmorphism style for Dark UI
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(20px)",
                 boxShadow: "0 15px 35px rgba(0,0,0,0.5)",
                 transition: "0.4s",
@@ -245,7 +244,7 @@ export default function Payment() {
                     sx={{
                       fontWeight: 700,
                       "&.Mui-selected": {
-                        backgroundColor: `${forestGreen} !important`, // Changed to Image Green
+                        backgroundColor: `${forestGreen} !important`,
                         color: "#fff",
                         boxShadow: `0 4px 12px ${forestGreen}66`,
                       },
@@ -301,7 +300,7 @@ export default function Payment() {
                   fontSize: 16,
                   fontWeight: 800,
                   borderRadius: 3,
-                  backgroundColor: forestGreen, // Match Button in Image
+                  backgroundColor: forestGreen,
                   color: "#fff",
                   boxShadow: `0 10px 20px rgba(0,0,0,0.3)`,
                   "&:hover": {

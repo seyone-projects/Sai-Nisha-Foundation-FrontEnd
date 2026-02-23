@@ -16,9 +16,11 @@ import {
   useMediaQuery,
   Snackbar,
   Alert,
+  IconButton, 
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import EmailIcon from "@mui/icons-material/Email";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import emailjs from "@emailjs/browser";
 import Footer from "./Footer";
 
@@ -119,6 +121,26 @@ export default function ContactUs() {
 <ThemeProvider theme={theme}>
       <CssBaseline />
 
+       {/* WhatsApp FAB */}
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
+        <Button
+          component="a"
+          href="https://wa.me/919962290875"
+          target="_blank"
+          sx={{
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" },
+          }}
+        >
+          <WhatsAppIcon />
+        </Button>
+      </Box>
+
       <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh" }}>
         <Card
           sx={{
@@ -142,8 +164,6 @@ export default function ContactUs() {
           {/* FORM AREA */}
           <Box sx={{ px: isMobile ? 3 : 10, py: 6 }}>
             <Grid container spacing={4} direction="column" alignItems="center">
-              
-              {/* All Grid items now have xs={12} and a set width to ensure they are wide but centered */}
               <Grid item xs={12} sx={{ width: "100%" }}>
                 <FormControl fullWidth>
                   <InputLabel sx={{ color: lightGrey }}>Type *</InputLabel>

@@ -76,17 +76,17 @@ export default function Footer() {
               }}
             >
               <Stack
-  spacing={1}
-  alignItems={{ xs: "center", md: "flex-end" }}
-  sx={{ fontSize: "14px" }}
-  mt={5}
->
-  <Link component={RouterLink} to="/about">About Us</Link>
-  <Link component={RouterLink} to="/contactus">Contact Us</Link>
-  <Link component={RouterLink} to="/volunteer">Volunteer</Link>
-  <Link component={RouterLink} to="/payment">Donate</Link>
-  <Link component={RouterLink} to="/careers">Careers</Link>
-</Stack>
+                spacing={1}
+                alignItems={{ xs: "center", md: "flex-end" }}
+                sx={{ fontSize: "14px" }}
+                mt={5}
+              >
+                <Link component={RouterLink} to="/about">About Us</Link>
+                <Link component={RouterLink} to="/contactus">Contact Us</Link>
+                <Link component={RouterLink} to="/volunteer">Volunteer</Link>
+                <Link component={RouterLink} to="/payment">Donate</Link>
+                <Link component={RouterLink} to="/careers">Careers</Link>
+              </Stack>
             </Grid>
           </Grid>
         </Box>
@@ -99,7 +99,15 @@ export default function Footer() {
             spacing={2}
             sx={{ mb: 2 }}
           >
-            <Link href="#"><WhatsAppIcon fontSize="small" /></Link>
+            {/* WHATSAPP REDIRECT ADDED BELOW */}
+            <Link 
+              href="https://wa.me/919962290875" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon fontSize="small" />
+            </Link>
+            
             <Link href="#"><InstagramIcon fontSize="small" /></Link>
             <Link href="#"><LinkedInIcon fontSize="small" /></Link>
             <Link href="#"><YouTubeIcon fontSize="small" /></Link>

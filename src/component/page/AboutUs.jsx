@@ -14,11 +14,9 @@ import { motion } from "framer-motion";
 import Footer from "../page/Footer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-
 import aboutImg1 from "../page/image/ladies.png";
 import aboutImg2 from "../page/image/newborn-baby.jpg";
 
@@ -47,7 +45,7 @@ const theme = createTheme({
 const thunderEffect = {
   animate: {
     opacity: [1, 0.8, 1, 0.9, 1, 0.4, 1],
-    scale: [1, 1.02, 1, 1.05, 1],
+    scale: [1, 1.02, 1, 1.00, 1],
     transition: {
       duration: 0.2,
       repeat: Infinity,
@@ -113,7 +111,7 @@ const spotlightMove = keyframes`
 
 const barData = [
   { label: "Pregnancy Emergency", value: 90 },
-  { label: "Newborn Emergency care", value: 95 },
+  { label: "Newborn Emergency care", value: 90 },
 ];
 
 function BubblesBackground() {
