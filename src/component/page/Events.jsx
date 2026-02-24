@@ -16,10 +16,10 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-// This connects your separate data file to this UI
+
 import { ALL_EVENTS, HERO_SLIDES } from "../page/data/EventRegistry";
 
-// Google Fonts
+
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -32,7 +32,7 @@ const eventMagenta = "#b7e900";
 const cinematicNavy = "#0B121E";
 const cinematicGold = "#F2A900";
 
-// --- ANIMATION CONFIGURATION ---
+
 const fadeDown = {
   hidden: { opacity: 0, y: -30 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
@@ -53,7 +53,6 @@ const cardItemVariants = {
   },
 };
 
-// --- BACKGROUND COMPONENTS ---
 function GlobalShaderBackground() {
   return (
     <Box sx={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -1, overflow: "hidden", background: cinematicNavy }}>
@@ -109,8 +108,6 @@ export default function Events() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const cardsPerPage = 6;
-  
-  // Calculate total pages based on registry length
   const totalPages = Math.ceil(ALL_EVENTS.length / cardsPerPage);
 
   const handleNext = useCallback(() => {
@@ -121,14 +118,13 @@ export default function Events() {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  // Auto-slide effect
   useEffect(() => {
     if (isPaused || totalPages <= 1) return;
     const timer = setInterval(() => handleNext(), 5000);
     return () => clearInterval(timer);
   }, [handleNext, isPaused, totalPages]);
 
-  // Slice data for the current page
+
   const currentCards = ALL_EVENTS.slice(
     currentPage * cardsPerPage,
     (currentPage + 1) * cardsPerPage

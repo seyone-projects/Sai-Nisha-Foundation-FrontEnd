@@ -12,8 +12,10 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "./Footer";
+import { useNavigate } from "react-router-dom"; 
+import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import serviceImg1 from "./image/ngo 3.avif";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -21,7 +23,6 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
-import serviceImg1 from "./image/ngo 3.avif";
 
 const gold = "#D68910";
 const lightMuted = "#CBD5E1"; 
@@ -62,20 +63,6 @@ function FullPageVideoBackground() {
         overflow: "hidden",
       }}
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          filter: "brightness(0.35) contrast(1.15)",
-        }}
-      >
-        <source src="/animation eeee.mp4" type="video/mp4" />
-      </video>
       <Box
         sx={{
           position: "absolute",
@@ -120,6 +107,7 @@ function BubblesBackground() {
 
 export default function Newsandpublication() {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -238,9 +226,11 @@ export default function Newsandpublication() {
                   Dive into our latest publication covering our impact, stories of hope, and upcoming community initiatives.
                 </Typography>
                 
+                {/* 3. Added onClick handler to the Button */}
                 <Button 
                   variant="contained" 
                   fullWidth
+                  onClick={() => navigate("/magazine")}
                   sx={{ 
                     bgcolor: gold, 
                     color: '#000', 
@@ -250,7 +240,7 @@ export default function Newsandpublication() {
                     '&:hover': { bgcolor: '#b3720d' }
                   }}
                 >
-                  View  Magazine
+                  View Magazine
                 </Button>
               </CardContent>
             </Card>

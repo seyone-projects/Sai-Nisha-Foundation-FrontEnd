@@ -14,32 +14,12 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
-/* IMPORT BACKGROUND IMAGE */
-// import footerBg from "../page/image/footer.png";
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box
-      // sx={{
-      //   width: "100%",
-      //   backgroundImage: `url(${footerBg})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      //   backgroundRepeat: "no-repeat",
-      //   position: "relative",
-      //   mt: 2,
-      // }}
-    >
-      {/* OVERLAY */}
-      <Box
-        // sx={{
-        //   backgroundColor: "rgba(255,255,255,0.92)",
-        //   py: 5,
-        //   px: 2,
-        // }}
-      >
+    <Box>
+      <Box>
         {/* TOP SECTION */}
         <Box sx={{ maxWidth: 1100, mx: "auto", mb: 8 }}>
           <Grid container spacing={4}>
@@ -99,7 +79,6 @@ export default function Footer() {
             spacing={2}
             sx={{ mb: 2 }}
           >
-            {/* WHATSAPP REDIRECT ADDED BELOW */}
             <Link 
               href="https://wa.me/919962290875" 
               target="_blank" 

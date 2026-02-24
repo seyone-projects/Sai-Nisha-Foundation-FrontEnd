@@ -24,20 +24,10 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-import serviceImg1 from "./image/pre.jpg";
-import serviceImg2 from "./image/gettyimages-1637251600-612x612.jpg";
-import serviceImg3 from "./image/mental 2.avif";
-import serviceImg4 from "./image/baby.png";
-import serviceImg5 from "./image/edu 1.avif";
-import serviceImg6 from "./image/sports 1.avif";
+import serviceImg3 from "./image/notify.jpeg";
 
 const serviceImages = [
-  serviceImg1,
-  serviceImg2,
   serviceImg3,
-  serviceImg4,
-  serviceImg5,
-  serviceImg6,
 ];
 
 
@@ -46,12 +36,7 @@ const lightOlive = "#A4B454";
 const lightMuted = "#CBD5E1"; 
 
 const services = [
-  { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies." },
-  { title: "Pets", desc: "Rescue, medical care, and adoption support." },
-  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-developed." },
-  { title: "Newborn Emergency Care", desc: "NICU access and life-saving care." },
-  { title: "Education", desc: "Empowering children through learning." },
-  { title: "Sports", desc: "Encouraging fitness and confidence." },
+  { title: "OUR EVENT", desc: "Our New and Great Organized Events" },
 ];
 
 const theme = createTheme({
@@ -209,7 +194,7 @@ export default function Magazine() {
                 animation: `${fadeIn} 1s ease-out`,
               }}
             >
-              Our <span style={{ color: gold }}>Services</span>
+              Our <span style={{ color: gold }}>First Magazine </span>
             </Typography>
 
             <Typography sx={{ color: "rgba(255,255,255,0.7)", mt: 2 }}>

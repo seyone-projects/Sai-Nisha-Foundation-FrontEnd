@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   AppBar,
@@ -28,13 +28,13 @@ import ContactUs from "./component/page/ContactUs";
 import Payment from "./component/page/payment";
 import VolunteerForm from "./component/page/VolunteerForm";
 import Campaigns from "./component/page/Campaigns";
-import Media from "./component/page/Media";
 import Manage from "./component/page/Manage";
 import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
 import PhotoGallery from "./component/page/PhotoGallery";
 import Newsandpublication from "./component/page/Newsandpublication";
-import Magazine from "./component/page/magazine";
+import Magazine from "./component/page/Magazine";
+import Partners from "./component/page/Partners";
 
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
@@ -43,8 +43,6 @@ const goldBtn = "#D68910";
 export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isMobile = useMediaQuery("(max-width:900px)");
-
-  // 🔥 Submenu State
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMediaHover = (event) => {
@@ -67,55 +65,55 @@ export default function App() {
   return (
     <Router>
       {/* NAVBAR */}
-      <AppBar position="sticky" sx={{ bgcolor: creamBg, color: navyText }}>
+      <AppBar position="sticky" sx={{ bgcolor: creamBg, color: navyText, boxShadow: 1 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <img src={logo} alt="Logo" style={{ width: 120, height: 60 }} />
+          <Link to="/">
+            <img src={logo} alt="Logo" style={{ width: 120, height: 60, display: "block" }} />
+          </Link>
 
           {isMobile ? (
             <IconButton onClick={() => setOpenDrawer(true)}>
               <MenuIcon sx={{ fontSize: 32, color: navyText }} />
             </IconButton>
           ) : (
-            <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+            <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
                   component={Link}
                   to={item.path}
-                  sx={{ color: navyText, fontWeight: 600 }}
+                  sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}
                 >
                   {item.label}
                 </Button>
               ))}
 
+              {/* MEDIA PARTNERS DROPDOWN */}
               <Box
                 onMouseEnter={handleMediaHover}
                 onMouseLeave={handleCloseMenu}
               >
                 <Button
-                  sx={{ color: navyText, fontWeight: 600 }}
+                  sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}
                 >
-                  Media
+                  Media Partners
                 </Button>
 
                 <Menu
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
                   onClose={handleCloseMenu}
+                  MenuListProps={{ onMouseLeave: handleCloseMenu }}
+                  PaperProps={{ sx: { bgcolor: creamBg } }}
                 >
-                  <MenuItem
-                    component={Link}
-                    to="/photo-gallery"
-                    onClick={handleCloseMenu}
-                  >
+                  <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>
                     Photo Gallery
                   </MenuItem>
-                  <MenuItem
-                    component={Link}
-                    to="/news"
-                    onClick={handleCloseMenu}
-                  >
+                  <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>
                     News
+                  </MenuItem>
+                  <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>
+                    Partners
                   </MenuItem>
                 </Menu>
               </Box>
@@ -123,7 +121,7 @@ export default function App() {
               <Button
                 component={Link}
                 to="/payment"
-                sx={{ bgcolor: goldBtn, color: "#000" }}
+                sx={{ bgcolor: goldBtn, color: "#fff", "&:hover": { bgcolor: "#b3740d" } }}
                 variant="contained"
               >
                 Donate
@@ -152,12 +150,16 @@ export default function App() {
               </ListItemButton>
             ))}
 
-            {/* MEDIA SUBMENU IN MOBILE */}
-            <Divider />
+            <Divider sx={{ my: 1 }} />
+            <ListItemButton disabled>
+               <ListItemText primary="Media Partners" sx={{ opacity: 0.6 }} />
+            </ListItemButton>
+            
             <ListItemButton
               component={Link}
               to="/photo-gallery"
               onClick={() => setOpenDrawer(false)}
+              sx={{ pl: 4 }}
             >
               <ListItemText primary="Photo Gallery" />
             </ListItemButton>
@@ -166,8 +168,19 @@ export default function App() {
               component={Link}
               to="/news"
               onClick={() => setOpenDrawer(false)}
+              sx={{ pl: 4 }}
             >
               <ListItemText primary="News" />
+            </ListItemButton>
+
+            {/* PARTNERS ADDED HERE */}
+            <ListItemButton
+              component={Link}
+              to="/partners"
+              onClick={() => setOpenDrawer(false)}
+              sx={{ pl: 4 }}
+            >
+              <ListItemText primary="Partners" />
             </ListItemButton>
           </List>
         </Box>
@@ -191,6 +204,7 @@ export default function App() {
           <Route path="/photo-gallery" element={<PhotoGallery />} />
           <Route path="/news" element={<Newsandpublication />} />
           <Route path="/magazine" element={<Magazine />} />
+          <Route path="/partners" element={<Partners />} />
         </Routes>
       </Container>
     </Router>
