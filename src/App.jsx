@@ -113,7 +113,7 @@ export default function App() {
                     News
                   </MenuItem>
                   <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>
-                    Partners
+                    Associated Partners
                   </MenuItem>
                 </Menu>
               </Box>
@@ -173,7 +173,6 @@ export default function App() {
               <ListItemText primary="News" />
             </ListItemButton>
 
-            {/* PARTNERS ADDED HERE */}
             <ListItemButton
               component={Link}
               to="/partners"
