@@ -1,116 +1,152 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, Stack, IconButton } from '@mui/material';
+import { Box, Typography, Container, Stack, IconButton, Grid } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CloudIcon from '@mui/icons-material/Cloud';
 import LanguageIcon from '@mui/icons-material/Language';
+import LeftImage from '../page/image/notify.jpeg';
+import MainImage from '../page/image/notify.jpeg';
+import Footer from '../page/Footer';
 
 const Magazine = () => {
   return (
-    <Container maxWidth="md" sx={{ py: 4, bgcolor: '#f4f4f4', minHeight: '100vh' }}>
-      <Box
-        sx={{
-          position: 'relative',
-          bgcolor: 'white',
-          boxShadow: 3,
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          aspectRatio: '1 / 1.414',
+    <Box 
+      sx={{ 
+        bgcolor: '#0f172a', 
+        minHeight: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column',
+        backgroundImage: 'radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%)'
+      }}
+    >
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          py: { xs: 4, md: 6 }, 
+          flexGrow: 1, 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center' 
         }}
       >
-        {/* Top Section: Green Header & Text */}
         <Box
           sx={{
-            bgcolor: '#4a6741',
-            color: 'white',
-            p: 4,
-            pt: 6,
-            clipPath: 'polygon(0 0, 100% 0, 100% 70%, 0 100%)',
-            zIndex: 2,
+            position: 'relative',
+            bgcolor: '#fcfaf7', 
+            boxShadow: '0px 50px 100px rgba(0,0,0,0.5)',
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            maxWidth: '850px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            overflow: 'hidden'
           }}
         >
-          <Typography variant="h1" sx={{ fontWeight: 800, letterSpacing: 4, mb: 0 }}>
-           Our New  Magazine
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <Typography variant="caption" sx={{ letterSpacing: 2, opacity: 0.8 }}>
-              THE FOUNDATION
-            </Typography>
-            <Box sx={{ flexGrow: 1, height: '1px', bgcolor: 'rgba(255,255,255,0.3)', ml: 2 }} />
-          </Box>
-          <Typography variant="body2" sx={{ maxWidth: '70%', fontSize: '0.7rem', lineHeight: 1.6, opacity: 0.9 }}>
-           SAI NISHA FOUNDATION
-          </Typography>
-
-          <Stack direction="row" spacing={1} sx={{ mt: 3 }}>
-            {[SettingsIcon, CloudIcon, LanguageIcon].map((Icon, index) => (
-              <IconButton key={index} size="small" sx={{ border: '1px solid white', color: 'white', p: 0.5 }}>
-                <Icon fontSize="inherit" />
-              </IconButton>
-            ))}
-          </Stack>
-        </Box>
-
-        {/* Middle Section: Diagonal Image Grid */}
-        <Box sx={{ flexGrow: 1, position: 'relative', mt: -5 }}>
+          {/* Top Section */}
           <Box
             sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '20%',
-              height: '40%',
-              backgroundImage: 'url(https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&q=80)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              clipPath: 'polygon(0 15%, 100% 65%, 100% 100%, 0 100%)',
-              zIndex: 1,
-            }}
-          />
-
-          {/* Right Image (Woman) */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '5%',
-              right: 0,
-              width: '65%',
-              height: '85%',
-              backgroundImage: 'url(https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&q=80)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              clipPath: 'polygon(0 35%, 100% 0, 100% 100%, 25% 100%)',
-              border: '10px solid white',
+              bgcolor: '#1a2a3a', 
+              color: 'white',
+              p: { xs: 4, md: 7 },
+              pb: { xs: 8, md: 15 },
+              clipPath: 'polygon(0 0, 100% 0, 100% 88%, 0 100%)',
+              zIndex: 10,
             }}
           >
-            {/* White Diagonal Lines Overlay */}
+            <Typography 
+              variant="h1" 
+              sx={{ 
+                fontWeight: 900, 
+                letterSpacing: -2, 
+                fontSize: { xs: '2.5rem', md: '4rem' },
+                textTransform: 'uppercase',
+                lineHeight: 0.9,
+                mb: 2
+              }}
+            >
+              Our New <br /> 
+              <span style={{ color: '#d4af37' }}>Magazine</span>
+            </Typography>
+            
+            <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}>
+              <Typography variant="overline" sx={{ letterSpacing: 5, fontWeight: 800, color: '#d4af37' }}>
+                SAI NISHA FOUNDATION
+              </Typography>
+              <Box sx={{ flexGrow: 1, height: '2px', bgcolor: '#d4af37', opacity: 0.3 }} />
+            </Stack>
+
+            <Typography variant="body2" sx={{ letterSpacing: 2, fontWeight: 400, opacity: 0.7 }}>
+              THE PRIME FOUNDATION
+            </Typography>
+          </Box>
+
+          {/* Image Section */}
+          <Box sx={{ position: 'relative', mt: { xs: -4, md: -8 }, px: { xs: 2, md: 0 } }}>
+            {/* Background Decorative Image */}
             <Box
               sx={{
                 position: 'absolute',
-                top: 0,
+                top: '10%',
                 left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.3) 41px, rgba(255,255,255,0.3) 42px)',
+                width: '40%',
+                height: '75%',
+                backgroundImage: `url(${LeftImage})`, 
+                backgroundSize: 'cover',
+                clipPath: 'polygon(0 15%, 100% 0, 100% 85%, 0 100%)',
+                filter: 'sepia(40%) contrast(1.2)',
+                zIndex: 1,
+                display: { xs: 'none', md: 'block' },
+                border: '8px solid white'
+              }}
+            />
+
+            {/* Hero Image */}
+            <Box
+              sx={{
+                position: 'relative',
+                mt: 4,
+                ml: 'auto',
+                width: { xs: '100%', md: '85%' },
+                height: { xs: '300px', md: '450px' }, // Tightened height
+                backgroundImage: `url(${MainImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 2,
+                boxShadow: '-20px 20px 40px rgba(0,0,0,0.15)',
+                borderLeft: { md: '12px solid #fcfaf7' },
+                clipPath: { md: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)', xs: 'none' }
               }}
             />
           </Box>
-        </Box>
 
-        {/* Bottom Section: Footer Text */}
-        <Box sx={{ p: 4, textAlign: 'right', bgcolor: 'white' }}>
-          <Typography  sx={{ fontWeight: 'bold', color: '#4a6741', mb: 0 }}>
-            |||
-          </Typography>
-          <Typography variant="h2" sx={{ fontWeight: 'bold', letterSpacing: 2 }}>
-            NEW MAGAZINE
-          </Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', maxWidth: '300px', ml: 'auto' }}>
-            This is first event for the inaugration for sai nisha foundation
-          </Typography>
+          {/* Content Section */}
+          <Box sx={{ p: { xs: 4, md: 6 }, bgcolor: '#fcfaf7' }}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={10}>
+                <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+                  {[SettingsIcon, CloudIcon, LanguageIcon].map((Icon, i) => (
+                    <IconButton key={i} size="small" sx={{ color: '#1a2a3a', border: '1px solid #1a2a3a' }}>
+                      <Icon fontSize="small" />
+                    </IconButton>
+                  ))}
+                </Stack>
+                <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a2a3a', mb: 2, fontSize: {xs: '1.5rem', md: '2rem'} }}>
+                  INSPIRING GLOBAL CHANGE
+                </Typography>
+                <Typography variant="body1" sx={{ color: '#4b5563', lineHeight: 1.6, borderLeft: '4px solid #d4af37', pl: 3 }}>
+                  This inaugural edition marks the beginning of the Sai Nisha Foundation's journey. 
+                  We explore the intersection of community, growth, and sustainable impact.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
+      </Container>
+
+      {/* Footer Area */}
+      <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
+        <Footer />
       </Box>
-    </Container>
+    </Box>
   );
 };
 

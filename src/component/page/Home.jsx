@@ -14,7 +14,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "./Footer";
 import Grid from '@mui/material/Grid';
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -22,8 +21,6 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
-
-/* IMAGES */
 import heroImage from "../page/image/volunteers 2.png";
 import ngoImage5 from "../page/image/image4.png.png";
 import ngoImage6 from "../page/image/home.jpg";
@@ -43,7 +40,7 @@ const theme = createTheme({
     mode: 'dark',
     primary: { main: gold },
     text: {
-      primary: "#FFFFFF", // Force primary text to white
+      primary: "#FFFFFF",
       secondary: "rgba(255, 255, 255, 0.7)",
     }
   },
