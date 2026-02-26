@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -21,14 +21,16 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
-import heroImage from "../page/image/volunteers 2.png";
+
+import backgroundVideo from "../page/image/30. Dream Reveal AV & lanuch.mp4"; 
+
+// Keep your image imports for other sections
 import ngoImage5 from "../page/image/image4.png.png";
 import ngoImage6 from "../page/image/home.jpg";
 import ngoImage7 from "../page/image/home1.jpg";
 import ngoImage8 from "../page/image/home3.jpg";
 import ngoImage2 from "../page/image/newborn.png";
 import ngoImage3 from "../page/image/baby.png";
-
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const darkBg = "#121212";
@@ -70,19 +72,9 @@ const imageClipReveal = {
   }
 };
 
-const heroImages = [heroImage, ngoImage5, ngoImage6, ngoImage7, ngoImage8];
-
 export default function Home() {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const isTablet = useMediaQuery("(max-width:960px)");
-  const [heroIndex, setHeroIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+  const videoRef = useRef(null);
 
   const testimonials = [
     { text: "Our goal is to ensure that every mother and newborn receives timely support during critical moments." },
@@ -111,23 +103,36 @@ export default function Home() {
 
       <Box sx={{ backgroundColor: darkBg, color: whiteText, overflowX: "hidden" }}>
         
-        {/* HERO SECTION */}
-        <Box sx={{ height: "100vh", position: "relative", overflow: "hidden", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={heroIndex}
-              initial={{ scale: 1.2, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.35 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 2.5, ease: "linear" }}
-              style={{
-                position: "absolute", inset: 0,
-                backgroundImage: `url(${heroImages[heroIndex]})`,
-                backgroundSize: "cover", backgroundPosition: "center",
-                zIndex: 1
-              }}
-            />
-          </AnimatePresence>
+        {/* HERO SECTION WITH VIDEO */}
+        <Box sx={{ 
+          height: "100vh", 
+          position: "relative", 
+          overflow: "hidden", 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center' 
+        }}>
+          
+          {/* Video Background Layer */}
+          <Box
+            component="video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            ref={videoRef}
+            sx={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 1,
+              filter: "brightness(0.4)" // Darkens video to make text readable
+            }}
+          >
+            <source src={backgroundVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </Box>
 
           <Container sx={{ position: "relative", zIndex: 2, textAlign: "center", px: 3 }}>
             <motion.div variants={staggerContainer} initial="initial" animate="animate">
@@ -195,6 +200,7 @@ export default function Home() {
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={!isMobile ? { y: -15, boxShadow: `0px 10px 30px ${gold}33` } : {}}
                   >
@@ -220,6 +226,7 @@ export default function Home() {
                 <motion.div 
                   initial={{ opacity: 0, x: isMobile ? 0 : -100, y: isMobile ? 20 : 0 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8 }}
                 >
                   <Typography variant={isMobile ? "h5" : "h4"} sx={{ color: gold, mb: 2, fontWeight: 800 }}>
@@ -235,7 +242,7 @@ export default function Home() {
               </Grid>
 
               <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
-                <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal}>
+                <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal} viewport={{ once: true }}>
                   <Box
                     component="img"
                     src={ngoImage3}
@@ -259,7 +266,7 @@ export default function Home() {
           <Container>
             <Grid container spacing={isMobile ? 4 : 8} alignItems="center" direction={isMobile ? "column-reverse" : "row"}>
               <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
-                <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal}>
+                <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal} viewport={{ once: true }}>
                   <Box
                     component="img"
                     src={ngoImage2}
@@ -279,6 +286,7 @@ export default function Home() {
                 <motion.div 
                    initial={{ opacity: 0, x: isMobile ? 0 : 100, y: isMobile ? 20 : 0 }}
                    whileInView={{ opacity: 1, x: 0, y: 0 }}
+                   viewport={{ once: true }}
                    transition={{ duration: 0.8 }}
                 >
                   <Typography variant={isMobile ? "h5" : "h4"} sx={{ color: gold, mb: 2, fontWeight: 800 }}>
@@ -296,11 +304,11 @@ export default function Home() {
           </Container>
         </Box>
 
-        {/* FINAL BANNER */}
         <Box 
           component={motion.div}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           sx={{ 
             py: isMobile ? 6 : 10, 
             textAlign: "center", 
@@ -319,7 +327,6 @@ export default function Home() {
             </Typography>
           </Container>
         </Box>
-
 
         <Box sx={{ color: "#FFFFFF" }}>
           <Footer />

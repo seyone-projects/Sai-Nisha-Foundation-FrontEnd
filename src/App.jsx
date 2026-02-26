@@ -15,6 +15,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Typography,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -36,9 +37,11 @@ import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
 
+// Theme Colors
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
+const darkNavy = "#1B2631";
 
 export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -88,17 +91,10 @@ export default function App() {
                 </Button>
               ))}
 
-              {/* MEDIA PARTNERS DROPDOWN */}
-              <Box
-                onMouseEnter={handleMediaHover}
-                onMouseLeave={handleCloseMenu}
-              >
-                <Button
-                  sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}
-                >
+              <Box onMouseEnter={handleMediaHover} onMouseLeave={handleCloseMenu}>
+                <Button sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}>
                   Media Partners
                 </Button>
-
                 <Menu
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
@@ -106,15 +102,9 @@ export default function App() {
                   MenuListProps={{ onMouseLeave: handleCloseMenu }}
                   PaperProps={{ sx: { bgcolor: creamBg } }}
                 >
-                  <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>
-                    Photo Gallery
-                  </MenuItem>
-                  <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>
-                    News
-                  </MenuItem>
-                  <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>
-                    Associated Partners
-                  </MenuItem>
+                  <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem>
+                  <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>News</MenuItem>
+                  <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                 </Menu>
               </Box>
 
@@ -131,56 +121,52 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-      {/* MOBILE DRAWER */}
-      <Drawer
-        anchor="right"
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
+      {/* ROAMING TICKER (The Scrolling Text) */}
+      <Box 
+        sx={{ 
+          bgcolor: darkNavy, 
+          color: "#fff", 
+          py: 1, 
+          overflow: "hidden", 
+          whiteSpace: "nowrap",
+          position: "relative"
+        }}
       >
+        <Typography
+          variant="body1"
+          sx={{
+            display: "inline-block",
+            fontWeight: "bold",
+            animation: "marquee 20s linear infinite",
+            "@keyframes marquee": {
+              "0%": { transform: "translateX(100%)" },
+              "100%": { transform: "translateX(-100%)" }
+            }
+          }}
+        >
+          🐾 REAL DOG RESCUE & CARE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+          🤰 SUPPORT FOR PREGNANT WOMEN &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+          👶 NEWBORN BABY WELLFARE PROGRAMS &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+          🐾 REAL DOG RESCUE & CARE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+          🤰 SUPPORT FOR PREGNANT WOMEN &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+          👶 NEWBORN BABY WELLFARE PROGRAMS
+        </Typography>
+      </Box>
+
+      {/* MOBILE DRAWER */}
+      <Drawer anchor="right" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <Box sx={{ width: 260, bgcolor: creamBg, height: "100%" }}>
           <List>
             {menuItems.map((item) => (
-              <ListItemButton
-                key={item.label}
-                component={Link}
-                to={item.path}
-                onClick={() => setOpenDrawer(false)}
-              >
+              <ListItemButton key={item.label} component={Link} to={item.path} onClick={() => setOpenDrawer(false)}>
                 <ListItemText primary={item.label} />
               </ListItemButton>
             ))}
-
             <Divider sx={{ my: 1 }} />
-            <ListItemButton disabled>
-               <ListItemText primary="Media Partners" sx={{ opacity: 0.6 }} />
-            </ListItemButton>
-            
-            <ListItemButton
-              component={Link}
-              to="/photo-gallery"
-              onClick={() => setOpenDrawer(false)}
-              sx={{ pl: 4 }}
-            >
-              <ListItemText primary="Photo Gallery" />
-            </ListItemButton>
-
-            <ListItemButton
-              component={Link}
-              to="/news"
-              onClick={() => setOpenDrawer(false)}
-              sx={{ pl: 4 }}
-            >
-              <ListItemText primary="News" />
-            </ListItemButton>
-
-            <ListItemButton
-              component={Link}
-              to="/partners"
-              onClick={() => setOpenDrawer(false)}
-              sx={{ pl: 4 }}
-            >
-              <ListItemText primary="Partners" />
-            </ListItemButton>
+            <ListItemButton disabled><ListItemText primary="Media Partners" sx={{ opacity: 0.6 }} /></ListItemButton>
+            <ListItemButton component={Link} to="/photo-gallery" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="Photo Gallery" /></ListItemButton>
+            <ListItemButton component={Link} to="/news" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="News" /></ListItemButton>
+            <ListItemButton component={Link} to="/partners" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="Partners" /></ListItemButton>
           </List>
         </Box>
       </Drawer>

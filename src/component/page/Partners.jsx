@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import img1 from "../page/image/DSC06299.jpg";
 import img2 from "../page/image/DSC06390.jpg";
 import img3 from "../page/image/DSC06321.jpg";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/900.css";
 
@@ -41,6 +42,7 @@ function FullPageVideoBackground() {
     <Box sx={{ position: "fixed", inset: 0, zIndex: -2, bgcolor: "#111827" }}>
       <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.85), rgba(17,24,39,0.95))" }} />
     </Box>
+
   );
 }
 
@@ -202,6 +204,34 @@ export default function Partners() {
             </Grid>
           </Grid>
         </Container>
+      </Box>
+
+      <Box
+        component="a"
+        href="https://wa.me/919962290875"
+        target="_blank"
+        rel="noopener noreferrer"
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          width: 60,
+          height: 60,
+          bgcolor: "#25D366",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+          zIndex: 9999,
+          transition: "all 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.1)",
+            bgcolor: "#1ebe5d",
+          },
+        }}
+      >
+        <WhatsAppIcon sx={{ color: "#fff", fontSize: 32 }} />
       </Box>
 
       <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
