@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -11,7 +11,7 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "./Footer";
 import Grid from '@mui/material/Grid';
 import "@fontsource/poppins/300.css";
@@ -22,15 +22,10 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-import backgroundVideo from "../page/image/30. Dream Reveal AV & lanuch.mp4"; 
-
-// Keep your image imports for other sections
-import ngoImage5 from "../page/image/image4.png.png";
-import ngoImage6 from "../page/image/home.jpg";
-import ngoImage7 from "../page/image/home1.jpg";
-import ngoImage8 from "../page/image/home3.jpg";
+// Image imports
 import ngoImage2 from "../page/image/newborn.png";
 import ngoImage3 from "../page/image/baby.png";
+import ngoImage6 from "../page/image/home.jpg";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const darkBg = "#121212";
@@ -74,7 +69,6 @@ const imageClipReveal = {
 
 export default function Home() {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const videoRef = useRef(null);
 
   const testimonials = [
     { text: "Our goal is to ensure that every mother and newborn receives timely support during critical moments." },
@@ -103,37 +97,19 @@ export default function Home() {
 
       <Box sx={{ backgroundColor: darkBg, color: whiteText, overflowX: "hidden" }}>
         
-        {/* HERO SECTION WITH VIDEO */}
+        {/* HERO SECTION WITH STATIC IMAGE */}
         <Box sx={{ 
           height: "100vh", 
           position: "relative", 
           overflow: "hidden", 
           display: 'flex', 
           alignItems: 'center', 
-          justifyContent: 'center' 
+          justifyContent: 'center',
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${ngoImage6})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}>
           
-          {/* Video Background Layer */}
-          <Box
-            component="video"
-            autoPlay
-            loop
-            muted
-            playsInline
-            ref={videoRef}
-            sx={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 1,
-              filter: "brightness(0.4)" // Darkens video to make text readable
-            }}
-          >
-            <source src={backgroundVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </Box>
-
           <Container sx={{ position: "relative", zIndex: 2, textAlign: "center", px: 3 }}>
             <motion.div variants={staggerContainer} initial="initial" animate="animate">
               
@@ -304,6 +280,7 @@ export default function Home() {
           </Container>
         </Box>
 
+        {/* QUOTE SECTION */}
         <Box 
           component={motion.div}
           initial={{ opacity: 0 }}
