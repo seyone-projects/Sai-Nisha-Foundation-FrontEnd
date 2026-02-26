@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Navigation hook
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Back icon
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Footer from "../page/Footer";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import HandshakeIcon from "@mui/icons-material/Handshake";
@@ -37,7 +37,7 @@ const theme = createTheme({
 });
 
 const PeerToPeer = () => {
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
 
   const fundraisingIdeas = [
     {
@@ -90,7 +90,7 @@ const PeerToPeer = () => {
       <Box
         sx={{
           height: { xs: "90vh", md: "100vh" },
-          position: "relative", // Required for absolute positioning of the back button
+          position: "relative", 
           backgroundImage: `
             linear-gradient(rgba(5,15,35,0.85), rgba(5,15,35,0.9)),
             url(${heroBg})
@@ -110,7 +110,7 @@ const PeerToPeer = () => {
             position: "absolute",
             top: { xs: 20, md: 40 },
             right: { xs: 20, md: 40 },
-            bgcolor: "rgba(255, 255, 255, 0.1)", // Slight background for visibility
+            bgcolor: "rgba(255, 255, 255, 0.1)", 
             color: "#FFC107",
             zIndex: 10,
             transition: "all 0.3s ease",
