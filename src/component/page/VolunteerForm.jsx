@@ -16,7 +16,6 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Footer from "../page/Footer"; 
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -158,7 +157,7 @@ export default function VolunteerForm() {
       >
         <BubblesBackground />
 
-        <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
+        <Container maxWidth="md" sx={{ position: "relative", zIndex: 1, mt: -8 }}>
           <Paper
             elevation={0}
             sx={{
@@ -174,7 +173,7 @@ export default function VolunteerForm() {
               textAlign="center"
               sx={{ fontWeight: 900, color: whiteText, mb: 1, textTransform: 'uppercase' }}
             >
-              Volunteer <span style={{ color: lightTeal }}>With Us</span>
+              <span style={{ color: lightTeal }}> Volunteer </span>
             </Typography>
 
             <Typography

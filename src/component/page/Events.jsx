@@ -192,7 +192,6 @@ export default function Events() {
                 <Typography variant="h3" sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: '2rem', md: '3.5rem' }, mb: 3 }}>
                   Captured Memories
                 </Typography>
-                {/* Pagination Dots */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
                     {[...Array(totalPages)].map((_, i) => (
                         <Box key={i} sx={{ width: currentPage === i ? 40 : 8, height: 8, borderRadius: 5, bgcolor: currentPage === i ? cinematicGold : 'rgba(255,255,255,0.2)', transition: '0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
@@ -204,8 +203,6 @@ export default function Events() {
                 <ArrowForwardIosIcon />
              </IconButton>
           </Box>
-
-          {/* Grid Display */}
           <Box sx={{ minHeight: { xs: 'auto', md: '650px' } }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -277,8 +274,6 @@ export default function Events() {
               </motion.div>
             </AnimatePresence>
           </Box>
-
-          {/* Mobile Only Navigation */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 6 }}>
              <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowBackIosNewIcon /></IconButton>
              <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff', width: 60, height: 60 }}><ArrowForwardIosIcon /></IconButton>

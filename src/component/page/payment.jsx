@@ -25,7 +25,7 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-// Updated Color Palette from the Image
+
 const deepNavy = "#050B18";
 const forestGreen = "#064439";
 const lightGreen = "#0A5D4D"; 
@@ -40,7 +40,6 @@ const theme = createTheme({
     body1: { fontWeight: 400 },
     body2: { fontWeight: 400 },
   },
-  // Added palette to fix TextField label colors on dark background
   palette: {
     mode: 'dark',
     primary: { main: forestGreen },
@@ -71,8 +70,6 @@ function BubblesBackground() {
         const randomLeft = Math.random() * 100;
         const duration = Math.random() * 10 + 10;
         const delay = Math.random() * 20;
-
-        // Updated bubble colors to match the theme
         const isGreen = i % 2 === 0;
         const color = isGreen ? "rgba(6, 68, 57, 0.45)" : "rgba(255, 255, 255, 0.1)";
         const glow = isGreen ? "rgba(6, 68, 57, 0.3)" : "rgba(255, 255, 255, 0.05)";
@@ -173,6 +170,7 @@ export default function Payment() {
               variant={isMobile ? "h4" : "h2"}
               align="center"
               sx={{
+                mt: -10,
                 fontWeight: 900,
                 mb: 4,
                 color: pureWhite,

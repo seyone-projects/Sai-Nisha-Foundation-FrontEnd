@@ -29,7 +29,7 @@ const theme = createTheme({
 
 const orbit = keyframes`
   from { transform: rotate(0deg) translateX(var(--radius)) rotate(0deg); }
-  to { transform: rotate(360deg) translateX(var(--radius)) rotate(-360deg); }
+  to { transform: rotate(180deg) translateX(var(--radius)) rotate(-180deg); }
 `;
 
 const fadeIn = keyframes`
@@ -54,8 +54,8 @@ const PartnerCard = ({ img, partner, onHover, onLeave, delay, isMobile, isPaused
       onClick={() => onHover(partner)}
       sx={{
         position: "absolute",
-        top: "50%", 
-        left: "50%",
+        top: "20%", 
+        left: "20%",
         "--radius": isMobile ? "100px" : "180px",
         margin: isMobile ? "-50px 0 0 -50px" : "-70px 0 0 -70px",
         animation: `${orbit} 20s linear infinite`,
@@ -134,7 +134,7 @@ export default function Partners() {
         <Container maxWidth="lg">
           <Typography 
             variant={isMobile ? "h4" : "h2"} 
-            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2 }}
+            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2 , mt: -10 }}
           >
             OUR <span style={{ color: gold }}>PARTNERS</span>
           </Typography>
@@ -181,6 +181,7 @@ export default function Partners() {
               <Box 
                 key={activePartner.name} 
                 sx={{ 
+                  mt: -15,
                   animation: `${fadeIn} 0.6s ease-out`,
                   padding: { xs: 3, md: 5 },
                   borderLeft: { md: `4px solid ${gold}` },

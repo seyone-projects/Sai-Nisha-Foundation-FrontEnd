@@ -259,6 +259,7 @@ export default function About() {
                   variant={isMobile ? "h4" : "h2"}
                   align="center"
                   sx={{
+                    height: 100,
                     position: "relative",
                     zIndex: 2,
                     fontWeight: 900,
@@ -269,7 +270,7 @@ export default function About() {
                     textShadow: `0 0 20px ${gold}`,
                   }}
                 >
-                  About <span style={{ color: gold }}>Us</span>
+                  About <span style={{ color: gold , textAlign: 'center'}}>Us</span>
                 </Typography>
               </motion.div>
 
@@ -584,10 +585,10 @@ export default function About() {
         </Container>
       </Box>
 
-      {/* FOOTER OVERRIDE BOX */}
+      {/* FOOTER  */}
       <Box sx={{ 
-        "& *": { color: "#FFFFFF !important" }, // Force all nested text/icons to white
-        bgcolor: "#020617" // Matching the dark aesthetic
+        "& *": { color: "#FFFFFF !important" },
+        bgcolor: "#020617"
       }}>
         <Footer />
       </Box>

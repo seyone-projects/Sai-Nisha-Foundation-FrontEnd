@@ -141,7 +141,7 @@ export default function ContactUs() {
         </Button>
       </Box>
 
-      <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh" }}>
+      <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh", mt: -12 }}>
         <Card
           sx={{
             width: isMobile ? "95%" : "90%", 

@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"; // Import Back Icon
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
@@ -33,8 +33,8 @@ import bgImage from "../page/image/home1.jpg";
 
 const theme = createTheme({
   palette: {
-    primary: { main: "#f5b400" }, // Yellow Accent
-    background: { default: "#0b1d3a" }, // Deep Navy
+    primary: { main: "#f5b400" },
+    background: { default: "#0b1d3a" },
   },
   typography: {
     fontFamily: `"Poppins","Roboto","Helvetica","Arial",sans-serif`,
@@ -56,7 +56,7 @@ const mediaList = [
 ];
 
 export default function Manage() {
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,8 +88,6 @@ export default function Manage() {
             display: "flex",
             flexDirection: "column",
             minHeight: "100vh",
-
-            /* 🎯 CAREER STYLE DARK OVERLAY */
             backgroundImage: `
               linear-gradient(
                 rgba(5, 15, 35, 0.92),

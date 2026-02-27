@@ -17,8 +17,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Footer from "./Footer";
-
-/* IMAGE IMPORTS */
 import eventImg1 from "../page/image/DSC05916.jpg";
 import eventImg4 from "../page/image/DSC06321.jpg";
 import eventImg8 from "../page/image/DSC06093.jpg";
@@ -40,7 +38,6 @@ const theme = createTheme({
 
 const BG_IMAGES = [eventImg1, eventImg4, eventImg8, eventImg12, eventImg3];
 
-// --- ANIMATION VARIANTS ---
 const fadeDown = {
   hidden: { opacity: 0, y: -30 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
@@ -64,7 +61,6 @@ const cardItemVariants = {
   },
 };
 
-// --- SHADER BACKGROUND ---
 function GlobalShaderBackground() {
   return (
     <Box
@@ -112,7 +108,6 @@ function GlobalShaderBackground() {
   );
 }
 
-// --- HERO BACKGROUND SLIDER ---
 function CinematicHeroBackground() {
   const [bgIndex, setBgIndex] = useState(0);
 
@@ -176,49 +171,77 @@ export default function Careers() {
 
       <Box sx={{ position: "relative", zIndex: 2 }}>
         
-        {/* HERO SECTION */}
-        <Box
-          sx={{
-            height: { xs: "60vh", md: "80vh" },
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            overflow: "hidden",
-            mb: 8,
-          }}
-        >
-          <CinematicHeroBackground />
-          <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10, textAlign: "center" }}>
-            <motion.div variants={fadeDown} initial="hidden" animate="visible">
-              <Typography
-                variant={isMobile ? "h2" : "h1"}
-                sx={{
-                  color: "#fff",
-                  fontWeight: 900,
-                  textTransform: "uppercase",
-                  letterSpacing: { xs: 2, md: 8 },
-                  textShadow: "0 10px 30px rgba(0,0,0,0.8)",
-                }}
-              >
-                Our <span style={{ color: cinematicGold }}>Careers</span>
-              </Typography>
-              <Typography sx={{ color: "rgba(255,255,255,0.7)", mt: 3, fontSize: 20, letterSpacing: 2 }}>
-                EXPLORE • PARTICIPATE • GROW
-              </Typography>
-            </motion.div>
-          </Container>
-        </Box>
+       {/* HERO SECTION */}
+<Box
+  component="section"
+  sx={{
+    height: { xs: "60vh", md: "80vh" }, 
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+    overflow: "hidden",
+    marginTop: -4,
+    paddingTop: 0,
+    mb: 8,
+  }}
+>
+  <CinematicHeroBackground />
+  
+  <Container 
+    maxWidth="lg" 
+    sx={{ 
+      position: "relative", 
+      zIndex: 10, 
+      textAlign: "center",
+      pt: 0 
+    }}
+  >
+    <motion.div variants={fadeDown} initial="hidden" animate="visible">
+      <Typography
+        variant={isMobile ? "h2" : "h1"}
+        sx={{
+          color: "#fff",
+          fontWeight: 900,
+          textTransform: "uppercase",
+          letterSpacing: { xs: 2, md: 8 },
+          textShadow: "0 10px 30px rgba(0,0,0,0.8)",
+          mt: 0, 
+        }}
+      >
+        Our <span style={{ color: cinematicGold }}>Careers</span>
+      </Typography>
+      
+      <Typography 
+        sx={{ 
+          color: "rgba(255,255,255,0.7)", 
+          mt: 3, 
+          fontSize: 18, 
+          letterSpacing: 2 
+        }}
+      >
+        EXPLORE • PARTICIPATE • GROW
+      </Typography>
+    </motion.div>
+  </Container>
+</Box>
 
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          <Typography
-            variant="h4"
-            fontWeight={800}
-            textAlign="center"
-            sx={{ mb: 6, color: "#fff" }}
-          >
-            Join us get Involved view openings
-          </Typography>
+        <Typography
+  variant="h4"
+  fontWeight={800}
+  textAlign="center"
+  sx={{ 
+    mt: -12, 
+    mb: 6, 
+    pt: 0,
+    color: "#fff",
+    lineHeight: 1.2 
+  }}
+>
+  view openings
+</Typography>
 
           {/* JOB CARDS */}
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -252,7 +275,7 @@ export default function Careers() {
               </Grid>
                       <Grid item xs={12} sm={6} md={4} display="flex" justifyContent="center">
                 <JobCard
-                  title="video creator"
+                  title="Video Creator"
                   location="Tambaram, Chennai"
                   desc="Create compelling visual stories that inspire action and strengthen audience engagement."
                   type="Full time"
@@ -264,9 +287,20 @@ export default function Careers() {
 
           {/* WHY JOIN SECTION */}
           <Box sx={{ mt: 15 }}>
-            <Typography variant="h4" fontWeight={800} textAlign="center" sx={{ color: "#fff", mb: 8 }}>
-              Why Join <span style={{ color: cinematicGold }}>Involve Scope</span>
-            </Typography>
+       <Typography 
+  variant="h4" 
+  fontWeight={800} 
+  textAlign="center" 
+  sx={{ 
+    color: "#fff", 
+    mt: -10,    
+    pt: 0,   
+    mb: 8, 
+    lineHeight: 1
+  }}
+>
+  <span style={{ color: cinematicGold }}>Why Join US</span>
+</Typography>
 
             <Grid container spacing={4} justifyContent="center">
               {[
@@ -309,65 +343,69 @@ export default function Careers() {
           </Box>
 
           {/* FAQ SECTION */}
-          <Box
+   <Box
+  sx={{
+    mt: 2, 
+    py: { xs: 8, md: 12 },
+    background: "linear-gradient(135deg, #F2A900, #D68910)",
+    borderRadius: 6,
+    color: "#fff",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+  }}
+>
+  <Container maxWidth="lg">
+    <Grid container spacing={6} alignItems="flex-start">
+      <Grid item xs={12} md={4}>
+        <Typography 
+          variant="h4" 
+          fontWeight={800} 
+          mb={2} 
+          sx={{ mt: 0 }} 
+        >
+          Frequently asked questions
+        </Typography>
+        <Typography sx={{ opacity: 0.9, mb: 4 }}>
+          We are always here to help. Reach out!
+        </Typography>
+        <Paper sx={{ p: 3, borderRadius: 4, display: "flex", alignItems: "center", gap: 2 }}>
+          <WhatsAppIcon sx={{ fontSize: 40, color: "#22c55e" }} />
+          <Box>
+            <Typography fontWeight={700} color="#111827">Reach out to us</Typography>
+            <Typography fontSize={14} color="text.secondary">hello@sainisha.in</Typography>
+          </Box>
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={8}>
+        {[
+          { q: "What is Sai Nisha Foundation?", a: "A youth-driven NGO focused on education and healthcare." },
+          { q: "How long is recruitment?", a: "Usually 1–2 weeks depending on volume." },
+          { q: "Is it paid?", a: "Learning-focused; some roles offer performance stipends." },
+        ].map((item, index) => (
+          <Accordion
+            key={index}
             sx={{
-              mt: 14,
-              py: { xs: 8, md: 12 },
-              background: "linear-gradient(135deg, #F2A900, #D68910)",
-              borderRadius: 6,
+              mb: 2,
+              backgroundColor: "rgba(255,255,255,0.15)",
               color: "#fff",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+              borderRadius: "12px !important",
+              "&:before": { display: "none" },
             }}
           >
-            <Container maxWidth="lg">
-              <Grid container spacing={6} alignItems="flex-start">
-                <Grid item xs={12} md={4}>
-                  <Typography variant="h4" fontWeight={800} mb={2}>
-                    Frequently asked questions
-                  </Typography>
-                  <Typography sx={{ opacity: 0.9, mb: 4 }}>
-                    We are always here to help. Reach out!
-                  </Typography>
-                  <Paper sx={{ p: 3, borderRadius: 4, display: "flex", alignItems: "center", gap: 2 }}>
-                    <WhatsAppIcon sx={{ fontSize: 40, color: "#22c55e" }} />
-                    <Box>
-                      <Typography fontWeight={700} color="#111827">Reach out to us</Typography>
-                      <Typography fontSize={14} color="text.secondary">hello@sainisha.in</Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={8}>
-                  {[
-                    { q: "What is Sai Nisha Foundation?", a: "A youth-driven NGO focused on education and healthcare." },
-                    { q: "How long is recruitment?", a: "Usually 1–2 weeks depending on volume." },
-                    { q: "Is it paid?", a: "Learning-focused; some roles offer performance stipends." },
-                  ].map((item, index) => (
-                    <Accordion
-                      key={index}
-                      sx={{
-                        mb: 2,
-                        backgroundColor: "rgba(255,255,255,0.15)",
-                        color: "#fff",
-                        borderRadius: "12px !important",
-                        "&:before": { display: "none" },
-                      }}
-                    >
-                      <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}>
-                        <Typography fontWeight={600}>{item.q}</Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography sx={{ opacity: 0.9 }}>{item.a}</Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  ))}
-                </Grid>
-              </Grid>
-            </Container>
-          </Box>
+            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}>
+              <Typography fontWeight={600}>{item.q}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography sx={{ opacity: 0.9 }}>{item.a}</Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Grid>
+    </Grid>
+  </Container>
+</Box>
         </Container>
 
-        {/* --- MODIFIED FOOTER SECTION --- */}
         <Box sx={{ 
           width: "100%", 
           "& *": { color: "#ffffff !important" } 

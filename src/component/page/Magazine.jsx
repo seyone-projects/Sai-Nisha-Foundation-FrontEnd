@@ -32,7 +32,6 @@ const Magazine = () => {
         backgroundImage: 'radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%)'
       }}
     >
-      {/* Removed maxWidth and added disableGutters to hit the edges */}
       <Container 
         maxWidth={false} 
         disableGutters
@@ -95,7 +94,6 @@ const Magazine = () => {
 
           {/* Image Section */}
           <Box sx={{ position: 'relative', mt: { xs: -4, md: -8 } }}>
-            {/* Background Decorative Image */}
             <Box
               sx={{
                 position: 'absolute',
@@ -157,7 +155,7 @@ const Magazine = () => {
         </Box>
       </Container>
 
-      {/* Footer Area */}
+      {/* Footer */}
       <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
         <Footer />
       </Box>

@@ -142,6 +142,7 @@ export default function Newsandpublication() {
           {/* HERO SECTION */}
           <Box
             sx={{
+              mt: -12,
               position: "relative",
               backgroundColor: "rgba(17,24,39,0.4)",
               backdropFilter: "blur(4px)",
@@ -175,7 +176,7 @@ export default function Newsandpublication() {
             </Typography>
 
             <Typography sx={{ color: "rgba(255,255,255,0.7)", mt: 2, letterSpacing: 4 }}>
-              EXPLORE • PARTICIPATE • GROW
+              EXPLORE • OUR • FIRST NEWS
             </Typography>
           </Box>
 

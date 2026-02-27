@@ -62,7 +62,7 @@ export default function App() {
     { label: "Events", path: "/events" },
     { label: "Services", path: "/services" },
     { label: "Careers", path: "/careers" },
-    { label: "Campaigns", path: "/campaigns" },
+    // { label: "Campaigns", path: "/campaigns" },
   ];
 
   return (
@@ -102,7 +102,7 @@ export default function App() {
                   MenuListProps={{ onMouseLeave: handleCloseMenu }}
                   PaperProps={{ sx: { bgcolor: creamBg } }}
                 >
-                  <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem>
+                  {/* <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem> */}
                   <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>News</MenuItem>
                   <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                 </Menu>
@@ -144,12 +144,9 @@ export default function App() {
             }
           }}
         >
-          🐾 REAL DOG RESCUE & CARE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+          🐾 DOG RESCUE & CARE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
           🤰 SUPPORT FOR PREGNANT WOMEN &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
           👶 NEWBORN BABY WELLFARE PROGRAMS &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
-          🐾 REAL DOG RESCUE & CARE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
-          🤰 SUPPORT FOR PREGNANT WOMEN &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
-          👶 NEWBORN BABY WELLFARE PROGRAMS
         </Typography>
       </Box>
 
@@ -182,7 +179,7 @@ export default function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/volunteer" element={<VolunteerForm />} />
-          <Route path="/campaigns" element={<Campaigns />} />
+          {/* <Route path="/campaigns" element={<Campaigns />} /> */}
           <Route path="/manage" element={<Manage />} />
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/peertopeer" element={<PeerToPeer />} />
