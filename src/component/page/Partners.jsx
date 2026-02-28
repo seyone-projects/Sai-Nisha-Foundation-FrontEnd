@@ -130,11 +130,11 @@ export default function Partners() {
       <CssBaseline />
       <FullPageVideoBackground />
 
-      <Box sx={{ position: "relative", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 } }}>
+      <Box sx={{ position: "relative",overflowX: "hidden", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 } }}>
         <Container maxWidth="lg">
           <Typography 
             variant={isMobile ? "h4" : "h2"} 
-            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2 , mt: -10 }}
+            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2 , mt: -5 }}
           >
             OUR <span style={{ color: gold }}>PARTNERS</span>
           </Typography>
@@ -142,15 +142,16 @@ export default function Partners() {
           <Grid container spacing={4} alignItems="center" justifyContent="center">
             <Grid item xs={12} md={6}>
               <Box
-                sx={{
-                  height: { xs: 300, md: 500 },
-                  width: "100%",
-                  position: "relative",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  overflow: "visible",
-                }}
+               sx={{
+  height: { xs: 300, md: 500 },
+  width: "100%",
+  position: "relative",
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",  
+  overflow: "visible",
+  paddingLeft: 150,    
+}}
               >
                 <Box sx={{ 
                     width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, 
@@ -177,32 +178,66 @@ export default function Partners() {
             </Grid>
 
             {/* RIGHT/BOTTOM SIDE: CONTENT DISPLAY */}
-            <Grid item xs={12} md={6}>
-              <Box 
-                key={activePartner.name} 
-                sx={{ 
-                  mt: -15,
-                  animation: `${fadeIn} 0.6s ease-out`,
-                  padding: { xs: 3, md: 5 },
-                  borderLeft: { md: `4px solid ${gold}` },
-                  borderTop: { xs: `4px solid ${gold}`, md: "none" },
-                  bgcolor: "rgba(255,255,255,0.03)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: { xs: "20px", md: "0 20px 20px 0" },
-                  textAlign: { xs: "center", md: "left" }
-                }}
-              >
-                <Typography variant="overline" sx={{ color: gold, fontSize: "1rem", fontWeight: "bold", display: "block" }}>
-                  Associate Spotlight
-                </Typography>
-                <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: "white", mb: 2, fontWeight: 900 }}>
-                  {activePartner.name}
-                </Typography>
-                <Typography variant="body1" sx={{ color: "#ccc", lineHeight: 1.8, fontSize: "1.1rem" }}>
-                  {activePartner.desc}
-                </Typography>
-              </Box>
-            </Grid>
+          <Grid item xs={12} md={6}>
+  <Box 
+    key={activePartner.name} 
+    sx={{ 
+      mt: { xs: -5, md: -55 }, 
+      ml: { md: "auto" }, 
+      width: { xs: "100%", md: "45%" }, 
+      animation: `${fadeIn} 0.6s ease-out`,
+      padding: { xs: 3, md: 5 },
+      borderLeft: { md: `4px solid ${gold}` },
+      borderTop: { xs: `4px solid ${gold}`, md: "none" }, 
+      bgcolor: "rgba(255,255,255,0.03)",
+      backdropFilter: "blur(10px)",
+      borderRadius: { xs: "20px", md: "20px 0 0 20px" }, 
+      textAlign: { xs: "center", md: "right" },
+      zIndex: 1,
+      position: 'relative' 
+    }}
+  >
+ <Typography 
+  variant="overline" 
+  sx={{ 
+    color: gold, 
+    fontSize: "1rem", 
+    fontWeight: "bold", 
+    display: "block",
+    textAlign: "left",
+    width: "100%",
+    paddingLeft: 0,
+    marginLeft: 0    
+  }}
+>
+  Associate Spotlight
+</Typography>
+
+    <Typography 
+      variant={isMobile ? "h4" : "h3"} 
+      sx={{ 
+        color: "white", 
+        mb: 2, 
+        fontWeight: 900, 
+        textAlign: "left"
+      }}
+    >
+      {activePartner.name}
+    </Typography>
+
+    <Typography 
+      variant="body1" 
+      sx={{ 
+        color: "#ccc", 
+        lineHeight: 1.8, 
+        fontSize: "1.1rem",
+        textAlign: "left"
+      }}
+    >
+      {activePartner.desc}
+    </Typography>
+  </Box>
+</Grid>
           </Grid>
         </Container>
       </Box>

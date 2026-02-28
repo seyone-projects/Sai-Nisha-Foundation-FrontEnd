@@ -219,7 +219,7 @@ export default function About() {
       >
         <BubblesBackground />
 
-        <Container sx={{ position: "relative", zIndex: 2 }}>
+        <Container sx={{ position: "relative", zIndex: 2 , mt: -10 }}>
           <motion.div variants={fadeDown} initial="hidden" animate="visible">
             <Box
               sx={{
@@ -293,7 +293,7 @@ export default function About() {
             </Box>
           </motion.div>
 
-          <Box sx={{ mt: { xs: 10, md: 0 } }}>
+          <Box sx={{ mt: { xs: -4, md: -10 } }}>
             <Container>
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
                 <Box
@@ -481,7 +481,7 @@ export default function About() {
             <Box
               sx={{
                 maxWidth: 980,
-                mt: 10,
+                mt: 3,
                 mx: "auto",
                 px: { xs: 3, md: 8 },
                 py: { xs: 4, md: 8 },

@@ -15,11 +15,7 @@ import Footer from "../page/Footer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-
 import { ALL_EVENTS, HERO_SLIDES } from "../page/data/EventRegistry";
-
-
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";

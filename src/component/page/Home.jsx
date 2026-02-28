@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Grid from '@mui/material/Grid';
 import "@fontsource/poppins/300.css";
@@ -67,6 +68,7 @@ const imageClipReveal = {
 
 export default function Home() {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const navigate = useNavigate();
 
   const testimonials = [
     { text: "Our goal is to ensure that every mother and newborn receives timely support during critical moments." },
@@ -95,277 +97,185 @@ export default function Home() {
 
       <Box sx={{ backgroundColor: darkBg, color: whiteText, overflowX: "hidden" }}>
         
-      <Box
-  component="section"
-  sx={{
-    mt: 0,
-    pt: 0,
-    pb: 0,
-    top: 0,
-    left: 0,
-    height: "100vh",
-    width: "100%",
-    position: "relative",
-    overflow: "hidden",
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${ngoImage6})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  }}
->
-  <Container 
-    maxWidth={false} 
-    sx={{ 
-      position: "relative", 
-      zIndex: 2, 
-      textAlign: "center", 
-      px: 3,
-      mx: 'auto' 
-    }}
-  >
-    <motion.div variants={staggerContainer} initial="initial" animate="animate">
-      
-      {/* Animated Gold Header */}
-      <Box sx={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>
-        {"SAI NISHA FOUNDATION".split("").map((char, i) => (
-          <motion.span key={i} variants={letterAnim} style={{ display: 'inline-block' }}>
-            <Typography 
-              variant={isMobile ? "body2" : "h5"} 
-              sx={{ 
-                color: gold, 
-                fontWeight: 700,
-                letterSpacing: isMobile ? '2px' : '4px',
-                mr: char === " " ? (isMobile ? 1 : 2) : 0.2 
-              }}
-            >
-              {char}
-            </Typography>
-          </motion.span>
-        ))}
-      </Box>
-
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1.5 }}>
-        <Typography 
-          variant={isMobile ? "body2" : "h6"} 
-          sx={{ 
-            fontStyle: 'italic', 
-            mb: isMobile ? 2 : 4, 
-            opacity: 0.8, 
-            fontSize: isMobile ? '0.85rem' : '1.25rem' 
+        <Box
+          component="section"
+          sx={{
+            height: "100vh",
+            width: "100%",
+            position: "relative",
+            overflow: "hidden",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${ngoImage6})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
-          "Reliving the moments of joy, talent, and meaningful connections"
-        </Typography>
-        
-        <Box sx={{ width: '60px', height: '3px', bgcolor: gold, margin: '0 auto', mb: isMobile ? 3 : 4 }} />
-        
-        <Typography 
-          variant="overline" 
-          sx={{ 
-            letterSpacing: isMobile ? 4 : 8, 
-            display: 'block', 
-            mb: 1, 
-            color: gold, 
-            fontSize: isMobile ? '0.6rem' : '0.75rem' 
-          }}
-        >
-          Care Moments
-        </Typography>
-        
-        <Typography variant={isMobile ? "h4" : "h2"} sx={{ mb: isMobile ? 4 : 6, fontWeight: 900 }}>
-          Captured Emotions
-        </Typography>
-        
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Button
-           onClick={() => navigate("/volunteer")}
-            variant="contained"
-            sx={{
-              bgcolor: gold, 
-              color: '#000', 
-              fontWeight: 900, 
-              px: isMobile ? 4 : 6, 
-              py: isMobile ? 1.5 : 2,
-              borderRadius: '0px', 
-              fontSize: isMobile ? '0.8rem' : '1rem',
-              '&:hover': { bgcolor: '#fff' }
+          <Container 
+            maxWidth={false} 
+            sx={{ 
+              position: "relative", 
+              zIndex: 2, 
+              textAlign: "center", 
+              px: 3,
+              mx: 'auto' 
             }}
           >
-            Join as Volunteer
-          </Button>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  </Container>
-</Box>
-        {/* GOALS SECTION */}
-     <Box 
-  sx={{ 
-    pt: 0,
-    pb: 0, 
-    bgcolor: '#0a0a0a' 
-  }}
->
-  <Container>
-    <Typography 
-      variant={isMobile ? "h5" : "h4"} 
-      textAlign="center" 
-      sx={{ 
-        color: gold, 
-        mt: 0,
-        mb: isMobile ? 4 : 6,
-        letterSpacing: isMobile ? 2 : 4, 
-        fontWeight: 700, 
-        pt: isMobile ? 4 : 6 
-      }}
-    >
-      OUR GOALS
-    </Typography>
+            <motion.div variants={staggerContainer} initial="initial" animate="animate">
+              
+              {/* Animated Gold Header */}
+              <Box sx={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>
+                {"SAI NISHA FOUNDATION".split("").map((char, i) => (
+                  <motion.span key={i} variants={letterAnim} style={{ display: 'inline-block' }}>
+                    <Typography 
+                      variant={isMobile ? "body2" : "h5"} 
+                      sx={{ 
+                        color: gold, 
+                        fontWeight: 700,
+                        letterSpacing: isMobile ? '2px' : '4px',
+                        mr: char === " " ? (isMobile ? 1 : 2) : 0.2 
+                      }}
+                    >
+                      {char}
+                    </Typography>
+                  </motion.span>
+                ))}
+              </Box>
 
-    <Grid 
-      container 
-      spacing={isMobile ? 3 : 6} 
-      sx={{ mb: 0, pb: isMobile ? 4 : 6 }}
-    >
-      {testimonials.map((goal, index) => (
-        <Grid item xs={12} md={4} key={index}>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={!isMobile ? { y: -15, boxShadow: `0px 10px 30px ${gold}33` } : {}}
-          >
-            <Card 
-              sx={{ 
-                bgcolor: '#1a1a1a', 
-                color: '#fff', 
-                height: '100%', 
-                borderRadius: 0, 
-                borderLeft: `2px solid ${gold}`,
-                transition: '0.3s'
-              }}
-            >
-              <CardContent sx={{ p: isMobile ? 3 : 5 }}>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1.5 }}>
                 <Typography 
-                  variant="body1" 
-                  lineHeight={1.8} 
+                  variant={isMobile ? "body2" : "h6"} 
                   sx={{ 
-                    opacity: 0.7, 
-                    fontSize: isMobile ? '0.9rem' : '1rem' 
+                    fontStyle: 'italic', 
+                    mb: isMobile ? 2 : 4, 
+                    opacity: 0.8, 
+                    fontSize: isMobile ? '0.85rem' : '1.25rem' 
                   }}
                 >
-                  {goal.text}
+                  "Reliving the moments of joy, talent, and meaningful connections"
                 </Typography>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </Grid>
-      ))}
-    </Grid>
-  </Container>
-</Box>
+                
+                <Box sx={{ width: '60px', height: '3px', bgcolor: gold, margin: '0 auto', mb: isMobile ? 3 : 4 }} />
+                
+                <Typography 
+                  variant="overline" 
+                  sx={{ 
+                    letterSpacing: isMobile ? 4 : 8, 
+                    display: 'block', 
+                    mb: 1, 
+                    color: gold, 
+                    fontSize: isMobile ? '0.6rem' : '0.75rem' 
+                  }}
+                >
+                  Care Moments
+                </Typography>
+                
+                <Typography variant={isMobile ? "h4" : "h2"} sx={{ mb: isMobile ? 4 : 6, fontWeight: 900 }}>
+                  Captured Emotions
+                </Typography>
+                
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    onClick={() => navigate("/volunteer")}
+                    variant="contained"
+                    sx={{
+                      bgcolor: gold, 
+                      color: '#000', 
+                      fontWeight: 900, 
+                      px: isMobile ? 4 : 6, 
+                      py: isMobile ? 1.5 : 2,
+                      borderRadius: '0px', 
+                      fontSize: isMobile ? '0.8rem' : '1rem',
+                      '&:hover': { bgcolor: '#fff' }
+                    }}
+                  >
+                    Join as Volunteer
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </Container>
+        </Box>
+
+        {/* GOALS SECTION */}
+        <Box sx={{ pt: 0, pb: 0, bgcolor: '#0a0a0a' }}>
+          <Container>
+            <Typography 
+              variant={isMobile ? "h5" : "h4"} 
+              textAlign="center" 
+              sx={{ 
+                color: gold, 
+                mb: isMobile ? 4 : 6,
+                letterSpacing: isMobile ? 2 : 4, 
+                fontWeight: 700, 
+                pt: isMobile ? 4 : 6 
+              }}
+            >
+              OUR GOALS
+            </Typography>
+
+            <Grid container spacing={isMobile ? 3 : 6} sx={{ mb: 0, pb: isMobile ? 4 : 6 }}>
+              {testimonials.map((goal, index) => (
+                <Grid item xs={12} md={4} key={index}>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={!isMobile ? { y: -15, boxShadow: `0px 10px 30px ${gold}33` } : {}}
+                  >
+                    <Card sx={{ bgcolor: '#1a1a1a', color: '#fff', height: '100%', borderRadius: 0, borderLeft: `2px solid ${gold}`, transition: '0.3s' }}>
+                      <CardContent sx={{ p: isMobile ? 3 : 5 }}>
+                        <Typography variant="body1" lineHeight={1.8} sx={{ opacity: 0.7, fontSize: isMobile ? '0.9rem' : '1rem' }}>
+                          {goal.text}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Box>
 
         {/* OPPOSITE REACTION 1 */}
-       <Box 
-  sx={{ 
-    bgcolor: '#000', 
-    pt: 0,
-    pb: 0,
-  }}
->
-  <Container>
-    <Grid 
-      container 
-      spacing={isMobile ? 4 : 8} 
-      alignItems="center"
-      sx={{ mt: 0 }}
-    >
-      <Grid item xs={12} md={6}>
-        <motion.div 
-          initial={{ opacity: 0, x: isMobile ? 0 : -100, y: isMobile ? 20 : 0 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <Typography 
-            variant={isMobile ? "h5" : "h4"} 
-            sx={{ 
-              color: gold, 
-              mb: 2, 
-              mt: 0,
-              fontWeight: 800 
-            }}
-          >
-            When Joy Turns Into Fear
-          </Typography>
-          <Divider sx={{ borderColor: gold, width: '80px', mb: 3, borderWidth: 2 }} />
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              fontSize: isMobile ? '0.95rem' : '1.1rem', 
-              lineHeight: 1.8, 
-              opacity: 0.6 
-            }}
-          >
-            Every day, a mother struggles to reach timely medical care. <br />
-            A newborn waits for life-saving NICU admission. <br />
-            We bridge that gap.
-          </Typography>
-        </motion.div>
-      </Grid>
-
-      <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
-        <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal} viewport={{ once: true }}>
-          <Box
-            component="img"
-            src={ngoImage3}
-            sx={{ 
-              width: "100%", 
-              maxWidth: "500px", 
-              borderRadius: '4px', 
-              filter: 'brightness(0.8) contrast(1.2)',
-              height: isMobile ? '300px' : 'auto',
-              objectFit: 'cover',
-              display: 'block'
-            }}
-          />
-        </motion.div>
-      </Grid>
-    </Grid>
-  </Container>
-</Box>
+        <Box sx={{ bgcolor: '#000', py: isMobile ? 4 : 8 }}>
+          <Container>
+            <Grid container spacing={isMobile ? 4 : 8} alignItems="center">
+              <Grid item xs={12} md={6}>
+                <motion.div initial={{ opacity: 0, x: isMobile ? 0 : -100 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                  <Typography variant={isMobile ? "h5" : "h4"} sx={{ color: gold, mb: 2, fontWeight: 800 }}>
+                    When Joy Turns Into Fear
+                  </Typography>
+                  <Divider sx={{ borderColor: gold, width: '80px', mb: 3, borderWidth: 2 }} />
+                  <Typography variant="body1" sx={{ fontSize: isMobile ? '0.95rem' : '1.1rem', lineHeight: 1.8, opacity: 0.6 }}>
+                    Every day, a mother struggles to reach timely medical care. <br />
+                    A newborn waits for life-saving NICU admission. <br />
+                    We bridge that gap.
+                  </Typography>
+                </motion.div>
+              </Grid>
+              <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
+                <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal} viewport={{ once: true }}>
+                  <Box component="img" src={ngoImage3} sx={{ width: "100%", maxWidth: "500px", borderRadius: '4px', filter: 'brightness(0.8) contrast(1.2)', height: isMobile ? '300px' : 'auto', objectFit: 'cover' }} />
+                </motion.div>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
 
         {/* OPPOSITE REACTION 2 */}
-        <Box sx={{ bgcolor: '#0a0a0a', pt: 2, pb: 2 }}>
+        <Box sx={{ bgcolor: '#0a0a0a', py: isMobile ? 4 : 8 }}>
           <Container>
             <Grid container spacing={isMobile ? 4 : 8} alignItems="center" direction={isMobile ? "column-reverse" : "row"}>
               <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
                 <motion.div initial="hidden" whileInView="visible" variants={imageClipReveal} viewport={{ once: true }}>
-                  <Box
-                    component="img"
-                    src={ngoImage2}
-                    sx={{ 
-                      width: "100%", 
-                      maxWidth: "500px", 
-                      borderRadius: '4px', 
-                      filter: 'grayscale(40%)',
-                      height: isMobile ? '300px' : 'auto',
-                      objectFit: 'cover'
-                    }}
-                  />
+                  <Box component="img" src={ngoImage2} sx={{ width: "100%", maxWidth: "500px", borderRadius: '4px', filter: 'grayscale(40%)', height: isMobile ? '300px' : 'auto', objectFit: 'cover' }} />
                 </motion.div>
               </Grid>
-              
               <Grid item xs={12} md={6}>
-                <motion.div 
-                   initial={{ opacity: 0, x: isMobile ? 0 : 100, y: isMobile ? 20 : 0 }}
-                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 0.8 }}
-                >
+                <motion.div initial={{ opacity: 0, x: isMobile ? 0 : 100 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
                   <Typography variant={isMobile ? "h5" : "h4"} sx={{ color: gold, mb: 2, fontWeight: 800 }}>
                     Our Core Work
                   </Typography>
@@ -406,10 +316,7 @@ export default function Home() {
           </Container>
         </Box>
 
-        <Box sx={{ color: "#FFFFFF" }}>
-          <Footer />
-        </Box>
-
+        <Footer />
       </Box>
     </ThemeProvider>
   );
