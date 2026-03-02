@@ -28,11 +28,11 @@ import Careers from "./component/page/Careers";
 import ContactUs from "./component/page/ContactUs";
 import Payment from "./component/page/payment";
 import VolunteerForm from "./component/page/VolunteerForm";
-import Campaigns from "./component/page/Campaigns";
+// import Campaigns from "./component/page/Campaigns";
 import Manage from "./component/page/Manage";
 import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
-import PhotoGallery from "./component/page/PhotoGallery";
+// import PhotoGallery from "./component/page/PhotoGallery";
 import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
@@ -161,7 +161,7 @@ export default function App() {
             ))}
             <Divider sx={{ my: 1 }} />
             <ListItemButton disabled><ListItemText primary="Media Partners" sx={{ opacity: 0.6 }} /></ListItemButton>
-            <ListItemButton component={Link} to="/photo-gallery" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="Photo Gallery" /></ListItemButton>
+            {/* <ListItemButton component={Link} to="/photo-gallery" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="Photo Gallery" /></ListItemButton> */}
             <ListItemButton component={Link} to="/news" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="News" /></ListItemButton>
             <ListItemButton component={Link} to="/partners" onClick={() => setOpenDrawer(false)} sx={{ pl: 4 }}><ListItemText primary="Partners" /></ListItemButton>
           </List>
@@ -183,7 +183,7 @@ export default function App() {
           <Route path="/manage" element={<Manage />} />
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/peertopeer" element={<PeerToPeer />} />
-          <Route path="/photo-gallery" element={<PhotoGallery />} />
+          {/* <Route path="/photo-gallery" element={<PhotoGallery />} /> */}
           <Route path="/news" element={<Newsandpublication />} />
           <Route path="/magazine" element={<Magazine />} />
           <Route path="/partners" element={<Partners />} />

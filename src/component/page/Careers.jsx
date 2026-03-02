@@ -378,7 +378,7 @@ export default function Careers() {
 
       <Grid item xs={12} md={8}>
         {[
-          { q: "What is Sai Nisha Foundation?", a: "A youth-driven NGO focused on education and healthcare." },
+          { q: "What is Sai Nisha Foundation?", a: "sai nisha is supporting women in their pregnancy time" },
           { q: "How long is recruitment?", a: "Usually 1–2 weeks depending on volume." },
           { q: "Is it paid?", a: "Learning-focused; some roles offer performance stipends." },
         ].map((item, index) => (

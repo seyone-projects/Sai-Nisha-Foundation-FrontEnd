@@ -182,7 +182,7 @@ export default function Partners() {
   <Box 
     key={activePartner.name} 
     sx={{ 
-      mt: { xs: -5, md: -55 }, 
+      mt: { xs: -5, md: -65 }, 
       ml: { md: "auto" }, 
       width: { xs: "100%", md: "45%" }, 
       animation: `${fadeIn} 0.6s ease-out`,
@@ -270,7 +270,7 @@ export default function Partners() {
         <WhatsAppIcon sx={{ color: "#fff", fontSize: 32 }} />
       </Box>
 
-      <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
+      <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" }, mt: -9 }}>
         <Footer />
       </Box>
     </ThemeProvider>
