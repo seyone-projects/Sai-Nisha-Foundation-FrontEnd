@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import img1 from "../page/image/DSC06299.jpg";
 import img2 from "../page/image/DSC06390.jpg";
 import img3 from "../page/image/DSC06321.jpg";
+import videoSrc from "../page/image/partners video.mp4"; 
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/900.css";
@@ -40,9 +41,30 @@ const fadeIn = keyframes`
 function FullPageVideoBackground() {
   return (
     <Box sx={{ position: "fixed", inset: 0, zIndex: -2, bgcolor: "#111827" }}>
-      <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.85), rgba(17,24,39,0.95))" }} />
+      <Box
+        component="video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={videoSrc}
+        sx={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          top: 0,
+          left: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(17,24,39,0.7), rgba(17,24,39,0.9))",
+        }}
+      />
     </Box>
-
   );
 }
 
@@ -54,7 +76,7 @@ const PartnerCard = ({ img, partner, onHover, onLeave, delay, isMobile, isPaused
       onClick={() => onHover(partner)}
       sx={{
         position: "absolute",
-        top: "20%", 
+        top: "20%",
         left: "20%",
         "--radius": isMobile ? "100px" : "180px",
         margin: isMobile ? "-50px 0 0 -50px" : "-70px 0 0 -70px",
@@ -78,7 +100,7 @@ const PartnerCard = ({ img, partner, onHover, onLeave, delay, isMobile, isPaused
           objectFit: "cover",
           boxShadow: `0 0 25px ${gold}44`,
           transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-          "&:hover": { 
+          "&:hover": {
             transform: "scale(1.1)",
             borderColor: "#fff",
             boxShadow: `0 0 40px ${gold}`,
@@ -92,25 +114,25 @@ const PartnerCard = ({ img, partner, onHover, onLeave, delay, isMobile, isPaused
 export default function Partners() {
   const isMobile = useMediaQuery("(max-width:900px)");
   const [isPaused, setIsPaused] = useState(false);
-  
+
   const partnersData = [
-    { 
-        img: img1, 
-        name: "Kalaimamani Thiru Dhina", 
-        desc: "A legendary Music Director in the Indian film industry, known for his soul-stirring compositions and decades of contribution to cinematic excellence.", 
-        delay: "0s" 
+    {
+      img: img1,
+      name: "Kalaimamani Thiru Dhina",
+      desc: "A legendary Music Director in the Indian film industry, known for his soul-stirring compositions and decades of contribution to cinematic excellence.",
+      delay: "0s",
     },
-    { 
-        img: img2, 
-        name: "R. Kannan", 
-        desc: "A massive director recognized for his unique storytelling and blockbuster hits. His vision brings grand narratives to life on the silver screen.", 
-        delay: "-6.6s" 
+    {
+      img: img2,
+      name: "R. Kannan",
+      desc: "A massive director recognized for his unique storytelling and blockbuster hits. His vision brings grand narratives to life on the silver screen.",
+      delay: "-6.6s",
     },
-    { 
-        img: img3, 
-        name: "Jagan Purushottam", 
-        desc: "One of the finest actors of the generation, bringing depth and authenticity to every character he portrays with remarkable versatility.", 
-        delay: "-13.3s" 
+    {
+      img: img3,
+      name: "Jagan Purushottam",
+      desc: "One of the finest actors of the generation, bringing depth and authenticity to every character he portrays with remarkable versatility.",
+      delay: "-13.3s",
     },
   ];
 
@@ -130,11 +152,11 @@ export default function Partners() {
       <CssBaseline />
       <FullPageVideoBackground />
 
-      <Box sx={{ position: "relative",overflowX: "hidden", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 } }}>
+      <Box sx={{ position: "relative", overflowX: "hidden", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 } }}>
         <Container maxWidth="lg">
-          <Typography 
-            variant={isMobile ? "h4" : "h2"} 
-            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2 , mt: -5 }}
+          <Typography
+            variant={isMobile ? "h4" : "h2"}
+            sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2, mt: -5 }}
           >
             OUR <span style={{ color: gold }}>PARTNERS</span>
           </Typography>
@@ -142,34 +164,37 @@ export default function Partners() {
           <Grid container spacing={4} alignItems="center" justifyContent="center">
             <Grid item xs={12} md={6}>
               <Box
-               sx={{
-  height: { xs: 300, md: 500 },
-  width: "100%",
-  position: "relative",
-  display: "flex",
-  justifyContent: "flex-start",
-  alignItems: "center",  
-  overflow: "visible",
-  paddingLeft: 150,    
-}}
+                sx={{
+                  height: { xs: 300, md: 500 },
+                  width: "100%",
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  overflow: "visible",
+                  paddingLeft: 150,
+                }}
               >
-                <Box sx={{ 
-                    width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, 
-                    borderRadius: '50%', 
-                    border: `1px dashed ${gold}`, 
-                    position: 'absolute',
+                <Box
+                  sx={{
+                    width: { xs: 60, md: 80 },
+                    height: { xs: 60, md: 80 },
+                    borderRadius: "50%",
+                    border: `1px dashed ${gold}`,
+                    position: "absolute",
                     opacity: 0.3,
-                    zIndex: 0
-                }} />
+                    zIndex: 0,
+                  }}
+                />
 
                 {partnersData.map((partner, index) => (
-                  <PartnerCard 
+                  <PartnerCard
                     key={index}
-                    img={partner.img} 
-                    partner={partner} 
-                    onHover={handleHover} 
+                    img={partner.img}
+                    partner={partner}
+                    onHover={handleHover}
                     onLeave={handleLeave}
-                    delay={partner.delay} 
+                    delay={partner.delay}
                     isMobile={isMobile}
                     isPaused={isPaused}
                   />
@@ -178,66 +203,66 @@ export default function Partners() {
             </Grid>
 
             {/* RIGHT/BOTTOM SIDE: CONTENT DISPLAY */}
-          <Grid item xs={12} md={6}>
-  <Box 
-    key={activePartner.name} 
-    sx={{ 
-      mt: { xs: -5, md: -65 }, 
-      ml: { md: "auto" }, 
-      width: { xs: "100%", md: "45%" }, 
-      animation: `${fadeIn} 0.6s ease-out`,
-      padding: { xs: 3, md: 5 },
-      borderLeft: { md: `4px solid ${gold}` },
-      borderTop: { xs: `4px solid ${gold}`, md: "none" }, 
-      bgcolor: "rgba(255,255,255,0.03)",
-      backdropFilter: "blur(10px)",
-      borderRadius: { xs: "20px", md: "20px 0 0 20px" }, 
-      textAlign: { xs: "center", md: "right" },
-      zIndex: 1,
-      position: 'relative' 
-    }}
-  >
- <Typography 
-  variant="overline" 
-  sx={{ 
-    color: gold, 
-    fontSize: "1rem", 
-    fontWeight: "bold", 
-    display: "block",
-    textAlign: "left",
-    width: "100%",
-    paddingLeft: 0,
-    marginLeft: 0    
-  }}
->
-  Associate Spotlight
-</Typography>
+            <Grid item xs={12} md={6}>
+              <Box
+                key={activePartner.name}
+                sx={{
+                  mt: { xs: -5, md: -65 },
+                  ml: { md: "auto" },
+                  width: { xs: "100%", md: "45%" },
+                  animation: `${fadeIn} 0.6s ease-out`,
+                  padding: { xs: 3, md: 5 },
+                  borderLeft: { md: `4px solid ${gold}` },
+                  borderTop: { xs: `4px solid ${gold}`, md: "none" },
+                  bgcolor: "rgba(255,255,255,0.03)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: { xs: "20px", md: "20px 0 0 20px" },
+                  textAlign: { xs: "center", md: "right" },
+                  zIndex: 1,
+                  position: "relative",
+                }}
+              >
+                <Typography
+                  variant="overline"
+                  sx={{
+                    color: gold,
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    display: "block",
+                    textAlign: "left",
+                    width: "100%",
+                    paddingLeft: 0,
+                    marginLeft: 0,
+                  }}
+                >
+                  Associate Spotlight
+                </Typography>
 
-    <Typography 
-      variant={isMobile ? "h4" : "h3"} 
-      sx={{ 
-        color: "white", 
-        mb: 2, 
-        fontWeight: 900, 
-        textAlign: "left"
-      }}
-    >
-      {activePartner.name}
-    </Typography>
+                <Typography
+                  variant={isMobile ? "h4" : "h3"}
+                  sx={{
+                    color: "white",
+                    mb: 2,
+                    fontWeight: 900,
+                    textAlign: "left",
+                  }}
+                >
+                  {activePartner.name}
+                </Typography>
 
-    <Typography 
-      variant="body1" 
-      sx={{ 
-        color: "#ccc", 
-        lineHeight: 1.8, 
-        fontSize: "1.1rem",
-        textAlign: "left"
-      }}
-    >
-      {activePartner.desc}
-    </Typography>
-  </Box>
-</Grid>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#ccc",
+                    lineHeight: 1.8,
+                    fontSize: "1.1rem",
+                    textAlign: "left",
+                  }}
+                >
+                  {activePartner.desc}
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
         </Container>
       </Box>
