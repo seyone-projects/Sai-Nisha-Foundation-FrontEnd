@@ -38,7 +38,6 @@ export default function VolunteerForm() {
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // All fields defined here to be mapped in order
   const formFields = [
     { name: "name", label: "Full Name", required: true },
     { name: "email", label: "Email Address", type: "email", required: true },
@@ -66,7 +65,6 @@ export default function VolunteerForm() {
       </Button>
 
       <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: COLORS.dark, minHeight: "100vh", position: "relative", overflow: "hidden" }}>
-        {/* Animated Bubbles Background */}
         {[...Array(20)].map((_, i) => (
           <Box key={i} sx={{
             position: "absolute", bottom: -50, left: `${Math.random() * 100}%`,
@@ -97,7 +95,6 @@ export default function VolunteerForm() {
 
             <form onSubmit={(e) => { e.preventDefault(); console.log(formData); alert("Thank you for volunteering!"); }}>
               <Grid container spacing={3}>
-                {/* Main form fields (including Preferred Role) */}
                 {formFields.map((f) => (
                   <Grid item xs={12} key={f.name}>
                     <TextField
