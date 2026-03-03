@@ -1,4 +1,6 @@
 import React, { useState, memo, useMemo } from "react";
+// 1. Video import at the top
+import backgroundVideo from "../page/image/pre video.mp4"; 
 import {
   Box, Button, Typography, Grid, Card, CardMedia,
   CardContent, Container, keyframes, useMediaQuery,
@@ -16,6 +18,8 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
+
+// Image Imports
 import serviceImg1 from "./image/pre.jpg";
 import serviceImg2 from "./image/gettyimages-1637251600-612x612.jpg";
 import serviceImg3 from "./image/mental 2.avif";
@@ -23,34 +27,36 @@ import serviceImg4 from "./image/born 1.jpg";
 import serviceImg5 from "./image/edu 1.avif";
 import serviceImg6 from "./image/sports 1.avif";
 
-
 const GOLD = "#D68910";
 const LIGHT_MUTED = "#CBD5E1";
 
 const SERVICES_DATA = [
-  { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies.", img: serviceImg1, longDesc: "Our Pregnancy Emergency program provides 24/7 rapid response for expectant mothers facing complications. We bridge the gap between home and hospital, providing emergency transport, immediate medical consultation, and financial aid for life-saving procedures. We ensure that no mother or child is at risk due to a lack of resources." },
-  { title: "Pets", desc: "Rescue, medical care, and adoption support.", img: serviceImg2, longDesc: "Our animal welfare wing focuses on rescuing stray and abandoned animals. We provide immediate veterinary care, vaccinations, and sterilization. Beyond medical help, we run an active adoption program to find forever homes for our furry friends and provide food for street animals in underserved areas." },
-  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-developed.", img: serviceImg3, longDesc: "We provide specialized residential and daycare services for elderly individuals living with dementia, Alzheimer's, and other cognitive challenges. Our program focuses on 'Dignity in Aging,' offering therapeutic activities, professional nursing care, and a safe, loving environment where they are never forgotten." },
-  { title: "Newborn Emergency Care", desc: "NICU access and life-saving care.", img: serviceImg4, longDesc: "The first few hours of life are critical. We specialize in facilitating access to Neonatal Intensive Care Units (NICU) for families who cannot afford them. We provide high-tech incubators, emergency medicine, and specialized pediatric transport to ensure newborns get a fighting chance at life." },
-  { title: "Education", desc: "Empowering children through learning.", img: serviceImg5, longDesc: "Education is the greatest equalizer. We support the schooling of children from low-income backgrounds by providing tuition fees, uniforms, books, and digital learning tools. We also run after-school mentorship programs to help students develop soft skills and vocational interests for a brighter future." },
-  { title: "Sports", desc: "Encouraging fitness and confidence.", img: serviceImg6, longDesc: "Our sports program aims to identify and nurture athletic talent in underprivileged communities. By providing coaching, equipment, and access to tournaments, we help youth build discipline, teamwork, and physical health. We believe every child deserves the chance to shine on the field." },
+  { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies.", img: serviceImg1, longDesc: "Our Pregnancy Emergency program provides 24/7 rapid response for expectant mothers facing complications. We bridge the gap between home and hospital, providing emergency transport, immediate medical consultation, and financial aid for life-saving procedures." },
+  { title: "Pets", desc: "Rescue, medical care, and adoption support.", img: serviceImg2, longDesc: "Our animal welfare wing focuses on rescuing stray and abandoned animals. We provide immediate veterinary care, vaccinations, and sterilization." },
+  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-developed.", img: serviceImg3, longDesc: "We provide specialized residential and daycare services for elderly individuals living with dementia, Alzheimer's, and other cognitive challenges." },
+  { title: "Newborn Emergency Care", desc: "NICU access and life-saving care.", img: serviceImg4, longDesc: "The first few hours of life are critical. We specialize in facilitating access to Neonatal Intensive Care Units (NICU) for families who cannot afford them." },
+  { title: "Education", desc: "Empowering children through learning.", img: serviceImg5, longDesc: "Education is the greatest equalizer. We support the schooling of children from low-income backgrounds by providing tuition fees, uniforms, and books." },
+  { title: "Sports", desc: "Encouraging fitness and confidence.", img: serviceImg6, longDesc: "Our sports program aims to identify and nurture athletic talent in underprivileged communities. We believe every child deserves the chance to shine." },
 ];
+
 const fadeIn = keyframes`from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); }`;
 const slideUp = keyframes`from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); }`;
 const spotlightMove = keyframes`0% { transform: translate(-20%, -20%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translate(120%, 120%); opacity: 0; }`;
 
 const FullPageVideoBackground = memo(() => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: -2, overflow: "hidden", backgroundColor: "#111" }}>
+  <Box sx={{ position: "fixed", inset: 0, zIndex: -2, overflow: "hidden", backgroundColor: "#000" }}>
     <video
       autoPlay muted loop playsInline
-      style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.35) contrast(1.15)" }}
+      src={backgroundVideo}
+      style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.4) contrast(1.1)" }}
     />
-    <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.85), rgba(17,24,39,0.95))" }} />
+    {/* Transparent Overlay to allow video visibility while keeping text readable */}
+    <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.4), rgba(17,24,39,0.7))" }} />
   </Box>
 ));
 
 const BubblesBackground = memo(() => {
-  const bubbles = useMemo(() => [...Array(35)], []);
+  const bubbles = useMemo(() => [...Array(25)], []);
   return (
     <Box sx={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
       {bubbles.map((_, i) => (
@@ -63,7 +69,7 @@ const BubblesBackground = memo(() => {
             width: 10 + Math.random() * 20,
             height: 10 + Math.random() * 20,
             borderRadius: "50%",
-            background: "rgba(214,137,16,0.35)",
+            background: "rgba(214,137,16,0.2)",
             animation: `floatUp ${12 + Math.random() * 10}s linear infinite`,
             animationDelay: `${Math.random() * 5}s`,
           }}
@@ -72,7 +78,7 @@ const BubblesBackground = memo(() => {
       <style>{`
         @keyframes floatUp {
           from { transform: translateY(0); opacity: 0; }
-          20% { opacity: .6; }
+          20% { opacity: .4; }
           to { transform: translateY(-110vh); opacity: 0; }
         }
       `}</style>
@@ -91,17 +97,17 @@ const ServiceCard = ({ service, index, onLearnMore }) => (
   >
     <Card
       sx={{
-        width: 320, background: "rgba(255,255,255,0.05)",
-        backdropFilter: "blur(12px)", borderRadius: 6,
+        width: 320, background: "rgba(255,255,255,0.08)",
+        backdropFilter: "blur(8px)", borderRadius: 6,
         border: "1px solid rgba(255,255,255,0.1)", color: "#fff",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         display: 'flex', flexDirection: 'column',
-        '&:hover': { transform: 'translateY(-10px)', background: "rgba(255,255,255,0.1)", borderColor: GOLD }
+        '&:hover': { transform: 'translateY(-10px)', background: "rgba(255,255,255,0.15)", borderColor: GOLD }
       }}
     >
       <CardMedia component="img" height="220" image={service.img} alt={service.title} loading="lazy" />
       <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
-        <Typography variant="h6" sx={{ color: GOLD, mb: 1 }}>{service.title}</Typography>
+        <Typography variant="h6" sx={{ color: GOLD, mb: 1, fontWeight: 700 }}>{service.title}</Typography>
         <Typography sx={{ color: LIGHT_MUTED, fontSize: '0.9rem', mb: 2 }}>{service.desc}</Typography>
         <Button 
           variant="outlined" 
@@ -111,7 +117,7 @@ const ServiceCard = ({ service, index, onLearnMore }) => (
             '&:hover': { borderColor: "#fff", color: "#fff" }
           }}
         >
-          Learn Mores
+          Learn More
         </Button>
       </CardContent>
     </Card>
@@ -154,27 +160,29 @@ export default function Services() {
       <Box sx={{ position: "relative", zIndex: 2, minHeight: "100vh" }}>
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
           
-          {/* HERO SECTION */}
+          {/* HERO SECTION - Made transparent to show video */}
           <Box sx={{
-              position: "relative", backgroundColor: "rgba(17,24,39,0.85)",
+              position: "relative", 
+              backgroundColor: "transparent", // Removed dark background
               mb: { xs: 4, md: 8 }, mt: { xs: -4, md: -6 },
               py: { xs: 6, md: 12 }, px: 2, textAlign: "center", overflow: "hidden",
               borderRadius: { xs: 0, md: 4 }, display: "flex", flexDirection: "column",
               alignItems: "center", justifyContent: "center",
             }}
           >
+            {/* Animated Spotlight remains for flair */}
             <Box sx={{
                 position: "absolute", inset: 0, pointerEvents: "none",
-                background: `radial-gradient(circle at center, ${GOLD}40, transparent 70%)`,
-                animation: `${spotlightMove} 10s infinite linear`, filter: "blur(40px)",
+                background: `radial-gradient(circle at center, ${GOLD}25, transparent 70%)`,
+                animation: `${spotlightMove} 10s infinite linear`, filter: "blur(60px)",
               }}
             />
             <Typography
               variant={isMobile ? "h4" : "h2"}
               sx={{
                 position: "relative", color: "#fff", textTransform: "uppercase",
-                animation: `${fadeIn} 1s ease-out`, fontSize: { xs: '2rem', sm: '3rem', md: '3.75rem' },
-                lineHeight: 1.2,
+                animation: `${fadeIn} 1s ease-out`, fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+                lineHeight: 1.2, textShadow: "2px 2px 10px rgba(0,0,0,0.5)"
               }}
             >
               Our <span style={{ color: GOLD }}>Services</span>
@@ -202,7 +210,7 @@ export default function Services() {
           fullWidth
           PaperProps={{
             sx: {
-              background: "rgba(20, 25, 35, 0.95)", backdropFilter: "blur(20px)",
+              background: "rgba(20, 25, 35, 0.9)", backdropFilter: "blur(20px)",
               color: "#fff", borderRadius: 5, border: `1px solid ${GOLD}`,
             }
           }}
@@ -230,7 +238,7 @@ export default function Services() {
           )}
         </Dialog>
 
-        <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}>
+        <Box sx={{ width: "100%", mt: 10, "& *": { color: "#ffffff !important" } }}>
           <Footer />
         </Box>
       </Box>
