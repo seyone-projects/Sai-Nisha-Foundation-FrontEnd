@@ -1,4 +1,5 @@
 import React, { memo, useMemo } from "react";
+import backgroundVideo from "../page/image/vecteezy_young-mother-with-a-cute-new-born-baby_36023928 (1).mp4"; 
 import { Box, Button, Typography, Grid, Container, Divider, CssBaseline, keyframes, GlobalStyles } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
@@ -56,49 +57,66 @@ export default function About() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      
+      {/* BACKGROUND SECTION */}
+      <Box sx={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0, overflow: "hidden" }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
+        >
+          <source src={backgroundVideo} type="video/mp4" />
+        </video>
+        <Box sx={{ position: "absolute", inset: 0, bgcolor: "rgba(15, 23, 42, 0.4)" }} /> 
+      </Box>
+
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}>
         <Button component="a" href="https://wa.me/919962290875" target="_blank" rel="noopener noreferrer" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", bgcolor: "#25D366", color: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { bgcolor: "#1EBE5D", transform: "scale(1.1)" }, transition: "transform 0.2s ease-in-out" }}><WhatsAppIcon sx={{ fontSize: 30 }} /></Button>
       </Box>
 
-      <Box sx={{ position: "relative", py: { xs: 10, md: 14 }, background: creamBg, overflow: "hidden", minHeight: "100vh" }}>
+      <Box sx={{ position: "relative", py: { xs: 10, md: 14 }, background: "transparent", overflow: "hidden", minHeight: "100vh" }}>
         <BubblesBackground />
         <Container sx={{ position: "relative", zIndex: 2, mt: -10 }}>
           <motion.div variants={anim.fadeDown} initial="hidden" animate="visible">
-            <Box sx={{ position: "relative", bgcolor: "#020617", borderRadius: 4, overflow: "hidden", py: { xs: 10, md: 15 }, mb: { xs: 6, md: 8 }, boxShadow: "0 20px 40px rgba(0,0,0,0.6)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.05)` }}>
+            <Box sx={{ position: "relative", bgcolor: "rgba(2, 6, 23, 0.3)", backdropFilter: "blur(2px)", borderRadius: 4, overflow: "hidden", py: { xs: 10, md: 15 }, mb: { xs: 6, md: 8 }, boxShadow: "0 20px 40px rgba(0,0,0,0.4)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.05)` }}>
               <Box sx={{ position: "absolute", width: "350px", height: "350px", borderRadius: "50%", border: `2px solid ${gold}`, opacity: 0.6, filter: "blur(1px)", "&::before": { content: '""', position: "absolute", inset: "-10px", borderRadius: "50%", padding: "5px", background: `conic-gradient(from 0deg, transparent, ${gold}, transparent 40%, ${gold})`, WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "destination-out", maskComposite: "exclude", animation: `${rotateCircle} 2s linear infinite` } }} />
-              <Box sx={{ position: "absolute", inset: 0, background: `radial-gradient(circle at center, rgba(250, 204, 21, 0.15) 0%, transparent 70%)`, filter: "blur(60px)", animation: `${spotlightMove} 6s infinite ease-in-out` }} />
+              <Box sx={{ position: "absolute", inset: 0, background: `radial-gradient(circle at center, rgba(250, 204, 21, 0.1) 0%, transparent 70%)`, filter: "blur(60px)", animation: `${spotlightMove} 6s infinite ease-in-out` }} />
               <motion.div variants={anim.thunder} animate="animate">
                 <Typography variant={isMobile ? "h4" : "h2"} align="center" sx={{ height: 100, position: "relative", zIndex: 2, fontWeight: 900, letterSpacing: { xs: "0.1em", md: "0.18em" }, textTransform: "uppercase", color: "#FFFFFF", lineHeight: 1, textShadow: `0 0 20px ${gold}` }}>About <span style={{ color: gold }}>Us</span></Typography>
               </motion.div>
-              <Typography align="center" sx={{ position: "relative", zIndex: 2, color: "rgba(255,255,255,0.7)", letterSpacing: { xs: 3, md: 8 }, fontSize: { xs: 12, md: 14 }, mt: 3, fontWeight: 600, textTransform: "uppercase", lineHeight: 1 }}>Compassion • Purpose • Impact</Typography>
+              <Typography align="center" sx={{ position: "relative", zIndex: 2, color: "rgba(255,255,255,0.9)", letterSpacing: { xs: 3, md: 8 }, fontSize: { xs: 12, md: 14 }, mt: 3, fontWeight: 600, textTransform: "uppercase", lineHeight: 1 }}>Compassion • Purpose • Impact</Typography>
             </Box>
           </motion.div>
 
-          <Box sx={{ mt: { xs: -4, md: -10 } }}>
+          <Box sx={{ mt: { xs: -4, md: -5 } }}>
             <Container><motion.div variants={anim.fadeUp} initial="hidden" whileInView="visible">
-              <Box sx={{ background: cardBg, borderRadius: 6, p: { xs: 4, md: 8 }, boxShadow: "0 40px 120px rgba(0,0,0,0.3)", border: `1px solid rgba(255,255,255,0.05)` }}>
+              <Box sx={{ background: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(4px)", borderRadius: 6, p: { xs: 4, md: 8 }, boxShadow: "0 40px 120px rgba(0,0,0,0.3)", border: `1px solid rgba(255,255,255,0.1)` }}>
                 <H4Center color={gold}>Our Vision</H4Center>
-                <Typography color={mutedText} mt={2} lineHeight={1.8}>A world where <Box component="span" sx={{ color: gold, fontWeight: 700 }}>no mother or newborn</Box> loses life due to <Box component="span" sx={{ color: olive, fontWeight: 600 }}>delayed care</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>financial hardship</Box>, or lack of <Box component="span" sx={{ color: gold, fontWeight: 700 }}>medical support</Box>.<br /><br />We envision a future where <Box component="span" sx={{ color: navyText, fontWeight: 600 }}>every individual</Box> has the opportunity to <Box component="span" sx={{ color: gold, fontWeight: 700 }}>thrive</Box> through <Box component="span" sx={{ color: olive, fontWeight: 600 }}>sustainable support</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>education</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>compassionate care</Box>.</Typography>
-                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.1)" }} />
+                <Typography color={navyText} mt={2} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>A world where <Box component="span" sx={{ color: gold, fontWeight: 700 }}>no mother or newborn</Box> loses life due to <Box component="span" sx={{ color: olive, fontWeight: 600 }}>delayed care</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>financial hardship</Box>, or lack of <Box component="span" sx={{ color: gold, fontWeight: 700 }}>medical support</Box>.<br /><br />We envision a future where <Box component="span" sx={{ color: navyText, fontWeight: 600 }}>every individual</Box> has the opportunity to <Box component="span" sx={{ color: gold, fontWeight: 700 }}>thrive</Box> through <Box component="span" sx={{ color: olive, fontWeight: 600 }}>sustainable support</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>education</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>compassionate care</Box>.</Typography>
+                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.2)" }} />
                 <H4Center color={olive}>Our Mission</H4Center>
-                <Typography color={mutedText} mt={2} lineHeight={1.8}>We act <Box component="span" sx={{ color: gold, fontWeight: 700 }}>swiftly</Box>, <Box component="span" sx={{ color: gold, fontWeight: 700 }}>compassionately</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>responsibly</Box> to <Box component="span" sx={{ color: olive, fontWeight: 700 }}>save lives</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>empower families</Box>, and create meaningful impact during the <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>most critical moments</Box>.<br /><br />Our mission is to <Box component="span" sx={{ color: gold, fontWeight: 700 }}>empower underprivileged communities</Box> by providing <Box component="span" sx={{ color: olive, fontWeight: 600 }}>essential resources</Box>, fostering <Box component="span" sx={{ color: olive, fontWeight: 600 }}>self-reliance</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>bridging the gap</Box> between <Box component="span" sx={{ color: "#EF4444", fontWeight: 700 }}>crisis</Box> and <Box component="span" sx={{ color: "#22C55E", fontWeight: 700 }}>stability</Box> through <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>dedicated social service</Box>.</Typography>
-                <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
+                <Typography color={navyText} mt={2} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>We act <Box component="span" sx={{ color: gold, fontWeight: 700 }}>swiftly</Box>, <Box component="span" sx={{ color: gold, fontWeight: 700 }}>compassionately</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>responsibly</Box> to <Box component="span" sx={{ color: olive, fontWeight: 700 }}>save lives</Box>, <Box component="span" sx={{ color: olive, fontWeight: 600 }}>empower families</Box>, and create meaningful impact during the <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>most critical moments</Box>.<br /><br />Our mission is to <Box component="span" sx={{ color: gold, fontWeight: 700 }}>empower underprivileged communities</Box> by providing <Box component="span" sx={{ color: olive, fontWeight: 600 }}>essential resources</Box>, fostering <Box component="span" sx={{ color: olive, fontWeight: 600 }}>self-reliance</Box>, and <Box component="span" sx={{ color: gold, fontWeight: 700 }}>bridging the gap</Box> between <Box component="span" sx={{ color: "#EF4444", fontWeight: 700 }}>crisis</Box> and <Box component="span" sx={{ color: "#22C55E", fontWeight: 700 }}>stability</Box> through <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>dedicated social service</Box>.</Typography>
+                
+                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.2)" }} />
                 <H4Center color={navyText}>Our Impact Focus</H4Center>
                 <Box mt={4}>{[{ l: "Pregnancy Emergency", v: 90 }, { l: "Newborn Emergency care", v: 90 }].map((item, i) => (
                   <Box key={i} mb={4}><Typography fontWeight={600} color={navyText}>{item.l}</Typography>
-                    <Box sx={{ position: "relative", height: 16, borderRadius: 20, background: "#334155", overflow: "hidden", mt: 1 }}>
+                    <Box sx={{ position: "relative", height: 16, borderRadius: 20, background: "rgba(51, 65, 85, 0.6)", overflow: "hidden", mt: 1 }}>
                       <motion.div initial={{ width: 0 }} whileInView={{ width: `${item.v}%` }} transition={{ duration: 1.2, ease: "easeOut" }} style={{ height: "100%", background: `linear-gradient(90deg, ${gold}, ${olive})`, borderRadius: 20 }} />
                       <motion.div animate={{ left: [`0%`, `${item.v}%`, `0%`] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: 22, height: 22, borderRadius: "50%", background: gold, boxShadow: `0 0 12px ${gold}`, zIndex: 2 }} />
                     </Box></Box>
                 ))}</Box>
-                <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
-                <Box sx={{ textAlign: "center", p: { xs: 3, md: 4 }, borderRadius: 4, background: `linear-gradient(135deg, #0F172A, #1e293b)`, color: "#fff", position: "relative", overflow: "hidden", border: `1px solid ${gold}44` }}>
+
+                <Box sx={{ textAlign: "center", p: { xs: 3, md: 4 }, borderRadius: 4, background: `linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6))`, color: "#fff", position: "relative", overflow: "hidden", border: `1px solid ${gold}44` }}>
                   <motion.div animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at center, ${gold}33, transparent 70%)` }} />
                   <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} style={{ position: "relative", zIndex: 1 }}>
-                    <Typography variant="h5" fontWeight={700} fontSize={20} sx={{ color: gold }}>“Saving one life may not change the world, but it changes the world for that one life.”</Typography>
+                    <Typography variant="h5" fontWeight={700} fontSize={20} sx={{ color: gold, textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>“Saving one life may not change the world, but it changes the world for that one life.”</Typography>
                   </motion.div>
                 </Box>
-                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.1)" }} />
+
+                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.2)" }} />
                 <H4Center color={navyText}>Get <span style={{ color: olive }}>Involved</span></H4Center>
                 <Grid container spacing={4} sx={{ mb: -5, mt: 2 }} justifyContent="center">
                   {[
@@ -107,10 +125,10 @@ export default function About() {
                     { t: "Join", i: <GroupAddIcon />, c: "#3B82F6", d: "Become part of a compassionate movement dedicated to protecting life, dignity, and hope for the future." }
                   ].map((card, idx) => (
                     <Grid item xs={12} sm={6} md={4} key={idx} sx={{ display: "flex", justifyContent: "center" }}>
-                      <Box component={motion.div} whileHover={{ y: -15, scale: 1.02 }} sx={{ width: "270px", p: 4, textAlign: "center", bgcolor: "#0F172A", borderRadius: 6, boxShadow: "0 10px 30px rgba(0,0,0,0.3)", borderTop: `5px solid ${card.c}`, border: `1px solid rgba(255,255,255,0.05)`, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                      <Box component={motion.div} whileHover={{ y: -15, scale: 1.02 }} sx={{ width: "270px", p: 4, textAlign: "center", bgcolor: "rgba(15, 23, 42, 0.5)", backdropFilter: "blur(2px)", borderRadius: 6, boxShadow: "0 10px 30px rgba(0,0,0,0.3)", borderTop: `5px solid ${card.c}`, border: `1px solid rgba(255,255,255,0.1)`, display: "flex", flexDirection: "column", alignItems: "center" }}>
                         <Box sx={{ color: card.c, mb: 2, transform: "scale(1.5)" }}>{card.i}</Box>
                         <Typography variant="h6" fontWeight={800} gutterBottom color={card.c}>{card.t}</Typography>
-                        <Typography color={mutedText} fontSize="0.95rem">{card.d}</Typography>
+                        <Typography color={navyText} fontSize="0.95rem">{card.d}</Typography>
                       </Box>
                     </Grid>
                   ))}</Grid>
@@ -119,38 +137,44 @@ export default function About() {
           </Box>
 
           <motion.div variants={anim.fadeUp} initial="hidden" whileInView="visible">
-            <Box sx={{ maxWidth: 980, mt: 3, mx: "auto", px: { xs: 3, md: 8 }, py: { xs: 4, md: 8 }, borderRadius: 6, background: cardBg, backdropFilter: "blur(16px)", boxShadow: "0 50px 140px rgba(0,0,0,0.4)", border: `1px solid rgba(255,255,255,0.05)` }}>
-              <Typography lineHeight={1.8} color={mutedText} fontSize="1.1rem">
+            <Box sx={{ maxWidth: 980, mt: 3, mx: "auto", px: { xs: 3, md: 8 }, py: { xs: 4, md: 8 }, borderRadius: 6, background: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(4px)", boxShadow: "0 50px 140px rgba(0,0,0,0.4)", border: `1px solid rgba(255,255,255,0.1)` }}>
+              <Typography lineHeight={1.8} color={navyText} fontSize="1.1rem" sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                 &bull; <Box component="span" sx={{ color: gold, fontWeight: 800 }}>Sai Nisha Foundation</Box> was born from <Box component="span" sx={{ color: olive, fontWeight: 600 }}>love, loss, and resolve</Box> to protect <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>fragile life</Box>.<br />
                 &bull; We stand in the gap for families facing <Box component="span" sx={{ color: "#EF4444", fontWeight: 600 }}>fear and uncertainty</Box> during <Box component="span" sx={{ color: gold, fontWeight: 700 }}>childbirth</Box>.<br />
                 &bull; We prioritize support during the <Box component="span" sx={{ color: olive, fontWeight: 600 }}>final weeks of pregnancy</Box> and <Box component="span" sx={{ color: olive, fontWeight: 600 }}>first hours of birth</Box>.
               </Typography>
+              
               <H4Center color={olive} mt={6}>Our Roots</H4Center>
               <Divider sx={{ my: 2, borderColor: `${olive}33` }} />
-              <Typography color={mutedText} lineHeight={1.8}>
+              <Typography color={navyText} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                 &bull; Established in <Box component="span" sx={{ fontWeight: 800, color: navyText }}>2023</Box> by <Box component="span" sx={{ fontWeight: 800, color: gold }}>Ganesh and his spouse</Box> to honor a <Box component="span" sx={{ fontWeight: 600, color: olive }}>deeply personal promise</Box>.<br />
                 &bull; Named in loving memory of <Box component="span" sx={{ fontWeight: 800, color: gold }}>Sai</Box> and <Box component="span" sx={{ fontWeight: 800, color: gold }}>Nisha</Box>.<br />
                 &bull; Born from the pain of <Box component="span" sx={{ fontWeight: 600, color: "#EF4444" }}>losing a child</Box> due to <Box component="span" sx={{ fontWeight: 600, color: olive }}>delayed hospital care</Box>.
               </Typography>
+
               <H4Center color={navyText} mt={6}>A Purpose Forged Through Loss</H4Center>
               <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
-              <Typography color={mutedText} lineHeight={1.8}>
+              <Typography color={navyText} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                 &bull; Strengthened following the <Box component="span" sx={{ color: "#EF4444", fontWeight: 600 }}>untimely loss</Box> of our founder.<br />
                 &bull; Transforming <Box component="span" sx={{ color: gold, fontWeight: 800 }}>personal grief</Box> into <Box component="span" sx={{ color: olive, fontWeight: 600 }}>compassionate action</Box>.<br />
                 &bull; Guided by the belief that <Box component="span" sx={{ color: navyText, fontWeight: 800 }}>care delayed should never become care denied</Box>.
               </Typography>
+
               <H4Center color="#3B82F6" mt={6}>What We Believe</H4Center>
               <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
-              <Typography color={mutedText} lineHeight={1.8}>&bull; <Box component="span" sx={{ fontWeight: 800, color: gold }}>Every mother</Box> deserves <Box component="span" sx={{ fontWeight: 600, color: olive }}>dignity and care</Box>.<br />&bull; <Box component="span" sx={{ fontWeight: 800, color: navyText }}>Timely intervention</Box> saves <Box component="span" sx={{ fontWeight: 800, color: gold }}>entire families</Box>.</Typography>
+              <Typography color={navyText} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>&bull; <Box component="span" sx={{ fontWeight: 800, color: gold }}>Every mother</Box> deserves <Box component="span" sx={{ fontWeight: 600, color: olive }}>dignity and care</Box>.<br />&bull; <Box component="span" sx={{ fontWeight: 800, color: navyText }}>Timely intervention</Box> saves <Box component="span" sx={{ fontWeight: 800, color: gold }}>entire families</Box>.</Typography>
+              
               <H4Center color="#06B6D4" mt={6}>Our Core Focus</H4Center>
               <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
-              <Typography color={mutedText} lineHeight={1.8}>&bull; <Box component="span" sx={{ fontWeight: 800, color: gold }}>Supporting Mothers</Box> in the <Box component="span" sx={{ fontWeight: 600, color: olive }}>Third Trimester</Box>.<br />&bull; <Box component="span" sx={{ fontWeight: 800, color: navyText }}>Emergency Support</Box> for <Box component="span" sx={{ fontWeight: 800, color: gold }}>New Borns & NICU care</Box>.</Typography>
+              <Typography color={navyText} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>&bull; <Box component="span" sx={{ fontWeight: 800, color: gold }}>Supporting Mothers</Box> in the <Box component="span" sx={{ fontWeight: 600, color: olive }}>Third Trimester</Box>.<br />&bull; <Box component="span" sx={{ fontWeight: 800, color: navyText }}>Emergency Support</Box> for <Box component="span" sx={{ fontWeight: 800, color: gold }}>New Borns & NICU care</Box>.</Typography>
+
               <H4Center color={navyText} mt={6}>Compassion Beyond Boundaries</H4Center>
               <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
-              <Typography color={mutedText} lineHeight={1.8}>&bull; Children Striving <Box component="span" sx={{ color: gold, fontWeight: 800 }}>for education and sports excellence</Box>, and <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>Injured elderly animals</Box>, <Box component="span" sx={{ color: gold, fontWeight: 800 }}>Mentally challenged elders facing neglect</Box>.</Typography>
+              <Typography color={navyText} lineHeight={1.8} sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>&bull; Children Striving <Box component="span" sx={{ color: gold, fontWeight: 800 }}>for education and sports excellence</Box>, and <Box component="span" sx={{ color: navyText, fontWeight: 700 }}>Injured elderly animals</Box>, <Box component="span" sx={{ color: gold, fontWeight: 800 }}>Mentally challenged elders facing neglect</Box>.</Typography>
+
               <H4Center color={gold} mt={8}>Our Promise</H4Center>
               <Divider sx={{ my: 2, borderColor: gold }} />
-              <Typography color={mutedText} lineHeight={1.8} textAlign="center" fontSize="1.2rem">&bull; We promise <Box component="span" sx={{ color: gold, fontWeight: 800 }}>presence</Box>, <Box component="span" sx={{ color: olive, fontWeight: 800 }}>honesty</Box>, and <Box component="span" sx={{ color: navyText, fontWeight: 800 }}>compassion</Box> to every life we reach.<br />&bull; Because <Box component="span" sx={{ color: gold, fontWeight: 900 }}>every life is worth fighting for</Box>.</Typography>
+              <Typography color={navyText} lineHeight={1.8} textAlign="center" fontSize="1.2rem" sx={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>&bull; We promise <Box component="span" sx={{ color: gold, fontWeight: 800 }}>presence</Box>, <Box component="span" sx={{ color: olive, fontWeight: 800 }}>honesty</Box>, and <Box component="span" sx={{ color: navyText, fontWeight: 800 }}>compassion</Box> to every life we reach.<br />&bull; Because <Box component="span" sx={{ color: gold, fontWeight: 900 }}>every life is worth fighting for</Box>.</Typography>
             </Box>
           </motion.div>
 
@@ -163,7 +187,7 @@ export default function About() {
           </Box>
         </Container>
       </Box>
-      <Box sx={{ "& *": { color: "#FFFFFF !important" }, bgcolor: "#020617" }}><Footer /></Box>
+      <Box sx={{ position: "relative", zIndex: 2, "& *": { color: "#FFFFFF !important" }, bgcolor: "rgba(2, 6, 23, 0.9)" }}><Footer /></Box>
     </ThemeProvider>
   );
 }
