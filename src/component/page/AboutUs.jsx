@@ -9,7 +9,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import aboutImg1 from "../page/image/Baby shower poses ideas.jpg";
+import aboutImg1 from "../page/image/pre photo 2.jpg";
 import aboutImg2 from "../page/image/born 2.jpg";
 
 const [navyText, olive, gold, mutedText, creamBg, cardBg] = ["#F1F5F9", "#84CC16", "#FACC15", "#94A3B8", "#0F172A", "#1E293B"];

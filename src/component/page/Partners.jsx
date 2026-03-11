@@ -68,7 +68,7 @@ export default function Partners() {
       <Box sx={{ position: "relative", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 }, overflowX: "hidden" }}>
         <Container maxWidth="lg">
           <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2, mt: -5 }}>
-            OUR <span style={{ color: gold }}>PARTNERS</span>
+            <span style={{ color: gold }}>celebrities</span>
           </Typography>
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>

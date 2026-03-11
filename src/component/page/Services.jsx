@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import backgroundVideo from "../page/image/pre video.mp4";
 import "@fontsource/poppins/300.css"; import "@fontsource/poppins/900.css";
 import serviceImg1 from "./image/pre.jpg"; import serviceImg2 from "./image/gettyimages-1637251600-612x612.jpg";
-import serviceImg3 from "./image/mental 2.avif"; import serviceImg4 from "./image/born 1.jpg";
+import serviceImg3 from "./image/mentally challenged.jpg"; import serviceImg4 from "./image/new born child 2.jpg";
 import serviceImg5 from "./image/edu 1.avif"; import serviceImg6 from "./image/sports 1.avif";
 
 const GOLD = "#D68910", MUTED = "#CBD5E1", fadeIn = keyframes`from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); }`, slideUp = keyframes`from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); }`, spot = keyframes`0% { transform: translate(-20%, -20%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translate(120%, 120%); opacity: 0; }`;
@@ -50,7 +50,7 @@ export default function Services() {
         <Grid container spacing={isMobile ? 3 : 4} justifyContent="center" sx={{ pb: 10 }}>
           {DATA.map((s, i) => (
             <Grid item key={i} xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center", opacity: 0, animation: `${slideUp} .8s ease-out ${i * 0.1}s forwards` }}>
-              <Card sx={{ width: "100%", maxWidth: 340, bgcolor: "rgba(255,255,255,0.08)", backdropFilter: "blur(8px)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", color: "#fff", transition: "0.3s", "&:hover": { transform: 'translateY(-10px)', borderColor: GOLD, bgcolor: "rgba(255,255,255,0.15)" } }}>
+              <Card sx={{ width: "100%", maxWidth: 500, bgcolor: "rgba(255,255,255,0.08)", backdropFilter: "blur(8px)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", color: "#fff", transition: "0.3s", "&:hover": { transform: 'translateY(-10px)', borderColor: GOLD, bgcolor: "rgba(255,255,255,0.15)" } }}>
                 <CardMedia component="img" height="200" image={s.img} sx={{ objectFit: 'cover' }} />
                 <CardContent sx={{ textAlign: "center", p: 3 }}>
                   <Typography variant="h6" sx={{ color: GOLD, fontWeight: 700, mb: 1 }}>{s.title}</Typography>

@@ -13,11 +13,11 @@ const theme = createTheme({
 });
 
 export default function VolunteerForm() {
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")), [formData, setFormData] = useState({ name: "", email: "", phone: "", age: "", role: "", availability: "", message: "" });
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")), [formData, setFormData] = useState({ name: "", email: "", phone: "", role: "", availability: "", message: "" });
   const hndl = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const fields = [
     { n: "name", l: "Full Name", r: 1 }, { n: "email", l: "Email Address", t: "email", r: 1 },
-    { n: "phone", l: "Phone Number", r: 1 }, { n: "age", l: "Age", t: "number" },
+    { n: "phone", l: "Phone Number", r: 1 },
     { n: "role", l: "Preferred Role", s: 1, o: ["Medical Support", "Education", "Services", "Careers"] },
     { n: "availability", l: "Availability (Days / Time)" }
   ];

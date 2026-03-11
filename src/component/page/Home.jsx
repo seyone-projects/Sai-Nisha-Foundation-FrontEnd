@@ -6,7 +6,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Footer from "./Footer";
 import "@fontsource/poppins/300.css"; import "@fontsource/poppins/400.css"; import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css"; import "@fontsource/poppins/700.css"; import "@fontsource/poppins/800.css"; import "@fontsource/poppins/900.css";
-import ngoImage2 from "../page/image/newborn-baby-crib.jpg"; import ngoImage3 from "../page/image/Baby shower poses.jpg"; import ngoImage6 from "../page/image/home.jpg";
+import ngoImage2 from "../page/image/newborn-baby-crib.jpg"; import ngoImage3 from "../page/image/pre photo.jpg"; import ngoImage6 from "../page/image/home.jpg";
 
 const DARK_BG = "#121212", GOLD = "#FFC107", WHITE_TEXT = "#FFFFFF";
 const theme = createTheme({ palette: { mode: 'dark', primary: { main: GOLD }, text: { primary: WHITE_TEXT, secondary: "rgba(255, 255, 255, 0.7)" } }, typography: { fontFamily: `"Poppins", "sans-serif"`, h1: { fontWeight: 900, textTransform: 'uppercase', letterSpacing: '8px' }, h2: { fontWeight: 800 } } });

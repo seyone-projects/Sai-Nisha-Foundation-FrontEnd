@@ -65,9 +65,16 @@ export default function Careers() {
             </motion.div>
           </Container>
         </Box>
+         <Box sx={{ mt: 5 }}><Typography variant="h4" textAlign="center" sx={{ color: "#fff", mb: 8 }}><span style={{ color: cinematicGold }}>Why Join US</span></Typography>
+            <Grid container spacing={4} justifyContent="center">{JOIN_DATA.map((item, i) => (
+              <Grid item xs={12} md={4} key={i} display="flex" justifyContent="center"><motion.div variants={anim.item} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ width: '100%', maxWidth: 350 }}>
+                <GlassPaper sx={{ p: 4, "&:hover": { borderColor: cinematicGold, transform: "translateY(-10px)" } }}><Typography fontWeight={700} sx={{ color: cinematicGold, mb: 2 }}>{item.t}</Typography><Typography fontSize={14} sx={{ opacity: 0.8 }}>{item.d}</Typography></GlassPaper>
+              </motion.div></Grid>
+            ))}</Grid>
+          </Box>
 
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          <Typography variant="h4" textAlign="center" sx={{ mt: -12, mb: 6, color: "#fff" }}>view openings</Typography>
+          <Typography variant="h4" textAlign="center" sx={{ mt: -2, mb: 6, color: "#fff" }}>view openings</Typography>
           <motion.div variants={anim.container} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Grid container spacing={4} justifyContent="center">
               {JOBS.map((j, i) => (
@@ -87,14 +94,6 @@ export default function Careers() {
               ))}
             </Grid>
           </motion.div>
-
-          <Box sx={{ mt: 5 }}><Typography variant="h4" textAlign="center" sx={{ color: "#fff", mb: 8 }}><span style={{ color: cinematicGold }}>Why Join US</span></Typography>
-            <Grid container spacing={4} justifyContent="center">{JOIN_DATA.map((item, i) => (
-              <Grid item xs={12} md={4} key={i} display="flex" justifyContent="center"><motion.div variants={anim.item} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ width: '100%', maxWidth: 350 }}>
-                <GlassPaper sx={{ p: 4, "&:hover": { borderColor: cinematicGold, transform: "translateY(-10px)" } }}><Typography fontWeight={700} sx={{ color: cinematicGold, mb: 2 }}>{item.t}</Typography><Typography fontSize={14} sx={{ opacity: 0.8 }}>{item.d}</Typography></GlassPaper>
-              </motion.div></Grid>
-            ))}</Grid>
-          </Box>
 
           <Box sx={{ mt: 10, py: { xs: 8, md: 12 }, background: "linear-gradient(135deg, #F2A900, #D68910)", borderRadius: 6, color: "#fff", boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
             <Container maxWidth="lg"><Grid container spacing={6}><Grid item xs={12} md={4}><Typography variant="h4" fontWeight={800} mb={2}>Frequently asked questions</Typography><Typography sx={{ opacity: 0.9, mb: 4 }}>We are always here to help. Reach out!</Typography>
