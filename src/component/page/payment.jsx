@@ -22,27 +22,55 @@ const BubblesBackground = () => (
 export default function Payment() {
   const isMobile = useMediaQuery("(max-width:900px)"), [amount, setAmount] = useState("500"), [customAmount, setCustomAmount] = useState("");
   const handleAmountChange = (_, v) => v && (setAmount(v) || setCustomAmount(""));
-  const inputSx = { "& .MuiOutlinedInput-root": { borderRadius: "12px", backgroundColor: "rgba(255,255,255,0.05)" } };
+  const inputSx = { 
+    mb: 2.5,
+    "& .MuiOutlinedInput-root": { 
+        borderRadius: "12px", 
+        backgroundColor: "rgba(255,255,255,0.05)" 
+    } 
+  };
 
   return (
     <ThemeProvider theme={theme}><CssBaseline />
+      {/* WhatsApp FAB */}
       <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}><Button component="a" href="https://wa.me/919962290875" target="_blank" rel="noopener" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", bgcolor: "#25D366", color: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { bgcolor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon sx={{ fontSize: 30 }} /></Button></Box>
+      
       <Box sx={{ bgcolor: deepNavy, minHeight: "100vh", position: "relative", zIndex: 1 }}><BubblesBackground />
         <Box sx={{ py: { xs: 8, md: 10 }, position: "relative", zIndex: 2 }}><Container maxWidth="sm">
+          
           <Typography variant={isMobile ? "h4" : "h2"} align="center" sx={{ mt: -10, fontWeight: 900, mb: 4, color: pureWhite, textTransform: "uppercase", animation: `${fadeIn} 1s ease-out`, letterSpacing: 1 }}>Support Our Cause</Typography>
+          
           <Card sx={{ p: { xs: 3, md: 5 }, borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", bgcolor: "rgba(255,255,255,0.05)", backdropFilter: "blur(20px)", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", "&:hover": { border: "1px solid rgba(255,255,255,0.2)" } }}>
             <Typography variant="h5" fontWeight={800} color={pureWhite} textAlign="center">Make a Donation</Typography>
             <Typography textAlign="center" color={mutedGrey} mb={4} fontWeight={500}>Your contribution helps us create real impact</Typography>
+            
+            {/* Amount Selection */}
             <Typography fontWeight={700} fontSize={14} mb={1.5} color={mutedGrey} sx={{ textTransform: 'uppercase', letterSpacing: 1.5 }}>Select Amount (₹)</Typography>
             <ToggleButtonGroup value={amount} exclusive onChange={handleAmountChange} fullWidth sx={{ mb: 2, "& .MuiToggleButton-root": { borderRadius: "12px", mx: 0.5, border: "1px solid rgba(255,255,255,0.1) !important", color: pureWhite } }}>
               {["500", "1000", "2500", "5000"].map((v) => <ToggleButton key={v} value={v} sx={{ fontWeight: 700, "&.Mui-selected": { bgcolor: `${forestGreen} !important`, color: "#fff" } }}>₹{v}</ToggleButton>)}
             </ToggleButtonGroup>
-            <TextField fullWidth label="Custom Amount" type="number" value={customAmount} onChange={(e) => { setCustomAmount(e.target.value); setAmount(""); }} sx={{ mb: 3, ...inputSx }} />
-            <Typography fontWeight={700} fontSize={14} mb={1.5} color={mutedGrey} sx={{ textTransform: 'uppercase', letterSpacing: 1.5 }}>Donor Details</Typography>
-            <Grid container spacing={2}>
-              {["Full Name", "Email Address", "Phone Number"].map((l) => <Grid item xs={12} key={l}><TextField fullWidth label={l} variant="outlined" sx={inputSx} /></Grid>)}
-            </Grid>
-            <Button fullWidth size="large" endIcon={<ChevronRightIcon />} onClick={() => alert("Payment Gateway Integration Pending")} sx={{ mt: 4, py: 1.8, fontSize: 16, fontWeight: 800, borderRadius: 3, bgcolor: forestGreen, color: "#fff", "&:hover": { bgcolor: lightGreen, transform: "translateY(-3px)" }, transition: "0.4s" }}>Proceed to Pay</Button>
+
+            {/* Custom Amount Field */}
+            <TextField 
+                fullWidth 
+                label="Custom Amount" 
+                type="number" 
+                variant="outlined"
+                value={customAmount} 
+                onChange={(e) => { setCustomAmount(e.target.value); setAmount(""); }} 
+                sx={inputSx} 
+            />
+            
+            <Typography fontWeight={700} fontSize={14} mb={2} mt={1} color={mutedGrey} sx={{ textTransform: 'uppercase', letterSpacing: 1.5 }}>Donor Details</Typography>
+            
+            {/* Donor Detail Fields - Now exactly the same width and style */}
+            <Box>
+                <TextField fullWidth label="Full Name" variant="outlined" sx={inputSx} />
+                <TextField fullWidth label="Email Address" variant="outlined" sx={inputSx} />
+                <TextField fullWidth label="Phone Number" variant="outlined" sx={inputSx} />
+            </Box>
+
+            <Button fullWidth size="large" endIcon={<ChevronRightIcon />} onClick={() => alert("Payment Gateway Integration Pending")} sx={{ mt: 2, py: 1.8, fontSize: 16, fontWeight: 800, borderRadius: 3, bgcolor: forestGreen, color: "#fff", "&:hover": { bgcolor: lightGreen, transform: "translateY(-3px)" }, transition: "0.4s" }}>Proceed to Pay</Button>
             <Typography mt={2.5} textAlign="center" fontSize={11} fontWeight={600} color={mutedGrey} sx={{ letterSpacing: 2 }}>SECURE PAYMENT • 100% TRANSPARENT USAGE</Typography>
           </Card>
         </Container></Box>

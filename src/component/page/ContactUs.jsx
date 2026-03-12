@@ -8,6 +8,15 @@ import Footer from "./Footer";
 
 const [darkNavy, tealGreen, emeraldGreen, textWhite, lightGrey] = ["#0B1120", "#0E4D44", "#157A6E", "#FFFFFF", "#B0BCC2"];
 const theme = createTheme({ palette: { mode: 'dark', primary: { main: emeraldGreen } }, typography: { fontFamily: `"Poppins", sans-serif`, h3: { fontWeight: 900 } }, components: { MuiTextField: { styleOverrides: { root: { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' } } } } } } });
+const BubblesBackground = () => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: 1, overflow: "hidden", pointerEvents: "none" }}>
+    {[...Array(40)].map((_, i) => {
+      const size = Math.random() * 20 + 8, left = Math.random() * 100, dur = Math.random() * 10 + 10, del = Math.random() * 20, isG = i % 2 === 0;
+      return <Box key={i} sx={{ position: "absolute", bottom: "-30px", left: `${left}%`, width: size, height: size, backgroundColor: isG ? "rgba(6, 68, 57, 0.45)" : "rgba(255, 255, 255, 0.1)", borderRadius: "50%", boxShadow: `0 0 15px 4px ${isG ? "rgba(6,68,57,0.3)" : "rgba(255,255,255,0.05)"}`, opacity: 0, animation: `floatUp ${dur}s linear infinite ${del}s` }} />;
+    })}
+    <style>{`@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.6; } 100% { transform: translateY(-110vh) scale(1.4); opacity: 0; } }`}</style>
+  </Box>
+);
 
 export default function ContactUs() {
   const isMobile = useMediaQuery("(max-width:600px)"), [type, setType] = useState(""), [success, setSuccess] = useState(false);
@@ -24,7 +33,7 @@ export default function ContactUs() {
 
   return (
     <ThemeProvider theme={theme}><CssBaseline />
-      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}><Button component="a" href="https://wa.me/919962290875" target="_blank" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", backgroundColor: "#25D366", color: "#fff", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></Button></Box>
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}><Button component="a" href="https://wa.me/919962290875" target="_blank" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", backgroundColor: "#25D366", color: "#fff", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></Button></Box><BubblesBackground />
       <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh", mt: -12 }}>
         <Card sx={{ width: isMobile ? "95%" : "90%", maxWidth: "800px", mx: "auto", borderRadius: 6, border: `1px solid ${emeraldGreen}`, background: "#111827", boxShadow: "0px 10px 30px rgba(0,0,0,0.5)" }}>
           <Box sx={{ background: `linear-gradient(135deg, ${tealGreen}, ${emeraldGreen})`, py: 4, textAlign: "center" }}><Typography variant="h3" sx={{ color: textWhite }}>Contact Us</Typography><Typography sx={{ color: lightGrey }}>Carrying His Light Forward</Typography></Box>

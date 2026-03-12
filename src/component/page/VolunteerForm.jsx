@@ -1,57 +1,53 @@
 import React, { useState } from "react";
-import { Box, TextField, Typography, Button, Grid, MenuItem, Paper, Container, CssBaseline, useMediaQuery, keyframes, createTheme, ThemeProvider } from "@mui/material";
+import { Box, Typography, Grid, TextField, Button, MenuItem, Select, FormControl, InputLabel, Card, InputAdornment, CssBaseline, Divider, useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import Footer from "../page/Footer";
-import "@fontsource/poppins/400.css"; import "@fontsource/poppins/700.css"; import "@fontsource/poppins/900.css";
+import emailjs from "@emailjs/browser";
+import Footer from "./Footer";
 
-const CLR = { dark: "#0A121E", teal: "#166352", muted: "#B0BEC5" };
-const floatUp = keyframes`0%{transform:translateY(0);opacity:0} 20%,80%{opacity:0.3} 100%{transform:translateY(-120vh) scale(1.5);opacity:0}`;
-const theme = createTheme({
-  palette: { mode: 'dark', primary: { main: CLR.teal } },
-  typography: { fontFamily: "Poppins, sans-serif" },
-  components: { MuiOutlinedInput: { styleOverrides: { root: { borderRadius: 12, backgroundColor: "rgba(255,255,255,0.05)", "&:hover": { backgroundColor: "rgba(255,255,255,0.08)" } } } } }
-});
+const [darkNavy, tealGreen, emeraldGreen, textWhite, lightGrey] = ["#0B1120", "#0E4D44", "#157A6E", "#FFFFFF", "#B0BCC2"];
+const theme = createTheme({ palette: { mode: 'dark', primary: { main: emeraldGreen } }, typography: { fontFamily: `"Poppins", sans-serif`, h3: { fontWeight: 900 } }, components: { MuiTextField: { styleOverrides: { root: { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' } } } } } } });
+const BubblesBackground = () => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: 1, overflow: "hidden", pointerEvents: "none" }}>
+    {[...Array(40)].map((_, i) => {
+      const size = Math.random() * 20 + 8, left = Math.random() * 100, dur = Math.random() * 10 + 10, del = Math.random() * 20, isG = i % 2 === 0;
+      return <Box key={i} sx={{ position: "absolute", bottom: "-30px", left: `${left}%`, width: size, height: size, backgroundColor: isG ? "rgba(6, 68, 57, 0.45)" : "rgba(255, 255, 255, 0.1)", borderRadius: "50%", boxShadow: `0 0 15px 4px ${isG ? "rgba(6,68,57,0.3)" : "rgba(255,255,255,0.05)"}`, opacity: 0, animation: `floatUp ${dur}s linear infinite ${del}s` }} />;
+    })}
+    <style>{`@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.6; } 100% { transform: translateY(-110vh) scale(1.4); opacity: 0; } }`}</style>
+  </Box>
+);
 
-export default function VolunteerForm() {
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")), [formData, setFormData] = useState({ name: "", email: "", phone: "", role: "", availability: "", message: "" });
-  const hndl = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const fields = [
-    { n: "name", l: "Full Name", r: 1 }, { n: "email", l: "Email Address", t: "email", r: 1 },
-    { n: "phone", l: "Phone Number", r: 1 },
-    { n: "role", l: "Preferred Role", s: 1, o: ["Medical Support", "Education", "Services", "Careers"] },
-    { n: "availability", l: "Availability (Days / Time)" }
-  ];
+export default function Volunteer() {
+  const isMobile = useMediaQuery("(max-width:600px)"), [type, setType] = useState(""), [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", mobile: "", message: "" });
+  const handleChange = (f) => (e) => setFormData({ ...formData, [f]: e.target.value });
+
+  const handleSubmit = async () => {
+    if (!type || !formData.name || !formData.email || !formData.mobile || !formData.message) return alert("Please fill all required fields");
+    try {
+      await emailjs.send("service_eb25s1n", "__ejs-test-mail-service__", { type, ...formData }, "4GsDVNd7LMiEbRwQY");
+      setSuccess(true); setFormData({ name: "", initial: "", email: "", mobile: "", message: "" }); setType("");
+    } catch (e) { alert("Failed to send message. Try again."); }
+  };
 
   return (
     <ThemeProvider theme={theme}><CssBaseline />
-      <Button href="https://wa.me/919962290875" target="_blank" sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 99, minWidth: 56, height: 56, borderRadius: "50%", bgcolor: "#25D366", color: "#fff", "&:hover": { bgcolor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></Button>
-      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: CLR.dark, minHeight: "100vh", position: "relative", overflow: "hidden" }}>
-        {[...Array(15)].map((_, i) => (
-          <Box key={i} sx={{ position: "absolute", bottom: -50, left: `${Math.random() * 100}%`, width: 15, height: 15, borderRadius: "50%", background: "radial-gradient(circle, rgba(22,99,82,0.4), transparent)", animation: `${floatUp} ${Math.random() * 10 + 8}s linear infinite`, animationDelay: `${Math.random() * 5}s` }} />
-        ))}
-        <Container maxWidth="sm" sx={{ position: "relative", zIndex: 1 }}>
-          <Paper sx={{ p: { xs: 3, md: 5 }, borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", bgcolor: "rgba(15, 28, 46, 0.8)", backdropFilter: "blur(10px)", boxShadow: 24 }}>
-            <Typography variant={isMobile ? "h4" : "h3"} textAlign="center" sx={{ fontWeight: 900, mb: 1, textTransform: 'uppercase', color: CLR.teal }}>Volunteer</Typography>
-            <Typography textAlign="center" sx={{ color: CLR.muted, mb: 4, letterSpacing: 1, fontSize: "0.85rem" }}>BE THE REASON SOMEONE SMILES TODAY</Typography>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Thank you for volunteering!"); }}>
-              <Grid container spacing={2.5}>
-                {fields.map((f) => (
-                  <Grid item xs={12} key={f.n}>
-                    <TextField fullWidth label={f.l} name={f.n} type={f.t || "text"} required={!!f.r} select={!!f.s} value={formData[f.n]} onChange={hndl}>
-                      {f.o?.map((opt) => <MenuItem key={opt} value={opt}>{opt}</MenuItem>)}
-                    </TextField>
-                  </Grid>
-                ))}
-                <Grid item xs={12}>
-                  <TextField fullWidth multiline rows={4} label="Message" name="message" placeholder="Tell us more..." value={formData.message} onChange={hndl} />
-                </Grid>
-                <Grid item xs={12} sx={{ mt: 1 }}>
-                  <Button type="submit" fullWidth size="large" sx={{ py: 2, fontWeight: 700, borderRadius: 3, color: "#fff", background: `linear-gradient(90deg, #0D4D3E, ${CLR.teal})`, boxShadow: "0 4px 15px rgba(13, 77, 62, 0.4)", "&:hover": { transform: "translateY(-2px)", filter: "brightness(1.2)" }, transition: "0.3s" }}>Submit Volunteer Form</Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Paper>
-        </Container>
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}><Button component="a" href="https://wa.me/919962290875" target="_blank" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", backgroundColor: "#25D366", color: "#fff", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></Button></Box><BubblesBackground />
+      <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh", mt: -12 }}>
+        <Card sx={{ width: isMobile ? "95%" : "90%", maxWidth: "800px", mx: "auto", borderRadius: 6, border: `1px solid ${emeraldGreen}`, background: "#111827", boxShadow: "0px 10px 30px rgba(0,0,0,0.5)" }}>
+          <Box sx={{ background: `linear-gradient(135deg, ${tealGreen}, ${emeraldGreen})`, py: 4, textAlign: "center" }}><Typography variant="h3" sx={{ color: textWhite }}>Volunteer</Typography><Typography sx={{ color: lightGrey }}>BE THE REASON SOMEONE SMILES TODAY</Typography></Box>
+          <Divider sx={{ height: 4, background: `linear-gradient(90deg, ${emeraldGreen}, #2DD4BF)`, border: "none" }} />
+          <Box sx={{ px: isMobile ? 3 : 10, py: 6 }}><Grid container spacing={4} direction="column" alignItems="center">
+            <Grid item xs={12} sx={{ width: "100%" }}><FormControl fullWidth><InputLabel sx={{ color: lightGrey }}>Type *</InputLabel><Select value={type} label="Type *" onChange={(e) => setType(e.target.value)} sx={{ color: textWhite }}><MenuItem value="Medical support">Medical Support</MenuItem><MenuItem value="Education">Education</MenuItem><MenuItem value="Others">Others</MenuItem></Select></FormControl></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Full Name *" fullWidth value={formData.name} onChange={handleChange("name")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Email *" fullWidth value={formData.initial} onChange={handleChange("email")} InputProps={{ endAdornment: <InputAdornment position="end"><EmailIcon sx={{ color: emeraldGreen }} /></InputAdornment> }} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Mobile *" fullWidth value={formData.email} onChange={handleChange("initial")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Availability(Days/Time)" fullWidth value={formData.mobile} onChange={handleChange("mobile")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Message *" multiline rows={5} fullWidth value={formData.message} onChange={handleChange("message")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%", textAlign: "center", mt: 4 }}><Button variant="contained" onClick={handleSubmit} sx={{ background: `linear-gradient(90deg, ${tealGreen}, ${emeraldGreen})`, width: isMobile ? "100%" : "40%", py: 2, borderRadius: 2, fontWeight: 700, color: textWhite, textTransform: "none", fontSize: "1.2rem", transition: "all 0.3s ease", "&:hover": { background: emeraldGreen, boxShadow: `0px 0px 20px ${emeraldGreen}` } }}>Submit Message</Button></Grid>
+          </Grid></Box>
+        </Card>
       </Box>
       <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}><Footer /></Box>
     </ThemeProvider>
