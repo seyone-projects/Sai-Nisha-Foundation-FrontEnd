@@ -31,16 +31,16 @@ export default function Newsandpublication() {
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 }, flex: 1, textAlign: 'center' }}>
           <Box sx={{ mt: -12, p: { xs: 4, md: 8 }, mb: 6, borderRadius: 8, bgcolor: "rgba(17,24,39,0.6)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 20px 50px rgba(0,0,0,0.5)", position: "relative", overflow: "hidden" }}>
             <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, rgba(214,137,16,0.25), transparent 70%)", animation: `${anims.spotlight} 6s infinite alternate`, pointerEvents: "none" }} />
-            <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", animation: `${anims.fadeIn} 1.2s ease-out`, letterSpacing: { xs: 4, md: 8 }, lineHeight: 1.2 }}>Press and  <span style={{ color: GOLD, filter: "drop-shadow(0 0 10px rgba(214,137,16,0.5))" }}>Media</span></Typography>
-            <Typography sx={{ color: "rgba(255,255,255,0.5)", mt: 3, letterSpacing: 6, fontSize: '0.75rem', fontWeight: 600, textTransform: "uppercase", display: "flex", alignItems: "center", justifyContent: "center", gap: 2, "&::before, &::after": { content: '""', height: "1px", width: "30px", bgcolor: "rgba(255,255,255,0.2)" } }}>EXPLORE • OUR • LATEST NEWS</Typography>
+            <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", animation: `${anims.fadeIn} 1.2s ease-out`, letterSpacing: { xs: 4, md: 8 }, lineHeight: 1.2 , fontFamily: "'Playfair Display', serif", }}>Press and  <span style={{ color: GOLD, filter: "drop-shadow(0 0 10px rgba(214,137,16,0.5))" }}>Media</span></Typography>
+            <Typography sx={{ color: "rgba(255,255,255,0.5)", mt: 3, letterSpacing: 6, fontSize: '0.75rem', fontWeight: 600, textTransform: "uppercase", display: "flex", alignItems: "center", justifyContent: "center", gap: 2, "&::before, &::after": { content: '""', height: "1px", width: "30px", bgcolor: "rgba(255,255,255,0.2)", fontFamily: "'Playfair Display', serif", } }}>EXPLORE • OUR • LATEST NEWS</Typography>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}><Card sx={{ maxWidth: 400, bgcolor: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(20px)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", color: "#fff", animation: `${anims.slideUp} 1s ease-out`, transition: "0.3s", '&:hover': { transform: 'scale(1.02)' } }}>
             <CardMedia component="img" height="300" image={serviceImg1} alt="Magazine" />
-            <CardContent sx={{ p: 4 }}><Typography variant="h5" sx={{ color: GOLD, mb: 2 }}>SAI NISHA FOUNDATION</Typography><Typography sx={{ color: "#CBD5E1", mb: 3, fontSize: '0.95rem' }}>Dive into our latest publication covering our impact, stories of hope, and community initiatives.</Typography>
-              <Button variant="contained" fullWidth onClick={() => navigate("/magazine")} sx={{ bgcolor: GOLD, color: '#000', fontWeight: 800, py: 1.5, '&:hover': { bgcolor: '#b3720d' } }}>View Press and Media</Button>
+            <CardContent sx={{ p: 4 }}><Typography variant="h5" sx={{ color: GOLD, mb: 2 ,fontFamily: "'Playfair Display', serif", }}>SAI NISHA FOUNDATION</Typography><Typography sx={{ color: "#CBD5E1", mb: 3, fontSize: '0.95rem', fontFamily: "'Playfair Display', serif", }}>Dive into our latest publication covering our impact, stories of hope, and community initiatives.</Typography>
+              <Button variant="contained" fullWidth onClick={() => navigate("/magazine")} sx={{ bgcolor: GOLD, color: '#000', fontWeight: 800, py: 1.5, '&:hover': { bgcolor: '#b3720d' }, fontFamily: "'Playfair Display', serif", }}>View Press and Media</Button>
             </CardContent></Card></Box>
         </Container>
-        <Box sx={{ bgcolor: 'rgba(0,0,0,0.8)', "& *": { color: "#fff !important" } }}><Footer /></Box>
+        <Box sx={{ bgcolor: 'rgba(0,0,0,0.8)', "& *": { color: "#fff !important" }, fontFamily: "'Playfair Display', serif", }}><Footer /></Box>
       </Box>
     </ThemeProvider>
   );

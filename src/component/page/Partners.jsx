@@ -67,7 +67,7 @@ export default function Partners() {
       <FullPageVideoBackground />
       <Box sx={{ position: "relative", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 }, overflowX: "hidden" }}>
         <Container maxWidth="lg">
-          <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2, mt: -5 }}>
+          <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2, mt: -5 ,fontFamily: "'Playfair Display', serif" }}>
             <span style={{ color: gold }}>celebrities</span>
           </Typography>
           <Grid container spacing={4} alignItems="center">
@@ -85,9 +85,9 @@ export default function Partners() {
                 p: { xs: 3, md: 5 }, borderLeft: { md: `4px solid ${gold}` }, borderTop: { xs: `4px solid ${gold}`, md: "none" },
                 bgcolor: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)", borderRadius: { xs: "20px", md: "20px 0 0 20px" }, textAlign: "left",
               }}>
-                <Typography variant="overline" sx={{ color: gold, fontSize: "1rem", fontWeight: "bold", display: "block" }}>Associate Spotlight</Typography>
-                <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: "white", mb: 2, fontWeight: 900 }}>{activePartner.name}</Typography>
-                <Typography variant="body1" sx={{ color: "#ccc", lineHeight: 1.8, fontSize: "1.1rem" }}>{activePartner.desc}</Typography>
+                <Typography variant="overline" sx={{ color: gold, fontSize: "1rem", fontWeight: "bold", display: "block" , fontFamily: "'Playfair Display', serif" }}>Associate Spotlight</Typography>
+                <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: "white", mb: 2, fontWeight: 900 , fontFamily: "'Playfair Display', serif"}}>{activePartner.name}</Typography>
+                <Typography variant="body1" sx={{ color: "#ccc", lineHeight: 1.8, fontSize: "1.1rem" , fontFamily: "'Playfair Display', serif" }}>{activePartner.desc}</Typography>
               </Box>
             </Grid>
           </Grid>
@@ -98,7 +98,7 @@ export default function Partners() {
         display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 20px rgba(0,0,0,0.3)", zIndex: 9999,
         transition: "0.3s", "&:hover": { transform: "scale(1.1)", bgcolor: "#1ebe5d" }
       }}><WhatsAppIcon sx={{ color: "#fff", fontSize: 32 }} /></Box>
-      <Box sx={{ "& *": { color: "#fff !important" }, mt: -9 }}><Footer /></Box>
+      <Box sx={{ "& *": { color: "#fff !important" }, mt: -9 , fontFamily: "'Playfair Display', serif"}}><Footer /></Box>
     </ThemeProvider>
   );
 }
