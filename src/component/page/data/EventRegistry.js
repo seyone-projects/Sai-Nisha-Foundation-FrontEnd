@@ -4,7 +4,7 @@ import img3 from "../image/DSC06390.jpg";
 import img4 from '../image/DSC06321.jpg';
 import img5 from '../image/DSC05759.jpg';
 import img6 from '../image/DSC05749.jpg';
-import img7 from '../image/DSC05657.jpg';
+import img7 from '../image/DSC05669.jpg';
 import img8 from '../image/DSC06093.jpg';
 import img9 from '../image/DSC05856.jpg';
 import img10 from '../image/DSC05875.jpg';

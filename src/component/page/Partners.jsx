@@ -1,104 +1,132 @@
 import React, { useState } from "react";
-import { Box, Typography, Container, keyframes, useMediaQuery, CssBaseline, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "./Footer";
+import { Box, Typography, Container, keyframes, useMediaQuery, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import img1 from "../page/image/DSC06299.jpg";
-import img2 from "../page/image/DSC06390.jpg";
-import img3 from "../page/image/DSC06321.jpg";
+import Footer from "./Footer";
+import img1 from "../page/image/Guru ji.jpg"; import img2 from "../page/image/DSC06390.jpg";import img3 from "../page/image/DSC06321.jpg";import img4 from "../page/image/DSC06299.jpg"; import img5 from "../page/image/marconi.jpeg";
 import videoSrc from "../page/image/partners video.mp4";
-import "@fontsource/poppins/300.css";
-import "@fontsource/poppins/900.css";
-
 const gold = "#D68910";
-const theme = createTheme({
-  typography: { fontFamily: `"Poppins", sans-serif`, h2: { fontWeight: 900 }, h4: { fontWeight: 800 } },
-});
-
+const theme = createTheme({ typography: { fontFamily: "'Poppins', sans-serif" } });
 const orbit = keyframes`
   from { transform: rotate(0deg) translateX(var(--radius)) rotate(0deg); }
-  to { transform: rotate(180deg) translateX(var(--radius)) rotate(-180deg); }
+  to { transform: rotate(360deg) translateX(var(--radius)) rotate(-360deg); }
 `;
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const FullPageVideoBackground = () => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: -2, bgcolor: "#111827" }}>
-    <Box component="video" autoPlay loop muted playsInline src={videoSrc} sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-    <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.7), rgba(17,24,39,0.9))" }} />
-  </Box>
-);
-
-const PartnerCard = ({ img, partner, onHover, onLeave, delay, isMobile, isPaused }) => (
-  <Box
-    onMouseEnter={() => onHover(partner)}
-    onMouseLeave={onLeave}
-    onClick={() => onHover(partner)}
-    sx={{
-      position: "absolute", top: "20%", left: "20%", zIndex: 1, cursor: "pointer", transition: "transform 0.3s",
-      "--radius": isMobile ? "100px" : "180px", margin: isMobile ? "-50px 0 0 -50px" : "-70px 0 0 -70px",
-      animation: `${orbit} 20s linear infinite`, animationDelay: delay, animationPlayState: isPaused ? "paused" : "running",
-      "&:hover": { zIndex: 10 },
-    }}
-  >
-    <Box component="img" src={img} sx={{
-      width: { xs: 100, md: 140 }, height: { xs: 100, md: 140 }, borderRadius: "50%", border: `3px solid ${gold}`,
-      objectFit: "cover", boxShadow: `0 0 25px ${gold}44`, transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-      "&:hover": { transform: "scale(1.1)", borderColor: "#fff", boxShadow: `0 0 40px ${gold}` },
-    }} />
-  </Box>
-);
-
 export default function Partners() {
   const isMobile = useMediaQuery("(max-width:900px)");
   const [isPaused, setIsPaused] = useState(false);
-  const partnersData = [
-    { img: img1, name: "Kalaimamani Thiru Dhina", delay: "0s", desc: "A legendary Music Director in the Indian film industry, known for his soul-stirring compositions and decades of contribution to cinematic excellence." },
-    { img: img2, name: "R. Kannan", delay: "-6.6s", desc: "A massive director recognized for his unique storytelling and blockbuster hits. His vision brings grand narratives to life on the silver screen." },
-    { img: img3, name: "Jagan Purushottam", delay: "-13.3s", desc: "One of the finest actors of the generation, bringing depth and authenticity to every character he portrays with remarkable versatility." },
+ const partnersData = [
+    { img: img1, name: "Guru Roopa Yogi", desc: "" },
+    { img: img2, name: "R. Kannan", desc: "A massive director recognized for his unique storytelling and blockbuster hits." },
+    { img: img3, name: "Jagan Purushottam", desc: "One of the finest actors of the generation, bringing depth and authenticity to every character." },
+    { img: img4, name: "Kalaimamani Thiru Dhina", desc: "A legendary Music Director in the Indian film industry, known for soul-stirring compositions." },
+    { img: img5, name: "Marconi", desc: "Brief description of your fifth celebrity partner and their unique contributions." },
   ];
-  const [activePartner, setActivePartner] = useState(partnersData[0]);
-
+   const [activePartner, setActivePartner] = useState(partnersData[0]);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <FullPageVideoBackground />
-      <Box sx={{ position: "relative", zIndex: 2, minHeight: "70vh", py: { xs: 5, md: 10 }, overflowX: "hidden" }}>
-        <Container maxWidth="lg">
-          <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", textAlign: "center", mb: { xs: 2, md: 8 }, letterSpacing: 2, mt: -5 ,fontFamily: "'Playfair Display', serif" }}>
-            <span style={{ color: gold }}>celebrities</span>
-          </Typography>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Box sx={{ height: { xs: 300, md: 500 }, position: "relative", display: "flex", alignItems: "center", paddingLeft: 150 }}>
-                <Box sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, borderRadius: "50%", border: `1px dashed ${gold}`, position: "absolute", opacity: 0.3 }} />
-                {partnersData.map((p, i) => (
-                  <PartnerCard key={i} {...p} partner={p} onHover={(partner) => { setActivePartner(partner); setIsPaused(true); }} onLeave={() => setIsPaused(false)} isMobile={isMobile} isPaused={isPaused} />
-                ))}
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box key={activePartner.name} sx={{
-                mt: { xs: -5, md: -65 }, ml: { md: "auto" }, width: { xs: "100%", md: "45%" }, animation: `${fadeIn} 0.6s ease-out`,
-                p: { xs: 3, md: 5 }, borderLeft: { md: `4px solid ${gold}` }, borderTop: { xs: `4px solid ${gold}`, md: "none" },
-                bgcolor: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)", borderRadius: { xs: "20px", md: "20px 0 0 20px" }, textAlign: "left",
-              }}>
-                <Typography variant="overline" sx={{ color: gold, fontSize: "1rem", fontWeight: "bold", display: "block" , fontFamily: "'Playfair Display', serif" }}>Associate Spotlight</Typography>
-                <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: "white", mb: 2, fontWeight: 900 , fontFamily: "'Playfair Display', serif"}}>{activePartner.name}</Typography>
-                <Typography variant="body1" sx={{ color: "#ccc", lineHeight: 1.8, fontSize: "1.1rem" , fontFamily: "'Playfair Display', serif" }}>{activePartner.desc}</Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+      
+      {/* Background Video Section */}
+      <Box sx={{ position: "fixed", inset: 0, zIndex: -1, bgcolor: "#000" }}>
+        <video autoPlay loop muted playsInline  style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+        {/* Dark Overlay for Readability */}
+        <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%)" }} />
       </Box>
+
+      <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 8 }, pb: 12, position: "relative", zIndex: 1 }}>
+        <Typography 
+          variant={isMobile ? "h4" : "h2"} 
+          sx={{ color: gold, textAlign: "center", fontWeight: 900, mb: { xs: 4, md: 10 }, textTransform: "uppercase", letterSpacing: 2 }}
+        >
+          Celebrities
+        </Typography>
+
+        <Box sx={{ 
+          display: "flex", 
+          flexDirection: isMobile ? "column" : "row", 
+          alignItems: "center", 
+          justifyContent: "center",
+          gap: { xs: 2, md: 10 }
+        }}>
+          
+          {/* Animated Orbit Container */}
+          <Box sx={{ 
+            position: "relative", 
+            width: { xs: "300px", md: "500px" }, 
+            height: { xs: "300px", md: "500px" },
+            display: "flex", alignItems: "center", justifyContent: "center"
+          }}>
+            {/* Background Dotted Ring */}
+            <Box sx={{ 
+              width: { xs: 180, md: 350 }, height: { xs: 180, md: 350 }, 
+              border: `1px dashed ${gold}`, borderRadius: "50%", opacity: 0.3, position: "absolute" 
+            }} />
+            
+            {partnersData.map((p, i) => (
+              <Box key={i}
+                onMouseEnter={() => { setActivePartner(p); setIsPaused(true); }}
+                onMouseLeave={() => setIsPaused(false)}
+                onClick={() => setActivePartner(p)}
+                sx={{
+                  position: "absolute",
+                  "--radius": isMobile ? "95px" : "180px",
+                  animation: `${orbit} 25s linear infinite`,
+                  animationDelay: `-${(25 / partnersData.length) * i}s`,
+                  animationPlayState: isPaused ? "paused" : "running",
+                  cursor: "pointer",
+                  zIndex: activePartner.name === p.name ? 10 : 1
+                }}
+              >
+                <Box 
+                  component="img" 
+                  src={p.img} 
+                  sx={{
+                    width: { xs: 75, md: 120 }, 
+                    height: { xs: 75, md: 120 },
+                    borderRadius: "50%", 
+                    border: `3px solid ${activePartner.name === p.name ? "#fff" : gold}`,
+                    boxShadow: activePartner.name === p.name ? `0 0 25px ${gold}` : "none",
+                    transition: "0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                    objectFit: "cover",
+                    "&:hover": { transform: "scale(1.2)" }
+                  }} 
+                />
+              </Box>
+            ))}
+          </Box>
+
+          {/* Celebrity Info Card */}
+          <Box sx={{ 
+            width: "100%",
+            maxWidth: { xs: "100%", md: "450px" },
+            p: { xs: 3, md: 5 }, 
+            borderRadius: 4, 
+            bgcolor: "rgba(255,255,255,0.03)", 
+            backdropFilter: "blur(12px)",
+            borderLeft: `5px solid ${gold}`,
+            textAlign: isMobile ? "center" : "left",
+            animation: "fadeIn 0.5s ease"
+          }}>
+            <Typography variant="overline" sx={{ color: gold, fontWeight: "bold", letterSpacing: 1 }}>Associate Spotlight</Typography>
+            <Typography variant={isMobile ? "h4" : "h3"} sx={{ color: "white", fontWeight: 900, mb: 2 }}>{activePartner.name}</Typography>
+            <Typography variant="body1" sx={{ color: "#ccc", lineHeight: 1.8, fontSize: "1.1rem" }}>{activePartner.desc}</Typography>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* WhatsApp Floating Action Button */}
       <Box component="a" href="https://wa.me/919962290875" target="_blank" rel="noopener" sx={{
-        position: "fixed", bottom: 20, right: 20, width: 60, height: 60, bgcolor: "#25D366", borderRadius: "50%",
-        display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 20px rgba(0,0,0,0.3)", zIndex: 9999,
+        position: "fixed", bottom: 25, right: 25, width: 60, height: 60, bgcolor: "#25D366", borderRadius: "50%",
+        display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 20px rgba(0,0,0,0.5)", zIndex: 9999,
         transition: "0.3s", "&:hover": { transform: "scale(1.1)", bgcolor: "#1ebe5d" }
       }}><WhatsAppIcon sx={{ color: "#fff", fontSize: 32 }} /></Box>
-      <Box sx={{ "& *": { color: "#fff !important" }, mt: -9 , fontFamily: "'Playfair Display', serif"}}><Footer /></Box>
+
+      {/* Footer Container */}
+      <Box sx={{ mt: 5, "& *": { color: "#fff !important",fontFamily: "'Playfair Display', serif" } }}>
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 }

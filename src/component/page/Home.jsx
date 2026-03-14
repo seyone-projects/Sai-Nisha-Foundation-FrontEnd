@@ -1,9 +1,10 @@
-import React, { useMemo ,  useState} from "react";
-import { Box, Typography, Button, Container, Card, CardContent, useMediaQuery, Divider, CssBaseline, Grid, createTheme, ThemeProvider,Dialog, IconButton } from "@mui/material";
+import React, { useMemo, useState } from "react";
+import { Box, Typography, Button, Container, Card, CardContent, useMediaQuery, Divider, CssBaseline, Grid, createTheme, ThemeProvider, Dialog, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import CloseIcon from "@mui/icons-material/Close";
 import Footer from "./Footer";
 import "@fontsource/poppins/300.css"; import "@fontsource/poppins/400.css"; import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css"; import "@fontsource/poppins/700.css"; import "@fontsource/poppins/800.css"; import "@fontsource/poppins/900.css";
@@ -20,7 +21,7 @@ export default function Home() {
   const goals = useMemo(() => [{ text: "Our goal is to ensure that every mother and newborn receives timely support during critical moments." }, { text: "We strive to expand our reach by building strong partnerships with healthcare providers." }, { text: "Our vision is a sustainable support system where no family faces emergencies alone." }], []);
   const titleLetters = useMemo(() => "SAI NISHA FOUNDATION".split(""), []);
 
-    const [openVideo, setOpenVideo] = useState(false);
+  const [openVideo, setOpenVideo] = useState(false);
 
   return (
     <ThemeProvider theme={theme}><CssBaseline />
@@ -33,27 +34,26 @@ export default function Home() {
             <Box sx={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>{titleLetters.map((char, i) => (<motion.span key={i} variants={LETTER_ANIM} style={{ display: 'inline-block' }}><Typography variant={isMobile ? "body2" : "h5"} sx={{ color: GOLD, fontWeight: 700, letterSpacing: isMobile ? '2px' : '4px', mr: char === " " ? (isMobile ? 1 : 2) : 0.2 }}>{char}</Typography></motion.span>))}</Box>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1.5 }}>
               <Typography variant={isMobile ? "body2" : "h6"} sx={{ fontStyle: 'italic', mb: isMobile ? 2 : 4, opacity: 0.8, fontSize: isMobile ? '0.85rem' : '1.25rem' }}>"Reliving the moments of joy, talent, and meaningful connections"</Typography>
-               {/* PLAY BUTTON ADDED HERE */}
-                <IconButton
-                  onClick={() => setOpenVideo(true)}
-                  sx={{
-                    border: `2px solid ${GOLD}`,
-                    color: GOLD,
-                    mb: isMobile ? 2 : 3,
-                    "&:hover": { backgroundColor: GOLD, color: "#000" }
-                  }}>
-                  <PlayArrowIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem' }}>Care Moments</Typography>
+               <IconButton
+                onClick={() => setOpenVideo(true)}
+                sx={{
+                  border: `2px solid ${GOLD}`,
+                  color: GOLD,
+                  mb: isMobile ? 2 : 3,
+                  "&:hover": { backgroundColor: GOLD, color: "#000" }
+                }}>
+                <PlayArrowIcon sx={{ fontSize: 40 }} />
+              </IconButton>
+          <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem' }}>Care Moments</Typography>
               <Typography variant={isMobile ? "h4" : "h2"} sx={{ mb: isMobile ? 4 : 6, fontWeight: 900 }}>Captured Emotions</Typography>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><Button onClick={() => navigate("/volunteer")} variant="contained" sx={{ bgcolor: GOLD, color: '#000', fontWeight: 900, px: isMobile ? 4 : 6, py: isMobile ? 1.5 : 2, borderRadius: 0, '&:hover': { bgcolor: '#fff' } }}>Join as Volunteer</Button></motion.div>
-               {/* VIDEO DIALOG */}
-        <Dialog open={openVideo} onClose={() => setOpenVideo(false)} maxWidth="md">
-          <video width="100%" controls autoPlay>
-            <source src={introVideo} type="video/mp4" />
-          </video>
-        </Dialog>
-            </motion.div>
+        <Dialog open={openVideo} onClose={() => setOpenVideo(false)} maxWidth="md"  PaperProps={{ sx: { bgcolor: "black", position: "relative", overflow: "visible" }}}
+              >
+                <IconButton onClick={() => setOpenVideo(false)} sx={{  position: "absolute", right: -12, top: -12, bgcolor: GOLD, color: "black", "&:hover": { bgcolor: "white" },  zIndex: 1}}
+                >
+                  <CloseIcon />
+                </IconButton><video width="100%" controls autoPlay style={{ display: 'block' }}> <source src={introVideo} type="video/mp4" /> </video>
+              </Dialog></motion.div>
           </motion.div></Container>
         </Box>
         <Box sx={{ py: 0, bgcolor: '#0a0a0a' }}><Container><Typography variant={isMobile ? "h5" : "h4"} textAlign="center" sx={{ color: GOLD, mb: isMobile ? 4 : 6, letterSpacing: isMobile ? 2 : 4, fontWeight: 700, pt: isMobile ? 4 : 6 }}>OUR GOALS</Typography>

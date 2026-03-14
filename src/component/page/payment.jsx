@@ -38,9 +38,9 @@ export default function Payment() {
       <Box sx={{ bgcolor: deepNavy, minHeight: "100vh", position: "relative", zIndex: 1 }}><BubblesBackground />
         <Box sx={{ py: { xs: 8, md: 10 }, position: "relative", zIndex: 2 }}><Container maxWidth="sm">
           
-          <Typography variant={isMobile ? "h4" : "h2"} align="center" sx={{ mt: -10, fontWeight: 900, mb: 4, color: pureWhite, textTransform: "uppercase", animation: `${fadeIn} 1s ease-out`, letterSpacing: 1 }}>Support Our Cause</Typography>
+          <Typography variant={isMobile ? "h4" : "h2"} align="center" sx={{ mt: -10, fontWeight: 900, mb: 4, color: pureWhite, textTransform: "uppercase", animation: `${fadeIn} 1s ease-out`, letterSpacing: 1 , fontFamily: "'Playfair Display', serif" }}>Support Our Cause</Typography>
           
-          <Card sx={{ p: { xs: 3, md: 5 }, borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", bgcolor: "rgba(255,255,255,0.05)", backdropFilter: "blur(20px)", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", "&:hover": { border: "1px solid rgba(255,255,255,0.2)" } }}>
+          <Card sx={{ p: { xs: 3, md: 5 }, borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", bgcolor: "rgba(255,255,255,0.05)", backdropFilter: "blur(20px)", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", "&:hover": { border: "1px solid rgba(255,255,255,0.2)" } , fontFamily: "'Playfair Display', serif"  }}>
             <Typography variant="h5" fontWeight={800} color={pureWhite} textAlign="center">Make a Donation</Typography>
             <Typography textAlign="center" color={mutedGrey} mb={4} fontWeight={500}>Your contribution helps us create real impact</Typography>
             
@@ -74,7 +74,7 @@ export default function Payment() {
             <Typography mt={2.5} textAlign="center" fontSize={11} fontWeight={600} color={mutedGrey} sx={{ letterSpacing: 2 }}>SECURE PAYMENT • 100% TRANSPARENT USAGE</Typography>
           </Card>
         </Container></Box>
-        <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" } }}><Footer /></Box>
+        <Box sx={{ bgcolor: "#050B18", "& *": { color: "#fff !important" , fontFamily: "'Playfair Display', serif" } }}><Footer /></Box>
       </Box>
     </ThemeProvider>
   );
