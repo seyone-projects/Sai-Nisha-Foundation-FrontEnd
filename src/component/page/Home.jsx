@@ -13,7 +13,7 @@ const DARK_BG = "#121212", GOLD = "#FFC107", WHITE_TEXT = "#FFFFFF";
 const theme = createTheme({ palette: { mode: 'dark', primary: { main: GOLD }, text: { primary: WHITE_TEXT, secondary: "rgba(255, 255, 255, 0.7)" } }, typography: { fontFamily: `"Poppins", "sans-serif"`, h1: { fontWeight: 900, textTransform: 'uppercase', letterSpacing: '8px' }, h2: { fontWeight: 800 } } });
 const STAGGER_CONTAINER = { initial: {}, animate: { transition: { staggerChildren: 0.05 } } }, LETTER_ANIM = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5 } } }, IMAGE_CLIP_REVEAL = { hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 }, visible: { clipPath: "inset(0 0% 0 0)", opacity: 1, transition: { duration: 1.2, ease: "circOut" } } }, FADE_UP = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
-import introVideo from "../page/image/pre video.mp4";
+import introVideo from "../page/image/0206 - Trim.mp4";
 
 export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")), navigate = useNavigate();
