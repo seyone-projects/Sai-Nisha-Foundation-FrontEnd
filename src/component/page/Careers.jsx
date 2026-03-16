@@ -96,4 +96,4 @@ Register Now </Button>
 </Typography>
 </AccordionDetails>
 </Accordion>))}
-</Grid></Grid></Container></Box><Box sx={{width:"100%","& *":{color:"#fff !important"}}}><Footer/></Box> </Container> </Box> </ThemeProvider>);}
+</Grid></Grid></Container></Box><Box sx={{ width: "100%", "& *": { color: "#ffffff !important"  } }}><Footer /></Box> </Container> </Box> </ThemeProvider>);}

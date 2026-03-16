@@ -40,7 +40,7 @@ export default function Newsandpublication() {
               <Button variant="contained" fullWidth onClick={() => navigate("/magazine")} sx={{ bgcolor: GOLD, color: '#000', fontWeight: 800, py: 1.5, '&:hover': { bgcolor: '#b3720d' }, fontFamily: "'Playfair Display', serif", }}>View Press and Media</Button>
             </CardContent></Card></Box>
         </Container>
-        <Box sx={{ bgcolor: 'rgba(0,0,0,0.8)', "& *": { color: "#fff !important" }, fontFamily: "'Playfair Display', serif", }}><Footer /></Box>
+        <Box sx={{ bgcolor: 'rgba(0,0,0,0.8)', "& *": { color: "#fff !important" } }}><Footer /></Box>
       </Box>
     </ThemeProvider>
   );

@@ -17,7 +17,6 @@ import {
   useMediaQuery,
   Typography,
 } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./component/page/image/ngo.jpeg";
 import Home from "./component/page/Home";
@@ -36,13 +35,10 @@ import PeerToPeer from "./component/page/PeertoPeer";
 import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
-
-// Theme Colors
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
 const darkNavy = "#1B2631";
-
 export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isMobile = useMediaQuery("(max-width:900px)");
@@ -55,8 +51,7 @@ export default function App() {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-
-  const menuItems = [
+const menuItems = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
     { label: "Events", path: "/events" },
@@ -64,83 +59,33 @@ export default function App() {
     { label: "Careers", path: "/careers" },
     // { label: "Campaigns", path: "/campaigns" },
   ];
-
-  return (
+return (
     <Router>
       {/* NAVBAR */}
       <AppBar position="sticky" sx={{ bgcolor: creamBg, color: navyText, boxShadow: 1 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Link to="/">
-            <img src={logo} alt="Logo" style={{ width: 120, height: 60, display: "block" }} />
-          </Link>
-
+          <Link to="/"> <img src={logo} alt="Logo" style={{ width: 120, height: 60, display: "block" }} /></Link>
           {isMobile ? (
             <IconButton onClick={() => setOpenDrawer(true)}>
               <MenuIcon sx={{ fontSize: 32, color: navyText }} />
             </IconButton>
           ) : (
             <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-              {menuItems.map((item) => (
-                <Button
-                  key={item.label}
-                  component={Link}
-                  to={item.path}
-                  sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}
-                >
-                  {item.label}
-                </Button>
-              ))}
-
+              {menuItems.map((item) => (<Button  key={item.label}  component={Link}  to={item.path} sx={{ color: navyText, fontWeight: 600, textTransform: "none" }} >{item.label}</Button> ))}
               <Box onMouseEnter={handleMediaHover} onMouseLeave={handleCloseMenu}>
-                <Button sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}>
-                  Media Partners
-                </Button>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleCloseMenu}
-                  MenuListProps={{ onMouseLeave: handleCloseMenu }}
-                  PaperProps={{ sx: { bgcolor: creamBg } }}
-                >
+                <Button sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}>  Media Partners</Button>
+                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu} MenuListProps={{ onMouseLeave: handleCloseMenu }} PaperProps={{ sx: { bgcolor: creamBg } }}>
                   {/* <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem> */}
                   <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>News</MenuItem>
                   <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                 </Menu>
               </Box>
-
-              <Button
-                component={Link}
-                to="/payment"
-                sx={{ bgcolor: goldBtn, color: "#fff", "&:hover": { bgcolor: "#b3740d" } }}
-                variant="contained"
-              >
-                Donate
-              </Button>
-            </Box>
-          )}
+              <Button component={Link}  to="/payment"  sx={{ bgcolor: goldBtn, color: "#fff", "&:hover": { bgcolor: "#b3740d" } }}  variant="contained" >  Donate  </Button> </Box> )}
         </Toolbar>
       </AppBar>
-
-      {/* ROAMING TICKER (The Scrolling Text) */}
-      <Box 
-        sx={{ 
-          bgcolor: darkNavy, 
-          color: "#fff", 
-          py: 1, 
-          overflow: "hidden", 
-          whiteSpace: "nowrap",
-          position: "relative"
-        }}
-      >
-        <Typography
-          variant="body1"
-          sx={{
-            display: "inline-block",
-            fontWeight: "bold",
-            animation: "marquee 20s linear infinite",
-            "@keyframes marquee": {
-              "0%": { transform: "translateX(100%)" },
-              "100%": { transform: "translateX(-100%)" }
+   {/* ROAMING TICKER (The Scrolling Text) */}
+      <Box    sx={{  bgcolor: darkNavy,  color: "#fff",  py: 1,  overflow: "hidden",  whiteSpace: "nowrap",  position: "relative",  zIndex: 1100, }} >
+        <Typography variant="body1"   sx={{   display: "inline-block",   fontWeight: "bold",   animation: "marquee 20s linear infinite",   "@keyframes marquee": {     "0%": { transform: "translateX(100%)" },      "100%": { transform: "translateX(-100%)" }
             }
           }}
         >
@@ -149,12 +94,11 @@ export default function App() {
           👶 NEWBORN BABY WELLFARE PROGRAMS &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
         </Typography>
       </Box>
-
-      {/* MOBILE DRAWER */}
+ {/* MOBILE DRAWER */}
       <Drawer anchor="right" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <Box sx={{ width: 260, bgcolor: creamBg, height: "100%" }}>
           <List>
-            {menuItems.map((item) => (
+   {menuItems.map((item) => (
               <ListItemButton key={item.label} component={Link} to={item.path} onClick={() => setOpenDrawer(false)}>
                 <ListItemText primary={item.label} />
               </ListItemButton>
@@ -167,8 +111,7 @@ export default function App() {
           </List>
         </Box>
       </Drawer>
-
-      {/* ROUTES */}
+ {/* ROUTES */}
       <Container sx={{ mt: 4 }}>
         <Routes>
           <Route path="/" element={<Home />} />

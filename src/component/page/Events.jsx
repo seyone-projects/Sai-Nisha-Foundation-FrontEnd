@@ -52,7 +52,7 @@ return (
     <>
       <CssBaseline />
       <GlobalShaderBackground /> <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}> <IconButton component="a" href="https://wa.me/919962290875" target="_blank" sx={{ width: 56, height: 56, bgcolor: "#25D366", color: "#fff", "&:hover": { bgcolor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></IconButton>
-      </Box> <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "Poppins, sans-serif" }}>  <Box sx={{ minHeight: { xs: "60vh", md: "85vh" }, display: "flex", alignItems: "center", position: "relative", zIndex: 2 }}>
+      </Box> <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Playfair Display', serif" }}>  <Box sx={{ minHeight: { xs: "60vh", md: "85vh" }, display: "flex", alignItems: "center", position: "relative", zIndex: 2 }}>
           <CinematicHeroBackground />
           <Container sx={{ position: "relative", zIndex: 10, textAlign: "center" }}>
             <motion.div variants={fadeDown} initial="hidden" animate="visible">
@@ -95,5 +95,5 @@ return (
                   ))}
                 </Grid>
               </motion.div>
-  </AnimatePresence> </Box><Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 6 }}> <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff' }}><ArrowBackIosNewIcon /></IconButton> <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff' }}><ArrowForwardIosIcon /></IconButton>  </Box> </Container> <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" ,fontFamily: "'Playfair Display', serif" } }}><Footer /></Box></Box>
+  </AnimatePresence> </Box><Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'center', gap: 4, mt: 6 }}> <IconButton onClick={handlePrev} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff' }}><ArrowBackIosNewIcon /></IconButton> <IconButton onClick={handleNext} sx={{ bgcolor: 'rgba(255,255,255,0.1)', color: '#fff' }}><ArrowForwardIosIcon /></IconButton>  </Box> </Container> <Box sx={{ width: "100%", "& *": { color: "#ffffff !important"  } }}><Footer /></Box></Box>
     </>);}

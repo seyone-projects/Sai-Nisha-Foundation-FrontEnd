@@ -14,11 +14,11 @@ export default function Partners() {
   const isMobile = useMediaQuery("(max-width:900px)");
   const [isPaused, setIsPaused] = useState(false);
  const partnersData = [
-    { img: img1, name: "Guru Roopa Yogi", desc: "" },
-    { img: img2, name: "R. Kannan", desc: "A massive director recognized for his unique storytelling and blockbuster hits." },
-    { img: img3, name: "Jagan Purushottam", desc: "One of the finest actors of the generation, bringing depth and authenticity to every character." },
-    { img: img4, name: "Kalaimamani Thiru Dhina", desc: "A legendary Music Director in the Indian film industry, known for soul-stirring compositions." },
-    { img: img5, name: "Marconi", desc: "Brief description of your fifth celebrity partner and their unique contributions." },
+    { img: img1, name: "Guru Roopa Yogi", desc: "Guru Roopa Yogi  Sri La Sri Maha Narasimha Athmanatha Swamigal: Founder of Jai Kosha Foundation, a revered spiritual guide dedicated to spreading divine wisdom, guiding individuals toward inner harmony, and uplifting society through sacred traditions and spiritual service." },
+    { img: img2, name: "R. Kannan", desc: "R. Kannan is recognized for his disciplined approach to filmmaking and his commitment to supporting new talent within the industry. Through his consistent contributions to the art of screenwriting and direction, he continues to inspire a new generation of technicians and storytellers in the world of Tamil cinema. " },
+    { img: img3, name: "Jagan Purushottam", desc: "He is Popularly known as “Ayan Jagan,” he is widely recognized for his razor-sharp wit and versatile performances in Tamil cinema. From his breakout role as Chitti Babu to his engaging presence as a premier television host, Jagan continues to contribute significantly to the entertainment landscape." },
+    { img: img4, name: "Kalaimamani Thiru Dhina", desc: "A legendary Music Director and widely recognized for his soul-stirring compositions and his dedicated mentorship of budding musical talent. Through his relentless pursuit of musical excellence, he continues to contribute significantly to the cultural heritage and cinematic landscape of Tamil Nadu." },
+    { img: img5, name: "Marconi", desc: "Emayavaramban Marconi Popularly known as “Vallal Nayagan,” Emayavaramban Marconi is widely recognized for his dedicated community services and temple renovation initiatives. Through his Marconi Foundation, he continues to contribute significantly to social welfare and community development in and around Sirkali." },
   ];
    const [activePartner, setActivePartner] = useState(partnersData[0]);
   return (
@@ -38,7 +38,7 @@ export default function Partners() {
       <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 8 }, pb: 12, position: "relative", zIndex: 1 }}>
         <Typography 
           variant={isMobile ? "h4" : "h2"} 
-          sx={{ color: gold, textAlign: "center", fontWeight: 900, mb: { xs: 4, md: 10 }, textTransform: "uppercase", letterSpacing: 2 }}
+          sx={{ color: gold, textAlign: "center", fontWeight: 900, mb: { xs: 4, md: 10 }, textTransform: "uppercase", letterSpacing: 2 , mt: -9 }}
         >
           Celebrities
         </Typography>
@@ -100,7 +100,7 @@ export default function Partners() {
           {/* Celebrity Info Card */}
           <Box sx={{ 
             width: "100%",
-            maxWidth: { xs: "100%", md: "450px" },
+            maxWidth: { xs: "100%", md: "600px" },
             p: { xs: 3, md: 5 }, 
             borderRadius: 4, 
             bgcolor: "rgba(255,255,255,0.03)", 
@@ -124,7 +124,7 @@ export default function Partners() {
       }}><WhatsAppIcon sx={{ color: "#fff", fontSize: 32 }} /></Box>
 
       {/* Footer Container */}
-      <Box sx={{ mt: 5, "& *": { color: "#fff !important",fontFamily: "'Playfair Display', serif" } }}>
+      <Box sx={{ mt: 5, "& *": { color: "#fff !important" } }}>
         <Footer />
       </Box>
     </ThemeProvider>
