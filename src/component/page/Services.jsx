@@ -1,320 +1,94 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Container,
-  keyframes,
-  useMediaQuery,
-  CssBaseline,
+import React, { useState, memo, useMemo } from "react";
+import { 
+  Box, Button, Typography, Grid, Card, CardMedia, CardContent, 
+  Container, keyframes, useMediaQuery, CssBaseline, Dialog, 
+  DialogTitle, DialogContent, IconButton, createTheme, ThemeProvider 
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Close as CloseIcon, WhatsApp as WhatsAppIcon } from "@mui/icons-material";
 import Footer from "./Footer";
-
-
-import "@fontsource/poppins/300.css";
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/playfair-display/900.css";
+import "@fontsource/poppins/300.css"; 
 import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
-import "@fontsource/poppins/800.css";
-import "@fontsource/poppins/900.css";
-
-import serviceImg1 from "./image/kids education - 1.jpg";
-import serviceImg2 from "./image/pets - 1.jpg";
-import serviceImg3 from "./image/mentally challenged elders.webp";
-import serviceImg4 from "./image/newborn-baby.jpg";
-import serviceImg5 from "./image/education.jpg";
-import serviceImg6 from "./image/kids_education_part2.jpg";
-
-const serviceImages = [serviceImg1, serviceImg2, serviceImg3, serviceImg4, serviceImg5, serviceImg6];
-
-
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
-const gold = "#D68910";
-const mutedText = "#5F6F7E";
-
-
-const services = [
-  {
-    title: "Pregnancy Emergency",
-    desc: "We provide urgent support for expecting mothers during high-risk pregnancies, ensuring timely medical care, transportation, and emotional assistance when every moment matters.",
-  },
-  {
-    title: "Pets",
-    desc: "We promote compassion toward animals through rescue support, medical aid, rehabilitation, and adoption awareness for abandoned and injured pets.",
-  },
-  {
-    title: "Mentally Challenged Elders",
-    desc: "We ensure dignity, care, and emotional well-being for mentally challenged elderly individuals by offering medical support, daily care, and compassionate companionship.",
-  },
-  {
-    title: "Newborn Emergency Care",
-    desc: "We support critically ill newborns by facilitating immediate medical attention, NICU access, and essential life-saving care during the most fragile first hours of life.",
-  },
-  {
-    title: "Education",
-    desc: "We empower children through access to education, learning resources, and skill development, helping them build a brighter and more secure future.",
-  },
-  {
-    title: "Sports",
-    desc: "We encourage physical fitness and confidence in young individuals by supporting sports training, team activities, and opportunities for healthy development.",
-  },
+import serviceImg1 from "./image/pre.jpg"; 
+import serviceImg2 from "./image/gettyimages-1637251600-612x612.jpg";
+import serviceImg3 from "./image/mentally challenged.jpg"; 
+import serviceImg4 from "./image/new born child 2.jpg";
+import serviceImg5 from "./image/edu 1.avif"; 
+import serviceImg6 from "./image/sports 1.avif";
+const GOLD = "#D68910", MUTED = "#CBD5E1";
+const fadeIn = keyframes`from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); }`;
+const slideUp = keyframes`from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); }`;
+const spot = keyframes`0% { transform: translate(-20%, -20%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translate(120%, 120%); opacity: 0; }`;
+const DATA = [
+  { title: "Pregnancy Emergency", desc: "Urgent support for high-risk pregnancies.", img: serviceImg1, longDesc: "Our Pregnancy Emergency program provides 24/7 rapid response for expectant mothers facing complications. We bridge the gap between home and hospital, providing emergency transport, immediate medical consultation, and financial aid for life-saving procedures." },
+  { title: "Newborn Emergency Care", desc: "NICU access and life-saving care.", img: serviceImg4, longDesc: "The first few hours of life are critical. We specialize in facilitating access to Neonatal Intensive Care Units (NICU) for families who cannot afford them. We provide high-tech incubators, emergency medicine, and specialized pediatric transport to ensure newborns get a fighting chance at life." },
+  { title: "Pets", desc: "Rescue, medical care, and adoption support.", img: serviceImg2, longDesc: "Our animal welfare wing focuses on rescuing stray and abandoned animals. We provide immediate veterinary care, vaccinations, and sterilization. Beyond medical help, we run an active adoption program to find forever homes for our furry friends and provide food for street animals in underserved areas." },
+  { title: "Mentally Challenged Elders", desc: "Care, dignity, and emotional well-developed.", img: serviceImg3, longDesc: "We provide specialized residential and daycare services for elderly individuals living with dementia, Alzheimer's, and other cognitive challenges. Our program focuses on 'Dignity in Aging,' offering therapeutic activities, professional nursing care, and a safe, loving environment where they are never forgotten." },
+   { title: "Sports", desc: "Encouraging fitness and confidence.", img: serviceImg6, longDesc: "Our sports program aims to identify and nurture athletic talent in underprivileged communities. By providing coaching, equipment, and access to tournaments, we help youth build discipline, teamwork, and physical health. We believe every child deserves the chance to shine on the field." },
+   { title: "Education", desc: "Empowering children through learning.", img: serviceImg5, longDesc: "Education is the greatest equalizer. We support the schooling of children from low-income backgrounds by providing tuition fees, uniforms, books, and digital learning tools. We also run after-school mentorship programs to help students develop soft skills and vocational interests for a brighter future." },
 ];
-
-
-const theme = createTheme({
-  typography: {
-    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
-    h2: { fontWeight: 900 },
-    h4: { fontWeight: 800 },
-    h5: { fontWeight: 700 },
-    h6: { fontWeight: 600 },
-    body1: { fontWeight: 400 },
-    body2: { fontWeight: 400 },
-  },
-});
-
-
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const slideUp = keyframes`
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-
-function BubblesBackground() {
-  return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        overflow: "hidden",
-        pointerEvents: "none",
-      }}
-    >
-      {[...Array(40)].map((_, i) => {
-        const size = Math.random() * 20 + 8;
-        const randomLeft = Math.random() * 100;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 20;
-        const isGold = i % 2 === 0;
-        const color = isGold ? "rgba(214, 137, 16, 0.45)" : "rgba(255, 230, 0, 0.35)";
-        const glow = isGold ? "rgba(214, 137, 16, 0.3)" : "rgba(255, 230, 0, 0.2)";
-
-        return (
-          <Box
-            key={i}
-            sx={{
-              position: "absolute",
-              bottom: "-30px",
-              left: `${randomLeft}%`,
-              width: `${size}px`,
-              height: `${size}px`,
-              backgroundColor: color,
-              borderRadius: "50%",
-              boxShadow: `0 0 15px 4px ${glow}`,
-              opacity: 0,
-              animation: `floatUp ${duration}s linear infinite`,
-              animationDelay: `${delay}s`,
-            }}
-          />
-        );
-      })}
-
-      <style>{`
-        @keyframes floatUp {
-          0% { transform: translateY(0) scale(1); opacity: 0; }
-          10% { opacity: 0.7; }
-          90% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
-        }
-      `}</style>
-    </Box>
-  );
-}
-
+const VideoBg = memo(() => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: -2, bgcolor: "#000", overflow: "hidden" }}>
+    <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(17,24,39,0.4), rgba(17,24,39,0.7))" }} />
+  </Box>
+));
+const Bubbles = memo(() => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }}>
+    {[...Array(25)].map((_, i) => (
+      <Box key={i} sx={{ 
+        position: "absolute", bottom: "-50px", left: `${Math.random() * 100}%`, 
+        width: 15, height: 15, borderRadius: "50%", bgcolor: "rgba(214,137,16,0.2)", 
+        animation: `float ${12 + Math.random() * 10}s linear infinite ${Math.random() * 5}s` 
+      }} />
+    ))}
+    <style>{`@keyframes float { from { transform: translateY(0); opacity: 0; } 20% { opacity: .4; } to { transform: translateY(-110vh); opacity: 0; } }`}</style>
+  </Box>
+));
 export default function Services() {
   const isMobile = useMediaQuery("(max-width:600px)");
-
-  return (
+  const [sel, setSel] = useState(null);
+  const theme = useMemo(() => createTheme({ 
+    typography: { fontFamily: "'Playfair Display', serif", h2: { fontWeight: 900 }, h6: { fontWeight: 700 } } 
+  }), []);
+return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        sx={{
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <BubblesBackground />
-
-        <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
-          <Container maxWidth="lg">
-            <Typography
-              variant={isMobile ? "h4" : "h2"}
-              align="center"
-              sx={{
-                fontWeight: 900,
-                mb: { xs: 6, md: 8 },
-                color: navyText,
-                textTransform: "uppercase",
-                animation: `${fadeIn} 1s ease-out`,
-              }}
-            >
-              Our <span style={{ color: gold }}>Services</span>
-            </Typography>
-
-
-            <Box
-              sx={{
-                maxWidth: 950,
-                mx: "auto",
-                mb: 10,
-                textAlign: "center",
-                animation: `${fadeIn} 1.2s ease-out`,
-                p: 4,
-                borderRadius: 8,
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
-                backdropFilter: "blur(5px)",
-              }}
-            >
-              <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: navyText }}>
-                Sai Nisha Foundation
-              </Typography>
-
-              <Typography sx={{ fontWeight: 600, color: olive, mb: 3 }}>
-                Serving Life at Its Most Vulnerable Moments
-              </Typography>
-
-              <Typography sx={{ lineHeight: 1.9, mb: 3, color: mutedText }}>
-                At Sai Nisha Foundation, our work begins where uncertainty is highest
-                and support is often absent. We focus on moments when time, care,
-                and reassurance matter more than anything else.
-              </Typography>
-
-              <Typography sx={{ lineHeight: 1.9, color: mutedText }}>
-                Our services are guided by urgency, compassion, and responsibility — 
-                always centred on dignity and need.
-              </Typography>
-            </Box>
-
-
-            <Box sx={{ maxWidth: 1000, mx: "auto", mb: 10, textAlign: "center" }}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: 800, color: gold, mb: 3 }}
-              >
-                Primary Services (Our Core Commitment)
-              </Typography>
-
-              <Typography sx={{ mb: 3, color: mutedText }}>
-                <b>Third Trimester Pregnancy Support:</b> Emergency medical
-                assistance, hospitalisation support, nutrition, guidance, and
-                emotional reassurance.
-              </Typography>
-
-              <Typography sx={{ color: mutedText }}>
-                <b>NICU & Newborn Emergency Care:</b> Partial or full financial
-                support, neonatal emergency treatment, and post-NICU recovery
-                support.
-              </Typography>
-            </Box>
-
-            <Box sx={{ maxWidth: 1000, mx: "auto", mb: 12, textAlign: "center" }}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: 800, color: "#00BFFF", mb: 3 }}
-              >
-                Secondary Services
-              </Typography>
-
-              <Typography sx={{ mb: 2, color: mutedText }}>
-                <b>Children – Education & Sports:</b> Supporting education, coaching,
-                equipment, and opportunities.
-              </Typography>
-
-              <Typography sx={{ mb: 2, color: mutedText }}>
-                <b>Injured & Elderly Pet Care:</b> Emergency medical care and support
-                for abandoned animals.
-              </Typography>
-
-              <Typography sx={{ color: mutedText }}>
-                <b>Mentally Challenged Elders:</b> Medical care, safety, dignity, and
-                caregiver support.
-              </Typography>
-            </Box>
-
-
-            <Grid container spacing={4} justifyContent="center">
-              {services.map((service, index) => (
-                <Grid
-                  item
-                  size={{ xs: 12, md: 6, lg: 4 }}
-                  key={index}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    opacity: 0,
-                    animation: `${slideUp} 0.8s ease-out ${index * 0.1}s forwards`,
-                  }}
-                >
-                  <Card
-                    sx={{
-                      width: 320,
-                      borderRadius: 6,
-                      overflow: "hidden",
-                      backgroundColor: "rgba(255, 255, 255, 0.7)", 
-                      backdropFilter: "blur(10px)",
-                      boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-                      border: "1px solid rgba(255, 255, 255, 0.3)",
-                      transition: "0.4s",
-                      "&:hover": {
-                        transform: "translateY(-10px)",
-                        boxShadow: "0 25px 50px rgba(0,0,0,0.2)",
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="240"
-                      image={serviceImages[index]}
-                      alt={service.title}
-                    />
-                    <CardContent sx={{ textAlign: "center" }}>
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 800, color: olive, mb: 1 }}
-                      >
-                        {service.title}
-                      </Typography>
-                      <Typography sx={{ opacity: 0.85, color: mutedText }}>
-                        {service.desc}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
+      <VideoBg />
+      <Bubbles />  <IconButton   href="https://wa.me/919962290875" target="_blank"  sx={{ position: "fixed", bottom: 20, right: 20, bgcolor: "#25D366", color: "#fff", zIndex: 1000, p: 1.5, boxShadow: 3, '&:hover': { bgcolor: "#128C7E", transform: 'scale(1.1)' } }}> <WhatsAppIcon fontSize={isMobile ? "medium" : "large"} /></IconButton>
+     <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 , overflowX: "hidden"}}>
+        <Box sx={{ pt: { xs: 10, md: 15 }, pb: { xs: 6, md: 10 }, textAlign: "center", position: "relative" }}>
+          <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "100%", height: "100%", background: `radial-gradient(circle, ${GOLD}20, transparent 70%)`, animation: `${spot} 10s infinite linear`, filter: "blur(50px)", zIndex: -1 }} />
+          <Typography variant="h2" sx={{ color: "#fff", textTransform: "uppercase", animation: `${fadeIn} 1s`, fontSize: { xs: '2.2rem', md: '4.5rem' }, textShadow: "0px 4px 15px #000", letterSpacing: { xs: 1, md: 3 },fontFamily: "'Playfair Display', serif", }}>
+            Our <span style={{ color: GOLD }}>Services</span>
+          </Typography>
+          <Typography sx={{ color: MUTED, mt: 2, fontSize: { xs: '0.9rem', md: '1.1rem' }, maxWidth: 600, mx: 'auto', px: 2, fontFamily: "'Playfair Display', serif", }}>
+            Dedicated to providing emergency medical aid, education, and welfare support to those in need.
+          </Typography>
         </Box>
-        <Footer />
-      </Box>
-    </ThemeProvider>
+       <Grid container spacing={isMobile ? 3 : 4} justifyContent="center" sx={{ pb: 10 }}>
+          {DATA.map((s, i) => (
+            <Grid item key={i} xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center", opacity: 0, animation: `${slideUp} .8s ease-out ${i * 0.1}s forwards` }}>
+              <Card sx={{ width: "100%", maxWidth: 500, bgcolor: "rgba(255,255,255,0.08)", backdropFilter: "blur(8px)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", color: "#fff", transition: "0.3s", "&:hover": { transform: 'translateY(-10px)', borderColor: GOLD, bgcolor: "rgba(255,255,255,0.15)" } }}>
+                <CardMedia component="img" height="200" image={s.img} sx={{ objectFit: 'cover' }} />
+                <CardContent sx={{ textAlign: "center", p: 3 }}>
+                  <Typography variant="h6" sx={{ color: GOLD, mb: 1 }}>{s.title}</Typography>
+                  <Typography sx={{ color: MUTED, fontSize: '0.85rem', mb: 2, minHeight: '40px', fontFamily: "'Playfair Display', serif", }}>{s.desc}</Typography>
+                  <Button variant="outlined" onClick={() => setSel(s)} sx={{ color: GOLD, borderColor: GOLD, borderRadius: 10, px: 3, fontFamily: "'Playfair Display', serif", '&:hover': { color: "#fff", borderColor: "#fff", bgcolor: GOLD } }}>
+                    Learn More </Button></CardContent></Card>
+            </Grid>
+          ))}</Grid><Dialog open={!!sel} onClose={() => setSel(null)} maxWidth="sm" fullWidth PaperProps={{ sx: { bgcolor: "rgba(20,25,35,0.95)", backdropFilter: "blur(20px)", color: "#fff", borderRadius: 5, border: `1px solid ${GOLD}`, m: 2 } }}>
+          {sel && (
+            <> <Box sx={{ position: 'relative' }}>
+                <CardMedia component="img" height={isMobile ? "200" : "280"} image={sel.img} sx={{ objectFit: 'cover' }} />
+                <IconButton onClick={() => setSel(null)} sx={{ position: 'absolute', top: 10, right: 10, color: '#fff', bgcolor: 'rgba(0,0,0,0.5)', '&:hover': { bgcolor: GOLD } }}><CloseIcon /></IconButton> </Box>
+              <DialogTitle sx={{ color: GOLD, fontWeight: 800, fontSize: { xs: '1.3rem', md: '1.6rem' }, pt: 3 }}>{sel.title}</DialogTitle>
+              <DialogContent sx={{ pb: 4 }}>
+                <Typography sx={{ lineHeight: 1.8, color: MUTED, fontSize: '0.95rem', fontFamily: "'Playfair Display', serif" }}>{sel.longDesc}</Typography>
+              </DialogContent>
+            </> )} </Dialog>
+            <Box sx={{ width: "100%", mt: 5, borderTop: "1px solid rgba(255,255,255,0.1)", pt: 5, "& *": { color: "#fff !important" } }}><Footer /> </Box>
+      </Container></ThemeProvider>
   );
 }

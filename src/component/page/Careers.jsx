@@ -1,237 +1,99 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  Paper,
-  Container,
-  CssBaseline,
-  keyframes,
-  useMediaQuery,
-} from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "./Footer";
+import React,{useState,useEffect}from"react";
+import{Box,Typography,Grid,Paper,Container,CssBaseline,useMediaQuery,Accordion,AccordionSummary,AccordionDetails,IconButton,createTheme,ThemeProvider,Button}from"@mui/material";
+import{motion,AnimatePresence}from"framer-motion";
+import{ExpandMore as ExpandMoreIcon,WhatsApp as WhatsAppIcon}from"@mui/icons-material";
+import{Link}from"react-router-dom";
+import Footer from"./Footer";
+import eventImg1 from"../page/image/DSC05916.jpg";
+import eventImg4 from"../page/image/DSC06321.jpg";
+import eventImg8 from"../page/image/DSC06093.jpg";
+import eventImg12 from"../page/image/DSC06023.jpg";
+import eventImg3 from"../page/image/DSC06390.jpg";
+const cinematicNavy="#0B121E",cinematicGold="#F2A900",BG_IMAGES=[eventImg1,eventImg4,eventImg8,eventImg12,eventImg3];
+const theme=createTheme({typography:{fontFamily:`"Poppins","Roboto",sans-serif`,h2:{fontWeight:900},h4:{fontWeight:800}}});
+const anim={fadeDown:{hidden:{opacity:0,y:-30},visible:{opacity:1,y:0,transition:{duration:1}}},container:{visible:{transition:{staggerChildren:.2}}},item:{hidden:{opacity:0,scale:.9,y:20},visible:{opacity:1,scale:1,y:0}}};
+const JOIN_DATA=[
+{t:"Purpose-Driven Work",d:"Work on projects that address real challenges in education and healthcare."},
+{t:"Learn & Grow",d:"Build leadership and workplace skills through hands-on mentorship."},
+{t:"Nationwide Impact",d:"Collaborate with a diverse team from across India to touch lives."}
+];
+const JOBS=[
+{t:"Internship",s:"Internship",d:"09/08/2025",p:"Part of one of India’s largest youth-run NGOs. Learn real-world skills."},
+{t:"Content Writer",s:"Full time",d:"12/08/2025",p:"Create engaging content that connects our mission with hearts."},
+{t:"Business Development",s:"Full time",d:"15/08/2025",p:"Drive growth and build relationships with corporate partners."},
+{t:"Video Creator",s:"Full time",d:"25/08/2025",p:"Create compelling visual stories that inspire action."}
+];
+const GlassPaper=({children,sx,...props})=>(<Paper sx={{p:3,borderRadius:5,background:"rgba(255,255,255,0.03)",backdropFilter:"blur(15px)",border:"1px solid rgba(255,255,255,0.1)",color:"#fff",transition:"0.4s",...sx}} {...props}>{children}</Paper>);
+const GlobalShader=()=>(
+<Box sx={{position:"fixed",inset:0,zIndex:-1,background:cinematicNavy,overflow:"hidden"}}>
+<Box sx={{position:"absolute",width:"200%",height:"200%",top:"-50%",left:"-50%",background:`radial-gradient(circle at 50% 50%,${cinematicNavy} 0%,#162435 50%,${cinematicNavy} 100%)`,animation:"meshRotate 20s linear infinite",opacity:.8}}/>
+{[...Array(3)].map((_,i)=>(<Box key={i} sx={{position:"absolute",inset:0,mixBlendMode:"screen",background:`linear-gradient(${45+i*30}deg,transparent 0%,rgba(242,169,0,0.05) 50%,transparent 100%)`,animation:`waveMove ${10+i*5}s infinite alternate ease-in-out`}}/>))}
 
-import "@fontsource/poppins/300.css";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
-import "@fontsource/poppins/800.css";
-import "@fontsource/poppins/900.css";
+<style>{`@keyframes meshRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}@keyframes waveMove{0%{transform:translateY(-10%) translateX(-5%)}100%{transform:translateY(10%) translateX(5%)}}`}</style>
 
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
-const gold = "#D68910";
-const mutedText = "#5F6F7E";
+</Box>
+);
 
-const theme = createTheme({
-  typography: {
-    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
-    h2: { fontWeight: 900 },
-    h4: { fontWeight: 800 },
-    h5: { fontWeight: 700 },
-    h6: { fontWeight: 600 },
-    body1: { fontWeight: 400 },
-    body2: { fontWeight: 400 },
-  },
-});
+export default function Careers(){
+const isMobile=useMediaQuery("(max-width:600px)"),[bgIndex,setBgIndex]=useState(0);
+useEffect(()=>{const int=setInterval(()=>setBgIndex(p=>(p+1)%BG_IMAGES.length),6000);return()=>clearInterval(int)},[]);
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
+return( <ThemeProvider theme={theme}><CssBaseline/><GlobalShader/>
 
-function BubblesBackground() {
-  return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        overflow: "hidden",
-        pointerEvents: "none",
-      }}
-    >
-      {[...Array(40)].map((_, i) => {
-        const size = Math.random() * 20 + 8;
-        const randomLeft = Math.random() * 100;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 20;
-
-        const isGold = i % 2 === 0;
-        const color = isGold
-          ? "rgba(214, 137, 16, 0.45)"
-          : "rgba(255, 230, 0, 0.35)";
-        const glow = isGold
-          ? "rgba(214, 137, 16, 0.3)"
-          : "rgba(255, 230, 0, 0.2)";
-
-        return (
-          <Box
-            key={i}
-            sx={{
-              position: "absolute",
-              bottom: "-30px",
-              left: `${randomLeft}%`,
-              width: `${size}px`,
-              height: `${size}px`,
-              backgroundColor: color,
-              borderRadius: "50%",
-              boxShadow: `0 0 15px 4px ${glow}`,
-              opacity: 0,
-              animation: `floatUp ${duration}s linear infinite`,
-              animationDelay: `${delay}s`,
-            }}
-          />
-        );
-      })}
-
-      <style>{`
-        @keyframes floatUp {
-          0% { transform: translateY(0) scale(1); opacity: 0; }
-          10% { opacity: 0.7; }
-          90% { opacity: 0.6; }
-          100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
-        }
-      `}</style>
-    </Box>
-  );
-}
-
-export default function Careers() {
-  const isMobile = useMediaQuery("(max-width:600px)");
-
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box
-        sx={{
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <BubblesBackground />
-
-        <Box sx={{ py: { xs: 8, md: 12 }, position: "relative", zIndex: 2 }}>
-          <Container maxWidth="lg">
-            <Typography
-              variant={isMobile ? "h4" : "h2"}
-              align="center"
-              sx={{
-                fontWeight: 900,
-                mb: { xs: 6, md: 8 },
-                color: navyText,
-                textTransform: "uppercase",
-                animation: `${fadeIn} 1s ease-out`,
-              }}
-            >
-              Our <span style={{ color: gold }}>Careers</span>
-            </Typography>
-
-            <Grid container spacing={4}>
-              <Grid item size={{ xs: 12, md: 12 }}>
-                <Box sx={{ mb: 4, textAlign: { xs: "center", md: "left" } }}>
-                  <Typography variant="h5" fontWeight={800} sx={{ color: navyText, mb: 1 }}>
-                    Join us to make an impact across India
-                  </Typography>
-                  <Typography sx={{ color: mutedText, fontWeight: 500 }}>
-                    Our vision is to inspire everyone to Volunteer
-                  </Typography>
-                </Box>
-
-                <JobCard
-                  title="Internship"
-                  location="Tambaram, Chennai, Tamil Nadu, India"
-                  desc="This is not your usual internship. At Sai Nisha Foundation, you will get to be part of one of India’s largest youth-run NGOs. You will learn real-world skills."
-                  type="Internship"
-                  date="09/08/2025"
-                />
-
-                <JobCard
-                  title="Content writer"
-                  location="Tambaram, Chennai, Tamil Nadu, India"
-                  desc="Help us tell stories that matter. You will be responsible for creating engaging content that connects our mission with the hearts of thousands."
-                  type="Full time"
-                  date="12/08/2025"
-                />
-
-                <JobCard
-                  title="Business Development"
-                  location="Tambaram, Chennai, Tamil Nadu, India"
-                  desc="Drive our growth and partnerships. You will identify opportunities and build relationships with corporate partners to scale our impact."
-                  type="Full time"
-                  date="15/08/2025"
-                />
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
-        <Footer />
-      </Box>
-    </ThemeProvider>
-  );
-}
-
-function JobCard({ title, location, desc, type, date }) {
-  return (
-    <Paper
-      variant="outlined"
-      sx={{
-        p: 3,
-        mb: 3,
-        borderRadius: 6,
-        borderColor: "rgba(255, 255, 255, 0.3)",
-        backgroundColor: "rgba(255, 255, 255, 0.7)",
-        backdropFilter: "blur(10px)",
-        boxShadow: "0 15px 35px rgba(0,0,0,0.08)",
-        transition: "0.4s",
-        "&:hover": {
-          transform: "translateY(-8px)",
-          boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
-          backgroundColor: "rgba(255, 255, 255, 0.9)",
-        },
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item size={{ xs: 12, md: 9 }}>
-          <Typography variant="h6" fontWeight={800} sx={{ color: olive, mb: 0.5 }}>
-            {title}
-          </Typography>
-
-          <Typography fontSize={13} sx={{ color: gold, fontWeight: 600, mb: 1.5 }}>
-            {location}
-          </Typography>
-
-          <Typography fontSize={14} sx={{ lineHeight: 1.7, color: mutedText }}>
-            {desc}
-          </Typography>
-        </Grid>
-
-        <Grid
-          item
-          size={{ xs: 12, md: 3 }}
-          sx={{
-            textAlign: { xs: "left", md: "right" },
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <Typography fontSize={13} fontWeight={700} sx={{ color: navyText, textTransform: "uppercase" }}>
-            {type}
-          </Typography>
-          <Typography fontSize={12} sx={{ color: mutedText, mt: 0.5 }}>
-            Posted: {date}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-}
+<IconButton component="a" href="https://wa.me/919962290875" target="_blank"
+sx={{position:"fixed",bottom:20,right:20,zIndex:9999,width:56,height:56,bgcolor:"#25D366",color:"#fff","&:hover":{bgcolor:"#1EBE5D",transform:"scale(1.1)"}}}> <WhatsAppIcon sx={{fontSize:30}}/></IconButton><Box sx={{position:"relative",zIndex:2}}>
+<Box sx={{height:{xs:"60vh",md:"80vh"},display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",mt:-4,mb:8}}> <AnimatePresence mode="wait">
+<motion.div key={bgIndex} initial={{opacity:0,scale:1.2}} animate={{opacity:.4,scale:1}} exit={{opacity:0}} transition={{duration:3}}
+style={{position:"absolute",inset:0,backgroundImage:`url(${BG_IMAGES[bgIndex]})`,backgroundSize:"cover",backgroundPosition:"center"}}/> </AnimatePresence>
+<Box sx={{position:"absolute",inset:0,background:`linear-gradient(to bottom,transparent,${cinematicNavy})`,zIndex:2}}/>
+<Container sx={{position:"relative",zIndex:10,textAlign:"center"}}>
+<motion.div variants={anim.fadeDown} initial="hidden" animate="visible">
+<Typography variant={isMobile?"h2":"h1"} sx={{color:"#fff",fontWeight:900,textTransform:"uppercase",letterSpacing:{xs:2,md:8},textShadow:"0 10px 30px #000",fontFamily:"'Playfair Display', serif"}}>
+Our <span style={{color:cinematicGold,fontFamily:"'Playfair Display', serif"}}>Careers</span> </Typography>
+<Typography sx={{color:"rgba(255,255,255,0.7)",mt:3,fontSize:18,letterSpacing:2}}>EXPLORE • PARTICIPATE • GROW</Typography>
+</motion.div> </Container> </Box><Box sx={{mt:5}}><Typography variant="h4" textAlign="center" sx={{color:"#fff",mb:8,fontFamily:"'Playfair Display', serif"}}><span style={{color:cinematicGold}}>Why Join US</span></Typography>
+<Grid container spacing={4} justifyContent="center">
+{JOIN_DATA.map((item,i)=>(
+<Grid item xs={12} md={4} key={i} display="flex" justifyContent="center">
+<motion.div variants={anim.item} initial="hidden" whileInView="visible" viewport={{once:true}} style={{width:"100%",maxWidth:350}}>
+<GlassPaper sx={{p:4,"&:hover":{borderColor:cinematicGold,transform:"translateY(-10px)"}}}>
+<Typography fontWeight={700} sx={{color:cinematicGold,mb:2,fontFamily:"'Playfair Display', serif"}}>{item.t}</Typography>
+<Typography fontSize={14} sx={{opacity:.8,fontFamily:"'Playfair Display', serif"}}>{item.d}</Typography>
+</GlassPaper>
+</motion.div>
+</Grid>
+))}
+</Grid>
+</Box>
+<Container maxWidth="lg" sx={{py:8,fontFamily:"'Playfair Display', serif"}}>
+<Typography variant="h4" textAlign="center" sx={{mt:-2,mb:6,color:"#fff"}}>View Openings</Typography>
+<motion.div variants={anim.container} initial="hidden" whileInView="visible" viewport={{once:true}}> <Grid container spacing={4} justifyContent="center">
+{JOBS.map((j,i)=>( <Grid item xs={12} sm={6} md={4} key={i} display="flex" justifyContent="center">
+<motion.div variants={anim.item} whileHover={{y:-10}} style={{width:"100%",maxWidth:350}}>
+<GlassPaper sx={{display:"flex",flexDirection:"column","&:hover":{borderColor:cinematicGold,boxShadow:"0 20px 50px rgba(0,0,0,0.5)"}}}>
+<Typography fontWeight={800} sx={{color:cinematicGold,mb:1,fontSize:"1.2rem",fontFamily:"'Playfair Display', serif"}}>{j.t}</Typography>
+<Typography fontSize={13} sx={{opacity:.7,mb:2,fontFamily:"'Playfair Display', serif"}}>Tambaram, Chennai</Typography>
+<Typography fontSize={14} sx={{opacity:.8,mb:3,flexGrow:1,fontFamily:"'Playfair Display', serif"}}>{j.p}</Typography>
+<Button component={Link} to="/volunteer" variant="outlined" fullWidth
+sx={{mb:2,borderRadius:"12px",borderColor:cinematicGold,color:cinematicGold,textTransform:"none",fontWeight:700,fontFamily:"'Playfair Display', serif","&:hover":{bgcolor:cinematicGold,color:"#000",borderColor:cinematicGold}}}>
+Register Now </Button>
+<Box sx={{pt:2,borderTop:"1px solid rgba(255,255,255,0.1)"}}>
+<Typography fontSize={12} sx={{color:cinematicGold,fontWeight:600,fontFamily:"'Playfair Display', serif"}}>
+{j.s} • Posted: {j.d} </Typography> </Box> </GlassPaper>
+</motion.div> </Grid>
+))} </Grid>
+</motion.div>
+<Box sx={{mt:10,py:{xs:8,md:12},background:"linear-gradient(135deg,#F2A900,#D68910)",borderRadius:6,color:"#fff",boxShadow:"0 20px 40px rgba(0,0,0,0.3)",fontFamily:"'Playfair Display', serif"}}> <Container maxWidth="lg"> <Grid container spacing={6}> <Grid item xs={12} md={4}> <Typography variant="h4"  fontWeight={800} mb={2} sx={{ fontFamily: "'Playfair Display', serif" }}>Frequently asked questions</Typography> <Typography sx={{opacity:.9,mb:4, fontFamily:"'Playfair Display', serif"}}>We are always here to help. Reach out!</Typography>
+<Paper sx={{p:3,borderRadius:4,display:"flex",alignItems:"center",gap:2}}>
+<WhatsAppIcon sx={{fontSize:40,color:"#22c55e"}}/> <Box> <Typography fontWeight={700} color="#111827">Reach out to us</Typography> <Typography fontSize={14} color="text.secondary">hello@sainisha.in</Typography> </Box> </Paper> </Grid>
+<Grid item xs={12} md={8}>
+{[{q:"What is Sai Nisha Foundation?",a:"Sai Nisha is supporting women in their pregnancy time"},{q:"How long is recruitment?",a:"Usually 1–2 weeks depending on volume."},{q:"Is it paid?",a:"Learning-focused; some roles offer performance stipends."}].map((item,i)=>( <Accordion key={i}sx={{mb:2,bgcolor:"rgba(255,255,255,0.15)",color:"#fff",borderRadius:"12px !important","&:before":{display:"none"}
+}}
+><AccordionSummary expandIcon={<ExpandMoreIcon sx={{color:"#fff"}}/>}>
+<Typography fontWeight={600} sx={{ fontFamily: "'Playfair Display', serif" }}>{item.q}</Typography></AccordionSummary>
+<AccordionDetails>
+<Typography sx={{ opacity:.9, fontFamily: "'Playfair Display', serif" }} >{item.a}
+</Typography>
+</AccordionDetails>
+</Accordion>))}
+</Grid></Grid></Container></Box><Box sx={{ width: "100%", "& *": { color: "#ffffff !important"  } }}><Footer /></Box> </Container> </Box> </ThemeProvider>);}

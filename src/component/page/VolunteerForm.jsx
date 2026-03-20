@@ -1,295 +1,55 @@
 import React, { useState } from "react";
-import {
-  Box,
-  TextField,
-  Typography,
-  Button,
-  Grid,
-  MenuItem,
-  Paper,
-  Container,
-  CssBaseline,
-  useMediaQuery,
-  keyframes,
-} from "@mui/material";
+import { Box, Typography, Grid, TextField, Button, MenuItem, Select, FormControl, InputLabel, Card, InputAdornment, CssBaseline, Divider, useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "../page/Footer";
+import EmailIcon from "@mui/icons-material/Email";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import emailjs from "@emailjs/browser";
+import Footer from "./Footer";
 
+const [darkNavy, tealGreen, emeraldGreen, textWhite, lightGrey] = ["#0B1120", "#0E4D44", "#157A6E", "#FFFFFF", "#B0BCC2"];
+const theme = createTheme({ palette: { mode: 'dark', primary: { main: emeraldGreen } }, typography: { fontFamily: `"Poppins", sans-serif`, h3: { fontWeight: 900 } }, components: { MuiTextField: { styleOverrides: { root: { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' } } } } } } });
+const BubblesBackground = () => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: 1, overflow: "hidden", pointerEvents: "none" }}>
+    {[...Array(40)].map((_, i) => {
+      const size = Math.random() * 20 + 8, left = Math.random() * 100, dur = Math.random() * 10 + 10, del = Math.random() * 20, isG = i % 2 === 0;
+      return <Box key={i} sx={{ position: "absolute", bottom: "-30px", left: `${left}%`, width: size, height: size, backgroundColor: isG ? "rgba(6, 68, 57, 0.45)" : "rgba(255, 255, 255, 0.1)", borderRadius: "50%", boxShadow: `0 0 15px 4px ${isG ? "rgba(6,68,57,0.3)" : "rgba(255,255,255,0.05)"}`, opacity: 0, animation: `floatUp ${dur}s linear infinite ${del}s` }} />;
+    })}
+    <style>{`@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.6; } 100% { transform: translateY(-110vh) scale(1.4); opacity: 0; } }`}</style>
+  </Box>
+);
 
-import "@fontsource/poppins/300.css";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
-import "@fontsource/poppins/800.css";
-import "@fontsource/poppins/900.css";
+export default function Volunteer() {
+  const isMobile = useMediaQuery("(max-width:600px)"), [type, setType] = useState(""), [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", mobile: "", message: "" });
+  const handleChange = (f) => (e) => setFormData({ ...formData, [f]: e.target.value });
 
-const creamBg = "#F7F4EC";
-const navyText = "#1F2F3F";
-const olive = "#7C8F29";
-const gold = "#D68910";
-
-
-const theme = createTheme({
-  typography: {
-    fontFamily: `"Poppins", "Roboto", "Helvetica", "Arial", sans-serif`,
-    h2: { fontWeight: 900 },
-    h4: { fontWeight: 800 },
-    h5: { fontWeight: 700 },
-    body1: { fontWeight: 400 },
-    body2: { fontWeight: 400 },
-  },
-});
-
-
-const floatUp = keyframes`
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  20% { opacity: 0.5; }
-  80% { opacity: 0.5; }
-  100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-`;
-
-const BubblesBackground = () => {
-  const bubbleArray = Array.from({ length: 25 });
-  return (
-    <Box
-      sx={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        overflow: "hidden",
-        zIndex: 0,
-        pointerEvents: "none",
-      }}
-    >
-      {bubbleArray.map((_, i) => {
-        const size = Math.random() * 20 + 10;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 12 + 8;
-        const delay = Math.random() * 10;
-
-        return (
-          <Box
-            key={i}
-            sx={{
-              position: "absolute",
-              bottom: "-50px",
-              left: `${left}%`,
-              width: size,
-              height: size,
-              borderRadius: "50%",
-              background: `radial-gradient(circle at 30% 30%, rgba(214, 137, 16, 0.4), rgba(255, 255, 255, 0.1))`,
-              boxShadow: `0 0 10px rgba(214, 137, 16, 0.2)`,
-              animation: `${floatUp} ${duration}s linear infinite`,
-              animationDelay: `${delay}s`,
-            }}
-          />
-        );
-      })}
-    </Box>
-  );
-};
-
-export default function VolunteerForm() {
-  const isMobile = useMediaQuery("(max-width:600px)");
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    age: "",
-    role: "",
-    availability: "",
-    message: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Volunteer Form Data:", formData);
-    alert("Thank you for volunteering!");
+  const handleSubmit = async () => {
+    if (!type || !formData.name || !formData.email || !formData.mobile || !formData.message) return alert("Please fill all required fields");
+    try {
+      await emailjs.send("service_eb25s1n", "__ejs-test-mail-service__", { type, ...formData }, "4GsDVNd7LMiEbRwQY");
+      setSuccess(true); setFormData({ name: "", initial: "", email: "", mobile: "", message: "" }); setType("");
+    } catch (e) { alert("Failed to send message. Try again."); }
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-
-      <Box
-        sx={{
-          py: { xs: 6, md: 10 },
-          background: `linear-gradient(180deg, ${creamBg} 0%, #ffffff 100%)`,
-          minHeight: "100vh",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <BubblesBackground />
-
-        <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
-          <Paper
-            elevation={8}
-            sx={{
-              p: { xs: 3, md: 5 },
-              borderRadius: 6,
-              boxShadow: "0 20px 45px rgba(0,0,0,0.12)",
-              bgcolor: "rgba(255, 255, 255, 0.85)",
-              backdropFilter: "blur(4px)", 
-            }}
-          >
-            <Typography
-              variant={isMobile ? "h4" : "h3"}
-              textAlign="center"
-              sx={{ fontWeight: 900, color: navyText, mb: 1 }}
-            >
-              Volunteer <span style={{ color: gold }}>With Us</span>
-            </Typography>
-
-            <Typography
-              textAlign="center"
-              sx={{ color: olive, fontWeight: 600, mb: 4 }}
-            >
-              Be the reason someone smiles today
-            </Typography>
-
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    fullWidth
-                    label="Full Name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    fullWidth
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    fullWidth
-                    label="Phone Number"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    fullWidth
-                    label="Age"
-                    name="age"
-                    type="number"
-                    value={formData.age}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    select
-                    fullWidth
-                    label="Preferred Volunteer Role"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  >
-                    <MenuItem value="Medical Support">Medical Support</MenuItem>
-                    <MenuItem value="Education">Education</MenuItem>
-                    <MenuItem value="Services">Services</MenuItem>
-                    <MenuItem value="Careers">Careers</MenuItem>
-                  </TextField>
-                </Grid>
-
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <TextField
-                    fullWidth
-                    label="Availability (Days / Time)"
-                    name="availability"
-                    value={formData.availability}
-                    onChange={handleChange}
-                    InputProps={{ sx: { borderRadius: 3, bgcolor: "#FFFDF7" } }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12 }}>
-                  <TextField
-                    label="Message"
-                    name="message"
-                    multiline
-                    rows={isMobile ? 4 : 6}
-                    value={formData.message}
-                    onChange={handleChange}
-                    sx={{
-                      width: "calc(500px)",
-                      maxWidth: "100%", 
-                    }}
-                    InputProps={{
-                      sx: {
-                        borderRadius: 3,
-                        bgcolor: "#FFFDF7",
-                      },
-                    }}
-                  />
-                </Grid>
-
-                <Grid item size={{ xs: 12 }}>
-                  <Box mt={4}>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      size="large"
-                      sx={{
-                        mt: -5,
-                        ml: { xs: 0, md: 0 },
-                        px: 0,
-                        py: 1.8,
-                        fontWeight: 800,
-                        borderRadius: 4,
-                        fontSize: "1rem",
-                        background: `linear-gradient(135deg, ${olive}, ${gold})`,
-                        color: "#fff",
-                        transition: "0.3s",
-                        "&:hover": {
-                          transform: "translateY(-2px)",
-                          boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-                        },
-                      }}
-                    >
-                      Submit Volunteer Form
-                    </Button>
-                  </Box>
-                </Grid>
-              </Grid>
-            </form>
-          </Paper>
-        </Container>
+    <ThemeProvider theme={theme}><CssBaseline />
+      <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}><Button component="a" href="https://wa.me/919962290875" target="_blank" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", backgroundColor: "#25D366", color: "#fff", "&:hover": { backgroundColor: "#1EBE5D", transform: "scale(1.1)" } }}><WhatsAppIcon /></Button></Box><BubblesBackground />
+      <Box sx={{ py: 10, background: darkNavy, minHeight: "100vh", mt: -12 }}>
+        <Card sx={{ width: isMobile ? "95%" : "90%", maxWidth: "800px", mx: "auto", borderRadius: 6, border: `1px solid ${emeraldGreen}`, background: "#111827", boxShadow: "0px 10px 30px rgba(0,0,0,0.5)" }}>
+          <Box sx={{ background: `linear-gradient(135deg, ${tealGreen}, ${emeraldGreen})`, py: 4, textAlign: "center" }}><Typography variant="h3" sx={{ color: textWhite, fontFamily: "'Playfair Display', serif"  }}>Volunteer</Typography><Typography sx={{ color: lightGrey, fontFamily: "'Playfair Display', serif"  }}>BE THE REASON SOMEONE SMILES TODAY</Typography></Box>
+          <Divider sx={{ height: 4, background: `linear-gradient(90deg, ${emeraldGreen}, #2DD4BF)`, border: "none" }} />
+          <Box sx={{ px: isMobile ? 3 : 10, py: 6 }}><Grid container spacing={4} direction="column" alignItems="center">
+            <Grid item xs={12} sx={{ width: "100%" }}><FormControl fullWidth><InputLabel sx={{ color: lightGrey }}>Type *</InputLabel><Select value={type} label="Type *" onChange={(e) => setType(e.target.value)} sx={{ color: textWhite }}><MenuItem value="Medical support">Medical Support</MenuItem><MenuItem value="Education">Education</MenuItem><MenuItem value="Others">Others</MenuItem></Select></FormControl></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Full Name *" fullWidth value={formData.name} onChange={handleChange("name")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Email *" fullWidth value={formData.initial} onChange={handleChange("email")} InputProps={{ endAdornment: <InputAdornment position="end"><EmailIcon sx={{ color: emeraldGreen }} /></InputAdornment> }} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Mobile *" fullWidth value={formData.email} onChange={handleChange("initial")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Availability(Days/Time)" fullWidth value={formData.mobile} onChange={handleChange("mobile")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%" }}><TextField label="Message *" multiline rows={5} fullWidth value={formData.message} onChange={handleChange("message")} /></Grid>
+            <Grid item xs={12} sx={{ width: "100%", textAlign: "center", mt: 4 }}><Button variant="contained" onClick={handleSubmit} sx={{ background: `linear-gradient(90deg, ${tealGreen}, ${emeraldGreen})`, width: isMobile ? "100%" : "40%", py: 2, borderRadius: 2, fontWeight: 700, color: textWhite, textTransform: "none", fontSize: "1.2rem", transition: "all 0.3s ease", "&:hover": { background: emeraldGreen, boxShadow: `0px 0px 20px ${emeraldGreen}`, fontFamily: "'Playfair Display', serif"  } }}>Submit Message</Button></Grid>
+          </Grid></Box>
+        </Card>
       </Box>
-
-      <Footer />
+      <Box sx={{ bgcolor: "#020617", "& *": { color: "#fff !important" } }}><Footer /></Box>
     </ThemeProvider>
   );
 }
