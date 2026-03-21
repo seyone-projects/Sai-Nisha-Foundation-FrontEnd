@@ -66,7 +66,7 @@ export default function Footer() {
                 <Link component={RouterLink} to="/volunteer">Volunteer</Link>
                 <Link component={RouterLink} to="/payment">Donate</Link>
                 <Link component={RouterLink} to="/careers">Careers</Link>
-                <Link component={RouterLink} to="/jobform">Registration Form</Link>
+                {/* <Link component={RouterLink} to="/jobform">Registration Form</Link> */}
               </Stack>
             </Grid>
           </Grid>
