@@ -35,6 +35,7 @@ import PeerToPeer from "./component/page/PeertoPeer";
 import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
+import JobForm from "./component/page/jobform";
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
@@ -130,6 +131,7 @@ return (
           <Route path="/news" element={<Newsandpublication />} />
           <Route path="/magazine" element={<Magazine />} />
           <Route path="/partners" element={<Partners />} />
+          <Route path="/jobform" element={<JobForm />} />
         </Routes>
       </Container>
     </Router>

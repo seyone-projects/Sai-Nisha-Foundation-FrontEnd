@@ -74,7 +74,7 @@ Our <span style={{color:cinematicGold,fontFamily:"'Playfair Display', serif"}}>C
 <Typography fontWeight={800} sx={{color:cinematicGold,mb:1,fontSize:"1.2rem",fontFamily:"'Playfair Display', serif"}}>{j.t}</Typography>
 <Typography fontSize={13} sx={{opacity:.7,mb:2,fontFamily:"'Playfair Display', serif"}}>Tambaram, Chennai</Typography>
 <Typography fontSize={14} sx={{opacity:.8,mb:3,flexGrow:1,fontFamily:"'Playfair Display', serif"}}>{j.p}</Typography>
-<Button component={Link} to="/volunteer" variant="outlined" fullWidth
+<Button component={Link} to="/jobform" variant="outlined" fullWidth
 sx={{mb:2,borderRadius:"12px",borderColor:cinematicGold,color:cinematicGold,textTransform:"none",fontWeight:700,fontFamily:"'Playfair Display', serif","&:hover":{bgcolor:cinematicGold,color:"#000",borderColor:cinematicGold}}}>
 Register Now </Button>
 <Box sx={{pt:2,borderTop:"1px solid rgba(255,255,255,0.1)"}}>
