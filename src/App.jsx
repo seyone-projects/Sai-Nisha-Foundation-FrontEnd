@@ -36,6 +36,7 @@ import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
 import JobForm from "./component/page/jobform";
+import MembershipForm from "./component/MembershipForm";
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
@@ -123,6 +124,7 @@ return (
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/volunteer" element={<VolunteerForm />} />
+          <Route path="/membership" element={<MembershipForm />} />
           {/* <Route path="/campaigns" element={<Campaigns />} /> */}
           <Route path="/manage" element={<Manage />} />
           <Route path="/awareness" element={<Awareness />} />
