@@ -9,15 +9,25 @@ import {
   Button,
   Avatar,
   IconButton,
-  Divider
+  Divider,
+  Stepper,
+  Step,
+  StepLabel
 } from '@mui/material';
 import {
   AppRegistration as FormIcon,
   CloudUpload as UploadIcon,
-  PhotoCamera
+  PhotoCamera,
+  NavigateNext,
+  NavigateBefore,
+  CheckCircleOutline
 } from '@mui/icons-material';
 
+// Define the steps for our sequential menu form
+const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
+
 export default function MembershipForm() {
+  const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     mobileNo: '',
@@ -40,6 +50,25 @@ export default function MembershipForm() {
     }
   };
 
+  const handleNext = () => {
+    // Basic validation before allowing user to move forward
+    if (activeStep === 0) {
+      if (!formData.name || !formData.mobileNo || !formData.dob) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+      if (formData.mobileNo.length !== 10) {
+        alert('Please enter a valid 10-digit mobile number.');
+        return;
+      }
+    }
+    setActiveStep((prevStep) => prevStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted Membership Data:', formData);
@@ -48,13 +77,13 @@ export default function MembershipForm() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
+    <Container maxWidth="md" sx={{ mt: 5, mb: 5, ml: 0, mr: 'auto' }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
         
         {/* Form Header */}
         <Box display="flex" alignItems="center" justifyContent="center" gap={1} mb={1}>
           <FormIcon color="primary" sx={{ fontSize: 32 }} />
-          <Typography  variant="h4" component="h1" fontWeight="bold" color="primary.main">
+          <Typography variant="h4" component="h1" fontWeight="bold" color="primary.main">
             SAI NISHA FOUNDATION
           </Typography>
         </Box>
@@ -62,18 +91,27 @@ export default function MembershipForm() {
           CARRYING HIS LIGHT FORWARD
         </Typography>
         
-        <Typography variant="h6" align="center" fontWeight="bold" sx={{ mt: 2, mb: 4, letterSpacing: 1 }}>
+        <Typography variant="h6" align="center" fontWeight="bold" sx={{ mt: 2, mb: 3, letterSpacing: 1 }}>
           LIFE MEMBERSHIP APPLICATION FORM
         </Typography>
         
+        {/* Step Indicator Progress Bar */}
+        <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
         <Divider sx={{ mb: 4 }} />
 
         {/* Form Body */}
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={4}>
-            
-            {/* Left/Main Section: Text Inputs */}
-            <Grid item xs={12} md={8}>
+          
+          {/* STEP 1: Personal Details Menu */}
+          {activeStep === 0 && (
+            <Box sx={{ minHeight: '220px' }}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
@@ -116,10 +154,12 @@ export default function MembershipForm() {
                   />
                 </Grid>
               </Grid>
-            </Grid>
+            </Box>
+          )}
 
-            {/* Right Section: Profile Photo Upload */}
-            <Grid item xs={12} md={4} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+          {/* STEP 2: Profile Photo Menu */}
+          {activeStep === 1 && (
+            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ minHeight: '220px' }}>
               <Typography variant="body2" fontWeight="medium" color="text.secondary" sx={{ mb: 2 }}>
                 Profile Photo
               </Typography>
@@ -168,28 +208,68 @@ export default function MembershipForm() {
               <Typography variant="caption" color="text.secondary" sx={{ mt: 2, textAlign: 'center' }}>
                 Upload a clear passport-size photograph
               </Typography>
-            </Grid>
+            </Box>
+          )}
 
-            {/* Submit Button */}
-            <Grid item xs={12} sx={{ mt: 2 }}>
+          {/* STEP 3: Review and Confirm Menu */}
+          {activeStep === 2 && (
+            <Box sx={{ minHeight: '220px' }}>
+              <Typography variant="subtitle1" fontWeight="bold" gutterBottom color="primary">
+                Please review your summary before generation:
+              </Typography>
+              <Grid container spacing={2} sx={{ mt: 1, p: 2, bgcolor: '#f9f9f9', borderRadius: 2 }}>
+                <Grid item xs={8}>
+                  <Typography variant="body1"><strong>Name:</strong> {formData.name}</Typography>
+                  <Typography variant="body1" sx={{ mt: 1 }}><strong>Mobile No:</strong> {formData.mobileNo}</Typography>
+                  <Typography variant="body1" sx={{ mt: 1 }}><strong>Date of Birth:</strong> {formData.dob}</Typography>
+                </Grid>
+                <Grid item xs={4} display="flex" justifyContent="center">
+                  <Avatar src={profilePreview} variant="rounded" sx={{ width: 80, height: 90, border: '1px solid #ccc' }} />
+                </Grid>
+              </Grid>
+              <Box display="flex" alignItems="center" gap={1} sx={{ mt: 2, color: 'success.main' }}>
+                <CheckCircleOutline />
+                <Typography variant="body2">Everything looks ready for card registration.</Typography>
+              </Box>
+            </Box>
+          )}
+
+          {/* Navigation Action Buttons */}
+          <Box display="flex" justifyContent="space-between" sx={{ mt: 4 }}>
+            <Button
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              startIcon={<NavigateBefore />}
+              variant="outlined"
+            >
+              Back
+            </Button>
+            
+            {activeStep < steps.length - 1 ? (
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                endIcon={<NavigateNext />}
+              >
+                Next
+              </Button>
+            ) : (
               <Button
                 type="submit"
                 variant="contained"
+                color="success"
                 size="large"
-                fullWidth
                 sx={{
-                  py: 1.5,
-                  fontSize: '1.1rem',
+                  px: 4,
                   fontWeight: 'bold',
-                  borderRadius: 2,
                   boxShadow: 3
                 }}
               >
                 Submit & Generate Membership Card
               </Button>
-            </Grid>
+            )}
+          </Box>
 
-          </Grid>
         </form>
       </Paper>
     </Container>
