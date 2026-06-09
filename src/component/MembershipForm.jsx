@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Paper,
@@ -23,7 +23,6 @@ import {
   CheckCircleOutline
 } from '@mui/icons-material';
 
-// Define the steps for our sequential menu form
 const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
 
 export default function MembershipForm() {
@@ -32,8 +31,22 @@ export default function MembershipForm() {
     name: '',
     mobileNo: '',
     dob: '',
+    membershipId: '' // New field for ID
   });
   const [profilePreview, setProfilePreview] = useState(null);
+
+  // Helper function to generate the next ID
+  const generateID = () => {
+    // 1. Get the last used number from localStorage, or start at 0
+    const lastId = localStorage.getItem('last_sainisha_id') || '0';
+    const nextIdNumber = parseInt(lastId, 10) + 1;
+    
+    // 2. Format it: Pad with zeros (e.g., 1 becomes 001)
+    const paddedNumber = String(nextIdNumber).padStart(3, '0');
+    const newId = `sainisha${paddedNumber}`;
+    
+    return { newId, nextIdNumber };
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +64,6 @@ export default function MembershipForm() {
   };
 
   const handleNext = () => {
-    // Basic validation before allowing user to move forward
     if (activeStep === 0) {
       if (!formData.name || !formData.mobileNo || !formData.dob) {
         alert('Please fill out all required fields.');
@@ -62,6 +74,15 @@ export default function MembershipForm() {
         return;
       }
     }
+
+    // GENERATION LOGIC: 
+    // If we are moving from Step 2 (Photo) to Step 3 (Review), 
+    // generate the ID if we haven't already.
+    if (activeStep === 1 && !formData.membershipId) {
+      const { newId } = generateID();
+      setFormData(prev => ({ ...prev, membershipId: newId }));
+    }
+
     setActiveStep((prevStep) => prevStep + 1);
   };
 
@@ -71,16 +92,19 @@ export default function MembershipForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted Membership Data:', formData);
-    // Add your API submission logic here
-    alert('Membership Application Submitted Successfully!');
+    
+    // On final successful submission, save the ID count to localStorage
+    const numericPart = formData.membershipId.replace('sainisha', '');
+    localStorage.setItem('last_sainisha_id', parseInt(numericPart, 10));
+
+    console.log('Final Membership Data:', formData);
+    alert(`Success! Application ${formData.membershipId} Submitted.`);
   };
 
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 5, ml: 0, mr: 'auto' }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
         
-        {/* Form Header */}
         <Box display="flex" alignItems="center" justifyContent="center" gap={1} mb={1}>
           <FormIcon color="primary" sx={{ fontSize: 32 }} />
           <Typography variant="h4" component="h1" fontWeight="bold" color="primary.main">
@@ -95,7 +119,6 @@ export default function MembershipForm() {
           LIFE MEMBERSHIP APPLICATION FORM
         </Typography>
         
-        {/* Step Indicator Progress Bar */}
         <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
           {steps.map((label) => (
             <Step key={label}>
@@ -106,10 +129,9 @@ export default function MembershipForm() {
 
         <Divider sx={{ mb: 4 }} />
 
-        {/* Form Body */}
         <form onSubmit={handleSubmit}>
           
-          {/* STEP 1: Personal Details Menu */}
+          {/* STEP 1: Personal Details */}
           {activeStep === 0 && (
             <Box sx={{ minHeight: '220px' }}>
               <Grid container spacing={3}>
@@ -157,7 +179,7 @@ export default function MembershipForm() {
             </Box>
           )}
 
-          {/* STEP 2: Profile Photo Menu */}
+          {/* STEP 2: Profile Photo */}
           {activeStep === 1 && (
             <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ minHeight: '220px' }}>
               <Typography variant="body2" fontWeight="medium" color="text.secondary" sx={{ mb: 2 }}>
@@ -205,13 +227,13 @@ export default function MembershipForm() {
                   </IconButton>
                 </label>
               </Box>
-              <Typography variant="caption" color="text.secondary" sx={{ mt: 2, textAlign: 'center' }}>
+              <Typography variant="caption" color="text.secondary" sx={{ mt: 2, textAlign: 'center' , maxHeight: 300}}>
                 Upload a clear passport-size photograph
               </Typography>
             </Box>
           )}
 
-          {/* STEP 3: Review and Confirm Menu */}
+          {/* STEP 3: Review and Confirm (Updated with ID) */}
           {activeStep === 2 && (
             <Box sx={{ minHeight: '220px' }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom color="primary">
@@ -219,6 +241,11 @@ export default function MembershipForm() {
               </Typography>
               <Grid container spacing={2} sx={{ mt: 1, p: 2, bgcolor: '#f9f9f9', borderRadius: 2 }}>
                 <Grid item xs={8}>
+                  {/* ID DISPLAYED HERE */}
+                  <Typography variant="body1" color="primary" fontWeight="bold">
+                    ID: {formData.membershipId}
+                  </Typography>
+                  <Divider sx={{ my: 1 }} />
                   <Typography variant="body1"><strong>Name:</strong> {formData.name}</Typography>
                   <Typography variant="body1" sx={{ mt: 1 }}><strong>Mobile No:</strong> {formData.mobileNo}</Typography>
                   <Typography variant="body1" sx={{ mt: 1 }}><strong>Date of Birth:</strong> {formData.dob}</Typography>
