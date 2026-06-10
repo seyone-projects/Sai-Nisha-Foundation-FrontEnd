@@ -398,7 +398,7 @@ export default function MembershipForm() {
                       src="/src/component/page/image/Sainisha-removebg-preview.png" 
                       alt="Sai Nisha Foundation Logo" 
                       variant="square"
-                      sx={{ width: 200, height: 70, objectFit: 'contain' }} 
+                      sx={{ width: 250, height: 70, objectFit: 'contain' }} 
                     />
                   </Box>
 
@@ -406,15 +406,15 @@ export default function MembershipForm() {
                   <Box display="flex" flexDirection="column" gap={0.4} alignItems="flex-start">
                     <Box display="flex" alignItems="center" gap={1}>
                       <Phone sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
-                      <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, color: BRAND_COLORS.navy }}>+91 99622 90875</Typography>
+                      <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: BRAND_COLORS.navy }}>+91 99622 90875</Typography>
                     </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <Email sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
-                      <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, color: BRAND_COLORS.navy }}>hello@sainisha.in</Typography>
+                      <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: BRAND_COLORS.navy }}>hello@sainisha.in</Typography>
                     </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <Language sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
-                      <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, color: BRAND_COLORS.navy }}>www.sainisha.in</Typography>
+                      <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: BRAND_COLORS.navy }}>www.sainisha.in</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -424,6 +424,7 @@ export default function MembershipForm() {
                   <Typography 
                     variant="subtitle1" 
                     sx={{ 
+                      top: 20,
                       fontWeight: 800,
                       color: BRAND_COLORS.navy, 
                       display: 'inline-block', 
@@ -508,7 +509,7 @@ export default function MembershipForm() {
                   }}
                 >
                   <LocationOn sx={{ color: BRAND_COLORS.gold, fontSize: 14 }} />
-                  <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: BRAND_COLORS.navy, textAlign: 'center', lineHeight: 1.3 }}>
+                  <Typography sx={{ fontSize: '0.80rem', fontWeight: 700, color: BRAND_COLORS.navy, textAlign: 'center', lineHeight: 1.3 }}>
                     10, Thiruvallur Street, Shanthi Nagar, Irumbuliyur, East Tambaram, Chennai - 600059
                   </Typography>
                 </Box>
