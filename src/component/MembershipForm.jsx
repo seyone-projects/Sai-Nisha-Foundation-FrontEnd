@@ -63,7 +63,7 @@ export default function MembershipForm() {
     
     // Fallback if localStorage is empty, corrupted, or contains "NaN"/"undefined"
     if (!lastId || lastId === 'undefined' || lastId.includes('NaN')) {
-      return { newId: 'sainisha001', nextIdNumber: 1 };
+      return { newId: 'SAINISHA001', nextIdNumber: 1 };
     }
     
     // Use regex to safely grab only the numeric characters sequence from the string
@@ -195,7 +195,7 @@ export default function MembershipForm() {
           
           {/* STEP 1: Personal Details */}
           {activeStep === 0 && (
-            <Box sx={{ minHeight: '220px' }}>
+            <Box sx={{ minHeight: '220px'}}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
@@ -217,7 +217,7 @@ export default function MembershipForm() {
                     variant="outlined"
                     fullWidth
                     required
-                    inputProps={{ maxLength: 10 }}
+                    inputProps={{ maxLength: 20 }}
                     value={formData.mobileNo}
                     onChange={handleInputChange}
                     placeholder="Enter 10-digit mobile number"
@@ -398,7 +398,7 @@ export default function MembershipForm() {
                       src="/src/component/page/image/Sainisha-removebg-preview.png" 
                       alt="Sai Nisha Foundation Logo" 
                       variant="square"
-                      sx={{ width: 150, height: 50, objectFit: 'contain' }} 
+                      sx={{ width: 200, height: 70, objectFit: 'contain' }} 
                     />
                   </Box>
 
@@ -460,7 +460,7 @@ export default function MembershipForm() {
                       <Box display="flex" alignItems="center">
                         <Typography sx={{ width: '110px', minWidth: '110px', fontWeight: 800, color: BRAND_COLORS.navy, fontSize: '0.9rem' }}>ID No</Typography>
                         <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.gold, mr: 1.5, fontSize: '0.9rem' }}>:</Typography>
-                        <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.maroon, fontSize: '1rem', letterSpacing: '0.5px' }}>{formData.membershipId || '---'}</Typography>
+                        <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.maroon, fontSize: '0.9rem', letterSpacing: '0.5px' }}>{formData.membershipId || '---'}</Typography>
                       </Box>
                     </Box>
                   </Grid>
