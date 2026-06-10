@@ -57,10 +57,25 @@ export default function MembershipForm() {
     return `${day}/${month}/${year}`;
   };
 
+  // Fixed and robust ID generation system using Regex matching
   const generateID = () => {
-    const lastId = localStorage.getItem('last_sainisha_id') || '123455'; 
-    const nextIdNumber = parseInt(lastId, 10) + 1;
-    return { newId: String(nextIdNumber), nextIdNumber };
+    const lastId = localStorage.getItem('last_sainisha_id');
+    
+    // Fallback if localStorage is empty, corrupted, or contains "NaN"/"undefined"
+    if (!lastId || lastId === 'undefined' || lastId.includes('NaN')) {
+      return { newId: 'sainisha001', nextIdNumber: 1 };
+    }
+    
+    // Use regex to safely grab only the numeric characters sequence from the string
+    const match = lastId.match(/\d+/);
+    const numericPart = match ? match[0] : '0';
+    const nextIdNumber = parseInt(numericPart, 10) + 1;
+    
+    // Pad with zeros to ensure a minimum width of 3 digits
+    const paddedNumber = String(nextIdNumber).padStart(3, '0');
+    const newId = `sainisha${paddedNumber}`;
+
+    return { newId, nextIdNumber };
   };
 
   const handleInputChange = (e) => {
@@ -104,11 +119,16 @@ export default function MembershipForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!formData.membershipId) {
+      alert('Error: ID generation failed. Please go back and try again.');
+      return;
+    }
+
     localStorage.setItem('last_sainisha_id', formData.membershipId);
 
     if (cardRef.current) {
       try {
-        // Target capturing options optimized for high-fidelity assets representation
         const canvas = await html2canvas(cardRef.current, {
           useCORS: true, 
           allowTaint: true,
@@ -138,24 +158,24 @@ export default function MembershipForm() {
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
         
        <Box 
-  display="flex" 
-  justifyContent="center" 
-  mb={3} 
-  sx={{ backgroundColor: 'transparent' }} // Ensures the container has no background
->
-  <Box
-    component="img"
-    src="/src/component/page/image/ngo-removebg-preview.png"
-    alt="Sai Nisha Foundation Logo"
-    sx={{
-      width: '100%',
-      maxWidth: 320,
-      height: 'auto',        // Maintains the aspect ratio so the logo doesn't distort
-      objectFit: 'contain',  // Forces the entire logo to be visible inside the box
-      backgroundColor: 'transparent', // Removes any background color from the image element
-    }}
-  />
-</Box>
+          display="flex" 
+          justifyContent="center" 
+          mb={3} 
+          sx={{ backgroundColor: 'transparent' }} 
+        >
+          <Box
+            component="img"
+            src="/src/component/page/image/ngo-removebg-preview.png"
+            alt="Sai Nisha Foundation Logo"
+            sx={{
+              width: '100%',
+              maxWidth: 320,
+              height: 'auto',        
+              objectFit: 'contain',  
+              backgroundColor: 'transparent', 
+            }}
+          />
+        </Box>
         
         <Typography variant="h6" align="center" fontWeight="bold" sx={{ mb: 3, letterSpacing: 1, color: BRAND_COLORS.navy }}>
           LIFE MEMBERSHIP APPLICATION FORM
@@ -284,7 +304,7 @@ export default function MembershipForm() {
               sx={{ 
                 minHeight: '340px',
                 width: '100%',
-                overflowX: 'auto', // Allows scrolling on small screens without breaking card snapshot width
+                overflowX: 'auto', 
                 py: 2
               }}
             >
@@ -294,7 +314,7 @@ export default function MembershipForm() {
                 ref={cardRef}
                 elevation={6} 
                 sx={{ 
-                  width: '600px', // Explicit fixed width ensures flawless rendering execution across all viewports
+                  width: '600px', 
                   height: '380px',
                   borderRadius: '20px', 
                   overflow: 'hidden',
@@ -347,7 +367,7 @@ export default function MembershipForm() {
                   <Box sx={{ flex: 1, bgcolor: BRAND_COLORS.navy }} />
                 </Box>
 
-                {/* Background Geometric Abstract Vectors (Safe html2canvas structural opacity) */}
+                {/* Background Geometric Abstract Vectors */}
                 <Box 
                   sx={{ 
                     position: 'absolute', top: '-40px', left: '-40px', width: '200px', height: '200px', 
@@ -375,7 +395,7 @@ export default function MembershipForm() {
                   {/* NGO Brand Container */}
                   <Box display="flex" alignItems="center">
                     <Avatar 
-                      src="/src/component/page/image/ngo.jpeg" 
+                      src="/src/component/page/image/Sainisha-removebg-preview.png" 
                       alt="Sai Nisha Foundation Logo" 
                       variant="square"
                       sx={{ width: 150, height: 50, objectFit: 'contain' }} 
