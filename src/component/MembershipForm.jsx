@@ -29,14 +29,61 @@ import {
 
 const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
 
-// Brand Color Palette perfectly matched to your logo ribbon strip
 const BRAND_COLORS = {
-  maroon: '#7A1A1C',
+  maroon: '#0c0909',
   gold: '#E59834',
   teal: '#008B9B',
   green: '#43882B',
   navy: '#093154',
   lightBg: '#F4F7F9'
+};
+
+// --- Verhoeff Algorithm Implementation for Aadhaar Validation ---
+const d = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+];
+
+const p = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+  [5, 8, 0, 3, 7, 9, 1, 4, 6, 2],
+  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+  [7, 0, 4, 6, 9, 1, 3, 5, 8, 2]
+];
+
+const inv = [0, 4, 3, 2, 1, 5, 6, 7, 8, 9];
+
+const validateAadhaar = (aadhaarString) => {
+  const cleanString = aadhaarString.replace(/\s+/g, '');
+  if (cleanString.length !== 12 || !/^\d+$/.test(cleanString)) {
+    return false;
+  }
+  
+  // Checking first digit cannot be 0 or 1
+  if (cleanString[0] === '0' || cleanString[0] === '1') {
+    return false;
+  }
+
+  let c = 0;
+  const invertedArray = cleanString.split('').map(Number).reverse();
+
+  for (let i = 0; i < invertedArray.length; i++) {
+    c = d[c][p[i % 8][invertedArray[i]]];
+  }
+
+  return c === 0;
 };
 
 export default function MembershipForm() {
@@ -45,6 +92,7 @@ export default function MembershipForm() {
     name: '',
     mobileNo: '',
     dob: '',
+    aadhaarNo: '', 
     membershipId: '' 
   });
   const [profilePreview, setProfilePreview] = useState(null);
@@ -57,33 +105,57 @@ export default function MembershipForm() {
     return `${day}/${month}/${year}`;
   };
 
-  // Fixed and robust ID generation system using Regex matching
+  // Helper to visually segment entry to standard 4-4-4 format
+  const formatAadhaarDisplay = (val) => {
+    const clean = val.replace(/\s+/g, '').replace(/\D/g, '');
+    const matches = clean.match(/\d{4,12}/g);
+    const match = (matches && matches[0]) || clean;
+    const parts = [];
+
+    for (let i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+
+    if (parts.length > 0) {
+      return parts.join(' ');
+    } else {
+      return clean;
+    }
+  };
+
   const generateID = () => {
+    const currentYear = new Date().getFullYear();
     const lastId = localStorage.getItem('last_sainisha_id');
     
-    // Fallback if localStorage is empty, corrupted, or contains "NaN"/"undefined"
     if (!lastId || lastId === 'undefined' || lastId.includes('NaN')) {
-      return { newId: 'SAINISHA001', nextIdNumber: 1 };
+      return { newId: `SAINISHA${currentYear}001`, nextIdNumber: 1 };
     }
     
-    // Use regex to safely grab only the numeric characters sequence from the string
-    const match = lastId.match(/\d+/);
+    // Extracts the last 3 numeric digits representing the incrementing sequential count
+    const match = lastId.match(/\d{3}$/);
     const numericPart = match ? match[0] : '0';
     const nextIdNumber = parseInt(numericPart, 10) + 1;
     
-    // Pad with zeros to ensure a minimum width of 3 digits
     const paddedNumber = String(nextIdNumber).padStart(3, '0');
-    const newId = `sainisha${paddedNumber}`;
+    const newId = `SAINISHA${currentYear}${paddedNumber}`;
 
     return { newId, nextIdNumber };
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    
+    if (name === 'aadhaarNo') {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formatAadhaarDisplay(value),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleImageChange = (e) => {
@@ -95,12 +167,17 @@ export default function MembershipForm() {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      if (!formData.name || !formData.mobileNo || !formData.dob) {
+      if (!formData.name || !formData.mobileNo || !formData.dob || !formData.aadhaarNo) {
         alert('Please fill out all required fields.');
         return;
       }
       if (formData.mobileNo.length !== 10) {
         alert('Please enter a valid 10-digit mobile number.');
+        return;
+      }
+      // Added Validation Rule Step Rejection check
+      if (!validateAadhaar(formData.aadhaarNo)) {
+        alert('Invalid Aadhaar Number. Please verify digits and try again.');
         return;
       }
     }
@@ -132,10 +209,10 @@ export default function MembershipForm() {
         const canvas = await html2canvas(cardRef.current, {
           useCORS: true, 
           allowTaint: true,
-          scale: 3, // Multiplies resolution for crisp rendering
+          scale: 3, 
           backgroundColor: '#ffffff',
           logging: false,
-          windowWidth: 600, // Forces static resolution footprint during image rendering compilation
+          windowWidth: 600, 
           windowHeight: 380
         });
         
@@ -217,7 +294,7 @@ export default function MembershipForm() {
                     variant="outlined"
                     fullWidth
                     required
-                    inputProps={{ maxLength: 20 }}
+                    inputProps={{ maxLength: 10 }}
                     value={formData.mobileNo}
                     onChange={handleInputChange}
                     placeholder="Enter 10-digit mobile number"
@@ -235,6 +312,21 @@ export default function MembershipForm() {
                     InputLabelProps={{ shrink: true }}
                     value={formData.dob}
                     onChange={handleInputChange}
+                  />
+                </Grid>
+
+                {/* Added Aadhaar Entry Input Field component */}
+                <Grid item xs={12}>
+                  <TextField
+                    label="Aadhaar Number"
+                    name="aadhaarNo"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    inputProps={{ maxLength: 14 }} 
+                    value={formData.aadhaarNo}
+                    onChange={handleInputChange}
+                    placeholder="Enter 12-digit Aadhaar number"
                   />
                 </Grid>
               </Grid>
@@ -295,7 +387,7 @@ export default function MembershipForm() {
             </Box>
           )}
 
-          {/* STEP 3: Premium Identity Card Design Layout Preview */}
+          {/* STEP 3: Identity Card Design Layout Preview */}
           {activeStep === 2 && (
             <Box 
               display="flex" 
@@ -309,7 +401,6 @@ export default function MembershipForm() {
               }}
             >
               
-              {/* --- START OF TARGET IDENTITY CARD BLOCK --- */}
               <Paper 
                 ref={cardRef}
                 elevation={6} 
@@ -330,7 +421,6 @@ export default function MembershipForm() {
                   boxSizing: 'border-box'
                 }}
               >
-                {/* Visual Decorative Multi-Color Ribbon Accent Bars Framing All Four Sides */}
                 {/* Top Border Ribbon */}
                 <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: '10px', display: 'flex', zIndex: 5 }}>
                   <Box sx={{ flex: 1, bgcolor: BRAND_COLORS.maroon }} />
@@ -368,31 +458,12 @@ export default function MembershipForm() {
                 </Box>
 
                 {/* Background Geometric Abstract Vectors */}
-                <Box 
-                  sx={{ 
-                    position: 'absolute', top: '-40px', left: '-40px', width: '200px', height: '200px', 
-                    borderRadius: '50%', bgcolor: BRAND_COLORS.teal, opacity: 0.06,
-                    pointerEvents: 'none', zIndex: 0 
-                  }} 
-                />
-                <Box 
-                  sx={{ 
-                    position: 'absolute', bottom: '20px', right: '-50px', width: '250px', height: '250px', 
-                    borderRadius: '50%', bgcolor: BRAND_COLORS.maroon, opacity: 0.04,
-                    pointerEvents: 'none', zIndex: 0 
-                  }} 
-                />
-                <Box 
-                  sx={{ 
-                    position: 'absolute', top: '40%', right: '35%', width: '120px', height: '120px', 
-                    borderRadius: '50%', bgcolor: BRAND_COLORS.gold, opacity: 0.03,
-                    pointerEvents: 'none', zIndex: 0 
-                  }} 
-                />
+                <Box sx={{ position: 'absolute', top: '-40px', left: '-40px', width: '200px', height: '200px', borderRadius: '50%', bgcolor: BRAND_COLORS.teal, opacity: 0.06, pointerEvents: 'none', zIndex: 0 }} />
+                <Box sx={{ position: 'absolute', bottom: '20px', right: '-50px', width: '250px', height: '250px', borderRadius: '50%', bgcolor: BRAND_COLORS.maroon, opacity: 0.04, pointerEvents: 'none', zIndex: 0 }} />
+                <Box sx={{ position: 'absolute', top: '40%', right: '35%', width: '120px', height: '120px', borderRadius: '50%', bgcolor: BRAND_COLORS.gold, opacity: 0.03, pointerEvents: 'none', zIndex: 0 }} />
 
                 {/* Identity Card Top Section Header */}
                 <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" sx={{ zIndex: 1, mt: 0.5 }}>
-                  {/* NGO Brand Container */}
                   <Box display="flex" alignItems="center">
                     <Avatar 
                       src="/src/component/page/image/Sainisha-removebg-preview.png" 
@@ -402,7 +473,6 @@ export default function MembershipForm() {
                     />
                   </Box>
 
-                  {/* Right Header Contact Info Block */}
                   <Box display="flex" flexDirection="column" gap={0.4} alignItems="flex-start">
                     <Box display="flex" alignItems="center" gap={1}>
                       <Phone sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
@@ -411,10 +481,6 @@ export default function MembershipForm() {
                     <Box display="flex" alignItems="center" gap={1}>
                       <Email sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
                       <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: BRAND_COLORS.navy }}>hello@sainisha.in</Typography>
-                    </Box>
-                    <Box display="flex" alignItems="center" gap={1}>
-                      <Language sx={{ fontSize: 10, color: '#fff', bgcolor: BRAND_COLORS.navy, borderRadius: '50%', p: '2px' }} />
-                      <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: BRAND_COLORS.navy }}>www.sainisha.in</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -440,9 +506,8 @@ export default function MembershipForm() {
 
                 {/* Identity Card Profile Data Layout Wrapper */}
                 <Grid container spacing={2} alignItems="center" sx={{ mb: 1, px: 1, zIndex: 1, width: '100%', ml: 0 }}>
-                  {/* Left Column Profile Data Setup */}
                   <Grid item xs={7.5} marginLeft={6} sx={{ pl: '0px !important' }}>
-                    <Box display="flex" flexDirection="column" gap={1.2}>
+                    <Box display="flex" flexDirection="column" gap={1}>
                       <Box display="flex" alignItems="center">
                         <Typography sx={{ width: '110px', minWidth: '110px', fontWeight: 800, color: BRAND_COLORS.navy, fontSize: '0.9rem' }}>Name</Typography>
                         <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.gold, mr: 1.5, fontSize: '0.9rem' }}>:</Typography>
@@ -458,15 +523,23 @@ export default function MembershipForm() {
                         <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.gold, mr: 1.5, fontSize: '0.9rem' }}>:</Typography>
                         <Typography sx={{ fontWeight: 700, color: '#111', fontSize: '0.9rem' }}>{formatDate(formData.dob) || '---'}</Typography>
                       </Box>
+                      
+                      {/* Integrated Aadhaar Data Display row onto the card preview */}
+                      <Box display="flex" alignItems="center">
+                        <Typography sx={{ width: '110px', minWidth: '110px', fontWeight: 800, color: BRAND_COLORS.navy, fontSize: '0.9rem' }}>Aadhaar No</Typography>
+                        <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.gold, mr: 1.5, fontSize: '0.9rem' }}>:</Typography>
+                        <Typography sx={{ fontWeight: 700, color: '#111', fontSize: '0.9rem' }}>{formData.aadhaarNo || '---'}</Typography>
+                      </Box>
+
                       <Box display="flex" alignItems="center">
                         <Typography sx={{ width: '110px', minWidth: '110px', fontWeight: 800, color: BRAND_COLORS.navy, fontSize: '0.9rem' }}>ID No</Typography>
                         <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.gold, mr: 1.5, fontSize: '0.9rem' }}>:</Typography>
-                        <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.maroon, fontSize: '0.9rem', letterSpacing: '0.5px' }}>{formData.membershipId || '---'}</Typography>
+                        <Typography sx={{ fontWeight: 800, color: BRAND_COLORS.maroon, fontSize: '0.9rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>{formData.membershipId || '---'}</Typography>
                       </Box>
                     </Box>
                   </Grid>
 
-                  {/* Right Column Profile Framed Image Holder */}
+                  {/* Profile Image Column */}
                   <Grid item xs={4.5} display="flex" justifyContent="center" marginLeft={10} sx={{ pr: '0px !important' }}>
                     <Box 
                       sx={{ 
@@ -494,7 +567,7 @@ export default function MembershipForm() {
                   </Grid>
                 </Grid>
 
-                {/* Identity Card Address Bottom Footer Bar Accent */}
+                {/* Footer Address */}
                 <Box 
                   display="flex" 
                   alignItems="center" 
@@ -515,7 +588,6 @@ export default function MembershipForm() {
                 </Box>
 
               </Paper>
-              {/* --- END OF TARGET IDENTITY CARD BLOCK --- */}
 
               <Box display="flex" alignItems="center" gap={1} sx={{ mt: 3, color: 'success.main' }}>
                 <CheckCircleOutline />
