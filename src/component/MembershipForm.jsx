@@ -128,7 +128,7 @@ export default function MembershipForm() {
     const lastId = localStorage.getItem('last_sainisha_id');
     
     if (!lastId || lastId === 'undefined' || lastId.includes('NaN')) {
-      return { newId: `SAINISHA${currentYear}001`, nextIdNumber: 1 };
+      return { newId: `SN${currentYear}001`, nextIdNumber: 1 };
     }
     
     // Extracts the last 3 numeric digits representing the incrementing sequential count
@@ -137,7 +137,7 @@ export default function MembershipForm() {
     const nextIdNumber = parseInt(numericPart, 10) + 1;
     
     const paddedNumber = String(nextIdNumber).padStart(3, '0');
-    const newId = `SAINISHA${currentYear}${paddedNumber}`;
+    const newId = `SN${currentYear}${paddedNumber}`;
 
     return { newId, nextIdNumber };
   };
