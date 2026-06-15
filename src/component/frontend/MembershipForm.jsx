@@ -194,41 +194,40 @@ export default function MembershipForm() {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!formData.membershipId) {
-      alert('Error: ID generation failed. Please go back and try again.');
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevents page reload
 
-    localStorage.setItem('last_sainisha_id', formData.membershipId);
-
-    if (cardRef.current) {
-      try {
-        const canvas = await html2canvas(cardRef.current, {
-          useCORS: true, 
-          allowTaint: true,
-          scale: 3, 
-          backgroundColor: '#ffffff',
-          logging: false,
-          windowWidth: 600, 
-          windowHeight: 380
-        });
-        
-        const imgData = canvas.toDataURL('image/png');
-        const downloadLink = document.createElement('a');
-        downloadLink.download = `SNF_Membership_${formData.membershipId || 'Card'}.png`;
-        downloadLink.href = imgData;
-        downloadLink.click();
-        
-        alert(`Success! Application ID ${formData.membershipId} Generated & Downloaded Successfully.`);
-      } catch (error) {
-        console.error('Error rendering ID card image assets:', error);
-        alert('Could not download your membership card image asset automatically. Please try again.');
-      }
-    }
+  // The data you gathered from your form inputs
+  const formData = {
+    name: nameInput,
+    mobileNo: mobileNoInput,
+    dob: dobInput,
+    aadhaarNo: aadhaarNoInput,
+    membershipId: generatedId // The ID your frontend generated
   };
+
+  try {
+    // Send the data across to your backend folder
+    const response = await fetch('http://localhost:5000/api/members/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData), // Turn JavaScript object into string text
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Registration Successful! Saved in MongoDB.");
+    } else {
+      alert("Database error: " + result.error);
+    }
+  } catch (error) {
+    console.error("Error connecting to backend:", error);
+    alert("Could not connect to backend server. Make sure it is running!");
+  }
+};
 
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>

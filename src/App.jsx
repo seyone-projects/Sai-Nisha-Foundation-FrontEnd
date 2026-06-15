@@ -36,7 +36,7 @@ import Newsandpublication from "./component/page/Newsandpublication";
 import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
 import JobForm from "./component/page/jobform";
-import MembershipForm from "./component/MembershipForm";
+import MembershipForm from "./component/frontend/MembershipForm";
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
