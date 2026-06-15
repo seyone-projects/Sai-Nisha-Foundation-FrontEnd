@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import axios from "axios";
 import {
   AppBar,
   Toolbar,
@@ -45,6 +46,17 @@ export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isMobile = useMediaQuery("(max-width:900px)");
   const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+  axios
+    .get("http://localhost:5000/api/health")
+    .then((res) => {
+      console.log("✅ Backend Response:", res.data);
+    })
+    .catch((err) => {
+      console.error("❌ Backend Error:", err);
+    });
+}, []);
 
   const handleMediaHover = (event) => {
     setAnchorEl(event.currentTarget);
