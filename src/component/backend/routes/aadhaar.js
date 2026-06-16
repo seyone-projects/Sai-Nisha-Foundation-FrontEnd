@@ -4,17 +4,22 @@ const router  = express.Router();
 
 // Get Sandbox auth token
 async function getSandboxToken() {
+  if (!process.env.SANDBOX_API_KEY || !process.env.SANDBOX_API_SECRET) {
+    throw new Error('Missing API Key or Secret in .env');
+  }
+
   const res = await axios.post(
     `${process.env.SANDBOX_BASE_URL}/authenticate`,
     {},
     {
       headers: {
-        'x-api-key':     process.env.SANDBOX_API_KEY,
-        'x-api-secret':  process.env.SANDBOX_API_SECRET,
+        'x-api-key': process.env.SANDBOX_API_KEY,
+        'x-api-secret': process.env.SANDBOX_API_SECRET,
         'x-api-version': '2.0'
       }
     }
   );
+
   return res.data.access_token;
 }
 
@@ -74,14 +79,13 @@ router.post('/send-otp', async (req, res) => {
       },
       {
         headers: {
-          'x-api-key':    process.env.SANDBOX_API_KEY,
-          'x-api-secret': process.env.SANDBOX_API_SECRET,
+          'x-api-key':    process.env.abc123,
+          'x-api-secret': process.env.xyz456,
           Authorization:  `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       }
     );
-
     return res.json({
       success: true,
       ref_id:  response.data.data.ref_id,
@@ -131,8 +135,8 @@ router.post('/verify-otp', async (req, res) => {
       },
       {
         headers: {
-          'x-api-key':    process.env.SANDBOX_API_KEY,
-          'x-api-secret': process.env.SANDBOX_API_SECRET,
+          'x-api-key':    process.env.abc123,
+          'x-api-secret': process.env.xyz456,
           Authorization:  `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
