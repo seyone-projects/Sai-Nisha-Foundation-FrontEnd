@@ -20,6 +20,10 @@ app.use('/api/members',  memberRoutes);
 app.get('/api/health', (req, res) =>
   res.json({ status: 'ok', db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' })
 );
+// ADD THIS ROUTE
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully');
+});
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
