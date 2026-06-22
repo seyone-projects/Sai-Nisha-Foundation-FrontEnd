@@ -37,6 +37,8 @@ const DonationReceipt = () => {
     boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
     position: "relative",
     overflow: "hidden",
+    width: "750px",
+    marginLeft: "230px",
   }}
 >
   {/* Decorative Background */}
@@ -92,6 +94,7 @@ const DonationReceipt = () => {
         fontWeight: "800",
         letterSpacing: "1px",
         fontFamily: "Georgia, serif",
+        textAlign: "center",
       }}
     >
       Donation Form
@@ -111,7 +114,8 @@ const DonationReceipt = () => {
     <p
       style={{
         color: "#475569",
-        fontSize: "15px",
+        fontSize: "30px",
+        textAlign: "center",
       }}
     >
       Fill in the donor details below
@@ -184,9 +188,10 @@ const DonationReceipt = () => {
   <div
     className="mt-10 p-6"
     style={{
-      background: "rgba(255,255,255,0.6)",
+      // background: "rgba(255,255,255,0.6)",
       borderRadius: "20px",
       backdropFilter: "blur(8px)",
+       marginLeft: "50px",
     }}
   >
     <p
@@ -224,7 +229,7 @@ const DonationReceipt = () => {
   </div>
 
   {/* Buttons */}
-  <div className="flex justify-center gap-5 mt-12">
+  <div className="flex justify-center gap-5 mt-12" style={{textAlign: "center"}}>
     <button
       type="button"
       style={{
@@ -238,6 +243,8 @@ const DonationReceipt = () => {
         fontSize: "15px",
         cursor: "pointer",
         boxShadow: "0 10px 25px rgba(37,99,235,0.35)",
+        marginTop: "50px",
+        marginRight: "30px",
       }}
     >
       Generate Receipt
