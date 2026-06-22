@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useRef } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+import logo from "../page/image/ngo-removebg-preview.png"; // Your Sai Nisha Foundation logo
 
 const DonationReceipt = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +28,88 @@ const DonationReceipt = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const [showReceipt, setShowReceipt] = useState(false);
+const receiptRef = useRef(null);
+
+const downloadPDF = async () => {
+  const element = receiptRef.current;
+
+  const canvas = await html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pdfWidth = 210;
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  pdf.addImage(
+    imgData,
+    "PNG",
+    0,
+    0,
+    pdfWidth,
+    pdfHeight
+  );
+
+  pdf.save(
+    `Donation_Receipt_${formData.receiptNo}.pdf`
+  );
+};
+const downloadExcel = () => {
+  const data = [
+    {
+      ReceiptNo: formData.receiptNo,
+      Date: formData.date,
+      DonorName: formData.donorName,
+      PAN: formData.pan,
+      Address1: formData.address1,
+      Address2: formData.address2,
+      City: formData.city,
+      Pincode: formData.pincode,
+      DonationAmount: formData.donationAmount,
+      TransactionId: formData.transactionId,
+      PaymentMode: formData.paymentMode,
+      AmountWords: formData.words,
+    },
+  ];
+
+  const worksheet =
+    XLSX.utils.json_to_sheet(data);
+
+  const workbook =
+    XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    "Receipt"
+  );
+
+  const excelBuffer = XLSX.write(
+    workbook,
+    {
+      bookType: "xlsx",
+      type: "array",
+    }
+  );
+
+  const fileData = new Blob(
+    [excelBuffer],
+    {
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    }
+  );
+
+  saveAs(
+    fileData,
+    `Donation_Receipt_${formData.receiptNo}.xlsx`
+  );
+};
 
   return (
     <div className="min-h-screen bg-gray-100 p-5">
@@ -229,43 +316,22 @@ const DonationReceipt = () => {
   </div>
 
   {/* Buttons */}
-  <div className="flex justify-center gap-5 mt-12" style={{textAlign: "center"}}>
-    <button
-      type="button"
-      style={{
-        padding: "14px 35px",
-        borderRadius: "50px",
-        border: "none",
-        background:
-          "linear-gradient(to right, #2563eb, #10b981)",
-        color: "#fff",
-        fontWeight: "700",
-        fontSize: "15px",
-        cursor: "pointer",
-        boxShadow: "0 10px 25px rgba(37,99,235,0.35)",
-        marginTop: "50px",
-        marginRight: "30px",
-      }}
-    >
-      Generate Receipt
-    </button>
-
-    <button
-      type="reset"
-      style={{
-        padding: "14px 35px",
-        borderRadius: "50px",
-        border: "2px solid #38bdf8",
-        background: "#fff",
-        color: "#0f172a",
-        fontWeight: "700",
-        fontSize: "15px",
-        cursor: "pointer",
-      }}
-    >
-      Clear Form
-    </button>
-  </div>
+<button
+  type="button"
+  onClick={() => setShowReceipt(true)}
+  style={{
+    padding: "14px 35px",
+    borderRadius: "50px",
+    border: "none",
+    background:
+      "linear-gradient(to right,#2563eb,#10b981)",
+    color: "#fff",
+    fontWeight: "700",
+    cursor: "pointer",
+  }}
+>
+  Generate Receipt
+</button>
 
   {/* Footer */}
   <div
@@ -286,154 +352,341 @@ const DonationReceipt = () => {
     <small>Your address will be shown here</small>
   </div>
 </div>
-
-      {/* Receipt */}
-      <div className="max-w-5xl mx-auto bg-white shadow-lg p-10 text-gray-800">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">80G Certificate</h1>
-        </div>
-
-        <div className="flex justify-between items-start mb-8">
-          <div className="text-sm leading-7">
-            <p>
-              <strong>Receipt No:</strong> {formData.receiptNo}
-            </p>
-
-            <p>{formData.date}</p>
-
-            <p className="font-semibold">{formData.donorName}</p>
-
-            <p>{formData.address1}</p>
-            <p>{formData.address2}</p>
-
-            <p>
-              {formData.city} - {formData.pincode}
-            </p>
-
-            <p>
-              <strong>PAN No :</strong> {formData.pan}
-            </p>
-          </div>
-
-          {/* Logo Area */}
-          <div className="text-right">
-            <div className="w-48 h-24 border rounded-lg flex items-center justify-center bg-green-50">
-              <span className="text-2xl font-bold text-green-700">
-                NGO LOGO
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Letter Content */}
-        <div className="mb-8 leading-8">
-          <p>Dear {formData.donorName}</p>
-
-          <p className="mt-4">
-            Thank you for making a contribution of{" "}
-            <strong>Rs {formData.donationAmount}</strong>. Please keep this
-            written acknowledgement of your donation for your tax records.
-          </p>
-
-          <p className="mt-6">For Foundation</p>
-
-          <div className="mt-8 mb-2">
-            <div className="w-48 border-b border-black"></div>
-          </div>
-
-          <p>({formData.signatory})</p>
-        </div>
-
-        <hr className="my-8" />
-
-        {/* Donation Receipt */}
-        <div>
-          <h2 className="text-center font-bold text-xl mb-6">
-            DONATION RECEIPT
-          </h2>
-
-          <p className="mb-5">
-            We confirm the receipt of donation from{" "}
-            <strong>{formData.donorName}</strong> as per details below:
-          </p>
-
-          <table className="w-full border border-gray-400 mb-6">
-            <tbody>
-              <tr>
-                <td className="border p-2 font-medium">
-                  Donation Date
-                </td>
-                <td className="border p-2">{formData.date}</td>
-              </tr>
-
-              <tr>
-                <td className="border p-2 font-medium">
-                  Transaction Reference Number
-                </td>
-                <td className="border p-2">
-                  {formData.transactionId}
-                </td>
-              </tr>
-
-              <tr>
-                <td className="border p-2 font-medium">
-                  Payment Mode
-                </td>
-                <td className="border p-2">
-                  {formData.paymentMode}
-                </td>
-              </tr>
-
-              <tr>
-                <td className="border p-2 font-medium">
-                  Total Contribution Received (Numbers)
-                </td>
-                <td className="border p-2">
-                  Rs {formData.donationAmount}
-                </td>
-              </tr>
-
-              <tr>
-                <td className="border p-2 font-medium">
-                  Total Contribution Received (Words)
-                </td>
-                <td className="border p-2">
-                  {formData.words}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="space-y-4 text-sm leading-7">
-            <p>
-              Donations qualify for deduction under Section 80G of
-              Income Tax Act subject to applicable rules and
-              regulations.
-            </p>
-
-            <p>
-              This is an acknowledgement for the receipt of donation.
-              Tax deduction can be claimed as per Income Tax rules.
-            </p>
-
-            <p>
-              This is a computer-generated receipt and does not
-              require a physical signature.
-            </p>
-          </div>
-        </div>
-
-        <hr className="my-8" />
-
-        {/* Footer */}
-        <div className="text-sm">
-          <strong>Registered Office Address:</strong>
-          <span className="ml-2">
-           No. 10, Thiruvallur Street Shanthi Nagar Irumbuliyur, East Tambaram Chennai – 600059
-          </span>
-        </div>
+{showReceipt && (
+  <div
+    ref={receiptRef}
+    style={{
+      width: "1000px",
+      margin: "30px auto",
+      background: "#fff",
+      padding: "30px",
+      fontFamily: "Poppins, sans-serif",
+      boxShadow: "0 0 20px rgba(0,0,0,0.15)",
+      borderRadius: "10px",
+    }}
+  >
+    {/* Certificate Header */}
+    <div style={{ textAlign: "center" }}>
+      <div
+        style={{
+          display: "inline-block",
+          background: "#08275d",
+          color: "#fff",
+          padding: "15px 70px",
+          borderRadius: "50px",
+          fontSize: "42px",
+          fontWeight: "700",
+        }}
+      >
+        80G CERTIFICATE
       </div>
+
+      <div
+        style={{
+          width: "350px",
+          margin: "20px auto",
+          borderBottom: "2px solid #d4a017",
+        }}
+      />
+    </div>
+
+    {/* Top Section */}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "30px",
+      }}
+    >
+      <div style={{ width: "50%" }}>
+        <p style={{ fontSize: "18px" }}>
+          Receipt No.: {formData.receiptNo}
+        </p>
+
+        <p style={{ fontSize: "18px" }}>
+          {formData.date}
+        </p>
+
+        <h2
+          style={{
+            fontWeight: "700",
+            marginTop: "20px",
+          }}
+        >
+          {formData.donorName}
+        </h2>
+
+        <p>{formData.address1}</p>
+        <p>{formData.address2}</p>
+
+        <p>
+          {formData.city} - {formData.pincode}
+        </p>
+
+        <p>PAN No. - {formData.pan}</p>
+      </div>
+
+      <div style={{ textAlign: "center" }}>
+        <img
+          src={logo}
+          alt="Sai Nisha Foundation"
+          style={{
+            width: "420px",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+    </div>
+
+    {/* Thank You */}
+    <div
+      style={{
+        marginTop: "40px",
+        fontSize: "18px",
+        lineHeight: "1.8",
+      }}
+    >
+      <p>Dear {formData.donorName}</p>
+
+      <p>
+        Thank you for making a contribution of
+        Rs {formData.donationAmount} to Sai Nisha
+        Foundation. Please keep this written
+        acknowledgement of your donation for
+        your tax records.
+      </p>
+
+      <p>For Sai Nisha Foundation</p>
+
+      <div style={{ marginTop: "50px" }}>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Signature_of_Barack_Obama.svg/512px-Signature_of_Barack_Obama.svg.png"
+          alt="signature"
+          style={{
+            height: "70px",
+          }}
+        />
+
+        <div
+          style={{
+            width: "220px",
+            borderTop: "2px solid #555",
+          }}
+        />
+
+        <p>(Authorised Signatory)</p>
+      </div>
+    </div>
+
+    {/* Donation Receipt Title */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        marginTop: "40px",
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          borderBottom: "2px solid #d4a017",
+        }}
+      />
+
+      <h2
+        style={{
+          color: "#08275d",
+          padding: "0 20px",
+          fontSize: "42px",
+          fontWeight: "700",
+        }}
+      >
+        DONATION RECEIPT
+      </h2>
+
+      <div
+        style={{
+          flex: 1,
+          borderBottom: "2px solid #d4a017",
+        }}
+      />
+    </div>
+
+    <p
+      style={{
+        textAlign: "center",
+        marginTop: "15px",
+        fontSize: "18px",
+      }}
+    >
+      We confirm the receipt of donation from
+      Mr/Ms/Mrs {formData.donorName}
+    </p>
+
+    {/* Table */}
+    <table
+      style={{
+        width: "100%",
+        marginTop: "25px",
+        borderCollapse: "collapse",
+      }}
+    >
+      <tbody>
+        {[
+          ["Donation Date", formData.date],
+          [
+            "Transaction Reference Number",
+            formData.transactionId,
+          ],
+          ["Payment Mode", formData.paymentMode],
+          [
+            "Total Contribution Received",
+            `Rs ${formData.donationAmount}`,
+          ],
+          [
+            "Total Contribution Received (Words)",
+            formData.words,
+          ],
+        ].map((row, index) => (
+          <tr key={index}>
+            <td
+              style={{
+                border: "1px solid #d4a017",
+                padding: "15px",
+                fontWeight: "600",
+                width: "45%",
+              }}
+            >
+              {row[0]}
+            </td>
+
+            <td
+              style={{
+                border: "1px solid #d4a017",
+                padding: "15px",
+              }}
+            >
+              {row[1]}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {/* 80G Box */}
+    <div
+      style={{
+        border: "2px solid #d4a017",
+        padding: "25px",
+        borderRadius: "10px",
+        marginTop: "30px",
+        background: "#fffdf7",
+        lineHeight: "1.8",
+      }}
+    >
+Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax Act 1961 vide Unique Registration Number AABTS1433NF20217 approved on August 31, 2021 which is valid until AY2026-27. This receipt is invalid in case of non-realization of the money instrument or reversal of the credit/debit card charge or reversal of donation amount for any reason. IT PAN: AABTI1433N.
+    </div>
+
+    {/* Notes */}
+    <div
+      style={{
+        marginTop: "25px",
+        lineHeight: "1.8",
+      }}
+    >
+      <p>
+      Please note that this is an acknowledgement for the receipt of donation. We will provide you the Form 10BE on which needed tax deduction can be claimed as per the Income-tax rules.
+      </p>
+
+      <p>
+        This Is A Computer Generated Receipt. In case of any discrepancy or queries please email sainishafoundation@gmail.com
+      </p>
+    </div>
+
+    {/* Thank You */}
+    <div
+      style={{
+        textAlign: "center",
+        marginTop: "30px",
+      }}
+    >
+      <h2
+        style={{
+          color: "#08275d",
+          fontFamily: "cursive",
+          fontSize: "45px",
+        }}
+      >
+        Thank You
+      </h2>
+
+      <p
+        style={{
+          fontSize: "20px",
+        }}
+      >
+        Your contribution makes a real
+        difference!
+      </p>
+    </div>
+
+    {/* Footer */}
+    <div
+      style={{
+        marginTop: "30px",
+        borderTop: "2px solid #d4a017",
+        paddingTop: "20px",
+      }}
+    >
+      <strong>
+        Registered office address:
+      </strong>
+
+      <p>
+        No. 10, Tiruvallur street, Shanthi Nagar, 
+        Irumbuliyur, East Tambaram, 
+        Chennai-600059
+      </p>
+    </div>
+
+    {/* Download Buttons */}
+    <div
+      style={{
+        textAlign: "center",
+        marginTop: "30px",
+      }}
+    >
+      <button
+        onClick={downloadPDF}
+        style={{
+          padding: "12px 30px",
+          background: "#08275d",
+          color: "#fff",
+          border: "none",
+          borderRadius: "8px",
+          marginRight: "10px",
+          cursor: "pointer",
+        }}
+      >
+        Download PDF
+      </button>
+
+      <button
+        onClick={downloadExcel}
+        style={{
+          padding: "12px 30px",
+          background: "#16a34a",
+          color: "#fff",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+        }}
+      >
+        Download Excel
+      </button>
+    </div>
+  </div>
+)}
     </div>
   );
 };
