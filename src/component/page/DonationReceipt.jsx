@@ -11,7 +11,6 @@ const DonationReceipt = () => {
     date: "01 January 2022",
     donorName: "NEERAJ RAUSHAN KANTH",
     address1: "FLAT NO 13, SF3, SUPERVISORS FLAT, BARADWARI",
-    address2: "SAKCHI",
     city: "Jamshedpur",
     pincode: "831001",
     pan: "DDUPK5216A",
@@ -67,7 +66,6 @@ const downloadExcel = () => {
       DonorName: formData.donorName,
       PAN: formData.pan,
       Address1: formData.address1,
-      Address2: formData.address2,
       City: formData.city,
       Pincode: formData.pincode,
       DonationAmount: formData.donationAmount,
@@ -217,7 +215,6 @@ const downloadExcel = () => {
       ["donorName", "Donor Name"],
       ["pan", "PAN Number"],
       ["address1", "Address Line 1"],
-      ["address2", "Address Line 2"],
       ["city", "City"],
       ["pincode", "Postal Code"],
       ["donationAmount", "Donation Amount"],
@@ -374,7 +371,7 @@ const downloadExcel = () => {
           color: "#fff",
           padding: "15px 70px",
           borderRadius: "50px",
-          fontSize: "42px",
+          fontSize: "20px",
           fontWeight: "700",
         }}
       >
@@ -417,7 +414,6 @@ const downloadExcel = () => {
         </h2>
 
         <p>{formData.address1}</p>
-        <p>{formData.address2}</p>
 
         <p>
           {formData.city} - {formData.pincode}
@@ -431,7 +427,8 @@ const downloadExcel = () => {
           src={logo}
           alt="Sai Nisha Foundation"
           style={{
-            width: "420px",
+            width: "200px",
+            marginRight: "700px",
             objectFit: "contain",
           }}
         />
