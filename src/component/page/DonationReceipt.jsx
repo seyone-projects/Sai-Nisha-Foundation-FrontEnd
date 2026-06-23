@@ -42,16 +42,16 @@ const downloadPDF = async () => {
 
   const pdf = new jsPDF("p", "mm", "a4");
 
-  const pdfWidth = 210;
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  const pageWidth = 210;
+  const pageHeight = 322;
 
   pdf.addImage(
     imgData,
     "PNG",
     0,
     0,
-    pdfWidth,
-    pdfHeight
+    pageWidth,
+    pageHeight
   );
 
   pdf.save(
@@ -363,76 +363,127 @@ const downloadExcel = () => {
     }}
   >
     {/* Certificate Header */}
-    <div style={{ textAlign: "center" }}>
-      <div
-        style={{
-          display: "inline-block",
-          background: "#08275d",
-          color: "#fff",
-          padding: "15px 70px",
-          borderRadius: "50px",
-          fontSize: "20px",
-          fontWeight: "700",
-        }}
-      >
-        80G CERTIFICATE
-      </div>
-
-      <div
-        style={{
-          width: "350px",
-          margin: "20px auto",
-          borderBottom: "2px solid #d4a017",
-        }}
-      />
-    </div>
-
-    {/* Top Section */}
-    <div
+{/* Header Row */}
+<div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: "30px",
+  }}
+>
+  {/* Logo */}
+  <div
+    style={{
+      width: "35%",
+      textAlign: "left",
+    }}
+  >
+    <img
+      src={logo}
+      alt="Sai Nisha Foundation"
       style={{
-        display: "flex",
-        justifyContent: "space-between",
-        marginTop: "30px",
+        width: "230px",
+        objectFit: "contain",
+      }}
+    />
+  </div>
+
+  {/* Registered Office Address */}
+  <div
+    style={{
+      width: "60%",
+      color: "#333",
+      lineHeight: "1.8",
+      textAlign: "right",
+    }}
+  >
+    <h3
+      style={{
+        color: "#08275d",
+        marginBottom: "10px",
+        fontSize: "22px",
       }}
     >
-      <div style={{ width: "50%" }}>
-        <p style={{ fontSize: "18px" }}>
-          Receipt No.: {formData.receiptNo}
-        </p>
+      Registered Office Address
+    </h3>
 
-        <p style={{ fontSize: "18px" }}>
-          {formData.date}
-        </p>
+    <p>
+      No. 10, Tiruvallur Street,
+      <br />
+      Shanthi Nagar, Irumbuliyur,
+      <br />
+      East Tambaram,
+      <br />
+      Chennai - 600059
+    </p>
+  </div>
+</div>
 
-        <h2
-          style={{
-            fontWeight: "700",
-            marginTop: "20px",
-          }}
-        >
-          {formData.donorName}
-        </h2>
+{/* 80G Certificate */}
+<div
+  style={{
+    textAlign: "center",
+    marginBottom: "40px",
+  }}
+>
+  <div
+    style={{
+      display: "inline-block",
+      background: "#08275d",
+      color: "#fff",
+      padding: "15px 70px",
+      borderRadius: "50px",
+      fontSize: "22px",
+      fontWeight: "700",
+      letterSpacing: "1px",
+    }}
+  >
+    80G RECEIPT
+  </div>
 
-        <p>{formData.address1}</p>
+  <div
+    style={{
+      width: "350px",
+      margin: "20px auto",
+      borderBottom: "2px solid #d4a017",
+    }}
+  />
+</div>
 
-        <p>
-          {formData.city} - {formData.pincode}
-        </p>
+{/* Donor Details */}
+<div
+  style={{
+    marginBottom: "30px",
+  }}
+>
+  <p style={{ fontSize: "18px" }}>
+    Receipt No : {formData.receiptNo}
+  </p>
 
-        <p>PAN No. - {formData.pan}</p>
-      </div>
+  <p style={{ fontSize: "18px" }}>
+     Receipt Date : {formData.date}
+  </p>
 
-      <div style={{ textAlign: "center" }}>
-        <img
-          src={logo}
-          alt="Sai Nisha Foundation"
-          style={{
-            width: "200px",
-            objectFit: "contain",
-          }}
-        />
-      </div>
-    </div>
+  <h2
+    style={{
+      fontWeight: "700",
+      marginTop: "20px",
+    }}
+  >
+    {formData.donorName}
+  </h2>
+
+  <p>{formData.address1}</p>
+
+  <p>
+    {formData.city} - {formData.pincode}
+  </p>
+
+  <p>
+    PAN No. - {formData.pan}
+  </p>
+</div>
 
     {/* Thank You */}
     <div
@@ -627,23 +678,15 @@ Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax
     </div>
 
     {/* Footer */}
-    <div
-      style={{
-        marginTop: "30px",
-        borderTop: "2px solid #d4a017",
-        paddingTop: "20px",
-      }}
-    >
-      <strong>
-        Registered office address:
-      </strong>
-
-      <p>
-        No. 10, Tiruvallur street, Shanthi Nagar, 
-        Irumbuliyur, East Tambaram, 
-        Chennai-600059
-      </p>
-    </div>
+{/* Footer */}
+<div
+  style={{
+    marginTop: "30px",
+    borderTop: "2px solid #d4a017",
+    paddingTop: "20px",
+  }}
+>
+</div>
 
     {/* Download Buttons */}
     <div
