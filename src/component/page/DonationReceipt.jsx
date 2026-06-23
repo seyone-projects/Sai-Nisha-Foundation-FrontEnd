@@ -383,7 +383,7 @@ const downloadExcel = () => {
       src={logo}
       alt="Sai Nisha Foundation"
       style={{
-        width: "230px",
+        width: "250px",
         objectFit: "contain",
       }}
     />
@@ -646,7 +646,7 @@ Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax
       </p>
 
       <p>
-        This Is A Computer Generated Receipt. In case of any discrepancy or queries please email sainishafoundation@gmail.com
+        This is a Computer Generated Receipt. In case of any discrepancy or queries please email sainishafoundation@gmail.com
       </p>
     </div>
 
