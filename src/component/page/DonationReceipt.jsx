@@ -428,7 +428,6 @@ const downloadExcel = () => {
           alt="Sai Nisha Foundation"
           style={{
             width: "200px",
-            marginRight: "700px",
             objectFit: "contain",
           }}
         />
