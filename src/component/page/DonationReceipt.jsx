@@ -398,24 +398,15 @@ const downloadExcel = () => {
       textAlign: "right",
     }}
   >
-    <h3
-      style={{
-        color: "#08275d",
-        marginBottom: "10px",
-        fontSize: "22px",
-      }}
-    >
-      Registered Office Address
-    </h3>
 
     <p>
       No. 10, Tiruvallur Street,
       <br />
       Shanthi Nagar, Irumbuliyur,
       <br />
-      East Tambaram,
+      East Tambaram,Chennai - 600059
       <br />
-      Chennai - 600059
+     Phone no: +91 9962290875
     </p>
   </div>
 </div>
@@ -642,11 +633,7 @@ Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax
       }}
     >
       <p>
-      Please note that this is an acknowledgement for the receipt of donation. We will provide you the Form 10BE on which needed tax deduction can be claimed as per the Income-tax rules.
-      </p>
-
-      <p>
-        This is a Computer Generated Receipt. In case of any discrepancy or queries please email sainishafoundation@gmail.com
+      Please note that this is an acknowledgement for the receipt of donation. We will provide you the Form 10BE on which needed tax deduction can be claimed as per the Income-tax rules. This is a Computer Generated Receipt. In case of any discrepancy or queries please email hello@sainisha.in
       </p>
     </div>
 
