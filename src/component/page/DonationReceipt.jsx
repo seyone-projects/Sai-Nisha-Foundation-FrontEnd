@@ -383,7 +383,7 @@ const downloadExcel = () => {
       src={logo}
       alt="Sai Nisha Foundation"
       style={{
-        width: "250px",
+        width: "300px",
         objectFit: "contain",
       }}
     />
@@ -400,13 +400,11 @@ const downloadExcel = () => {
   >
 
     <p>
-      No. 10, Tiruvallur Street,
+      No. 10, thiruvalluvar Street, Shanthi Nagar, 
       <br />
-      Shanthi Nagar, Irumbuliyur,
+     Irumbuliyur,East Tambaram,Chennai - 600059
       <br />
-      East Tambaram,Chennai - 600059
-      <br />
-     Phone no: +91 9962290875
+        Phone no: +91 9962290875
     </p>
   </div>
 </div>
@@ -452,7 +450,13 @@ const downloadExcel = () => {
     Receipt No : {formData.receiptNo}
   </p>
 
-  <p style={{ fontSize: "18px" }}>
+  <p
+  style={{
+    fontSize: "18px",
+    marginLeft: "600px",
+    marginTop: "-50px", 
+  }}
+>
      Receipt Date : {formData.date}
   </p>
 
@@ -484,7 +488,7 @@ const downloadExcel = () => {
         lineHeight: "1.8",
       }}
     >
-      <p>Dear {formData.donorName}</p>
+      <p>Dear {formData.  donorName}</p>
 
       <p>
         Thank you for making a contribution of
@@ -493,7 +497,7 @@ const downloadExcel = () => {
         acknowledgement of your donation for
         your tax records.
       </p>
-
+       <br />
       <p>For Sai Nisha Foundation</p>
 
       <div style={{ marginTop: "50px" }}>
@@ -535,7 +539,7 @@ const downloadExcel = () => {
         style={{
           color: "#08275d",
           padding: "0 20px",
-          fontSize: "42px",
+          fontSize: "30px",
           fontWeight: "700",
         }}
       >
@@ -622,7 +626,7 @@ const downloadExcel = () => {
         lineHeight: "1.8",
       }}
     >
-Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax Act 1961 vide Unique Registration Number AABTS1433NF20217 approved on August 31, 2021 which is valid until AY2026-27. This receipt is invalid in case of non-realization of the money instrument or reversal of the credit/debit card charge or reversal of donation amount for any reason. IT PAN: AABTI1433N.
+Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax Act 1961 vide Unique Registration Number ABLTS4033PF20251 approved on April 04, 2025 which is valid until AY2027-2028. This receipt is invalid in case of non-realization of the money instrument or reversal of the credit/debit card charge or reversal of donation amount for any reason. IT PAN: ABLTS4033P.
     </div>
 
     {/* Notes */}
