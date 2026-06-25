@@ -488,11 +488,11 @@ const downloadExcel = () => {
         lineHeight: "1.8",
       }}
     >
-      <p>Dear {formData.  donorName}</p>
+      <p>Dear  {formData.  donorName}</p>
 
       <p>
         Thank you for making a contribution of
-        Rs {formData.donationAmount} to Sai Nisha
+        Rs {formData.donationAmount} /- to Sai Nisha
         Foundation. Please keep this written
         acknowledgement of your donation for
         your tax records.
@@ -583,7 +583,7 @@ const downloadExcel = () => {
           ["Payment Mode", formData.paymentMode],
           [
             "Total Contribution Received",
-            `Rs ${formData.donationAmount}`,
+            `Rs ${formData.donationAmount} /-`,
           ],
           [
             "Total Contribution Received (Words)",
