@@ -383,7 +383,7 @@ const downloadExcel = () => {
       src={logo}
       alt="Sai Nisha Foundation"
       style={{
-        width: "300px",
+        width: "400px",
         objectFit: "contain",
       }}
     />
@@ -400,11 +400,11 @@ const downloadExcel = () => {
   >
 
     <p>
-      No. 10, thiruvalluvar Street, Shanthi Nagar, 
+      No. 10, Thiruvalluvar Street, Shanthi Nagar, 
       <br />
-     Irumbuliyur,East Tambaram,Chennai - 600059
+     Irumbuliyur, East Tambaram, Chennai - 600059
       <br />
-        Phone no: +91 9962290875
+        Contact no: +91 9962290875
     </p>
   </div>
 </div>
@@ -454,7 +454,7 @@ const downloadExcel = () => {
   style={{
     fontSize: "18px",
     marginLeft: "600px",
-    marginTop: "-50px", 
+    marginTop: "-40px", 
   }}
 >
      Receipt Date : {formData.date}
@@ -463,7 +463,7 @@ const downloadExcel = () => {
   <h2
     style={{
       fontWeight: "700",
-      marginTop: "20px",
+      marginTop: "40px",
     }}
   >
     {formData.donorName}
@@ -484,6 +484,7 @@ const downloadExcel = () => {
     <div
       style={{
         marginTop: "40px",
+        marginBottom: "50px",
         fontSize: "18px",
         lineHeight: "1.8",
       }}
@@ -500,7 +501,7 @@ const downloadExcel = () => {
        <br />
       <p>For Sai Nisha Foundation</p>
 
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ marginTop: "20px" }}>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Signature_of_Barack_Obama.svg/512px-Signature_of_Barack_Obama.svg.png"
           alt="signature"
@@ -642,31 +643,32 @@ Donations to Sai Nisha Foundation qualify for reduction u/s 80G(5) of Income Tax
     </div>
 
     {/* Thank You */}
-    <div
-      style={{
-        textAlign: "center",
-        marginTop: "30px",
-      }}
-    >
-      <h2
-        style={{
-          color: "#08275d",
-          fontFamily: "cursive",
-          fontSize: "45px",
-        }}
-      >
-        Thank You
-      </h2>
+<div
+  style={{
+    textAlign: "center",
+    marginTop: "30px",
+    marginBottom: "150px",
+  }}
+>
+  <h2
+    style={{
+      color: "#08275d",
+      padding: "0 20px",
+      fontSize: "30px",
+      fontWeight: "700",
+    }}
+  >
+    Thank You
+  </h2>
 
-      <p
-        style={{
-          fontSize: "20px",
-        }}
-      >
-        Your contribution makes a real
-        difference!
-      </p>
-    </div>
+  <p
+    style={{
+      fontSize: "20px",
+    }}
+  >
+    Your contribution makes a real difference!
+  </p>
+</div>
 
     {/* Footer */}
 {/* Footer */}
