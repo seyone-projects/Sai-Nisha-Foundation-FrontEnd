@@ -3,7 +3,8 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import logo from "../page/image/ngo-removebg-preview.png"; // Your Sai Nisha Foundation logo
+import logo from "../page/image/ngo-removebg-preview.png";
+import sign from "../page/image/founder sign.jpeg"
 
 const DonationReceipt = () => {
   const [formData, setFormData] = useState({
@@ -503,7 +504,7 @@ const downloadExcel = () => {
 
       <div style={{ marginTop: "20px" }}>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Signature_of_Barack_Obama.svg/512px-Signature_of_Barack_Obama.svg.png"
+          src="/src/component/page/image/founder_sign-removebg-preview.png"
           alt="signature"
           style={{
             height: "70px",
@@ -517,7 +518,7 @@ const downloadExcel = () => {
           }}
         />
 
-        <p>(Authorised Signatory)</p>
+        <p>(Founder Signatory)</p>
       </div>
     </div>
 
