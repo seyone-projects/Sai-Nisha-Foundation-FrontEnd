@@ -394,6 +394,7 @@ const downloadExcel = () => {
   <div
     style={{
       width: "60%",
+      marginTop: "30px",
       color: "#333",
       lineHeight: "1.8",
       textAlign: "right",
@@ -490,11 +491,11 @@ const downloadExcel = () => {
         lineHeight: "1.8",
       }}
     >
-      <p>Dear  {formData.  donorName}</p>
+      <p>Dear  {formData.  donorName},</p>
 
-      <p>
+      <p style={{marginTop: "15px"}}>
         Thank you for making a contribution of
-        Rs {formData.donationAmount} /- to Sai Nisha
+        Rs {formData.donationAmount}/- to Sai Nisha
         Foundation. Please keep this written
         acknowledgement of your donation for
         your tax records.
@@ -518,7 +519,7 @@ const downloadExcel = () => {
           }}
         />
 
-        <p>(Founder Signatory)</p>
+        <p>(Founder)</p>
       </div>
     </div>
 
@@ -585,7 +586,7 @@ const downloadExcel = () => {
           ["Payment Mode", formData.paymentMode],
           [
             "Total Contribution Received",
-            `Rs ${formData.donationAmount} /-`,
+            `Rs ${formData.donationAmount}/-`,
           ],
           [
             "Total Contribution Received (Words)",

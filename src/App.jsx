@@ -91,8 +91,8 @@ return (
                 <Button sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}>  Media Partners</Button>
                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu} MenuListProps={{ onMouseLeave: handleCloseMenu }} PaperProps={{ sx: { bgcolor: creamBg } }}>
                   {/* <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem> */}
+                   <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                   <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>News</MenuItem>
-                  <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                 </Menu>
               </Box>
               <Button component={Link}  to="/payment"  sx={{ bgcolor: goldBtn, color: "#fff", "&:hover": { bgcolor: "#b3740d" } }}  variant="contained" >  Donate  </Button> </Box> )}
