@@ -13,12 +13,6 @@ import img12 from '../image/DSC06023.jpg';
 
 export const ALL_EVENTS = [
   { 
-    title: "Guru Roopa Yogi", 
-    date: "Sun, 01 Feb 2026", 
-    image: img1, 
-    partner: "Sai Nisha" 
-  },
-  { 
     title: "Music director Thiru  Dhina", 
     date: "Sun, 01 Feb 2026", 
     image: img2, 
@@ -34,6 +28,12 @@ export const ALL_EVENTS = [
     title: "Actor Thiru  Jagan purushottam", 
     date: "Sun, 01 Feb 2026", 
     image: img4, 
+    partner: "Sai Nisha" 
+  },
+    { 
+    title: "Guru Roopa Yogi", 
+    date: "Sun, 01 Feb 2026", 
+    image: img1, 
     partner: "Sai Nisha" 
   },
    { 
@@ -86,4 +86,4 @@ export const ALL_EVENTS = [
   },
 ];
 
-export const HERO_SLIDES = [img1, img3, img12];
+export const HERO_SLIDES = [img2, img3, img4, img1];

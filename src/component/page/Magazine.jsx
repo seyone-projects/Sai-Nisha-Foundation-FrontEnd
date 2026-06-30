@@ -15,7 +15,7 @@ const Magazine = () => {
         <Container maxWidth={false} disableGutters sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ position: 'relative', bgcolor: '#fcfaf7', boxShadow: '0px 50px 100px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', width: '100%', border: 'none', overflow: 'hidden' }}>
             <Box sx={{ bgcolor: '#1a2a3a', color: 'white', p: { xs: 4, md: 7 }, pt: { xs: 6, md: 8 }, pb: { xs: 8, md: 15 }, clipPath: 'polygon(0 0, 100% 0, 100% 88%, 0 100%)', zIndex: 10 }}>
-              <Typography variant="h1" sx={{ fontWeight: 900, letterSpacing: -2, fontSize: { xs: '2.5rem', md: '5rem' }, textTransform: 'uppercase', lineHeight: 0.9, mb: 2 }}>Press and <br /> <span style={{ color: '#d4af37' }}>Media</span></Typography>
+              <Typography variant="h1" sx={{ fontWeight: 900, letterSpacing: -2, fontSize: { xs: '2.5rem', md: '5rem' }, textTransform: 'uppercase', lineHeight: 0.9, mb: 2 }}>Print and <br /> <span style={{ color: '#d4af37' }}>Media</span></Typography>
               <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}><Typography variant="overline" sx={{ letterSpacing: 5, fontWeight: 800, color: '#d4af37' }}>SAI NISHA FOUNDATION</Typography><Box sx={{ flexGrow: 1, height: '2px', bgcolor: '#d4af37', opacity: 0.3 }} /></Stack>
               <Typography variant="body2" sx={{ letterSpacing: 2, fontWeight: 400, opacity: 0.7 }}>THE PRIME FOUNDATION</Typography>
             </Box>

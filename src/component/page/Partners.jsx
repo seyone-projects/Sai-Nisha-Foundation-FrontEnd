@@ -1,30 +1,106 @@
-import React, { useState } from "react";
-import { Box, Typography, Container, keyframes, useMediaQuery, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { Box, Typography, Container, useMediaQuery, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Footer from "./Footer";
 import img1 from "../page/image/Guru ji.jpg"; import img2 from "../page/image/DSC06390.jpg";import img3 from "../page/image/DSC06321.jpg";import img4 from "../page/image/DSC06299.jpg"; import img5 from "../page/image/marconi.jpeg";
 import videoSrc from "../page/image/partners video.mp4";
 const gold = "#D68910";
 const theme = createTheme({ typography: { fontFamily: "'Poppins', sans-serif" } });
-const orbit = keyframes`
-  from { transform: rotate(0deg) translateX(var(--radius)) rotate(0deg); }
-  to { transform: rotate(360deg) translateX(var(--radius)) rotate(-360deg); }
-`;
+
+const ORBIT_DURATION_MS = 25000; // one full revolution
+
 export default function Partners() {
   const isMobile = useMediaQuery("(max-width:900px)");
   const [isPaused, setIsPaused] = useState(false);
- const partnersData = [
+  const [hoveredName, setHoveredName] = useState(null);
+
+  const partnersData = [
     { img: img1, name: "Guru Roopa Yogi", desc: "Guru Roopa Yogi  Sri La Sri Maha Narasimha Athmanatha Swamigal: Founder of Jai Kosha Foundation, a revered spiritual guide dedicated to spreading divine wisdom, guiding individuals toward inner harmony, and uplifting society through sacred traditions and spiritual service." },
     { img: img2, name: "R. Kannan", desc: "R. Kannan is recognized for his disciplined approach to filmmaking and his commitment to supporting new talent within the industry. Through his consistent contributions to the art of screenwriting and direction, he continues to inspire a new generation of technicians and storytellers in the world of Tamil cinema. " },
     { img: img3, name: "Jagan Purushottam", desc: "He is Popularly known as “Ayan Jagan,” he is widely recognized for his razor-sharp wit and versatile performances in Tamil cinema. From his breakout role as Chitti Babu to his engaging presence as a premier television host, Jagan continues to contribute significantly to the entertainment landscape." },
     { img: img4, name: "Kalaimamani Thiru Dhina", desc: "A legendary Music Director and widely recognized for his soul-stirring compositions and his dedicated mentorship of budding musical talent. Through his relentless pursuit of musical excellence, he continues to contribute significantly to the cultural heritage and cinematic landscape of Tamil Nadu." },
     { img: img5, name: "Emayavaramban Marconi", desc: "Emayavaramban Marconi Popularly known as “Vallal Nayagan,” Emayavaramban Marconi is widely recognized for his dedicated community services and temple renovation initiatives. Through his Marconi Foundation, he continues to contribute significantly to social welfare and community development in and around Sirkali." },
   ];
-   const [activePartner, setActivePartner] = useState(partnersData[0]);
+
+  const [activePartner, setActivePartner] = useState(partnersData[0]);
+
+  // ── JS-driven orbit so we always know each photo's current angle ──
+  const radius = isMobile ? 95 : 180;
+  // The "front" angle is the point on the circle closest to the info card.
+  // Row layout (desktop): card sits to the right -> front = 0deg (right side).
+  // Column layout (mobile): card sits below -> front = 90deg (bottom).
+  const frontAngle = isMobile ? 90 : 0;
+
+  const [angleDeg, setAngleDeg] = useState(0);
+  const rafRef = useRef(null);
+  const startRef = useRef(null);
+  const pausedAtRef = useRef(0);
+
+  useEffect(() => {
+    if (isPaused) {
+      // Freeze: remember where we stopped, cancel the loop.
+      pausedAtRef.current = angleDeg;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      return;
+    }
+
+    startRef.current = performance.now() - (pausedAtRef.current / 360) * ORBIT_DURATION_MS;
+
+    const tick = (now) => {
+      const elapsed = now - startRef.current;
+      const newAngle = (elapsed / ORBIT_DURATION_MS) * 360 % 360;
+      setAngleDeg(newAngle);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPaused]);
+
+  // Smallest angular distance between two angles (0-360)
+  const angularDistance = (a, b) => {
+    const diff = Math.abs(a - b) % 360;
+    return diff > 180 ? 360 - diff : diff;
+  };
+
+  // Whenever the orbit advances (and nobody is hovering a specific photo),
+  // automatically highlight whichever partner is currently nearest the card.
+  useEffect(() => {
+    if (hoveredName) return; // hover takes priority, handled separately
+    const step = 360 / partnersData.length;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+    partnersData.forEach((_, i) => {
+      const itemAngle = (angleDeg + i * step) % 360;
+      const dist = angularDistance(itemAngle, frontAngle);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIndex = i;
+      }
+    });
+    const nearest = partnersData[closestIndex];
+    setActivePartner(prev => (prev.name === nearest.name ? prev : nearest));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [angleDeg, hoveredName]);
+
+  const handleEnter = (p) => {
+    setHoveredName(p.name);
+    setActivePartner(p);
+    setIsPaused(true);
+  };
+
+  const handleLeave = () => {
+    setHoveredName(null);
+    setIsPaused(false);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      
+
       {/* Background Video Section */}
       <Box sx={{ position: "fixed", inset: 0, zIndex: -1, bgcolor: "#000" }}>
         <video autoPlay loop muted playsInline  style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }}
@@ -36,74 +112,80 @@ export default function Partners() {
       </Box>
 
       <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 8 }, pb: 12, position: "relative", zIndex: 1 }}>
-        <Typography 
-          variant={isMobile ? "h4" : "h2"} 
+        <Typography
+          variant={isMobile ? "h4" : "h2"}
           sx={{ color: gold, textAlign: "center", fontWeight: 900, mb: { xs: 4, md: 10 }, textTransform: "uppercase", letterSpacing: 2 , mt: -9 }}
         >
           Celebrities
         </Typography>
 
-        <Box sx={{ 
-          display: "flex", 
-          flexDirection: isMobile ? "column" : "row", 
-          alignItems: "center", 
+        <Box sx={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
           justifyContent: "center",
           gap: { xs: 2, md: 10 }
         }}>
-          
+
           {/* Animated Orbit Container */}
-          <Box sx={{ 
-            position: "relative", 
-            width: { xs: "300px", md: "500px" }, 
+          <Box sx={{
+            position: "relative",
+            width: { xs: "300px", md: "500px" },
             height: { xs: "300px", md: "500px" },
             display: "flex", alignItems: "center", justifyContent: "center"
           }}>
             {/* Background Dotted Ring */}
-            <Box sx={{ 
-              width: { xs: 180, md: 350 }, height: { xs: 180, md: 350 }, 
-              border: `1px dashed ${gold}`, borderRadius: "50%", opacity: 0.3, position: "absolute" 
+            <Box sx={{
+              width: { xs: 180, md: 350 }, height: { xs: 180, md: 350 },
+              border: `1px dashed ${gold}`, borderRadius: "50%", opacity: 0.3, position: "absolute"
             }} />
-            
-            {partnersData.map((p, i) => (
-              <Box key={i}
-                onMouseEnter={() => { setActivePartner(p); setIsPaused(true); }}
-                onMouseLeave={() => setIsPaused(false)}
-                onClick={() => setActivePartner(p)}
-                sx={{
-                  position: "absolute",
-                  "--radius": isMobile ? "95px" : "180px",
-                  animation: `${orbit} 25s linear infinite`,
-                  animationDelay: `-${(25 / partnersData.length) * i}s`,
-                  animationPlayState: isPaused ? "paused" : "running",
-                  cursor: "pointer",
-                  zIndex: activePartner.name === p.name ? 10 : 1
-                }}
-              >
-                <Box 
-                  component="img" 
-                  src={p.img} 
+
+            {partnersData.map((p, i) => {
+              const step = 360 / partnersData.length;
+              const itemAngle = (angleDeg + i * step) % 360;
+              const rad = (itemAngle * Math.PI) / 180;
+              const x = radius * Math.cos(rad);
+              const y = radius * Math.sin(rad);
+              const isActive = activePartner.name === p.name;
+
+              return (
+                <Box key={i}
+                  onMouseEnter={() => handleEnter(p)}
+                  onMouseLeave={handleLeave}
+                  onClick={() => handleEnter(p)}
                   sx={{
-                    width: { xs: 75, md: 120 }, 
-                    height: { xs: 75, md: 120 },
-                    borderRadius: "50%", 
-                    border: `3px solid ${activePartner.name === p.name ? "#fff" : gold}`,
-                    boxShadow: activePartner.name === p.name ? `0 0 25px ${gold}` : "none",
-                    transition: "0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                    objectFit: "cover",
-                    "&:hover": { transform: "scale(1.2)" }
-                  }} 
-                />
-              </Box>
-            ))}
+                    position: "absolute",
+                    transform: `translate(${x}px, ${y}px)`,
+                    cursor: "pointer",
+                    zIndex: isActive ? 10 : 1
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={p.img}
+                    sx={{
+                      width: { xs: 75, md: 120 },
+                      height: { xs: 75, md: 120 },
+                      borderRadius: "50%",
+                      border: `3px solid ${isActive ? "#fff" : gold}`,
+                      boxShadow: isActive ? `0 0 25px ${gold}` : "none",
+                      transition: "border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                      objectFit: "cover",
+                      "&:hover": { transform: "scale(1.2)" }
+                    }}
+                  />
+                </Box>
+              );
+            })}
           </Box>
 
           {/* Celebrity Info Card */}
-          <Box sx={{ 
+          <Box sx={{
             width: "100%",
             maxWidth: { xs: "100%", md: "600px" },
-            p: { xs: 3, md: 5 }, 
-            borderRadius: 4, 
-            bgcolor: "rgba(255,255,255,0.03)", 
+            p: { xs: 3, md: 5 },
+            borderRadius: 4,
+            bgcolor: "rgba(255,255,255,0.03)",
             backdropFilter: "blur(12px)",
             borderLeft: `5px solid ${gold}`,
             textAlign: isMobile ? "center" : "left",

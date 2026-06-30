@@ -1,12 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Container, Paper, Box, Typography, TextField, Grid, Button,
-  Avatar, IconButton, Divider, Stepper, Step, StepLabel, Chip, Alert
+  Avatar, IconButton, Divider, Stepper, Step, StepLabel, Chip, Alert,
+  Dialog, DialogTitle, DialogContent, DialogActions, InputAdornment
 } from '@mui/material';
 import {
   PhotoCamera, NavigateNext, NavigateBefore, CheckCircleOutline,
   Phone, Email, LocationOn, CloudUpload as UploadIcon,
-  CreditCard, CheckCircle
+  CreditCard, CheckCircle, Lock, Visibility, VisibilityOff
 } from '@mui/icons-material';
 
 const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
@@ -20,7 +21,25 @@ const BRAND_COLORS = {
   lightBg: '#F4F7F9'
 };
 
-// ─── Aadhaar Upload Box ───────────────────────────────────────────────────────
+// Set the password required before a card can be downloaded
+const DOWNLOAD_PASSWORD = 'sainisha@01';
+
+function useHtml2Canvas() {
+  const [ready, setReady] = useState(!!window.html2canvas);
+  useEffect(() => {
+    if (window.html2canvas) {
+      setReady(true);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.async = true;
+    script.onload = () => setReady(true);
+    document.body.appendChild(script);
+  }, []);
+  return ready;
+}
+
 function AadhaarUploadBox({ label, preview, onUpload, chipColor }) {
   const inputId = `aadhaar-${label.replace(/\s+/g, '-').toLowerCase()}`;
   return (
@@ -62,7 +81,6 @@ function AadhaarUploadBox({ label, preview, onUpload, chipColor }) {
           </Box>
         )}
 
-        {/* Overlay upload button */}
         <label htmlFor={inputId}>
           <input
             accept="image/*"
@@ -88,7 +106,6 @@ function AadhaarUploadBox({ label, preview, onUpload, chipColor }) {
           </IconButton>
         </label>
 
-        {/* Verified tick */}
         {preview && (
           <CheckCircle
             sx={{
@@ -112,7 +129,6 @@ function AadhaarUploadBox({ label, preview, onUpload, chipColor }) {
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
 export default function MembershipForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -121,7 +137,15 @@ export default function MembershipForm() {
   const [profilePreview, setProfilePreview]         = useState(null);
   const [aadhaarFrontPreview, setAadhaarFrontPreview] = useState(null);
   const [aadhaarBackPreview, setAadhaarBackPreview]   = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const cardRef = useRef(null);
+  const html2canvasReady = useHtml2Canvas();
+
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
@@ -173,35 +197,75 @@ export default function MembershipForm() {
 
   const handleBack = () => setActiveStep(prev => prev - 1);
 
-  const handleSubmit = async (e) => {
+  // Clicking the main button just opens the password dialog
+  const handleRequestDownload = (e) => {
     e.preventDefault();
+    setPasswordInput('');
+    setPasswordError('');
+    setShowPassword(false);
+    setPasswordDialogOpen(true);
+  };
+
+  const handleClosePasswordDialog = () => {
+    if (submitting) return;
+    setPasswordDialogOpen(false);
+  };
+
+  // Actual download logic, runs only after password is verified
+  const generateAndDownloadCard = async () => {
+    if (!html2canvasReady || !window.html2canvas) {
+      setPasswordError('Still preparing the download tool, please try again in a moment.');
+      return;
+    }
+
+    setSubmitting(true);
     try {
-      const res = await fetch('http://localhost:5000/api/members/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          mobileNo: formData.mobileNo,
-          dob: formData.dob,
-          gender: formData.gender,
-          membershipId: formData.membershipId,
-        })
+      const member = { ...formData, savedAt: new Date().toISOString() };
+      const existing = JSON.parse(localStorage.getItem('sainisha_members') || '[]');
+      existing.push(member);
+      localStorage.setItem('sainisha_members', JSON.stringify(existing));
+
+      const canvas = await window.html2canvas(cardRef.current, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
       });
-      const result = await res.json();
-      if (result.success) {
-        alert('Registration Successful! Saved in MongoDB.');
-      } else {
-        alert('Database error: ' + result.error);
-      }
-    } catch {
-      alert('Could not connect to backend server. Make sure it is running!');
+
+      const link = document.createElement('a');
+      link.download = `${formData.membershipId || 'membership-card'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      setSubmitted(true);
+      setPasswordDialogOpen(false);
+    } catch (err) {
+      console.error(err);
+      setPasswordError('Something went wrong while generating the card image. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
+
+  const handleVerifyPassword = () => {
+    if (passwordInput !== DOWNLOAD_PASSWORD) {
+      setPasswordError('Incorrect password. Please try again.');
+      return;
+    }
+    setPasswordError('');
+    generateAndDownloadCard();
+  };
+
+  const handlePasswordKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleVerifyPassword();
+    }
+  };
+
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
 
-        {/* Logo */}
         <Box display="flex" justifyContent="center" mb={3}>
           <Box
             component="img"
@@ -224,9 +288,8 @@ export default function MembershipForm() {
 
         <Divider sx={{ mb: 4 }} />
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleRequestDownload}>
 
-          {/* ── STEP 1: Personal Details + Aadhaar Upload ────────────────── */}
           {activeStep === 0 && (
             <Box sx={{ minHeight: '220px' }}>
               <Grid container spacing={3}>
@@ -256,7 +319,6 @@ export default function MembershipForm() {
                   </TextField>
                 </Grid>
 
-                {/* ── Aadhaar Upload ── */}
                 <Grid item xs={12}>
                   <Box
                     sx={{
@@ -313,7 +375,6 @@ export default function MembershipForm() {
             </Box>
           )}
 
-          {/* ── STEP 2: Profile Photo ────────────────────────────────────── */}
           {activeStep === 1 && (
             <Box display="flex" flexDirection="column" alignItems="center"
               justifyContent="center" sx={{ minHeight: '220px' }}>
@@ -347,12 +408,10 @@ export default function MembershipForm() {
             </Box>
           )}
 
-          {/* ── STEP 3: Review & Card Preview ───────────────────────────── */}
           {activeStep === 2 && (
             <Box display="flex" flexDirection="column" alignItems="center"
               sx={{ minHeight: '340px', width: '100%', overflowX: 'auto', py: 2 }}>
 
-              {/* ── Membership Card ── */}
               <Paper ref={cardRef} elevation={6}
                 sx={{
                   width: '600px', height: '380px', borderRadius: '20px', overflow: 'hidden',
@@ -452,7 +511,6 @@ export default function MembershipForm() {
                 </Box>
               </Paper>
 
-              {/* ── Aadhaar Uploaded Images Preview ── */}
               <Box sx={{ mt: 4, width: '100%' }}>
                 <Box display="flex" alignItems="center" gap={1} mb={2} justifyContent="center">
                   <CreditCard sx={{ color: BRAND_COLORS.navy }} />
@@ -468,7 +526,6 @@ export default function MembershipForm() {
                   justifyContent="center"
                   alignItems="flex-start"
                 >
-                  {/* Front */}
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     <Chip label="Front" size="small"
                       sx={{ bgcolor: BRAND_COLORS.navy, color: '#fff', fontWeight: 700, letterSpacing: 1 }} />
@@ -488,7 +545,6 @@ export default function MembershipForm() {
                     </Box>
                   </Box>
 
-                  {/* Back */}
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     <Chip label="Back" size="small"
                       sx={{ bgcolor: BRAND_COLORS.gold, color: '#fff', fontWeight: 700, letterSpacing: 1 }} />
@@ -520,10 +576,15 @@ export default function MembershipForm() {
                   Everything looks ready for card registration.
                 </Typography>
               </Box>
+
+              {submitted && (
+                <Alert severity="success" sx={{ mt: 2, borderRadius: 2 }}>
+                  Card generated and downloaded successfully! Saved locally on this device.
+                </Alert>
+              )}
             </Box>
           )}
 
-          {/* ── Navigation Buttons ───────────────────────────────────────── */}
           <Box display="flex" justifyContent="space-between" sx={{ mt: 4 }}>
             <Button disabled={activeStep === 0} onClick={handleBack}
               startIcon={<NavigateBefore />} variant="outlined"
@@ -538,6 +599,7 @@ export default function MembershipForm() {
               </Button>
             ) : (
               <Button type="submit" variant="contained" size="large"
+                startIcon={<Lock fontSize="small" />}
                 sx={{
                   px: 4, fontWeight: 'bold', boxShadow: 3,
                   backgroundColor: BRAND_COLORS.navy, '&:hover': { backgroundColor: '#124a7c' }
@@ -548,6 +610,58 @@ export default function MembershipForm() {
           </Box>
         </form>
       </Paper>
+
+      <Dialog
+        open={passwordDialogOpen}
+        onClose={handleClosePasswordDialog}
+        maxWidth="xs"
+        fullWidth
+        PaperProps={{ sx: { borderRadius: 3, p: 1 } }}
+      >
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, color: BRAND_COLORS.navy }}>
+          <Lock sx={{ color: BRAND_COLORS.navy }} />
+          Enter Password to Download
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            Please enter the authorized password to generate and download this membership card.
+          </Typography>
+          <TextField
+            autoFocus
+            fullWidth
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            value={passwordInput}
+            onChange={(e) => { setPasswordInput(e.target.value); setPasswordError(''); }}
+            onKeyDown={handlePasswordKeyDown}
+            error={!!passwordError}
+            helperText={passwordError || ' '}
+            disabled={submitting}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(prev => !prev)} edge="end" size="small">
+                    {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={handleClosePasswordDialog} disabled={submitting}>
+            Cancel
+          </Button>
+          <Button
+            onClick={handleVerifyPassword}
+            variant="contained"
+            disabled={submitting || !passwordInput}
+            sx={{ backgroundColor: BRAND_COLORS.navy, '&:hover': { backgroundColor: '#124a7c' } }}
+          >
+            {submitting ? 'Generating...' : 'Confirm & Download'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
