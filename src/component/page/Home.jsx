@@ -33,7 +33,7 @@ export default function Home() {
           <Container maxWidth={false} sx={{ textAlign: "center", zIndex: 2 }}><motion.div variants={STAGGER_CONTAINER} initial="initial" animate="animate">
             <Box sx={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>{titleLetters.map((char, i) => (<motion.span key={i} variants={LETTER_ANIM} style={{ display: 'inline-block' }}><Typography variant={isMobile ? "body2" : "h5"} sx={{ color: GOLD, fontWeight: 700, letterSpacing: isMobile ? '2px' : '4px', mr: char === " " ? (isMobile ? 1 : 2) : 0.2 }}>{char}</Typography></motion.span>))}</Box>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1.5 }}>
-              <Typography variant={isMobile ? "body2" : "h6"} sx={{ fontStyle: 'italic', mb: isMobile ? 2 : 4, opacity: 0.8, fontSize: isMobile ? '0.85rem' : '1.25rem',fontFamily: "'Playfair Display', serif" }}>"Reliving the moments of joy, talent, and meaningful connections"</Typography>
+              <Typography variant={isMobile ? "body2" : "h6"} sx={{ fontStyle: 'italic', mb: isMobile ? 2 : 4, opacity: 0.8, fontSize: isMobile ? '0.85rem' : '1.25rem',fontFamily: "'Playfair Display', serif" }}>"Every Great Change Starts with One Step—and One View."</Typography>
                <IconButton
                 onClick={() => setOpenVideo(true)}
                 sx={{

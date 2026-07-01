@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import backgroundVideo from "../page/image/vecteezy_young-mother-with-a-cute-new-born-baby_36023928 (1).mp4"; 
+// import backgroundVideo from "../page/image/vecteezy_young-mother-with-a-cute-new-born-baby_36023928 (1).mp4"; 
 import { Box, Button, Typography, Grid, Container, Divider, CssBaseline, keyframes, GlobalStyles } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles"; import { motion } from "framer-motion";import Footer from "../page/Footer"; import useMediaQuery from "@mui/material/useMediaQuery";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";import HandshakeIcon from "@mui/icons-material/Handshake"; import GroupAddIcon from "@mui/icons-material/GroupAdd";
@@ -45,7 +45,7 @@ export default function About() {
       <CssBaseline />
    {/* BACKGROUND SECTION */}
       <Box sx={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0, overflow: "hidden" }}>
-        <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}>  <source src={backgroundVideo} type="video/mp4" /> </video>
+        {/* <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}>  <source src={backgroundVideo} type="video/mp4" /> </video> */}
         <Box sx={{ position: "absolute", inset: 0, bgcolor: "rgba(15, 23, 42, 0.4)" }} /> 
       </Box>  <Box sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999 }}> <Button component="a" href="https://wa.me/919962290875" target="_blank" rel="noopener noreferrer" sx={{ minWidth: 0, width: 56, height: 56, borderRadius: "50%", bgcolor: "#25D366", color: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.3)", "&:hover": { bgcolor: "#1EBE5D", transform: "scale(1.1)" }, transition: "transform 0.2s ease-in-out" }}><WhatsAppIcon sx={{ fontSize: 30 }} /></Button></Box> <Box sx={{ position: "relative", py: { xs: 10, md: 14 }, background: "transparent", overflow: "hidden", minHeight: "100vh" }}> <BubblesBackground />
         <Container sx={{ position: "relative", zIndex: 2, mt: -10 }}>

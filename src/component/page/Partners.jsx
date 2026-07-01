@@ -3,7 +3,7 @@ import { Box, Typography, Container, useMediaQuery, CssBaseline, ThemeProvider, 
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Footer from "./Footer";
 import img1 from "../page/image/Guru ji.jpg"; import img2 from "../page/image/DSC06390.jpg";import img3 from "../page/image/DSC06321.jpg";import img4 from "../page/image/DSC06299.jpg"; import img5 from "../page/image/marconi.jpeg";
-import videoSrc from "../page/image/partners video.mp4";
+// import videoSrc from "../page/image/partners video.mp4";
 const gold = "#D68910";
 const theme = createTheme({ typography: { fontFamily: "'Poppins', sans-serif" } });
 
@@ -103,10 +103,10 @@ export default function Partners() {
 
       {/* Background Video Section */}
       <Box sx={{ position: "fixed", inset: 0, zIndex: -1, bgcolor: "#000" }}>
-        <video autoPlay loop muted playsInline  style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }}
+        {/* <video autoPlay loop muted playsInline  style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }}
         >
           <source src={videoSrc} type="video/mp4" />
-        </video>
+        </video> */}
         {/* Dark Overlay for Readability */}
         <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%)" }} />
       </Box>

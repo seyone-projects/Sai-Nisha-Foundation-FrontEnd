@@ -9,7 +9,7 @@ import eventImg4 from"../page/image/DSC06321.jpg";
 import eventImg8 from"../page/image/DSC06093.jpg";
 import eventImg12 from"../page/image/DSC06023.jpg";
 import eventImg3 from"../page/image/DSC06390.jpg";
-const cinematicNavy="#0B121E",cinematicGold="#F2A900",BG_IMAGES=[eventImg1,eventImg4,eventImg8,eventImg12,eventImg3];
+const cinematicNavy="#0B121E",cinematicGold="#F2A900",BG_IMAGES=[eventImg4,eventImg8,eventImg12,eventImg3,eventImg1];
 const theme=createTheme({typography:{fontFamily:`"Poppins","Roboto",sans-serif`,h2:{fontWeight:900},h4:{fontWeight:800}}});
 const anim={fadeDown:{hidden:{opacity:0,y:-30},visible:{opacity:1,y:0,transition:{duration:1}}},container:{visible:{transition:{staggerChildren:.2}}},item:{hidden:{opacity:0,scale:.9,y:20},visible:{opacity:1,scale:1,y:0}}};
 const JOIN_DATA=[
