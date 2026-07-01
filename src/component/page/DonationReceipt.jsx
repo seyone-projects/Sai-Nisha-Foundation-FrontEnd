@@ -7,7 +7,7 @@ import logo from "../page/image/ngo-removebg-preview.png";
 
 // ── Login credentials (change these as needed) ──────────────────────────────
 const VALID_USERNAME = "sainisha";
-const VALID_PASSWORD = "admin@2024";
+const VALID_PASSWORD = "employee@2026";
 
 // ── Lock icon SVG (no extra dependency needed) ───────────────────────────────
 const LockIcon = () => (
@@ -106,7 +106,7 @@ function LoginPage({ onLogin }) {
           Employee Login
         </h2>
         <p style={{ textAlign: "center", color: "#64748b", fontSize: "14px", marginBottom: "32px" }}>
-          Sign in to access the Donation Portal
+          Sign in to access the Portal
         </p>
 
         <form onSubmit={handleSubmit}>
