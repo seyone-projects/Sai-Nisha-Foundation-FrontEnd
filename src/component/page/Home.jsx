@@ -44,7 +44,7 @@ export default function Home() {
                 }}>
                 <PlayArrowIcon sx={{ fontSize: 40 }} />
               </IconButton>
-          <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem', fontFamily: "'Playfair Display', serif" }}>Care Moments</Typography>
+          <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem', fontFamily: "'Playfair Display', serif" }}>Click view to get more</Typography>
               <Typography variant={isMobile ? "h4" : "h2"} sx={{ mb: isMobile ? 4 : 6, fontWeight: 900, fontFamily: "'Playfair Display', serif" }}>Captured Emotions</Typography>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><Button onClick={() => navigate("/volunteer")} variant="contained" sx={{ bgcolor: GOLD, color: '#000', fontWeight: 900, px: isMobile ? 4 : 6, py: isMobile ? 1.5 : 2, borderRadius: 0, '&:hover': { bgcolor: '#fff' }, fontFamily: "'Playfair Display', serif" }}> Join  as  Volunteer</Button></motion.div>
         <Dialog open={openVideo} onClose={() => setOpenVideo(false)} maxWidth="md"  PaperProps={{ sx: { bgcolor: "black", position: "relative", overflow: "visible" }}}
