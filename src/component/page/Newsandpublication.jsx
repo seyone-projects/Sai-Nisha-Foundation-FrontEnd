@@ -1,47 +1,39 @@
-import React from "react";
-import { Box, Button, Typography, Card, CardMedia, CardContent, Container, keyframes, useMediaQuery, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import Footer from "../page/Footer";
-import serviceImg1 from "./image/ngo 3.avif";
-import backgroundvideo from '../page/image/new_one (1) (1).mp4';
-import "@fontsource/poppins/400.css"; import "@fontsource/poppins/900.css";
+import React from 'react';
+import { Box, Typography, Container, Stack, IconButton, Grid, CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Settings as SettingsIcon, Cloud as CloudIcon, Language as LanguageIcon } from '@mui/icons-material';
+import LeftImage from '../page/image/notify.jpeg';
+import MainImage from '../page/image/notify.jpeg';
+import Footer from './Footer';
 
-const GOLD = "#D68910", anims = {
-  fadeIn: keyframes`from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); }`,
-  slideUp: keyframes`from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); }`,
-  spotlight: keyframes`0% { transform: translate(-20%,-20%); opacity:0; } 50% { opacity:1; } 100% { transform: translate(120%,120%); opacity:0; }`,
-  floatUp: keyframes`from { transform: translateY(0); opacity: 0; } 20% { opacity: .6; } to { transform: translateY(-450vh); opacity: 0; }`
-}, theme = createTheme({ typography: { fontFamily: "Poppins, sans-serif", h2: { fontWeight: 900 }, h5: { fontWeight: 700 } } });
+const theme = createTheme({ palette: { primary: { main: "#0B1F3A" }, secondary: { main: "#FFC107" }, background: { default: "#0A192F" } }, typography: { fontFamily: "Poppins, sans-serif" } });
 
-const Background = () => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: -1, overflow: "hidden", bgcolor: "#000" }}>
-    <video autoPlay loop muted playsInline style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", zIndex: -2 }}><source src={backgroundvideo} type="video/mp4" /></video>
-    <Box sx={{ position: "absolute", inset: 0, backgroundColor: "rgba(0, 0, 0, 0.6)", zIndex: -1 }} />
-    {[...Array(15)].map((_, i) => <Box key={i} sx={{ position: "absolute", bottom: "-50px", left: `${Math.random() * 100}%`, width: 15, height: 15, borderRadius: "50%", bgcolor: "rgba(214,137,16,0.2)", animation: `${anims.floatUp} ${10 + Math.random() * 10}s linear infinite` }} />)}
-  </Box>
-);
-
-export default function Newsandpublication() {
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")), navigate = useNavigate();
+const Newsandpublication = () => {
   return (
-    <ThemeProvider theme={theme}><CssBaseline /><Background />
-      <Button href="https://wa.me/919962290875" target="_blank" sx={{ position: "fixed", bottom: 20, right: 20, minWidth: 56, height: 56, borderRadius: "50%", bgcolor: "#25D366", color: "#fff", zIndex: 10, '&:hover': { bgcolor: "#128C7E" } }}><WhatsAppIcon /></Button>
-      <Box sx={{ position: "relative", zIndex: 2, minHeight: "100vh", display: 'flex', flexDirection: 'column' }}>
-        <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 }, flex: 1, textAlign: 'center' }}>
-          <Box sx={{ mt: -12, p: { xs: 4, md: 8 }, mb: 6, borderRadius: 8, bgcolor: "rgba(17,24,39,0.6)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 20px 50px rgba(0,0,0,0.5)", position: "relative", overflow: "hidden" }}>
-            <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 50%, rgba(214,137,16,0.25), transparent 70%)", animation: `${anims.spotlight} 6s infinite alternate`, pointerEvents: "none" }} />
-            <Typography variant={isMobile ? "h4" : "h2"} sx={{ color: "#fff", animation: `${anims.fadeIn} 1.2s ease-out`, letterSpacing: { xs: 4, md: 8 }, lineHeight: 1.2 , fontFamily: "'Playfair Display', serif", }}>Print and  <span style={{ color: GOLD, filter: "drop-shadow(0 0 10px rgba(214,137,16,0.5))" }}>Media</span></Typography>
-            <Typography sx={{ color: "rgba(255,255,255,0.5)", mt: 3, letterSpacing: 6, fontSize: '0.75rem', fontWeight: 600, textTransform: "uppercase", display: "flex", alignItems: "center", justifyContent: "center", gap: 2, "&::before, &::after": { content: '""', height: "1px", width: "30px", bgcolor: "rgba(255,255,255,0.2)", fontFamily: "'Playfair Display', serif", } }}>EXPLORE • OUR • LATEST NEWS</Typography>
+    <ThemeProvider theme={theme}><CssBaseline />
+      <Box sx={{ bgcolor: '#0f172a', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundImage: 'radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%)' }}>
+        <Container maxWidth={false} disableGutters sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ position: 'relative', bgcolor: '#fcfaf7', boxShadow: '0px 50px 100px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', width: '100%', border: 'none', overflow: 'hidden' }}>
+            <Box sx={{ bgcolor: '#1a2a3a', color: 'white', p: { xs: 4, md: 7 }, pt: { xs: 6, md: 8 }, pb: { xs: 8, md: 15 }, clipPath: 'polygon(0 0, 100% 0, 100% 88%, 0 100%)', zIndex: 10 }}>
+              <Typography variant="h1" sx={{ fontWeight: 900, letterSpacing: -2, fontSize: { xs: '2.5rem', md: '5rem' }, textTransform: 'uppercase', lineHeight: 0.9, mb: 2 }}>Print and <br /> <span style={{ color: '#d4af37' }}>Media</span></Typography>
+              <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}><Typography variant="overline" sx={{ letterSpacing: 5, fontWeight: 800, color: '#d4af37' }}>SAI NISHA FOUNDATION</Typography><Box sx={{ flexGrow: 1, height: '2px', bgcolor: '#d4af37', opacity: 0.3 }} /></Stack>
+              <Typography variant="body2" sx={{ letterSpacing: 2, fontWeight: 400, opacity: 0.7 }}>THE PRIME FOUNDATION</Typography>
+            </Box>
+            <Box sx={{ position: 'relative', mt: { xs: -4, md: -8 } }}>
+              <Box sx={{ position: 'absolute', top: '10%', left: 0, width: '35%', height: '75%', backgroundImage: `url(${LeftImage})`, backgroundSize: 'cover', clipPath: 'polygon(0 15%, 100% 0, 100% 85%, 0 100%)', filter: 'sepia(40%) contrast(1.2)', zIndex: 1, display: { xs: 'none', md: 'block' }, border: '8px solid white', borderLeft: 'none' }} />
+              <Box sx={{ position: 'relative', mt: 4, ml: 'auto', width: { xs: '100%', md: '75%' }, height: { xs: '350px', md: '550px' }, backgroundImage: `url(${MainImage})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 2, boxShadow: '-20px 20px 40px rgba(0,0,0,0.15)', borderLeft: { md: '12px solid #fcfaf7' }, clipPath: { md: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)', xs: 'none' } }} />
+            </Box>
+            <Box sx={{ p: { xs: 4, md: 8 }, bgcolor: '#fcfaf7' }}><Grid container spacing={4}><Grid item xs={12} md={8}>
+                <Stack direction="row" spacing={1} sx={{ mb: 2 }}>{[SettingsIcon, CloudIcon, LanguageIcon].map((Icon, i) => (<IconButton key={i} size="small" sx={{ color: '#1a2a3a', border: '1px solid #1a2a3a' }}><Icon fontSize="small" /></IconButton>))}</Stack>
+                <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a2a3a', mb: 2, fontSize: {xs: '1.8rem', md: '2.5rem'} }}>INSPIRING GLOBAL CHANGE</Typography>
+                <Typography variant="body1" sx={{ color: '#4b5563', lineHeight: 1.8, borderLeft: '6px solid #d4af37', pl: 3, fontSize: '1.1rem' }}>This inaugural edition marks the beginning of the Sai Nisha Foundation's journey. We explore the intersection of community, growth, and sustainable impact.</Typography>
+            </Grid></Grid></Box>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}><Card sx={{ maxWidth: 400, bgcolor: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(20px)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.1)", color: "#fff", animation: `${anims.slideUp} 1s ease-out`, transition: "0.3s", '&:hover': { transform: 'scale(1.02)' } }}>
-            <CardMedia component="img" height="300" image={serviceImg1} alt="Magazine" />
-            <CardContent sx={{ p: 4 }}><Typography variant="h5" sx={{ color: GOLD, mb: 2 ,fontFamily: "'Playfair Display', serif", }}>SAI NISHA FOUNDATION</Typography><Typography sx={{ color: "#CBD5E1", mb: 3, fontSize: '0.95rem', fontFamily: "'Playfair Display', serif", }}>Dive into our latest publication covering our impact, stories of hope, and community initiatives.</Typography>
-              <Button variant="contained" fullWidth onClick={() => navigate("/magazine")} sx={{ bgcolor: GOLD, color: '#000', fontWeight: 800, py: 1.5, '&:hover': { bgcolor: '#b3720d' }, fontFamily: "'Playfair Display', serif", }}>View Press and Media</Button>
-            </CardContent></Card></Box>
         </Container>
-        <Box sx={{ bgcolor: 'rgba(0,0,0,0.8)', "& *": { color: "#fff !important" } }}><Footer /></Box>
+        <Box sx={{ width: "100%", "& *": { color: "#ffffff !important" } }}><Footer /></Box>
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default Newsandpublication;

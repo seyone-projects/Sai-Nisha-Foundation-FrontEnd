@@ -34,7 +34,6 @@ import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
 // import PhotoGallery from "./component/page/PhotoGallery";
 import Newsandpublication from "./component/page/Newsandpublication";
-import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
 import JobForm from "./component/page/jobform";
 import MembershipForm from "./component/frontend/MembershipForm";
@@ -144,7 +143,6 @@ return (
           <Route path="/peertopeer" element={<PeerToPeer />} />
           {/* <Route path="/photo-gallery" element={<PhotoGallery />} /> */}
           <Route path="/news" element={<Newsandpublication />} />
-          <Route path="/magazine" element={<Magazine />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/jobform" element={< JobForm />} />
           <Route path="/donationreceipt" element={< DonationReceipt />} />
