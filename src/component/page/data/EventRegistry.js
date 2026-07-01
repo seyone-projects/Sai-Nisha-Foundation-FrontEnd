@@ -10,6 +10,8 @@ import img9 from '../image/DSC05856.jpg';
 import img10 from '../image/DSC05875.jpg';
 import img11 from '../image/DSC06227.jpg';
 import img12 from '../image/DSC06023.jpg';
+import img13 from '../image/DSC06181.jpg';
+import img14 from '../image/DSC06137.jpg';
 
 export const ALL_EVENTS = [
   { 
@@ -67,15 +69,15 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
   { 
-    title: "Dancers", 
+    title: "Bharathanatiyam part 2", 
     date: "Sun, 01 Feb 2026", 
-    image: img10, 
+    image: img13, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Memory Recreations", 
+    title: "Bharathanatiyam part 3", 
     date: "Sun, 01 Feb 2026", 
-    image: img11, 
+    image: img14, 
     partner: "Sai Nisha" 
   },
   { 
