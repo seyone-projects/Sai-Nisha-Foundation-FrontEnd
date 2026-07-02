@@ -36,7 +36,7 @@ import PeerToPeer from "./component/page/PeertoPeer";
 import Newsandpublication from "./component/page/Newsandpublication";
 import Partners from "./component/page/Partners";
 import JobForm from "./component/page/jobform";
-import MembershipForm from "./component/frontend/MembershipForm";
+import MembershipForm from "./component/page/MembershipForm";
 import DonationReceipt from "./component/page/DonationReceipt";
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";

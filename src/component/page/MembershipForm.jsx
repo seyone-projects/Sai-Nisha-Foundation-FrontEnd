@@ -9,6 +9,7 @@ import {
   Phone, Email, LocationOn, CloudUpload as UploadIcon,
   CreditCard, CheckCircle, Lock, Visibility, VisibilityOff
 } from '@mui/icons-material';
+import Footer from './Footer';
 
 const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
 
@@ -662,6 +663,8 @@ export default function MembershipForm() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Footer />
     </Container>
   );
 }
