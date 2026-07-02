@@ -664,7 +664,21 @@ export default function MembershipForm() {
         </DialogActions>
       </Dialog>
 
-      <Footer />
+ <Box
+  sx={{
+    position: 'relative',
+    zIndex: 2,
+    '& *': { fontSize: '0.96rem !important' },
+    width: '97vw',
+    ml: 'calc(50% - 50vw)',
+    mr: 'calc(50% - 50vw)',
+    mb: 0,
+    pb: 0,
+    marginBottom: 0
+  }}
+>
+  <Footer />
+</Box>
     </Container>
   );
 }
