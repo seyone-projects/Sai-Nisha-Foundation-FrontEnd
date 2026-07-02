@@ -33,10 +33,10 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
     { 
-    title: "Guru Roopa Yogi", 
+    title: "Guru Roopa Yogi Sri La Sri Maha Narasimha Athmanatha Swamigal", 
     date: "Sun, 01 Feb 2026", 
     image: img1, 
-    partner: "Sai Nisha" 
+    partner: "Sai Nisha"
   },
    { 
     title: "Sujesh  (Zee tamil) ", 
