@@ -27,7 +27,7 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
   { 
-    title: "Actor Thiru  Jagan purushottam", 
+    title: "Actor Thiru  Jagan Purushottam", 
     date: "Sun, 01 Feb 2026", 
     image: img4, 
     partner: "Sai Nisha" 
@@ -39,7 +39,7 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
    { 
-    title: "sujesh  (Zee tamil) ", 
+    title: "Sujesh  (Zee tamil) ", 
     date: "Sun, 01 Feb 2026", 
     image: img5, 
     partner: "Sai Nisha" 
