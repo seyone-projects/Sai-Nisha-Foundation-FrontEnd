@@ -45,37 +45,37 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
    { 
-    title: "Singers", 
+    // title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img6, 
     partner: "Sai Nisha" 
   },
    { 
-    title: "Hosts", 
+    // title: "Hosts", 
     date: "Sun, 01 Feb 2026", 
     image: img7, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Bharathanatiyam", 
+    title: "Classical dance", 
     date: "Sun, 01 Feb 2026", 
     image: img8, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singers", 
+    // title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img9, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Bharathanatiyam part 2", 
+    // title: "Bharathanatiyam part 2", 
     date: "Sun, 01 Feb 2026", 
     image: img13, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Bharathanatiyam part 3", 
+    // title: "Bharathanatiyam part 3", 
     date: "Sun, 01 Feb 2026", 
     image: img14, 
     partner: "Sai Nisha" 
