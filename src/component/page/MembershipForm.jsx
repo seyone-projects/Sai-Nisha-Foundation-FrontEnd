@@ -131,7 +131,7 @@ export default function MembershipForm() {
         <Box sx={{ position: 'absolute', top: -40, left: -40, width: 200, height: 200, borderRadius: '50%', bgcolor: C.teal, opacity: 0.06, zIndex: 0 }} />
         <Box sx={{ position: 'absolute', bottom: 20, right: -50, width: 250, height: 250, borderRadius: '50%', bgcolor: C.maroon, opacity: 0.04, zIndex: 0 }} />
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" sx={{ zIndex: 1, mt: 0.5 }}>
-          <Avatar src="/src/component/page/image/Sainisha-removebg-preview.png" alt="Logo" variant="square" sx={{ width: 250, height: 70, objectFit: 'contain' }} />
+          <Box component="img" src="/src/component/page/image/Sainisha-removebg-preview.png" alt="Logo" sx={{ width: 250, height: 90, objectFit: 'contain', display: 'block' }} />
           <Box display="flex" flexDirection="column" gap={0.4}>
             {[[Phone, '+91 99622 90875'], [Email, 'hello@sainisha.in']].map(([Icon, text]) => <Box key={text} display="flex" alignItems="center" gap={1}><Icon sx={{ fontSize: 10, color: '#fff', bgcolor: C.navy, borderRadius: '50%', p: '2px' }} /><Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: C.navy }}>{text}</Typography></Box>)}
           </Box>
