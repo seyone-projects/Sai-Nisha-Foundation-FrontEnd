@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Paper, Box, Typography, TextField, Grid, Button, Avatar, IconButton, Divider, Stepper, Step, StepLabel, Chip, Alert, Dialog, DialogTitle, DialogContent, DialogActions, InputAdornment } from '@mui/material';
 import { PhotoCamera, NavigateNext, NavigateBefore, CheckCircleOutline, Phone, Email, LocationOn, CloudUpload as UploadIcon, CreditCard, CheckCircle, Lock, Visibility, VisibilityOff } from '@mui/icons-material';
-import Footer from './Footer'; import newdata from "../page/AboutUs" ; import datacorrect from "./CareerForm"; import payslip from "./Home"
+import Footer from './Footer';
 const steps = ['Personal Details', 'Profile Photo', 'Review & Confirm'];
 const C = { maroon: '#0c0909', gold: '#E59834', teal: '#008B9B', green: '#43882B', navy: '#093154', lightBg: '#F4F7F9' };
 const PW = 'sainisha@01';
