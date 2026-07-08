@@ -10,14 +10,10 @@ import img9 from '../image/DSC05856.jpg';
 import img10 from '../image/DSC05875.jpg';
 import img11 from '../image/DSC06227.jpg';
 import img12 from '../image/DSC06023.jpg';
+import img13 from '../image/DSC06181.jpg';
+import img14 from '../image/DSC06137.jpg';
 
 export const ALL_EVENTS = [
-  { 
-    title: "Guru Roopa Yogi", 
-    date: "Sun, 01 Feb 2026", 
-    image: img1, 
-    partner: "Sai Nisha" 
-  },
   { 
     title: "Music director Thiru  Dhina", 
     date: "Sun, 01 Feb 2026", 
@@ -31,51 +27,57 @@ export const ALL_EVENTS = [
     partner: "Sai Nisha" 
   },
   { 
-    title: "Actor Thiru  Jagan purushottam", 
+    title: "Actor Thiru  Jagan Purushottam", 
     date: "Sun, 01 Feb 2026", 
     image: img4, 
     partner: "Sai Nisha" 
   },
+    { 
+    title: "Guru Roopa Yogi Sri La Sri Maha Narasimha Athmanatha Swamigal", 
+    date: "Sun, 01 Feb 2026", 
+    image: img1, 
+    partner: "Sai Nisha"
+  },
    { 
-    title: "sujesh  (Zee tamil) ", 
+    title: "Sujesh  (Zee tamil) ", 
     date: "Sun, 01 Feb 2026", 
     image: img5, 
     partner: "Sai Nisha" 
   },
    { 
-    title: "Singers", 
+    // title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img6, 
     partner: "Sai Nisha" 
   },
    { 
-    title: "Hosts", 
+    // title: "Hosts", 
     date: "Sun, 01 Feb 2026", 
     image: img7, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Bharathanatiyam", 
+    title: "Classical dance", 
     date: "Sun, 01 Feb 2026", 
     image: img8, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Singers", 
+    // title: "Singers", 
     date: "Sun, 01 Feb 2026", 
     image: img9, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Dancers", 
+    // title: "Bharathanatiyam part 2", 
     date: "Sun, 01 Feb 2026", 
-    image: img10, 
+    image: img13, 
     partner: "Sai Nisha" 
   },
   { 
-    title: "Memory Recreations", 
+    // title: "Bharathanatiyam part 3", 
     date: "Sun, 01 Feb 2026", 
-    image: img11, 
+    image: img14, 
     partner: "Sai Nisha" 
   },
   { 
@@ -86,4 +88,4 @@ export const ALL_EVENTS = [
   },
 ];
 
-export const HERO_SLIDES = [img1, img3, img12];
+export const HERO_SLIDES = [img2, img3, img4, img1];

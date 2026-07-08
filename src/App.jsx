@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import axios from "axios";
 import {
   AppBar,
   Toolbar,
@@ -33,9 +34,10 @@ import Awareness from "./component/page/Awareness";
 import PeerToPeer from "./component/page/PeertoPeer";
 // import PhotoGallery from "./component/page/PhotoGallery";
 import Newsandpublication from "./component/page/Newsandpublication";
-import Magazine from "./component/page/Magazine";
 import Partners from "./component/page/Partners";
 import JobForm from "./component/page/jobform";
+import MembershipForm from "./component/page/MembershipForm";
+import DonationReceipt from "./component/page/DonationReceipt";
 const creamBg = "#F3EEDC";
 const navyText = "#2C3E50";
 const goldBtn = "#D68910";
@@ -44,6 +46,17 @@ export default function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isMobile = useMediaQuery("(max-width:900px)");
   const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+  axios
+    .get("http://localhost:5000/api/health")
+    .then((res) => {
+      console.log("✅ Backend Response:", res.data);
+    })
+    .catch((err) => {
+      console.error("❌ Backend Error:", err);
+    });
+}, []);
 
   const handleMediaHover = (event) => {
     setAnchorEl(event.currentTarget);
@@ -77,8 +90,8 @@ return (
                 <Button sx={{ color: navyText, fontWeight: 600, textTransform: "none" }}>  Media Partners</Button>
                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu} MenuListProps={{ onMouseLeave: handleCloseMenu }} PaperProps={{ sx: { bgcolor: creamBg } }}>
                   {/* <MenuItem component={Link} to="/photo-gallery" onClick={handleCloseMenu}>Photo Gallery</MenuItem> */}
+                   <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                   <MenuItem component={Link} to="/news" onClick={handleCloseMenu}>News</MenuItem>
-                  <MenuItem component={Link} to="/partners" onClick={handleCloseMenu}>Associated Partners</MenuItem>
                 </Menu>
               </Box>
               <Button component={Link}  to="/payment"  sx={{ bgcolor: goldBtn, color: "#fff", "&:hover": { bgcolor: "#b3740d" } }}  variant="contained" >  Donate  </Button> </Box> )}
@@ -123,15 +136,16 @@ return (
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/volunteer" element={<VolunteerForm />} />
+          <Route path="/membership" element={<MembershipForm />} />
           {/* <Route path="/campaigns" element={<Campaigns />} /> */}
           <Route path="/manage" element={<Manage />} />
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/peertopeer" element={<PeerToPeer />} />
           {/* <Route path="/photo-gallery" element={<PhotoGallery />} /> */}
           <Route path="/news" element={<Newsandpublication />} />
-          <Route path="/magazine" element={<Magazine />} />
           <Route path="/partners" element={<Partners />} />
-          <Route path="/jobform" element={<JobForm />} />
+          <Route path="/jobform" element={< JobForm />} />
+          <Route path="/donationreceipt" element={< DonationReceipt />} />
         </Routes>
       </Container>
     </Router>

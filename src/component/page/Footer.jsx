@@ -64,9 +64,11 @@ export default function Footer() {
                 <Link component={RouterLink} to="/about">About Us</Link>
                 <Link component={RouterLink} to="/contactus">Contact Us</Link>
                 <Link component={RouterLink} to="/volunteer">Volunteer</Link>
+                <Link component={RouterLink} to="/membership">Membership card</Link>
                 <Link component={RouterLink} to="/payment">Donate</Link>
-                <Link component={RouterLink} to="/careers">Careers</Link>
-                <Link component={RouterLink} to="/jobform">Registration Form</Link>
+                 <Link component={RouterLink} to="/donationreceipt">Employee Login</Link>
+                <Link component={RouterLink} to="/careers">Careers</Link>  
+                {/* <Link component={RouterLink} to="/jobform">Registration Form</Link> */}
               </Stack>
             </Grid>
           </Grid>

@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Footer from "./Footer";
 import "@fontsource/poppins/300.css"; import "@fontsource/poppins/400.css"; import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css"; import "@fontsource/poppins/700.css"; import "@fontsource/poppins/800.css"; import "@fontsource/poppins/900.css";
-import ngoImage2 from "../page/image/newborn-baby-crib.jpg"; import ngoImage3 from "../page/image/pre photo.jpg"; import ngoImage6 from "../page/image/home.jpg";
+import ngoImage2 from "../page/image/newborn-baby-crib.jpg"; import ngoImage3 from "../page/image/pre photo.jpg"; import ngoImage6 from "../page/image/DSC06412.jpg";
 
 const DARK_BG = "#121212", GOLD = "#FFC107", WHITE_TEXT = "#FFFFFF";
 const theme = createTheme({ palette: { mode: 'dark', primary: { main: GOLD }, text: { primary: WHITE_TEXT, secondary: "rgba(255, 255, 255, 0.7)" } }, typography: { fontFamily: `"Poppins", "sans-serif"`, h1: { fontWeight: 900, textTransform: 'uppercase', letterSpacing: '8px' }, h2: { fontWeight: 800 } } });
@@ -33,7 +33,7 @@ export default function Home() {
           <Container maxWidth={false} sx={{ textAlign: "center", zIndex: 2 }}><motion.div variants={STAGGER_CONTAINER} initial="initial" animate="animate">
             <Box sx={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>{titleLetters.map((char, i) => (<motion.span key={i} variants={LETTER_ANIM} style={{ display: 'inline-block' }}><Typography variant={isMobile ? "body2" : "h5"} sx={{ color: GOLD, fontWeight: 700, letterSpacing: isMobile ? '2px' : '4px', mr: char === " " ? (isMobile ? 1 : 2) : 0.2 }}>{char}</Typography></motion.span>))}</Box>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1.5 }}>
-              <Typography variant={isMobile ? "body2" : "h6"} sx={{ fontStyle: 'italic', mb: isMobile ? 2 : 4, opacity: 0.8, fontSize: isMobile ? '0.85rem' : '1.25rem',fontFamily: "'Playfair Display', serif" }}>"Reliving the moments of joy, talent, and meaningful connections"</Typography>
+              <Typography variant={isMobile ? "body2" : "h6"} sx={{ fontStyle: 'italic', mb: isMobile ? 2 : 4, opacity: 0.8, fontSize: isMobile ? '0.85rem' : '1.25rem',fontFamily: "'Playfair Display', serif" }}>"Every Great Change Starts with One Step—and One View."</Typography>
                <IconButton
                 onClick={() => setOpenVideo(true)}
                 sx={{
@@ -44,7 +44,7 @@ export default function Home() {
                 }}>
                 <PlayArrowIcon sx={{ fontSize: 40 }} />
               </IconButton>
-          <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem', fontFamily: "'Playfair Display', serif" }}>Care Moments</Typography>
+          <Box sx={{ width: '60px', height: '3px', bgcolor: GOLD, margin: '0 auto', mb: isMobile ? 3 : 4 }} /><Typography variant="overline" sx={{ letterSpacing: isMobile ? 4 : 8, display: 'block', mb: 1, color: GOLD, fontSize: isMobile ? '0.6rem' : '1.5rem', fontFamily: "'Playfair Display', serif" }}>Click view to get more</Typography>
               <Typography variant={isMobile ? "h4" : "h2"} sx={{ mb: isMobile ? 4 : 6, fontWeight: 900, fontFamily: "'Playfair Display', serif" }}>Captured Emotions</Typography>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><Button onClick={() => navigate("/volunteer")} variant="contained" sx={{ bgcolor: GOLD, color: '#000', fontWeight: 900, px: isMobile ? 4 : 6, py: isMobile ? 1.5 : 2, borderRadius: 0, '&:hover': { bgcolor: '#fff' }, fontFamily: "'Playfair Display', serif" }}> Join  as  Volunteer</Button></motion.div>
         <Dialog open={openVideo} onClose={() => setOpenVideo(false)} maxWidth="md"  PaperProps={{ sx: { bgcolor: "black", position: "relative", overflow: "visible" }}}
