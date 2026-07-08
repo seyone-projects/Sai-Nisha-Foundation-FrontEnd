@@ -164,7 +164,7 @@ export default function MembershipForm() {
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3 }}>
-        <Box display="flex" justifyContent="center" mb={3}><Box component="img" src="/src/component/page/image/ngo-removebg-preview.png" alt="Sai Nisha Foundation Logo" sx={{ width: '100%', maxWidth: 320, height: 'auto', objectFit: 'contain' }} /></Box>
+        {/* <Box display="flex" justifyContent="center" mb={3}><Box component="img" src="/src/component/page/image/ngo-removebg-preview.png" alt="Sai Nisha Foundation Logo" sx={{ width: '100%', maxWidth: 320, height: 'auto', objectFit: 'contain' }} /></Box> */}
         <Typography variant="h6" align="center" fontWeight="bold" sx={{ mb: 3, letterSpacing: 1, color: C.navy }}>LIFE MEMBERSHIP APPLICATION FORM</Typography>
         <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>{steps.map(l => <Step key={l}><StepLabel>{l}</StepLabel></Step>)}</Stepper>
         <Divider sx={{ mb: 4 }} />
